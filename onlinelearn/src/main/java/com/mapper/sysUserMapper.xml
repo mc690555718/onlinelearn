@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!--  private int user_id;          //主键
+	private String login_name;      //登录名
+	private String login_pwd;       //登录密码
+	private String user_name;       //用户真实姓名
+	private int status;             //状态.0: 正常,1:冻结,2:删除
+	private String last_login_time; //最后登录时间
+	private String last_login_ip;   //最后登录IP
+	private Date create_time;       //创建时间
+	private String email;           //邮件地址
+	private String tel;             //手机号码
+	private SysRole role;
+	 -->
+	
+ <mapper namespace="com.mapper.SysUserMapper">
+ 
+     <resultMap type="SysUser" id="userMap">
+         <result column="user_id" property="user_id"/>
+         <result column="login_name" property="login_name"/>
+         <result column="login_pwd" property="login_pwd"/>
+         <result column="user_name" property="user_name"/>
+         <result column="status" property="status"/>
+         <result column="last_login_time" property="last_login_time"/>
+         <result column="last_login_ip" property="last_login_ip"/>
+         <result column="create_time" property="create_time"/>
+         <result column="email" property="email"/>
+         <result column="tel" property="tel"/>
+         <association property="role" column="role_id" select="com.mapper.SysRoleMapper.getById"/>
+     </resultMap>
+ 
+     <insert id="add" parameterType="SysUser">
+         insert into sys_user values (null,#{login_name},#{login_pwd},
+         #{user_name},#{status},#{last_login_time},#{last_login_ip},#{create_time},#{email},#{tel},#{role.role_id})
+     </insert>
+     <delete id="remove" parameterType="int">
+         delete from sys_user where user_id = #{value}
+     </delete>
+     <update id="edit" parameterType="SysUser">
+         update sys_user set user_name=#{user_name},status=#{status},email=#{email},
+         tel=#{tel},role_id=#{role.role_id} where user_id=#{user_id}
+     </update>
+     <select id="getById" parameterType="int" resultMap="userMap">
+         select * from sys_user where user_id = #{value}
+     </select>
+     <select id="getByName" parameterType="java.lang.String" resultMap="userMap">
+         select * from sys_user where login_name = #{value}
+     </select>
+     <select id="query" resultMap="userMap" parameterType="java.util.Map">
+         select * from sys_user  where 0=0
+         <if test="qname!=null">
+             and login_name like '%${qname}%' or user_name like '%${qname}%'
+         </if>
+     </select>
+ </mapper>
+
+
+
+
+
+

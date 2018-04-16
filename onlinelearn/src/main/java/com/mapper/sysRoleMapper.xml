@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  	private int role_id;         //角色ID -->
+<!-- 	private String role_name;    //角色名 -->
+<!-- 	private String create_time;  //创建时间 -->
+<!-- 	private List<SysFunction> functions; -->
+
+<mapper namespace="com.mapper.SysRoleMapper">
+     <resultMap type="SysRole" id="roleMap">
+         <result column="role_id" property="role_id"/>
+         <result column="role_name" property="role_name"/>
+         <result column="create_time" property="create_time"/>
+         <association property="functions" column="role_id" select="com.mapper.SysFunctionMapper.getByRoleId"/>
+     </resultMap>
+ 
+     <insert id="add" parameterType="SysRole">
+         insert into sys_role values(null,#{role_name},#{create_time})
+     </insert>
+     <delete id="remove" parameterType="int">
+         delete from sys_role where role_id = #{value}
+     </delete>
+     <update id="edit" parameterType="SysRole">
+         update sys_role set role_name = #{role_name},create_time = #{create_time} where role_id = #{role_id}
+     </update>
+     <select id="getById" parameterType="int" resultMap="roleMap">
+         select * from sys_role where role_id = #{value}
+     </select>
+
+     <select id="query" resultMap="roleMap">
+          select * from sys_role
+     </select>
+     
+     <select id="getfirstRole" resultMap="roleMap">
+          select * from sys_role limit 1;
+     </select>
+</mapper>

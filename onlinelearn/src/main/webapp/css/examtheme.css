@@ -1,0 +1,81 @@
+@charset "utf-8";
+.ex-per-nav span,
+.ex-per-nav a {
+  color: #d44920;
+}
+.ex-per-nav ul li a:hover {
+  background-color: #d44920;
+}
+.catlog-bar dl dd.current {
+  border-left: 2px solid #d44920;
+}
+.ex-top .ex-top-nav ul li.current a {
+  background-color: #d44920;
+}
+.e-nav-box,
+.e-nav-box1 {
+  border: 1px solid #d44920;
+}
+.DT-arrow em {
+  color: #d44920;
+}
+.e-km-box dl dt span {
+  color: #d44920;
+}
+.ex-top .ex-top-nav a:hover {
+  color: #d44920;
+}
+.paper-list ul li:hover .p-item-pic {
+  border-color: #d44920;
+}
+.p-learn-btn {
+  background-color: #d44920;
+}
+.p-learn-btn:hover {
+  background-color: #d44920;
+}
+#footer {
+  border-top: 5px solid #d44920;
+}
+.c-master {
+  color: #d44920;
+}
+.c-s-dl dl ul li a:hover,
+.c-s-dl-li ul li.current a {
+  color: #d44920;
+}
+.c-orange {
+  color: #d44920;
+}
+.my-history-title {
+  border-bottom: 2px solid #d44920;
+}
+.p-test-title span {
+  color: #d44920;
+}
+.p-ques-title tt {
+  background-color: #d44920;
+}
+.ques-card-tab tr td.current a {
+  color: #d44920;
+}
+.paper-test dd a:hover,
+.paper-test dd.current a {
+  color: #d44920;
+}
+.ques-type li a,
+.submit-btn {
+  background-color: #d44920;
+}
+.submit-btn {
+  background-color: #d44920;
+}
+.e-km-box dl dd a:hover {
+  color: #d44920;
+}
+.ques-wrong-card ul li.wrong-ans a {
+  color: #d44920;
+}
+.ex-per-nav span {
+  border-bottom: 2px solid #d44920;
+}

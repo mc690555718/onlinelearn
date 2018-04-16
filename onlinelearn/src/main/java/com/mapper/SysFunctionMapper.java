@@ -19,4 +19,8 @@ public interface SysFunctionMapper {
 	
 	public List<SysFunction> query(Map<Object,Object> map);
 	
+	public void removeRoleFunctions(int rold_id);
+	
+	public void addRoleFunctions(Map<Object,Object> map);
+	
 }

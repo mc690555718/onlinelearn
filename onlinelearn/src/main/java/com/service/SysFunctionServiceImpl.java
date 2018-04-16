@@ -38,18 +38,26 @@ public class SysFunctionServiceImpl implements SysFunctionService{
 	}
 
 	@Override
-	public List<SysFunction> queryMenu() {
-		Map<Object,Object> map = new HashMap<>();
-		map.put("function_type",1);
-		return mapper.query(map);
+	public void removeRoleFunctions(int role_id) {
+		if (role_id > 0) {
+			mapper.removeRoleFunctions(role_id);
+		}
 	}
 
+
 	@Override
-	public List<SysFunction> queryFunction() {
-		Map<Object,Object> map = new HashMap<>();
-		map.put("function_type",2);
-		List<SysFunction> functions = mapper.query(map);
-		return functions;
+	public void addRoleFunctions(int role_id,String[] function_ids) {
+		if (role_id > 0) {
+			removeRoleFunctions(role_id);
+			if (function_ids != null) {
+				Map<Object, Object> map = new HashMap<>();
+				map.put("role_id", role_id);
+			    for (String fun : function_ids) {
+					map.put("function_id", Integer.valueOf(fun));
+					mapper.addRoleFunctions(map);
+				}
+			}
+		}
 	}
 
 }

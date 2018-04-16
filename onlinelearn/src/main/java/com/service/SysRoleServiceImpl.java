@@ -1,5 +1,8 @@
 package com.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,14 @@ public class SysRoleServiceImpl implements SysRoleService{
 	@Override
 	public void add(SysRole role) {
 		if (role != null) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			String date = df.format(new Date());
+			try {
+				Date now = df.parse(date);
+				role.setCreate_time(now);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 			mapper.add(role);
 		}
 	}

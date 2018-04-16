@@ -22,5 +22,13 @@
             and function_type = #{function_type}
         </if>
     </select>
+    
+    <delete id="removeRoleFunctions" parameterType="int">
+        delete from sys_role_function where role_id = #{value}
+    </delete>
+    
+    <insert id="addRoleFunctions" parameterType="java.util.Map">
+        insert into sys_role_function values(#{role_id},#{function_id})
+    </insert>
 
 </mapper>

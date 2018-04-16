@@ -12,13 +12,15 @@
 <link rel="stylesheet" href="/css/bootstrap-theme.css">
 <!-- <script type="text/javascript" src="/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
-<script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+<!-- <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script> -->
 <script type="text/javascript" src="/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="/js/jquery.ztree.excheck.js"></script>
 
+
 <!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <!-- <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
-<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <SCRIPT type="text/javascript">
 	var setting = {
@@ -37,22 +39,6 @@
 			}
 		}
 	};
-
-	function btn_submit() {
-		//根据ztree的id获取ztree对象
-		var treeObj = $.fn.zTree.getZTreeObj("tree");
-		//获取ztree上选中的节点，返回数组对象
-		var nodes = treeObj.getCheckedNodes(true);
-		var array = new Array();
-		for (var i = 0; i < nodes.length; i++) {
-			var id = nodes[i].function_id;
-			array.push(id);
-		}
-		var functionIds = array.join(",");
-		//为隐藏域赋值（权限的id拼接成的字符串）
-		$("#perid").val(functionIds);
-		$("#roleForm").submit();
-	}
 
 	function loadTree() {
 		$.post("/admin/sysfunctioin/loadtree", function(data) {
@@ -96,8 +82,9 @@
 			<button type="button" class="btn btn-danger" aria-label="Left Align"
 				id="btn_delete">删除</button>
 
-<!-- 			新建用户 -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="btn_modal">新建用户</button>
+			<!-- 			新建用户 -->
+			<button type="button" class="btn btn-primary" data-toggle="modal"
+				data-target="#myModal" id="btn_modal">新建角色</button>
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel">
@@ -110,11 +97,19 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">创建一个新的用户</h4>
 						</div>
-						<div class="modal-body">...</div>
+						<div class="modal-body">
+
+							<div class="form-group">
+								<label for="exampleInputEmail1">角色名称</label> <input type="text"
+									class="form-control" id="role_name" name="role_name"
+									placeholder="角色名">
+							</div>
+
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">取消</button>
-							<button type="button" class="btn btn-primary">确认</button>
+							<button type="button" id="btn_addRole" class="btn btn-primary">确认</button>
 						</div>
 					</div>
 				</div>
@@ -134,9 +129,33 @@
 				loadTreeAjax(role_id);
 			});
 
-//  			$('#myModal').modal('toggle');
-			$('#btn_modal').click(function() {
-				$('#myModal').modal('show');
+			$("#btn_submit").click(function() {
+				//根据ztree的id获取ztree对象
+				var treeObj = $.fn.zTree.getZTreeObj("tree");
+				//获取ztree上选中的节点，返回数组对象
+				var nodes = treeObj.getCheckedNodes(true);
+				var array = new Array();
+				for (var i = 0; i < nodes.length; i++) {
+					var id = nodes[i].id;
+					array.push(id);
+				}
+				var functionIds = array.join(",");
+				alert(functionIds);
+				//为隐藏域赋值（权限的id拼接成的字符串）
+				$("#perid").val(functionIds);
+				document.forms[0].action = "/admin/sysrole/saveroelfunction";
+				document.forms[0].submit();
+			});
+			
+			$("#btn_addRole").click(function() {
+				document.forms[0].action = "/admin/sysrole/addrole";
+				document.forms[0].submit();
+			});
+			
+			
+			$("#btn_delete").click(function() {
+				document.forms[0].action = "/admin/sysrole/deleterole";
+				document.forms[0].submit();
 			});
 			
 		});

@@ -140,7 +140,6 @@
 					array.push(id);
 				}
 				var functionIds = array.join(",");
-				alert(functionIds);
 				//为隐藏域赋值（权限的id拼接成的字符串）
 				$("#perid").val(functionIds);
 				document.forms[0].action = "/admin/sysrole/saveroelfunction";

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!--  	private int subject_id; -->
+<!-- 	private String subject_name; -->
+<!-- 	private int status; -->
+<!-- 	private Date create_time; -->
+<!-- 	private int sort; -->
+
+<mapper namespace="com.mapper.SysSubjectMapper">
+    <insert id="save" parameterType="SysSubject">
+        insert into sys_subject values(null,#{subject_name},#{status},#{create_time},#{sort})
+    </insert>
+    <update id="remove" parameterType="int">
+        update sys_subject set status = 1 where subject_id = #{value}
+    </update>
+    
+    <update id="update" parameterType="SysSubject">
+        update sys_subject set subject_name = #{subject_name} , sort = #{sort} where subject_id = #{subject_id}
+    </update>
+    
+    <select id="getById" resultType="SysSubject" parameterType="int">
+        select * from sys_subject where status = 0 and subject_id = #{value} 
+    </select>
+
+    <select id="query" resultType="SysSubject" parameterType="java.util.Map">
+       select * from sys_subject where status = 0 
+       <if test="qname != null">
+          and subject_name like '%${qname}%'
+       </if>
+       <if test="0==0">
+         order by sort desc  
+       </if>
+    </select>
+    
+</mapper>

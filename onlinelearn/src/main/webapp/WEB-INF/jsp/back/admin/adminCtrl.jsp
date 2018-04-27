@@ -94,7 +94,7 @@
 										<td><c:if test="${user.status == 0}">正常</c:if> <c:if
 												test="${user.status == 1}">冻结</c:if></td>
 										<td><fmt:formatDate value="${user.create_time}"
-												type="date" pattern="yy-MM-dd hh:mm:ss" /></td>
+												type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 										<td>${user.tel}</td>
 										<td>${user.role.role_name}</td>
 										<td><shiro:hasPermission name="user_update">

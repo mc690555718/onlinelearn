@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -12,11 +10,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<context:annotation-config />
 	<context:component-scan base-package="com" />
-	<context:property-placeholder location="classpath:conf.properties"/>
+	<context:property-placeholder location="classpath:conf.properties" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql:///learning?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"></property>
+		<property name="url"
+			value="jdbc:mysql:///learning?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
 	</bean>
@@ -24,31 +23,32 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="typeAliasesPackage" value="com.bean"></property>
 		<property name="mapperLocations" value="classpath:com/mapper/*.xml"></property>
-		<property name="plugins">  
-        <array>  
-            <bean class="com.github.pagehelper.PageHelper">  
-                <property name="properties">  
-                    <!--使用下面的方式配置参数，一行配置一个 -->  
-                    <value>  
-                       dialect=mysql
-                       reasonable=true
-                    </value>  
-                </property>  
-            </bean>  
-        </array>  
-    </property>  
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<!--使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							dialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.mapper"></property>
 	</bean>
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">    
-    <!-- 设置默认编码 -->  
-    <property name="defaultEncoding" value="utf-8"></property>  
-    <!-- 上传图片最大大小5M-->   
-    <property name="maxUploadSize" value="5242440"></property>    
-</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置默认编码 -->
+		<property name="defaultEncoding" value="utf-8"></property>
+		<!-- 上传图片最大大小5M -->
+		<property name="maxUploadSize" value="5242440"></property>
+	</bean>
 
-<!-- 事务管理器 -->
+	<!-- 事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<!-- 注入数据源 -->
@@ -78,13 +78,13 @@
 		<!-- 你现在给这些切点提供什么建议 -->
 		<aop:advisor advice-ref="aopAdvice" pointcut-ref="pointCut" />
 	</aop:config>
-	
+
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="cacheManager" ref="cacheManager"></property>
 		<property name="realm" ref="jdbcRealm"></property>
-		<property name="sessionManager" ref="sessionManager"/>
+		<property name="sessionManager" ref="sessionManager" />
 	</bean>
-	
+
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml"></property>
 	</bean>
@@ -102,77 +102,80 @@
 	<bean
 		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor"></bean>
-		
-		
-<!--  	id必须和web.xml文件中配置的filter标签中的name一致  -->
+
+
+	<!-- id必须和web.xml文件中配置的filter标签中的name一致 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager"></property>
 		<property name="loginUrl" value="/admin/back/login"></property>
 		<property name="successUrl" value="/admin/back/index"></property>
 		<property name="filterChainDefinitions">
 			<value>
-	   <!--            有时候shrio会拦截静态资源访问            -->
-	   /js/**=anon
-       /css/**=anon
-       /bs/**=anon
-       /inc/**=anon
-       /common/**=anon
-       /json/**=anon
-       /jsplug/**=anon
-       /images/**=anon  
-       /skins/**=anon
-       /jsplug/**=anon
-       /kindeditor/**=anon
-       /local/**=anon
-       /static/**=anon
-       /front/**=anon
-       /admin/back/login=anon
-       /admin/back/checkAdmin=anon
-       /admin/logout=logout
-       /**=authc 
+				<!-- 有时候shrio会拦截静态资源访问 -->
+				/js/**=anon
+				/css/**=anon
+				/bs/**=anon
+				/inc/**=anon
+				/common/**=anon
+				/json/**=anon
+				/jsplug/**=anon
+				/images/**=anon
+				/skins/**=anon
+				/jsplug/**=anon
+				/kindeditor/**=anon
+				/local/**=anon
+				/static/**=anon
+				/front/**=anon
+				/admin/back/login=anon
+				/admin/back/checkAdmin=anon
+				/admin/logout=logout
+				/**=authc
 			</value>
 		</property>
 	</bean>
-	<!-- 定义Session ID生成管理器 --> 
-<bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
-<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie"> 
-    <!-- 在Tomcat运行下默认使用的Cookie的名字为JSESSIONID --> <constructor-arg value="mldn-session-id"/> 
-    <!-- 保证该系统不会受到跨域的脚本操作供给 --> 
-    <property name="httpOnly" value="true"/> 
-    <!-- 定义Cookie的过期时间，单位为秒，如果设置为-1表示浏览器关闭，则Cookie消失 --> 
-    <property name="maxAge" value="-1"/> 
-</bean>
-<!-- 定义会话管理器的操作 -->
-    <bean id="sessionManager"
-        class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
-        <!-- 定义的是全局的session会话超时时间，此操作会覆盖web.xml文件中的超时时间配置 -->
-        <property name="globalSessionTimeout" value="1000000"/>
-        <!-- 删除所有无效的Session对象，此时的session被保存在了内存里面 -->
-        <property name="deleteInvalidSessions" value="true"/>
-        <!-- 定义要使用的无效的Session定时调度器 -->
-        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
-        <!-- 需要让此session可以使用该定时调度器进行检测 -->
-        <property name="sessionValidationSchedulerEnabled" value="true"/>
-        <!-- 定义Session可以进行序列化的工具类 -->
-        <property name="sessionDAO" ref="sessionDAO"/> 
-        <!-- 所有的session一定要将id设置到Cookie之中，需要提供有Cookie的操作模版 -->
-        <property name="sessionIdCookie" ref="sessionIdCookie"/>
-        <!-- 定义sessionIdCookie模版可以进行操作的启用 -->
-        <property name="sessionIdCookieEnabled" value="true"/>
-    </bean> 
-    <!-- 配置Session DAO的操作处理 --> 
-<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO"> 
-    <!-- 设置session缓存的名字，这个名字可以任意 --> 
-    <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/> 
-    <!-- 定义该Session DAO操作中所使用的ID生成器 --> 
-    <property name="sessionIdGenerator" ref="sessionIdGenerator"/> 
-</bean>
-<!-- 配置session的定时验证检测程序类，以让无效的session释放 -->
-    <bean id="sessionValidationScheduler"
-        class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
-        <!-- 设置session的失效扫描间隔，单位为毫秒 -->
-        <property name="sessionValidationInterval" value="100000"/>
-        <!-- 随后还需要定义有一个会话管理器的程序类的引用 -->
-        <property name="sessionManager" ref="sessionManager"/>
-    </bean> 
+	<!-- 定义Session ID生成管理器 -->
+	<bean id="sessionIdGenerator"
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- 在Tomcat运行下默认使用的Cookie的名字为JSESSIONID -->
+		<constructor-arg value="mldn-session-id" />
+		<!-- 保证该系统不会受到跨域的脚本操作供给 -->
+		<property name="httpOnly" value="true" />
+		<!-- 定义Cookie的过期时间，单位为秒，如果设置为-1表示浏览器关闭，则Cookie消失 -->
+		<property name="maxAge" value="-1" />
+	</bean>
+	<!-- 定义会话管理器的操作 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 定义的是全局的session会话超时时间，此操作会覆盖web.xml文件中的超时时间配置 -->
+		<property name="globalSessionTimeout" value="1000000" />
+		<!-- 删除所有无效的Session对象，此时的session被保存在了内存里面 -->
+		<property name="deleteInvalidSessions" value="true" />
+		<!-- 定义要使用的无效的Session定时调度器 -->
+		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
+		<!-- 需要让此session可以使用该定时调度器进行检测 -->
+		<property name="sessionValidationSchedulerEnabled" value="true" />
+		<!-- 定义Session可以进行序列化的工具类 -->
+		<property name="sessionDAO" ref="sessionDAO" />
+		<!-- 所有的session一定要将id设置到Cookie之中，需要提供有Cookie的操作模版 -->
+		<property name="sessionIdCookie" ref="sessionIdCookie" />
+		<!-- 定义sessionIdCookie模版可以进行操作的启用 -->
+		<property name="sessionIdCookieEnabled" value="true" />
+	</bean>
+	<!-- 配置Session DAO的操作处理 -->
+	<bean id="sessionDAO"
+		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<!-- 设置session缓存的名字，这个名字可以任意 -->
+		<property name="activeSessionsCacheName" value="shiro-activeSessionCache" />
+		<!-- 定义该Session DAO操作中所使用的ID生成器 -->
+		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
+	</bean>
+	<!-- 配置session的定时验证检测程序类，以让无效的session释放 -->
+	<bean id="sessionValidationScheduler"
+		class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+		<!-- 设置session的失效扫描间隔，单位为毫秒 -->
+		<property name="sessionValidationInterval" value="100000" />
+		<!-- 随后还需要定义有一个会话管理器的程序类的引用 -->
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
 </beans>

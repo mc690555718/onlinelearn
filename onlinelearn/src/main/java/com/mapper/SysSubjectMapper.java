@@ -15,6 +15,8 @@ public interface SysSubjectMapper {
 	
 	public SysSubject getById(int subject_id);
 	
-	public List<SysSubject> query(Map<Object, Object> map);
+	public List<SysSubject> queryParent(Map<Object, Object> map);
+	
+	public List<SysSubject> queryChild(Map<Object, Object> map);
 	
 }

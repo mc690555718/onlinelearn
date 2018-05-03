@@ -57,13 +57,5 @@
          <if test="is_avaliable > 0">
              and is_avaliable = #{is_avaliable}
          </if>
-         <choose>
-             <when test="is_avaliable != null">
-                 and is_avaliable = #{value}
-             </when>
-             <otherwise>
-                 and is_avaliable in (1,2)
-             </otherwise>
-         </choose>
      </select>
  </mapper>

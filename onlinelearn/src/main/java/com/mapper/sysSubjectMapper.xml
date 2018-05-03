@@ -2,30 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<!--  	private int subject_id; -->
+<!-- 	private int subject_id; -->
 <!-- 	private String subject_name; -->
 <!-- 	private int status; -->
 <!-- 	private Date create_time; -->
+<!-- 	private int parent_id; -->
 <!-- 	private int sort; -->
+<!-- 	private SysSubject sub; -->
 
 <mapper namespace="com.mapper.SysSubjectMapper">
+    
+    <resultMap type="SysSubject" id="subMap">
+       <result column="subject_id" property="subject_id"/>
+       <result column="subject_name" property="subject_name"/>
+       <result column="status" property="status"/>
+       <result column="create_time" property="create_time"/>
+       <result column="sort" property="sort"/>
+       <association column="parent_id" property="sub" select="com.mapper.SysSubjectMapper.getById"/>
+    </resultMap>
+
     <insert id="save" parameterType="SysSubject">
-        insert into sys_subject values(null,#{subject_name},#{status},#{create_time},#{sort})
+        insert into sys_subject values(null,#{subject_name},#{status},#{create_time},#{sub.subject_id},#{sort})
     </insert>
     <update id="remove" parameterType="int">
         update sys_subject set status = 1 where subject_id = #{value}
     </update>
     
     <update id="update" parameterType="SysSubject">
-        update sys_subject set subject_name = #{subject_name} , sort = #{sort} where subject_id = #{subject_id}
+        update sys_subject set subject_name = #{subject_name} , parent_id = #{sub.subject_id} , sort = #{sort}  where subject_id = #{subject_id}
     </update>
     
-    <select id="getById" resultType="SysSubject" parameterType="int">
+    <select id="getById" resultMap="subMap" parameterType="int">
         select * from sys_subject where status = 0 and subject_id = #{value} 
     </select>
 
-    <select id="query" resultType="SysSubject" parameterType="java.util.Map">
+    <select id="queryChild" resultMap="subMap" parameterType="java.util.Map">
        select * from sys_subject where status = 0 
+       <if test="qname != null">
+          and subject_name like '%${qname}%'
+       </if>
+       <choose>       
+            <when test="parent_id!=null">       
+                 and parent_id = #{parent_id}       
+            </when>       
+            <otherwise>       
+                 and parent_id != 0      
+            </otherwise>       
+        </choose>
+       <if test="0==0">
+         order by sort desc  
+       </if>
+    </select>
+    
+    <select id="queryParent" resultMap="subMap" parameterType="java.util.Map">
+       select * from sys_subject where status = 0 and parent_id = 0
        <if test="qname != null">
           and subject_name like '%${qname}%'
        </if>

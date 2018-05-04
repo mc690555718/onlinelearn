@@ -25,12 +25,11 @@
 		<property name="mapperLocations" value="classpath:com/mapper/*.xml"></property>
 		<property name="plugins">
 			<array>
-				<bean class="com.github.pagehelper.PageHelper">
+				<bean class="com.github.pagehelper.PageInterceptor">
 					<property name="properties">
 						<!--使用下面的方式配置参数，一行配置一个 -->
 						<value>
-							dialect=mysql
-							reasonable=true
+							helperDialect=mysql
 						</value>
 					</property>
 				</bean>

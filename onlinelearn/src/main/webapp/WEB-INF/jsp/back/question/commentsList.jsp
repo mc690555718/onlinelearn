@@ -113,6 +113,13 @@
 					</button></td>
 			</tr>
 		</c:forEach>
+		<tr>
+		<td align="center" colspan="9">一共${page.pages}页 <a
+		href="/admin/questions_comment/listAll/${c.id }?page=${page.firstPage}">第一页</a> <a
+		href="/admin/questions_comment/listAll/${c.id }?page=${page.prePage}">上一页</a> <a
+		href="/admin/questions_comment/listAll/${c.id }?page=${page.nextPage}">下一页</a> <a
+		href="/admin/questions_comment/listAll/${c.id }?page=${page.lastPage}">最后页</a></td>
+		</tr>
 	</table>
 </body>
 <script type="text/javascript">

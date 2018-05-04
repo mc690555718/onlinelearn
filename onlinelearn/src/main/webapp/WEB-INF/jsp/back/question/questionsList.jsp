@@ -114,6 +114,13 @@
 					<button class="layui-btn layui-btn-xs" onclick="getById(${q.id })">查看回复</button></td>
 			</tr>
 		</c:forEach>
+		<tr>
+		<td align="center" colspan="9">一共${page.pages}页 <a
+		href="/admin/questions/listAll/${q.id }?page=${page.firstPage}">第一页</a> <a
+		href="/admin/questions/listAll/${q.id }?page=${page.prePage}">上一页</a> <a
+		href="/admin/questions/listAll/${q.id }?page=${page.nextPage}">下一页</a> <a
+		href="/admin/questions/listAll/${q.id }?page=${page.lastPage}">最后页</a></td>
+		</tr>
 	</table>
 </body>
 

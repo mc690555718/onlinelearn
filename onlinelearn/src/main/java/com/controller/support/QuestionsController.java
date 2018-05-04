@@ -10,11 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Questions;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.QuestionsService;
 
 @Controller
@@ -25,12 +29,15 @@ public class QuestionsController {
 	private QuestionsService questionsService;
 	
 	@RequestMapping("/listAll")
-	public ModelAndView listAll(HttpServletRequest request) throws UnsupportedEncodingException {
+	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) throws UnsupportedEncodingException {
+		PageHelper.startPage(page, 5);
 		ModelAndView mv = new ModelAndView();
 		Map map = new HashMap();
 		map = initMap(request, map);
 		List<Questions> questions = questionsService.listAll(map);
+		PageInfo<Questions>  pageInfo = new PageInfo<Questions>(questions);
 		mv.setViewName("/back/question/questionsList");
+		mv.addObject("page", pageInfo);
 		mv.addObject("questions",questions);
 		return mv;
 	}

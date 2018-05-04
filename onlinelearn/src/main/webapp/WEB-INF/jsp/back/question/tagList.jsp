@@ -52,6 +52,13 @@
 					<button class="layui-btn layui-btn-xs" onclick="update(${t.questions_tag_id })">修改</button></td>
 			</tr>
 		</c:forEach>
+		<tr>
+		<td align="center" colspan="9">一共${page.pages}页 <a
+		href="/admin/questions_tag/listAll/${t.id }?page=${page.firstPage}">第一页</a> <a
+		href="/admin/questions_tag/listAll/${t.id }?page=${page.prePage}">上一页</a> <a
+		href="/admin/questions_tag/listAll/${t.id }?page=${page.nextPage}">下一页</a> <a
+		href="/admin/questions_tag/listAll/${t.id }?page=${page.lastPage}">最后页</a></td>
+		</tr>
 	</table>
 </body>
 <script type="text/javascript">

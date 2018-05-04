@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Questions_comment;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.Questions_commentService;
 
 @Controller
@@ -25,12 +28,15 @@ public class Questions_commentController {
 	private Questions_commentService questions_commentService;
 	
 	@RequestMapping("listAll")
-	public ModelAndView listAll(HttpServletRequest request) throws UnsupportedEncodingException {
+	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) throws UnsupportedEncodingException {
+		PageHelper.startPage(page, 5);
 		ModelAndView mv = new ModelAndView();
 		Map map = new HashMap();
 		map = initMap(request, map);
 		List<Questions_comment> comments = questions_commentService.listAll(map);
+		PageInfo<Questions_comment>  pageInfo = new PageInfo<Questions_comment>(comments);
 		mv.setViewName("/back/question/commentsList");
+		mv.addObject("page", pageInfo);
 		mv.addObject("comments", comments);
 		return mv;
 	}

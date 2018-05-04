@@ -5,15 +5,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bean.Questions_comment;
 import com.bean.Questions_tag;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.Questions_tagService;
 
 @Controller
@@ -24,10 +30,13 @@ public class Questions_tagController {
 	private Questions_tagService Questions_tagService;
 
 	@RequestMapping("listAll")
-	public ModelAndView listAll() {
+	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) {
+		PageHelper.startPage(page, 5);
 		ModelAndView mv=new ModelAndView();
 		List<Questions_tag> tags = Questions_tagService.listAll();
+		PageInfo<Questions_tag>  pageInfo = new PageInfo<Questions_tag>(tags);
 		mv.setViewName("/back/question/tagList");
+		mv.addObject("page", pageInfo);
 		mv.addObject("tags", tags);
 		return mv;
 	}

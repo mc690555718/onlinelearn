@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.QuestionsMapper">
+	<resultMap type="Questions" id="QuestionsMap">
+		<result column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="type" property="type" />
+		<result column="status" property="status" />
+		<result column="reply_count" property="reply_count" />
+		<result column="browse_count" property="browse_count" />
+		<result column="praise_count" property="praise_count" />
+		<result column="add_time" property="add_time" />
+		<association property="edu_user" column="cus_id"
+			select="com.mapper.Edu_UserMapper.getById">
+		</association>
+	</resultMap>
+	<select id="listAll" resultMap="QuestionsMap" parameterType="java.util.Map">
+		select * from edu_questions
+		<where>
+			<if test="title!=null">
+				and title like '%${title}%'
+			</if>
+			<if test="type>0">
+				and type=#{type}
+			</if>
+			<if test="start!=null">
+				and add_time &gt; #{start}
+			</if>
+			<if test="end !=null">
+				and add_time &lt; #{end}
+			</if>
+		</where>
+	</select>
+	<select id="getById" resultMap="QuestionsMap" parameterType="int">
+		select * from edu_questions where id=#{id}
+	</select>
+	<delete id="delete" parameterType="int">
+		delete from edu_questions
+		where id=#{id}
+	</delete>
+</mapper>

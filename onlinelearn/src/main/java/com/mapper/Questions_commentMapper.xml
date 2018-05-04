@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.Questions_commentMapper">
+	<resultMap type="Questions_comment" id="Questions_commentMap">
+		<result column="id" property="id" />
+		<result column="content" property="content" />
+		<result column="is_best" property="is_best" />
+		<result column="reply_count" property="reply_count" />
+		<result column="praise_count" property="praise_count" />
+		<result column="add_time" property="add_time" />
+		<result column="comment_id" property="comment_id" />
+		<association property="edu_user" column="cus_id"
+			select="com.mapper.Edu_UserMapper.getById">
+		</association>
+		<association property="questions" column="question_id"
+			select="com.mapper.QuestionsMapper.getById">
+		</association>
+	</resultMap>
+	<select id="listAll" resultMap="Questions_commentMap" parameterType="java.util.Map">
+		select * from edu_questions_comment
+		<where>
+           <if test="question_id>0">
+           and question_id=#{question_id}
+           </if>
+           <if test="is_best!=null">
+           and is_best=#{is_best}
+           </if>
+           <if test="name!=null">
+            and question_id in (select id from edu_questions where title like '%${name}%')
+           </if>
+           <if test="start!=null">
+			and question_id in(select id from edu_questions where add_time &gt; #{start})
+			</if>
+			<if test="end !=null">
+			and question_id in(select id from edu_questions where add_time &lt; #{end})
+			</if>
+		</where>
+	</select>
+	<delete id="delete" parameterType="int">
+	     delete from edu_questions_comment where id = #{id}
+	</delete>
+	<select id="getById" resultType="Questions_comment" parameterType="int">
+	     select * from edu_questions_comment where id = #{id}
+	</select>
+	<update id="update" parameterType="int">
+	     update edu_questions_comment set is_best=1 where id = #{id}
+	</update>
+	<select id="getById1" resultMap="Questions_commentMap" parameterType="int">
+	     select * from edu_questions_comment where question_id = #{id}
+	</select>
+</mapper>

@@ -63,7 +63,7 @@ public class AdminRealm extends AuthorizingRealm{
 	public static void main(String[] args){
 		String hashAlgorithName="MD5";
 		String pass="123456";
-		Object salt=ByteSource.Util.bytes("inxedu");
+		Object salt=ByteSource.Util.bytes("index");
 		int count=1024;
 		Object result=new SimpleHash(hashAlgorithName, pass,salt,count);
 		System.out.println("result:"+result);

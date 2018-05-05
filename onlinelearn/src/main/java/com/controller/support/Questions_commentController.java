@@ -88,6 +88,7 @@ public class Questions_commentController {
 	
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable("id")int id) {
+		questions_commentService.update(id);
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
@@ -95,7 +96,7 @@ public class Questions_commentController {
 	public ModelAndView getById1(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
 		List<Questions_comment> comments = questions_commentService.getById1(id);
-		mv.setViewName("/back/question/commentsList");
+		mv.setViewName("/back/question/commentsById");
 		mv.addObject("comments", comments);
 		return mv;
 	}

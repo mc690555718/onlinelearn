@@ -11,4 +11,5 @@ public interface QuestionsMapper {
 	public List<Questions> listAll(Map map);
 	public void delete(int id);
 	public Questions getById(int id);
+	public List<Questions> getByType(Questions questions);
 }

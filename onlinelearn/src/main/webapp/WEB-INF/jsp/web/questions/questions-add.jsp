@@ -36,7 +36,9 @@
 									<span class="c-999 fsize14">标题：</span>
 								</dt>
 								<dd class="pr">
-									<label class=""><input type="text" name="questions.title" placeholder="问题标题不少于16个字" onkeyup="checkTitleLength(this)" value=""></label>
+									<label class=""><input type="text"
+										name="questions.title" placeholder="问题标题不少于16个字"
+										onkeyup="checkTitleLength(this)" value=""></label>
 									<aside class="q-c-jy"></aside>
 								</dd>
 							</dl>
@@ -45,7 +47,9 @@
 									<span class="c-999 fsize14">内容：</span>
 								</dt>
 								<dd class="pr">
-									<textarea name="questions.content" placeholder="简洁，明了，能引起思考和讨论的知识性的内容。" onkeyup="checkQuestionContent(this)"></textarea>
+									<textarea name="questions.content"
+										placeholder="简洁，明了，能引起思考和讨论的知识性的内容。"
+										onkeyup="checkQuestionContent(this)"></textarea>
 									<aside class="q-c-jy"></aside>
 								</dd>
 							</dl>
@@ -66,9 +70,12 @@
 								</dt>
 								<dd>
 									<div class="taglist clearfix" id="js-tags">
-										<input type="hidden" name="questionsTag" id="questionsTag" value="">
+										<input type="hidden" name="questionsTag" id="questionsTag"
+											value="">
 										<c:forEach items="${questionsTagList }" var="questionsTag">
-											<a title="${questionsTag.questionsTagName }" data-id="${questionsTag.questionsTagId }" class="list-tag" href="javascript:;">${questionsTag.questionsTagName }</a>
+											<a title="${questionsTag.questionsTagName }"
+												data-id="${questionsTag.questionsTagId }" class="list-tag"
+												href="javascript:;">${questionsTag.questionsTagName }</a>
 										</c:forEach>
 									</div>
 									<!-- /标签集 -->
@@ -79,11 +86,17 @@
 									<span class="c-999 fsize14">&nbsp;</span>
 								</dt>
 								<dd class="pr">
-									<label class=""><input type="text" style="width: 80px;" name="randomCode" placeholder="输入验证码" value="" onkeyup='$(this).parent().next().next().html("<img width=\"16\" height=\"16\" alt=\"正确\" src=\"${ctx }/static/inxweb/img/d-icon.png\">")'></label>
+									<label class=""><input type="text" style="width: 80px;"
+										name="randomCode" placeholder="输入验证码" value=""
+										onkeyup='$(this).parent().next().next().html("<img width=\"
+										16\" height=\ "16\" alt=\ "正确\" src=\"${ctx }/static/inxweb/img/d-icon.png\">")'></label>
 									<div class="v-code-pic">
-										<img src="${ctx}/ran/random" alt="验证码，点击图片更换" onclick="this.src='${ctx}/ran/random?random='+Math.random();" width="80" height="34" class="vam">
-										<span class="c-999">看不清</span>
-										<a href="javascript:void(0)" onclick="$(this).prev().prev().click();" title="" class="c-green"> 换一换 </a>
+										<img src="${ctx}/ran/random" alt="验证码，点击图片更换"
+											onclick="this.src='${ctx}/ran/random?random='+Math.random();"
+											width="80" height="34" class="vam"> <span class="c-999">看不清</span>
+										<a href="javascript:void(0)"
+											onclick="$(this).prev().prev().click();" title=""
+											class="c-green"> 换一换 </a>
 									</div>
 									<aside class="q-c-jy"></aside>
 								</dd>
@@ -94,7 +107,8 @@
 								</dt>
 								<dd>
 									<section class="pt10">
-										<a href="javascript:void(0)" onclick="addQuestions()" title="" class="comm-btn c-btn-4 bg-orange">提 问</a>
+										<a href="javascript:void(0)" onclick="addQuestions()" title=""
+											class="comm-btn c-btn-4 bg-orange">提 问</a>
 									</section>
 								</dd>
 							</dl>
@@ -105,11 +119,11 @@
 				<aside class="fl col-3">
 					<div class="mt30 pl10">
 						<section class="q-tip-pic col-3">
-							<img src="${ctx }/static/inxweb/img/tipQe.png" width="100%" alt="亲，您要提问吧？">
+							<img src="${ctx }/static/inxweb/img/tipQe.png" width="100%"
+								alt="亲，您要提问吧？">
 						</section>
 						<h5 class="pt10">
-							<span class="fsize18 c-333 vam">亲，您要提问吧？<br>
-							<br>要知道这些哦！
+							<span class="fsize18 c-333 vam">亲，您要提问吧？<br> <br>要知道这些哦！
 							</span>
 						</h5>
 						<div class="clear"></div>
@@ -145,6 +159,7 @@
 		</section>
 		<!-- /提问题 结束 -->
 	</div>
-	<script type="text/javascript" src="${ctx}/static/inxweb/questions/questions_add.js"></script>
+	<script type="text/javascript"
+		src="${ctx}/static/inxweb/questions/questions_add.js"></script>
 </body>
 </html>

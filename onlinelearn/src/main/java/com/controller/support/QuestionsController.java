@@ -67,7 +67,7 @@ public class QuestionsController {
 		return map;
 	}
 	
-	@RequestMapping("delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id")int id) {
 		questionsService.delete(id);
 		return "redirect:/admin/questions/listAll";

@@ -25,6 +25,16 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<script>
+ function todown(){
+	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.nextPage}";
+	 document.forms[0].submit();
+ }
+ function toup(){
+	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.prePage}";
+	 document.forms[0].submit();
+ }
+</script>
 </head>
 <body>
 
@@ -46,30 +56,31 @@
 			<div class="layui-input-inline">
 				<label class="layui-inline">开始时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text"
-						name="start" onClick="WdatePicker()" />
+					<input class="Wdate layui-input" type="text" name="start"
+						onClick="WdatePicker()" />
 				</div>
 			</div>
 			<div class="layui-input-inline">
 				<label class="layui-inline">结束时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text"
-						name="end" onClick="WdatePicker()" />
+					<input class="Wdate layui-input" type="text" name="end"
+						onClick="WdatePicker()" />
 				</div>
 			</div>
 			<button class="layui-btn" type="submit">查询</button>
 		</form>
+
+		<a href="/questions/getByType/0">前端</a>
 	</div>
 	<table class="layui-table">
 		<colgroup>
-			<col width="5%">
 			<col width="2%">
 			<col width="7%">
-			<col width="8%">
-			<col width="4%">
-			<col width="4%">
-			<col width="7%">
-			<col width="7%">
+			<col width="10%">
+			<col width="3%">
+			<col width="3%">
+			<col width="3%">
+			<col width="3%">
 			<col width="7%">
 			<col width="14%">
 		</colgroup>
@@ -78,7 +89,6 @@
 			<td>发表人</td>
 			<td>回答标题</td>
 			<td>类型</td>
-			<td>是否采纳</td>
 			<td>回复数</td>
 			<td>浏览数</td>
 			<td>点赞数</td>
@@ -90,18 +100,11 @@
 				<td>${q.id }</td>
 				<td>${q.edu_user.email }</td>
 				<td>${q.title }</td>
-				<c:if test="${q.type==1 }">
-					<td>课程问答</td>
-				</c:if>
-				<c:if test="${q.type==2 }">
-					<td>学习分享</td>
-				</c:if>
-				<c:if test="${q.status==0 }">
-					<td>是</td>
-				</c:if>
-				<c:if test="${q.status==1 }">
-					<td>否</td>
-				</c:if>
+				<td><c:if test="${q.type==1 }">
+					课程问答
+				</c:if> <c:if test="${q.type==2 }">
+					学习分享
+				</c:if></td>
 				<td>${q.reply_count }</td>
 				<td>${q.browse_count }</td>
 				<td>${q.praise_count }</td>
@@ -115,11 +118,9 @@
 			</tr>
 		</c:forEach>
 		<tr>
-		<td align="center" colspan="9">一共${page.pages}页 <a
-		href="/admin/questions/listAll/${q.id }?page=${page.firstPage}">第一页</a> <a
-		href="/admin/questions/listAll/${q.id }?page=${page.prePage}">上一页</a> <a
-		href="/admin/questions/listAll/${q.id }?page=${page.nextPage}">下一页</a> <a
-		href="/admin/questions/listAll/${q.id }?page=${page.lastPage}">最后页</a></td>
+			<td align="center" colspan="9">一共${page.pages}页
+				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
+				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
 		</tr>
 	</table>
 </body>

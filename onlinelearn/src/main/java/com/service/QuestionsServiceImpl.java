@@ -42,4 +42,9 @@ public class QuestionsServiceImpl implements QuestionsService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Questions> getByType(Questions questions) {
+		return QuestionsMapper.getByType(questions);
+	}
 }

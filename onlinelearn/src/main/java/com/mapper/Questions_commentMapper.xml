@@ -11,7 +11,7 @@
 		<result column="add_time" property="add_time" />
 		<result column="comment_id" property="comment_id" />
 		<association property="edu_user" column="cus_id"
-			select="com.mapper.Edu_UserMapper.getById">
+			select="com.mapper.Edu_UserDao.getUser">
 		</association>
 		<association property="questions" column="question_id"
 			select="com.mapper.QuestionsMapper.getById">
@@ -20,9 +20,6 @@
 	<select id="listAll" resultMap="Questions_commentMap" parameterType="java.util.Map">
 		select * from edu_questions_comment
 		<where>
-           <if test="question_id>0">
-           and question_id=#{question_id}
-           </if>
            <if test="is_best!=null">
            and is_best=#{is_best}
            </if>

@@ -30,11 +30,6 @@
 <body>
 	<div class="layui-inline">
 		<form action="/admin/questions_comment/listAll" method="post">
-			<label>问答id</label>
-			<div class="layui-input-inline">
-				<input name="question_id" value="" id="question_id"
-					class="layui-input" type="text">
-			</div>
 			<label>问答标题</label>
 			<div class="layui-input-inline">
 				<input name="name" value="" id="name" class="layui-input"

@@ -71,13 +71,13 @@ public class Questions_commentController {
 		return map;
 	}
 	
-	@RequestMapping("delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id")int id) {
 		questions_commentService.delete(id);
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
-	@RequestMapping("getById/{id}")
+	@RequestMapping("/getById/{id}")
 	public ModelAndView getById(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
 		Questions_comment comment = questions_commentService.getById(id);
@@ -86,12 +86,12 @@ public class Questions_commentController {
 		return mv;
 	}
 	
-	@RequestMapping("update/{id}")
+	@RequestMapping("/update/{id}")
 	public String update(@PathVariable("id")int id) {
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
-	@RequestMapping("getById1/{id}")
+	@RequestMapping("/getById1/{id}")
 	public ModelAndView getById1(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
 		List<Questions_comment> comments = questions_commentService.getById1(id);

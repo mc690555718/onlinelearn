@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.QuestionsMapper">
-	<resultMap type="Questions" id="QuestionsMap">
+	<resultMap type="com.bean.Questions" id="QuestionsMap">
 		<result column="id" property="id" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
@@ -13,7 +13,7 @@
 		<result column="praise_count" property="praise_count" />
 		<result column="add_time" property="add_time" />
 		<association property="edu_user" column="cus_id"
-			select="com.mapper.Edu_UserMapper.getById">
+			select="com.mapper.Edu_UserDao.getUser">
 		</association>
 	</resultMap>
 	<select id="listAll" resultMap="QuestionsMap" parameterType="java.util.Map">
@@ -39,5 +39,13 @@
 	<delete id="delete" parameterType="int">
 		delete from edu_questions
 		where id=#{id}
-	</delete>
+	</delete>   
+	<select id="getByType" resultMap="QuestionsMap" parameterType="com.bean.Questions">
+	    select * from  edu_questions 
+        <where>
+        <if test="type!=0">
+        and type=#{type}
+        </if>
+        </where>
+	</select>
 </mapper>

@@ -29,7 +29,7 @@ public class Questions_tagController {
 	@Autowired
 	private Questions_tagService Questions_tagService;
 
-	@RequestMapping("listAll")
+	@RequestMapping("/listAll")
 	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) {
 		PageHelper.startPage(page, 5);
 		ModelAndView mv=new ModelAndView();
@@ -41,20 +41,20 @@ public class Questions_tagController {
 		return mv;
 	}
 	
-	@RequestMapping("updateStatus/{id}")
+	@RequestMapping("/updateStatus/{id}")
 	public String updateStatus(@PathVariable("id")int id) {
 	    Questions_tagService.updateStatus(id);
 		return "redirect:/admin/questions_tag/listAll";
 	}
 	
-	@RequestMapping("init/{id}")
+	@RequestMapping("/init/{id}")
 	public String init(@PathVariable("id")int id,Model model) {
 		Questions_tag tag = Questions_tagService.getById(id);
 		model.addAttribute("tag", tag);
 		return "/back/question/updateTag";
 	}
 	
-	@RequestMapping("update")
+	@RequestMapping("/update")
 	public String update(Questions_tag tag){
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date create_time = null;
@@ -68,7 +68,7 @@ public class Questions_tagController {
 		return "redirect:/admin/questions_tag/listAll";
 	}
 	
-	@RequestMapping("save")
+	@RequestMapping("/save")
 	public String save(Questions_tag tag){
 		if (!tag.getQuestions_tag_name().equals("")) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

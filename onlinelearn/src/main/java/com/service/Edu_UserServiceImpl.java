@@ -22,28 +22,26 @@ public class Edu_UserServiceImpl  implements Edu_UserService{
 	@Override
 	public void update(Map map) {
 		Edu_UserDao.update(map);
-		
+
 	}
 
 	@Override
 	public void updateZZ(Map map) {
 		Edu_UserDao.updateZZ(map);
-		
-	}
 
-	@Override
-	public Edu_User getUser(int user_id) {
-		Edu_User user=Edu_UserDao.getUser(user_id);
-		System.out.println(user);
-		return user;
 	}
-
 	@Override
 	public void save(Edu_User user) {
 		Edu_UserDao.save(user);
-		
+
 	}
 
-	
+	@Override
+	public Edu_User getById(int user_id) {
+      System.out.println(Edu_UserDao.getById(user_id));
+		return Edu_UserDao.getById(user_id);
+	}
+
+
 
 }

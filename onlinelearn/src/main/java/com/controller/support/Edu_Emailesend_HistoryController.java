@@ -42,11 +42,12 @@ public class Edu_Emailesend_HistoryController {
 
 	@RequestMapping("/admin/email/sendEmaillist")
 	public ModelAndView list(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request) {
-		PageHelper.startPage(page, 1);
+		PageHelper.startPage(page, 5);
 		ModelAndView mv = new ModelAndView();
 		Map map = new HashMap();
 		map = initMap(request, map);
 		List<Edu_Emailesend_History> list = eService.list(map);
+	
 		PageInfo<Edu_Emailesend_History> pageInfo=new PageInfo<Edu_Emailesend_History>(list);
 		mv.setViewName("/back/email/edu_emailesend_historyList");
 		mv.addObject("list",list);

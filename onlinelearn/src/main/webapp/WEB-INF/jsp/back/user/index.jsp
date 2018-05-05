@@ -100,14 +100,17 @@ function xiugai(id) {
 			   })
 		}
 	}
-	
-	
-	
-	function rizhi() {
-		
-		
-		
-	}
+
+</script>
+<script>
+ function todown(){
+	 document.forms[0].action="/admin/user/listUser/${list.user_id }?page=${page.nextPage}";
+	 document.forms[0].submit();
+ }
+ function toup(){
+	 document.forms[0].action="/admin/user/listUser/${list.user_id }?page=${page.prePage}";
+	 document.forms[0].submit();
+ }
 </script>
 </head>
 <body>
@@ -194,28 +197,20 @@ function xiugai(id) {
 							</c:if>
 							<td>
 								<button title="修改密码" onclick="xiugai(${list.user_id})"
-									class="layui-btn layui-btn-normal layui-btn-sm">
-									<i class="layui-icon"></i>
-								</button>
-								<button title="冻结用户"
+									class="layui-btn layui-btn-normal layui-btn-sm">修改密码</button>
+								<button title="冻结"
 									onclick="dongjie(${list.user_id},${list.is_avalible})"
-									class="layui-btn layui-btn-danger">
-									<i class="layui-icon"></i>
-								</button>
-
-								<button title="查看日志" class="layui-btn" onclick="rizhi()">
-									<i class="layui-icon"></i>
-								</button>
+									class="layui-btn layui-btn-danger">冻结</button>
 							</td>
 						</tr>
 					</c:forEach>
 					<tr>
-		<td align="center" colspan="9"><font face="微软雅黑" size="4px" color="blue">一共${page.pages}页</font> <a class="layui-btn"
-		href="/admin/user/listUser/${list.user_id }?page=${page.firstPage}">第一页</a> <a class="layui-btn"
-		href="/admin/user/listUser/${list.user_id }?page=${page.prePage}">上一页</a> <a class="layui-btn"
-		href="/admin/user/listUser/${list.user_id }?page=${page.nextPage}">下一页</a> <a class="layui-btn"
-		href="/admin/user/listUser/${list.user_id }?page=${page.lastPage}">最后页</a></td>
-		</tr>
+						<td align="center" colspan="9">一共${page.pages}页
+							<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
+							<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
+							当前第${page.pageNum}页
+						</td>
+					</tr>
 				</table>
 			</div>
 

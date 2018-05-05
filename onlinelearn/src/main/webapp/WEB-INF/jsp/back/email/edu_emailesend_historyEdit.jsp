@@ -30,7 +30,7 @@
 			<div class="layui-form-item">
 					<label class="layui-form-label">操作人</label>
 					<div class="layui-input-block">  
-						<input type="text" name="user_id"  class="layui-input " value="${list.user.user_name}"  autocomplete="off" disabled="disabled">
+						<input  type="text" name="user_id"  class="layui-input " value="${list.user.user_name}"  autocomplete="off" disabled="disabled">
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -67,13 +67,13 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">邮箱标题</label>
 					<div class="layui-input-block">
-						<input type="text" name="title"  class="layui-input" value="${list.title}">
+						<input type="text" name="title"  class="layui-input" value="${list.title}" disabled="disabled">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">邮箱正文</label>
 					<div class="layui-input-block">
-						<input type="text" name="content"   class="layui-input" value="${list.content}">
+						<input type="text" name="content"   class="layui-input" value="${list.content}" disabled="disabled">
 					</div>
 				</div>
 				

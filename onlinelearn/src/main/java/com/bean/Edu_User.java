@@ -18,6 +18,7 @@ public class Edu_User {
 	private Timestamp last_system_time;//上传统计系统消息时间
 	private String start;
 	private String end;
+	
 	public String getStart() {
 		return start;
 	}

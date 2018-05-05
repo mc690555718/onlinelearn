@@ -121,6 +121,7 @@
 			<td align="center" colspan="9">一共${page.pages}页
 				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
 				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
+				当前第${page.pageNum}页</td>
 		</tr>
 	</table>
 </body>

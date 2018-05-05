@@ -13,7 +13,7 @@
 		<result column="praise_count" property="praise_count" />
 		<result column="add_time" property="add_time" />
 		<association property="edu_user" column="cus_id"
-			select="com.mapper.Edu_UserDao.getUser">
+			select="com.mapper.Edu_UserDao.getById">
 		</association>
 	</resultMap>
 	<select id="listAll" resultMap="QuestionsMap" parameterType="java.util.Map">

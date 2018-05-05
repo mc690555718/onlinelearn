@@ -1,8 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mapper.Edu_UserMapper">
-  <select id="getById" resultType="Edu_User"  parameterType="int">
-  select * from edu_user where user_id=#{user_id}
-  </select>
+<mapper namespace="com.mapper.Edu_UserDao">
+
+	<resultMap type="Edu_User" id="Edu_UserMap">
+		<result property="user_id" column="user_id" />
+		<result property="mobile" column="mobile" />
+		<result property="email" column="email" />
+		<result property="password" column="password" />
+		<result property="user_name" column="user_name" />
+		<result property="show_name" column="show_name" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="create_time" column="create_time" />
+		<result property="is_avalible" column="is_avalible" />
+		<result property="pic_img" column="pic_img" />
+		<result property="banner_url" column="banner_url" />
+		<result property="msg_num" column="msg_num" />
+		<result property="sys_msg_num" column="sys_msg_num" />
+		<result property="last_system_time" column="last_system_time" />
+
+	</resultMap>
+
+	<select id="listUser" resultMap="Edu_UserMap" parameterType="java.util.Map">
+		select * from edu_user
+		<where>
+			<if test="name!=null">
+				and (mobile like "%${name}%" or email like "%${name}%")
+			</if>
+			<if test="type>0">
+				and is_avalible=#{type}
+			</if>
+			<if test="start!=null">
+			and create_time&gt;#{start}
+			</if>
+			<if test="end!=null">
+			and create_time&lt;#{end}
+			</if>
+		</where>
+	</select>
+	<update id="update" parameterType="java.util.Map">
+		update edu_user set password=#{password} where USER_ID=#{user_id}
+	</update>
+
+	<update id="updateZZ" parameterType="java.util.Map">
+		update edu_user set IS_AVALIBLE=#{zz} where USER_ID=#{user_id}
+
+	</update>
+	
+	<select id="getUser" parameterType="int" resultMap="Edu_UserMap">
+	select * from edu_user where user_id=#{value}
+	
+	</select>
+	
+	<insert id="save" parameterType="Edu_User">
+	insert into edu_user(mobile,email,password,user_name,show_name,sex,age,create_time,is_avalible,pic_img,banner_url,msg_num,sys_msg_num,LAST_SYSTEM_TIME) values(#{mobile},#{mobile},#{password},#{user_name},#{show_name},#{sex},#{age},#{create_time},1,'/img/src/','/img/src/local',0,0,#{last_system_time})
+	</insert>
 </mapper>
+

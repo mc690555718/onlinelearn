@@ -1,0 +1,15 @@
+.Wdate{
+	outline: 0;
+	-webkit-transition: border-color .3s cubic-bezier(.65, .05, .35, .5);
+	transition: border-color .3s cubic-bezier(.65, .05, .35, .5);
+	-webkit-box-sizing: border-box!important;
+	-moz-box-sizing: border-box!important;
+	box-sizing: border-box!important;
+	background:#fff url(datePicker.gif) no-repeat right;
+}
+.Wdate::-ms-clear{display:none;}
+
+.WdateFmtErr{
+	font-weight:bold;
+	color:red;
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.Edu_Emailesend_HistoryMapper">
+
+	<resultMap type="Edu_Emailesend_History" id="HistoryMap">
+		<id column="id" property="id" />
+		<result column="email" property="email" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="create_time" property="create_time" />
+		<result column="send_time" property="send_time" />
+		<result column="status" property="status" />
+		<result column="type" property="type" />
+		<association property="user" column="user_id"
+			select="com.mapper.Edu_UserDao.getUser"></association>
+	</resultMap>
+
+	<select id="list" resultType="Edu_Emailesend_History" resultMap="HistoryMap">
+		select * from edu_emailsend_history
+		<where>
+			<if test="email!=null">
+				and email LIKE '%${email}%'
+			</if>
+			<if test="type>0">
+				and type = #{type}
+			</if>
+		</where>
+	</select>
+
+	<select id="getById" parameterType="int" resultType="Edu_Emailesend_History"
+		resultMap="HistoryMap">
+		select * from edu_emailsend_history where id = #{id}
+	</select>
+
+	<insert id="save" parameterType="Edu_Emailesend_History">
+		insert into
+		edu_emailsend_history
+		(email,user_id,title,content,create_time,send_time,type)
+		value
+		(#{email},1,#{title},#{content},#{create_time},#{send_time},#{type})
+	</insert>
+
+</mapper>

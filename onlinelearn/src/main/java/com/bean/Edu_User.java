@@ -1,24 +1,35 @@
 package com.bean;
-
-import java.util.Date;
-
+import java.sql.Timestamp;
 public class Edu_User {
 	private int user_id;//用户Id
 	private String mobile;//手机号
 	private String email;//邮箱号
-	private int class_id;//班级编号
 	private String password;//密码
 	private String user_name;//用户名
 	private String show_name;//显示名 （昵称）
 	private int sex;//性别  1男  2女
 	private int age;//年龄
-	private Date create_time;//注册时间
-	private int is_avalible;//是否可用 1正常  2冻结
+	private Timestamp create_time;//注册时间
+	private int is_avalible;//是否可用
 	private String pic_img;//用户头像
 	private String banner_url;//个人中心用户背景图片
 	private int msg_num;//站内信未读消息数
 	private int sys_msg_num;//0
-	private Date last_system_time;//上传统计系统消息时间
+	private Timestamp last_system_time;//上传统计系统消息时间
+	private String start;
+	private String end;
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
@@ -36,12 +47,6 @@ public class Edu_User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public int getClass_id() {
-		return class_id;
-	}
-	public void setClass_id(int class_id) {
-		this.class_id = class_id;
 	}
 	public String getPassword() {
 		return password;
@@ -73,10 +78,10 @@ public class Edu_User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public Date getCreate_time() {
+	public Timestamp getCreate_time() {
 		return create_time;
 	}
-	public void setCreate_time(Date create_time) {
+	public void setCreate_time(Timestamp create_time) {
 		this.create_time = create_time;
 	}
 	public int getIs_avalible() {
@@ -109,12 +114,22 @@ public class Edu_User {
 	public void setSys_msg_num(int sys_msg_num) {
 		this.sys_msg_num = sys_msg_num;
 	}
-	public Date getLast_system_time() {
+	public Timestamp getLast_system_time() {
 		return last_system_time;
 	}
-	public void setLast_system_time(Date last_system_time) {
+	public void setLast_system_time(Timestamp last_system_time) {
 		this.last_system_time = last_system_time;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Edu_User [user_id=" + user_id + ", mobile=" + mobile + ", email=" + email + ", password=" + password
+				+ ", user_name=" + user_name + ", show_name=" + show_name + ", sex=" + sex + ", age=" + age
+				+ ", create_time=" + create_time + ", is_avalible=" + is_avalible + ", pic_img=" + pic_img
+				+ ", banner_url=" + banner_url + ", msg_num=" + msg_num + ", sys_msg_num=" + sys_msg_num
+				+ ", last_system_time=" + last_system_time + ", start=" + start + ", end=" + end + "]";
+	}
+
+
+
+
 }

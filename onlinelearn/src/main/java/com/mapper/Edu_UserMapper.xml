@@ -48,7 +48,7 @@
 
 	</update>
 	
-	<select id="getUser" parameterType="int" resultMap="Edu_UserMap">
+	<select id="getById" parameterType="int" resultMap="Edu_UserMap">
 	select * from edu_user where user_id=#{value}
 	
 	</select>

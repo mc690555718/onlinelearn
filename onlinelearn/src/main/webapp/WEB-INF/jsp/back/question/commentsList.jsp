@@ -26,6 +26,16 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<script>
+ function todown(){
+	 document.forms[0].action="/admin/questions_comment/listAll/${q.id }?page=${page.nextPage}";
+	 document.forms[0].submit();
+ }
+ function toup(){
+	 document.forms[0].action="/admin/questions_comment/listAll/${q.id }?page=${page.prePage}";
+	 document.forms[0].submit();
+ }
+</script>
 </head>
 <body>
 	<div class="layui-inline">
@@ -46,15 +56,15 @@
 			<div class="layui-input-inline">
 				<label class="layui-inline">开始时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text"
-						name="start" onClick="WdatePicker()" />
+					<input class="Wdate layui-input" type="text" name="start"
+						onClick="WdatePicker()" />
 				</div>
 			</div>
 			<div class="layui-input-inline">
 				<label class="layui-inline">结束时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text"
-						name="end" onClick="WdatePicker()" />
+					<input class="Wdate layui-input" type="text" name="end"
+						onClick="WdatePicker()" />
 				</div>
 			</div>
 			<button class="layui-btn" type="submit">查询</button>
@@ -62,14 +72,14 @@
 	</div>
 	<table class="layui-table">
 		<colgroup>
-			<col width="5%">
 			<col width="2%">
-			<col width="7%">
-			<col width="8%">
-			<col width="4%">
-			<col width="4%">
-			<col width="7%">
 			<col width="10%">
+			<col width="7%">
+			<col width="3%">
+			<col width="3%">
+			<col width="3%">
+			<col width="7%">
+			<col width="20%">
 		</colgroup>
 		<tr>
 			<td>问答ID</td>
@@ -86,34 +96,30 @@
 				<td>${c.questions.id }</td>
 				<td>${c.questions.title }</td>
 				<td>${c.edu_user.email }</td>
-				<c:if test="${c.is_best==0 }">
-					<td>否</td>
-				</c:if>
-				<c:if test="${c.is_best==1 }">
-					<td>是</td>
-				</c:if>
+				<td><c:if test="${c.is_best==0 }">
+					否
+				</c:if> <c:if test="${c.is_best==1 }">
+					是
+				</c:if></td>
 				<td>${c.questions.reply_count }</td>
 				<td>${c.questions.praise_count }</td>
 				<td><fmt:formatDate value="${c.questions.add_time }"
-						type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>		
+						type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 				<td><button class="layui-btn layui-btn-sm layui-btn-normal"
 						onclick="del(${c.id })">
 						<i class="layui-icon"></i>
 					</button>
 					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="getById(${c.id })">查看评论详情
-					</button>
+						onclick="getById(${c.id })">查看评论详情</button>
 					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="update(${c.id },${c.is_best })">采纳为最佳
-					</button></td>
+						onclick="update(${c.id },${c.is_best })">采纳为最佳</button></td>
 			</tr>
 		</c:forEach>
 		<tr>
-		<td align="center" colspan="9">一共${page.pages}页 <a
-		href="/admin/questions_comment/listAll/${c.id }?page=${page.firstPage}">第一页</a> <a
-		href="/admin/questions_comment/listAll/${c.id }?page=${page.prePage}">上一页</a> <a
-		href="/admin/questions_comment/listAll/${c.id }?page=${page.nextPage}">下一页</a> <a
-		href="/admin/questions_comment/listAll/${c.id }?page=${page.lastPage}">最后页</a></td>
+			<td align="center" colspan="9">一共${page.pages}页
+				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
+				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
+				当前第${page.pageNum}页</td>
 		</tr>
 	</table>
 </body>

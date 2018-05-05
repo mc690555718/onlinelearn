@@ -11,7 +11,7 @@
 		<result column="add_time" property="add_time" />
 		<result column="comment_id" property="comment_id" />
 		<association property="edu_user" column="cus_id"
-			select="com.mapper.Edu_UserDao.getUser">
+			select="com.mapper.Edu_UserDao.getById">
 		</association>
 		<association property="questions" column="question_id"
 			select="com.mapper.QuestionsMapper.getById">

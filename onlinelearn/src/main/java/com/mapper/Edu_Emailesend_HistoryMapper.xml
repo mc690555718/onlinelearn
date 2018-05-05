@@ -14,7 +14,7 @@
 		<result column="status" property="status" />
 		<result column="type" property="type" />
 		<association property="user" column="user_id"
-			select="com.mapper.Edu_UserDao.getUser"></association>
+			select="com.mapper.Edu_UserDao.getById"></association>
 	</resultMap>
 
 	<select id="list" resultType="Edu_Emailesend_History" resultMap="HistoryMap">

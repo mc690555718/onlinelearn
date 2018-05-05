@@ -28,7 +28,22 @@
 #myButton {
 	width: 80px;
 }
+
+#table1{
+text-align: center;
+}
 </style>
+
+<script>
+ function todown(){
+	 document.forms[0].action="/admin/email/sendEmaillist/${P.id }?page=${page.nextPage}";
+	 document.forms[0].submit();
+ }
+ function toup(){
+	 document.forms[0].action="/admin/email/sendEmaillist/${P.id }?page=${page.prePage}";
+	 document.forms[0].submit();
+ }
+</script>
 </head>
 <body>
 <form action="/admin/email/sendEmaillist" method="post">
@@ -59,7 +74,7 @@
 					class="layui-tab-content larry-personal-body clearfix mylog-info-box">
 					<!-- 操作日志 -->
 					<div class="layui-tab-item layui-field-box layui-show">
-						<table class="layui-table table-hover">
+						<table class="layui-table table-hover" id="table1">
 							<thead>
 								<tr>
 									<th>id</th>
@@ -73,15 +88,15 @@
 									<th>操作</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody >
 								<c:forEach items="${list}" var="p" varStatus="count">
 									<tr align="center">
-										<td>${count.index+1 }</td>
+										<td>${p.id }</td>
 										<c:if test="${p.type==1}">
-											<td>普通</td>
+											<td> 普通</td>
 										</c:if>
 										<c:if test="${p.type==2 }">
-											<td>定时</td>
+											<td> 定时</td>
 										</c:if>
 										<c:if test="${p.status==1}">
 											<td>已发送</td>
@@ -93,7 +108,7 @@
 										<td>${p.email}</td>
 										<td><fmt:formatDate value="${p.create_time}" type="both" /></td>
 										<td><fmt:formatDate value="${p.send_time}" type="both" /></td>
-										<td>${p.user.user_name}</td>
+										<td>${p.user.user_name }</td>
 										<td><a href="/admin/email/sendEmailinit/${p.id}">
 												<button type="button" class="btn btn-success">查看</button>
 										</a></td>
@@ -102,12 +117,12 @@
 							</tbody>
 							<tr>
 							</tr>
-							<tr>
-		<td align="center" colspan="9"><font face="微软雅黑" size="4px" color="blue">一共${page.pages}页 </font><a class="layui-btn"
-		href="/admin/email/sendEmaillist/${p.id }?page=${page.firstPage}">第一页</a> <a class="layui-btn"
-		href="/admin/email/sendEmaillist/${p.id }?page=${page.prePage}">上一页</a> <a class="layui-btn"
-		href="/admin/email/sendEmaillist/${p.id }?page=${page.nextPage}">下一页</a> <a class="layui-btn"
-		href="/admin/email/sendEmaillist/${p.id }?page=${page.lastPage}">最后页</a></td>
+						<tr>
+			<td align="center" colspan="9">一共${page.pages}页
+				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
+				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
+				当前第${page.pageNum}页
+				</td>
 		</tr>
 
 						</table>

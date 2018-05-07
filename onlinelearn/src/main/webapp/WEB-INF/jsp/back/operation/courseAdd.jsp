@@ -254,7 +254,6 @@
 								id="is_avaliable">
 								<option value="1" selected="selected">上架</option>
 								<option value="2">下架</option>
-								<option value="3">删除</option>
 							</select>
 						</div>
 					</div>

@@ -18,4 +18,7 @@ public interface EduCourseMapper {
 	
 	public void add(EduCourse course);
 
+	public int setTeacher(Map<Object, Object> map);
+
+
 }

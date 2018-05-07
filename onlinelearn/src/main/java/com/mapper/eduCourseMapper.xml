@@ -1,61 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="com.mapper.EduCourseMapper">
-     <resultMap type="EduCourse" id="courseMap">
-<!--      	private int course_id;       //课程编号 -->
-<!-- 	private String courser_name; //课程名称 -->
-<!-- 	private int is_avaliable;    //1正常2删除 -->
-<!-- 	private SysSubject subject;  //课程专业ID -->
-<!-- 	private Date add_time;       //添加时间 -->
-<!-- 	private int sourse_price;    //课程原价格（只显示） -->
-<!-- 	private int current_price;   //课程销售价格（实际支付价格）设置为0则可免费观看 -->
-<!-- 	private String title;        //课程简介 -->
-<!-- 	private String context;      //课程详情 -->
-<!-- 	private int lession_num;     //总课时 -->
-<!-- 	private String logo;         //图片路径 -->
-<!-- 	private Date update_time;    //最后更新时间 -->
-<!-- 	private int page_buyCount;   //销售数量 -->
-<!-- 	private int page_viewCount;  //浏览数量 -->
-<!-- 	private Date end_time;       //有效结束时间 -->
-<!-- 	private int lose_type;       //有效期类型，0：到期时间，1：按天数 -->
-<!-- 	private String lose_time;    //有效期:商品订单过期时间点 -->
-<!-- 	private int sequence;        //序列 -->
-         <result column="course_id" property="course_id"/>
-         <result column="courser_name" property="courser_name"/>
-         <result column="is_avaliable" property="is_avaliable"/>
-         <result column="add_time" property="add_time"/>
-         <result column="sourse_price" property="sourse_price"/>
-         <result column="current_price" property="current_price"/>
-         <result column="title" property="title"/>
-         <result column="context" property="context"/>
-         <result column="lession_num" property="lession_num"/>
-         <result column="logo" property="logo"/>
-         <result column="update_time" property="update_time"/>
-         <result column="page_buyCount" property="page_buyCount"/>
-         <result column="page_viewCount" property="page_viewCount"/>
-         <result column="end_time" property="end_time"/>
-         <result column="lose_type" property="lose_type"/>
-         <result column="lose_time" property="lose_time"/>
-         <result column="sequence" property="sequence"/>
-         <association property="subject" column="subject_id" select="com.mapper.SysSubjectMapper.getById" />
-     </resultMap>
-     <select id="query" parameterType="java.util.Map" resultMap="courseMap">
-         select * from edu_course where 0 = 0 
-         <if test="add_time != null">
-             and add_time &gt; #{add_time}
-         </if>
-         <if test="end_time != null">
-             and add_time &lt; #{end_time}
-         </if>
-         <if test="qname != null">
-             and course_name like '%${qname}%'
-         </if>
-         <if test="subject_id > 0">
-             and subject_id = #{subject_id}
-         </if>
-         <if test="is_avaliable > 0">
-             and is_avaliable = #{is_avaliable}
-         </if>
-     </select>
- </mapper>
+<mapper namespace="com.mapper.EduCourseMapper">
+	<resultMap type="EduCourse" id="courseMap">
+		<!-- private int course_id; //课程编号 -->
+		<!-- private String courser_name; //课程名称 -->
+		<!-- private int is_avaliable; //1正常2删除 -->
+		<!-- private SysSubject subject; //课程专业ID -->
+		<!-- private Date add_time; //添加时间 -->
+		<!-- private int source_price; //课程原价格（只显示） -->
+		<!-- private int current_price; //课程销售价格（实际支付价格）设置为0则可免费观看 -->
+		<!-- private String title; //课程简介 -->
+		<!-- private String context; //课程详情 -->
+		<!-- private int lession_num; //总课时 -->
+		<!-- private String logo; //图片路径 -->
+		<!-- private Date update_time; //最后更新时间 -->
+		<!-- private int page_buyCount; //销售数量 -->
+		<!-- private int page_viewCount; //浏览数量 -->
+		<!-- private Date end_time; //有效结束时间 -->
+		<!-- private int lose_type; //有效期类型，0：到期时间，1：按天数 -->
+		<!-- private String lose_time; //有效期:商品订单过期时间点 -->
+		<!-- private int sequence; //序列 -->
+		<result column="course_id" property="course_id" />
+		<result column="courser_name" property="courser_name" />
+		<result column="is_avaliable" property="is_avaliable" />
+		<result column="subject_link" property="subject_link" />
+		<result column="add_time" property="add_time" />
+		<result column="source_price" property="source_price" />
+		<result column="current_price" property="current_price" />
+		<result column="title" property="title" />
+		<result column="context" property="context" />
+		<result column="lession_num" property="lession_num" />
+		<result column="logo" property="logo" />
+		<result column="update_time" property="update_time" />
+		<result column="page_buyCount" property="page_buyCount" />
+		<result column="page_viewCount" property="page_viewCount" />
+		<result column="end_time" property="end_time" />
+		<result column="lose_type" property="lose_type" />
+		<result column="lose_time" property="lose_time" />
+		<result column="sequence" property="sequence" />
+		<association property="subject" column="subject_id"
+			select="com.mapper.SysSubjectMapper.getById" />
+	</resultMap>
+	<select id="query" parameterType="java.util.Map" resultMap="courseMap">
+		select * from edu_course where 0 = 0
+		<if test="add_time != null">
+			and add_time &gt; #{add_time}
+		</if>
+		<if test="end_time != null">
+			and add_time &lt; #{end_time}
+		</if>
+		<if test="qname != null">
+			and course_name like '%${qname}%'
+		</if>
+		<if test="subject_id > 0">
+			and subject_id = #{subject_id}
+		</if>
+		<if test="is_avaliable > 0">
+			and is_avaliable = #{is_avaliable}
+		</if>
+	</select>
+
+	<select id="getByName" parameterType="java.lang.String"
+		resultMap="courseMap">
+		select * from edu_course where courser_name = #{value}
+	</select>
+
+	<insert id="setTeacher" parameterType="java.util.Map">
+		insert into edu_course_teacher values(#{course_id},#{teancher_id})
+	</insert>
+		<insert id="add" parameterType="EduCourse">
+		insert into edu_course values(
+		null,#{course_name},#{is_avaliable},#{subject.subject_id},#{subject_link},#{add_time},#{source_price},
+		#{current_price},#{title},#{context},#{lession_num},#{logo},#{add_time},#{page_buyCount},
+		#{page_viewCount},#{end_time},#{lose_type},#{lose_time},#{sequence},null
+		)
+		<selectKey keyProperty="course_id" resultType="java.lang.Integer">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+	</insert>
+</mapper>

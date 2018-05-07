@@ -134,6 +134,7 @@ public class EduCourseController {
 			course.setSubject_link(subject_link);
 			course.setSubject(subject);
 		}
+		//上传图片
 		if (logo1 != null) {
 			String filename=logo1.getOriginalFilename();
 			//upload文件夹的路径
@@ -145,8 +146,15 @@ public class EduCourseController {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			course.setLogo(filename);
+			course.setLogo("/upload/"+filename);
 		}
+		//插入添加时间
+		try {
+			course.setAdd_time(format.parse(format.format(new Date())));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		cs.add(course,teacher_id);
 		mv.setViewName("redirect:/admin/cou/list");
 		return mv;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     <mapper namespace="com.mapper.imgMapper">
+	
+       
+		<resultMap type="img" id="imgMap"> 
+		<result column="imageId" property="imageId"/> 
+		<result column="title" property="title"/> 
+		<result column="describes" property="describes"/> 
+		<result column="linkAddress" property="linkAddress"/> 
+		<result column="seriesNumber" property="seriesNumber"/> 
+		<result column="imageUrl" property="imageUrl"/>
+	    <result column="previewUrl" property="previewUrl"/>
+	    <result column="color" property="color" /> 
+	   <association property="imgType" column="typeId" select="com.mapper.imgTypeMapper.getById"></association>
+	</resultMap>
+	
+	 <insert id="save" parameterType="img"> 
+	 insert into edu_website_images(title,describes,linkAddress,seriesNumber,imageUrl,previewUrl,color,typeId) 
+		values (#{title},#{describes},#{linkAddress},#{seriesNumber},#{imageUrl},#{previewUrl},#{color},#{imgType.typeId}) 
+		</insert>
+	
+	 <update id="update" parameterType="img">
+    update edu_website_images  set title=#{title},describes=#{describes},typeId=#{typeId},linkAddress=#{linkAddress},seriesNumber=#{seriesNumber},imageUrl=#{imageUrl},previewUrl=#{previewUrl},color=#{color}  where imageId=#{imageId}
+    </update>
+
+	<select id="listAll" resultType="img" parameterType="java.util.Map" resultMap="imgMap">
+		select * from edu_website_images
+		<where>
+			<if test="title!=null">and title like '%${title}%'</if>
+			<if test="typeId>0">and typeId=#{typeId}</if>
+		</where>
+	</select>
+ 
+ <select id="checkName" resultType="img" parameterType="java.util.Map">
+   select * from edu_website_images 
+   <where>
+   <if test="title!=null">
+   and title=#{title}
+   </if>
+   
+   </where>
+   </select> 
+	<delete id="delete" parameterType="int">
+		delete from edu_website_images where imageId=#{value}
+	</delete>
+	
+	<select id="getById" resultType="img" parameterType="int">
+		select * from edu_website_images where imageId=#{imageId}
+	</select>
+</mapper> 

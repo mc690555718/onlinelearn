@@ -16,9 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
-	
-	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
-	
+	<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
       <style type="text/css">
 
 	#t{
@@ -48,12 +46,7 @@
 		</header><!-- /header -->
 		<div class="larry-personal-body clearfix changepwd">
 			<form class="layui-form col-lg-4" method="post" action="/teacher/update" enctype="multipart/form-data">
-			<div class="layui-form-item">
-					<div class="layui-input-block">  
-					  	<input type="text" name="id"  value="${a.id }" class="layui-input layui-disabled"   >
-					</div>
-				</div>
-			
+			<input type="hidden" name="id"  value="${a.id }" class="layui-input layui-disabled"   >
 			 	<div class="layui-form-item">
 					<label class="layui-form-label">讲师名称</label>
 					<div class="layui-input-block">  
@@ -119,9 +112,8 @@
 		</div>
 	</div>
 </section>
-<script type="text/javascript" src="common/layui/layui.js"></script>
+<script type="text/javascript" src="/common/layui/layui.js"></script>
 <script type="text/javascript">
-
 //div显示图片
 function readURL(input) {
 		if (input.files && input.files[0]) {

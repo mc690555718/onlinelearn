@@ -35,9 +35,6 @@
    </delete>
    
    <update id="update" parameterType="Article">
-   		<selectKey resultType="int" order="AFTER" keyProperty="article_id">
-			SELECT LAST_INSERT_ID()
-		</selectKey>
    update edu_article set title=#{title},summary=#{summary},author=#{author},source=#{source},image_url=#{image_url},sort=#{sort} where article_id=#{article_id}
    </update>
    

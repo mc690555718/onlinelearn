@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
-<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="/common/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css"
@@ -23,17 +23,14 @@
 	media="all">
 <link rel="stylesheet" type="text/css" href="/css/personal.css"
 	media="all">
-
 <style type="text/css">
 #myButton {
 	width: 80px;
 }
-
 #table1{
 text-align: center;
 }
 </style>
-
 <script>
  function todown(){
 	 document.forms[0].action="/admin/email/sendEmaillist/${P.id }?page=${page.nextPage}";

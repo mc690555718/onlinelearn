@@ -47,7 +47,6 @@ public class TestController {
 		mv.setViewName("/back/user/index");
 		mv.addObject("listUser", list);
 		mv.addObject("page", pageInfo);
-		System.out.println(pageInfo);
 		return mv;
 	}
 

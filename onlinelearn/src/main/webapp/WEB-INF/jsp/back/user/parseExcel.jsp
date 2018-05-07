@@ -10,19 +10,11 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
-
-		<script src="/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/js/bootstrap-table.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/js/locale/bootstrap-table-zh-CN.min.js" type="text/javascript" charset="utf-8"></script>
-     
-		<link rel="stylesheet" type="text/css" href="/comm/layui/css/layui.css" media="all">
-		<link rel="stylesheet" type="text/css" href="/comm/bootstrap/css/bootstrap.css" media="all">
-
-		<link rel="stylesheet" type="text/css" href="/comm/global.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
+		<link rel="stylesheet" type="text/css" href="/css/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
 		<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
-		<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 <title>解析excel</title>
 </head>
 <style type="text/css">
@@ -82,13 +74,6 @@ h2 {
 			<tr>
 				<td>第四列:赠送课程模板（<a href="#">点击下载模板</a>）
 				</td>
-			</tr>
-			<tr>
-			 	<td>导入中出错选择项</td>
-				<td><select  name="" id="" >
-						<option value="-1">--请选择--</option>
-						<option value="1">跳过</option>
-				</select></td>
 			</tr>
 			<tr>
 				<td>上传</td>

@@ -19,8 +19,8 @@
 <link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
-<script src="/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<script src="/common/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" />
 <script type="text/javascript">
 	function getList() {
 		document.forms[0].action = "showlist";

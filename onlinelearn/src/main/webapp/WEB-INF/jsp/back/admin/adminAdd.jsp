@@ -23,38 +23,6 @@
 <section class="layui-larry-box ">
 	<div class="larry-personal">
 	    <div class="layui-tab">
-            <blockquote class="layui-elem-quote news_search">
-				<div class="layui-inline">
-				    <div class="layui-input-inline">
-				    	<input value="" placeholder="请输入关键字" class="layui-input search_input" type="text">
-				    </div>
-				    <a class="layui-btn search_btn">查询</a>
-				</div>
-				
-			</blockquote>
-			<blockquote class="layui-elem-quote news_search">
-				<div class="layui-btn-group">
-				  <button class="layui-btn layui-btn-small layui-btn-normal"><i class="layui-icon">&#xe61f;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-danger"><i class="layui-icon">&#x1002;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-warm"><i class="layui-icon">&#xe601;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-disabled"><i class="layui-icon">&#xe642;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon">&#xe603;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon">&#xe602;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon">&#xe62d;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon">&#xe609;</i></button>
-				  <button class="layui-btn layui-btn-small layui-btn-primary"><i class="layui-icon">&#xe640;</i></button>
-				</div>
-			</blockquote>
-			
-<!-- 			 密码 -->
-<!-- 				  <div class="layui-form-item"> -->
-<!-- 				    <label class="layui-form-label">密码</label> -->
-<!-- 				    <div class="layui-input-inline"> -->
-<!-- 				      <input type="password" name="password" value="" required lay-verify="required" autocomplete="off" class="layui-input"> -->
-<!-- 				    </div> -->
-<!-- 				    <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
-<!-- 				  </div> -->
-            
 		         <!-- 用户添加 -->
                 <form class="layui-form" action="" method="post" style="height: 530px;">
                    <!-- 用户名 -->
@@ -71,9 +39,7 @@
 				    <div class="layui-input-inline">
 				      <input type="password" name="login_pwd" value="" required lay-verify="required" autocomplete="off" class="layui-input">
 				    </div>
-				    <div class="layui-form-mid layui-word-aux">辅助文字</div>
 				  </div>
-				  
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">真实姓名</label>
 				    <div class="layui-input-block">
@@ -94,12 +60,7 @@
 				    <select name="role_id" lay-verify="required" id="sel_role">
                          <option value="-1">--------请选择角色-------</option>
                          <c:forEach items="${roles}" var="role">
-                         <c:if test="${user.role.role_id == role.role_id}">
-                             <option value="${role.role_id}" selected>${role.role_name}</option>
-                         </c:if>
-                         <c:if test="${user.role.role_id != role.role_id}">
                              <option value="${role.role_id}">${role.role_name}</option>
-                         </c:if>
 				        </c:forEach>
                     </select>  
 				    </div>
@@ -121,21 +82,8 @@
 	
 </section>
 <script type="text/javascript" src="/common/layui/layui.js"></script>
-<script type="text/javascript" src="/js/newslist.js"></script>
 <script>
-/* //Demo
-layui.use('form', function(){
-  var form = layui.form;
-  
-  //监听提交
-  form.on('submit(formDemo)', function(data){
-    layer.msg(JSON.stringify(data.field));
-    return false;
-  });
-}); */
-
 $(function(){
-	
 	$("#btn_submit").click(function(){
 		document.forms[0].action="/admin/sysuser/createuser";
 		document.forms[0].submit();

@@ -25,7 +25,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 	media="all">
 <link rel="stylesheet" type="text/css" href="/css/personal.css"
 	media="all">
-<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
 <!--  <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script> -->
 <style type="text/css">
 .tt {
@@ -50,26 +50,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 			<button class="layui-btn" data-type="isAll">验证是否全选</button>
 		</div>
 
-		<table class="layui-table"
-			lay-data="{width: 892, height:332, url:'/demo/table/user/', page:true, id:'idTest'}"
-			lay-filter="demo">
-			<thead>
-				<tr>
-					<th lay-data="{type:'checkbox', fixed: 'left'}"></th>
-					<th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-					<th lay-data="{field:'username', width:80}">用户名</th>
-					<th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-					<th lay-data="{field:'city', width:80}">城市</th>
-					<th lay-data="{field:'sign', width:160}">签名</th>
-					<th lay-data="{field:'experience', width:80, sort: true}">积分</th>
-					<th lay-data="{field:'classify', width:80}">职业</th>
-					<th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
-					<th lay-data="{field:'score', width:80, sort: true, fixed: 'right'}">评分</th>
-					<th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
-				</tr>
-			</thead>
-		</table>
-
 
 		<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -79,8 +59,5 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 
 	</div>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
-	<script type="text/javascript">
-	
-</script>
 </body>
 </html>

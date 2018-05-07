@@ -61,21 +61,8 @@
 							<thead>
 								<tr>
 
-									<!-- 	private int user_id;            //主键 -->
-									<!-- 	private String login_name;      //登录名 -->
-									<!-- 	private String login_pwd;       //登录密码 -->
-									<!-- 	private String user_name;       //用户真实姓名 -->
-									<!-- 	private int status;             //状态.0: 正常,1:冻结,2:删除 -->
-									<!-- 	private String last_login_time; //最后登录时间 -->
-									<!-- 	private String last_login_ip;   //最后登录IP -->
-									<!-- 	private Date create_time;       //创建时间 -->
-									<!-- 	private String email;           //邮件地址 -->
-									<!-- 	private String tel;             //手机号码 -->
-									<!-- 	private SysRole role;           //角色 -->
-
 									<th style="text-align: left;">用户ID</th>
 									<th>用户名</th>
-									<th>密码</th>
 									<th>真实姓名</th>
 									<th>状态</th>
 									<th>创建时间</th>
@@ -89,7 +76,6 @@
 									<tr id="tr">
 										<td>${user.user_id}</td>
 										<td>${user.login_name}</td>
-										<td>${user.login_pwd}</td>
 										<td>${user.user_name}</td>
 										<td><c:if test="${user.status == 0}">正常</c:if> <c:if
 												test="${user.status == 1}">冻结</c:if></td>
@@ -118,7 +104,6 @@
 		</div>
 	</section>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
-	<script type="text/javascript" src="/js/newslist.js"></script>
 	<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 	<script type="text/javascript">
 		$(function(){

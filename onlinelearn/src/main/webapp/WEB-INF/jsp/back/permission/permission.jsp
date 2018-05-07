@@ -10,18 +10,9 @@
 <link rel="stylesheet" href="/css/zTreeStyle.css" type="text/css">
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bootstrap-theme.css">
-<!-- <script type="text/javascript" src="/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
-<!-- <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script> -->
-<script type="text/javascript" src="/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="/js/jquery.ztree.excheck.js"></script>
-
-
-<!-- <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<!-- <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
-<script
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="/static/common/ztree/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="/static/common/ztree/jquery.ztree.excheck-3.5.js"></script>
 <SCRIPT type="text/javascript">
 	var setting = {
 		check : {

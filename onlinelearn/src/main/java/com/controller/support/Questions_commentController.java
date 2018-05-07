@@ -77,6 +77,12 @@ public class Questions_commentController {
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
+	@RequestMapping("/delete1/{id}/{questionsId}")
+	public String delete1(@PathVariable("id")int id,@PathVariable("questionsId")int qid){
+		questions_commentService.delete(id);
+		return "redirect:/admin/questions_comment/getById1/"+qid;
+	}
+	
 	@RequestMapping("/getById/{id}")
 	public ModelAndView getById(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
@@ -92,11 +98,20 @@ public class Questions_commentController {
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
+	@RequestMapping("/update1/{id}/{questionsId}")
+	public String update1(@PathVariable("id")int id,@PathVariable("questionsId")int qid){
+		questions_commentService.update(id);
+		return "redirect:/admin/questions_comment/getById1/"+qid;
+	}
 	@RequestMapping("/getById1/{id}")
-	public ModelAndView getById1(@PathVariable("id")int id){
+	public ModelAndView getById1(@PathVariable("id")int id,@RequestParam(required=true,defaultValue="1") Integer page,Model md){
+		PageHelper.startPage(page, 5);
 		ModelAndView mv = new ModelAndView();
 		List<Questions_comment> comments = questions_commentService.getById1(id);
+		PageInfo<Questions_comment>  pageInfo = new PageInfo<Questions_comment>(comments);
 		mv.setViewName("/back/question/commentsById");
+		mv.addObject("page", pageInfo);
+		mv.addObject("id", id);
 		mv.addObject("comments", comments);
 		return mv;
 	}

@@ -11,5 +11,7 @@ public interface SubjectMapper {
 	SubjectBean getByIdSM(int id);
 
 	List<SubjectBean> listAll();
+	
+	List<SubjectBean> getById(int id);
 
 }

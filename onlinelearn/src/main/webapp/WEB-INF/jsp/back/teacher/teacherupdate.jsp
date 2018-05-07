@@ -82,7 +82,7 @@
 						</select>
 					</div>
 				</div>
-				
+
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师排序</label>
 					<div class="layui-input-block">  

@@ -27,14 +27,11 @@ public class AdminRealm extends AuthorizingRealm{
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		
 		 String username =  (String)principals.getPrimaryPrincipal();
 		 SysUser user = us.getByName(username);
 		 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		 info.setRoles(us.getRoleNameSet(user));
 		 info.setStringPermissions(us.getPermissionNamesSet(user));
-		 Session session=SecurityUtils.getSubject().getSession();
-		 session.setAttribute("user",user);
 		return info;
 		
 	}

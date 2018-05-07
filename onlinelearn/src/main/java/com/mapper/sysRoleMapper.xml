@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--  	private int role_id;         //角色ID -->
-<!-- 	private String role_name;    //角色名 -->
-<!-- 	private String create_time;  //创建时间 -->
-<!-- 	private List<SysFunction> functions; -->
-
 <mapper namespace="com.mapper.SysRoleMapper">
      <resultMap type="SysRole" id="roleMap">
          <result column="role_id" property="role_id"/>

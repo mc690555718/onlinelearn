@@ -17,11 +17,15 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
-<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
-<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
-<script src="/js/jquery-3.0.0.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"
+	href="/common/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css"
+	href="/common/bootstrap/css/bootstrap.css" media="all">
+<link rel="stylesheet" type="text/css" href="/common/global.css"
+	media="all">
+<link rel="stylesheet" type="text/css" href="/css/personal.css"
+	media="all">
+<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
 <!--  <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script> -->
 <style type="text/css">
 .tt {
@@ -188,8 +192,22 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
+
+
+		<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+	</div>
+=======
 	</section>
+>>>>>>> branch 'master' of https://github.com/mc690555718/onlinelearn.git
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
+<<<<<<< HEAD
+=======
 	<script type="text/javascript">
 	layui.use(['jquery','layer','element','laypage'],function(){
 	      window.jQuery = window.$ = layui.jquery;
@@ -229,5 +247,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 				});
     });
 </script>
+>>>>>>> branch 'master' of https://github.com/mc690555718/onlinelearn.git
 </body>
 </html>

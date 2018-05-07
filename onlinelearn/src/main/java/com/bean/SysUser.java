@@ -3,20 +3,6 @@ package com.bean;
 import java.util.Date;
 
 public class SysUser {
-
-//	  `USER_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-//	  `LOGIN_NAME` varchar(20) NOT NULL DEFAULT '' COMMENT '登录名',
-//	  `LOGIN_PWD` varchar(32) NOT NULL DEFAULT '' COMMENT '登录密码',
-//	  `USER_NAME` varchar(50) DEFAULT NULL COMMENT '用户真实姓名名',
-//	  `STATUS` tinyint(1) DEFAULT '0' COMMENT '状态.0: 正常,1:冻结,2：删除',
-//	  `LAST_LOGIN_TIME` timestamp NULL DEFAULT NULL COMMENT '最后登录时间',
-//	  `LAST_LOGIN_IP` varchar(20) DEFAULT NULL COMMENT '最后登录IP',
-//	  `CREATE_TIME` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-//	  `EMAIL` varchar(50) DEFAULT NULL COMMENT '邮件地址',
-//	  `TEL` varchar(12) DEFAULT NULL COMMENT '手机号码',
-//	  `ROLE_ID` int(11) DEFAULT '0' COMMENT '所属角色ID',
-//	  PRIMARY KEY (`USER_ID`)
-	
 	private int user_id;            //主键
 	private String login_name;      //登录名
 	private String login_pwd;       //登录密码
@@ -28,7 +14,6 @@ public class SysUser {
 	private String email;           //邮件地址
 	private String tel;             //手机号码
 	private SysRole role;           //角色
-	
 	public int getUser_id() {
 		return user_id;
 	}

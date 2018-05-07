@@ -25,8 +25,6 @@ public class EduCourseController {
 
 	@RequestMapping(value="list")
 	public ModelAndView listCourse(ModelAndView mv,String qname,String subject_id,String add_time ,String end_time,String is_avaliable){
-		
-		System.out.println("qname :"+ qname +"\n subject_id : " + subject_id + "\n addtime : " +add_time +"\n endtime : "+end_time + "\n is_avaliable :" +is_avaliable);
 		Map<Object, Object> map = new HashMap<>();
 		if (qname != null && qname.trim().length() != 0) {
 			map.put("qname", qname);
@@ -52,10 +50,6 @@ public class EduCourseController {
 		}
 		if (is_avaliable != null && Integer.valueOf(is_avaliable) > 0 ) {
 			map.put("is_avaliable", Integer.valueOf(is_avaliable));
-		}
-		System.out.println("----------------------");
-		for (Object key : map.keySet()) {
-			System.out.println(key + ":" + map.get(key));
 		}
 		List<EduCourse> eduCourses  = cs.query(map);
 		List<SysSubject> subjects = ss.query(null);

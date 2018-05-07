@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bean.Article;
 import com.bean.ArticleContent;
 import com.bean.ArticleType;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.ArticleContentService;
 import com.service.ArticleService;
 
@@ -35,12 +37,15 @@ public class ArticleController {
 	ArticleContentService articleContentService;
 	//	²éÑ¯andÄ£ºý²éÑ¯
 	@RequestMapping("/showlist")
-	public ModelAndView listAll(HttpServletRequest request) {
+	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1")Integer page,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		Map map = new HashMap<>();
+		PageHelper.startPage(page, 8);
 		map=initMap(request, map);
 		List<Article> list = articleService.listAll(map);
+		PageInfo<Article> pageInfo=new PageInfo<>(list);
 		mv.addObject("list", list);
+		mv.addObject("page", pageInfo);
 		mv.setViewName("/back/article/article");
 		return mv;
 	}

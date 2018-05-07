@@ -13,7 +13,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">	
 	<meta name="format-detection" content="telephone=no">	
 	
-	<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
 	<link href="/js/utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
@@ -78,18 +78,18 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">图片</label>
 					<div class="layui-input-block">
-						<img alt="" src=""
+						<img alt="" src="" id="blah"
 					name="image_urls" style="height: 200px; width: 200px" /><input type="file" name="file" id="file">
 					</div>
 				</div>
 
-				<div class="layui-form-item">
+				<!-- <div class="layui-form-item">
 					<label class="layui-form-label">点击数</label>
 					<div class="layui-input-block">
 						<input type="text" name="click_num" id="click_num" 
 							class="layui-input">
 					</div>
-				</div>
+				</div> -->
 
 
 
@@ -125,7 +125,7 @@
 		</div>
 	</div>
 </section>
-<script type="text/javascript" src="common/layui/layui.js"></script>
+<script type="text/javascript" src="/common/layui/layui.js"></script>
 <script type="text/javascript">
 	layui.use(['form','upload'],function(){
          var form = layui.form();
@@ -138,6 +138,22 @@
          });
 
 	});
+	
+//  图片显示
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#file").change(function() {
+		readURL(this);
+	});
+	
 </script>
 </body>
 <script type="text/javascript">

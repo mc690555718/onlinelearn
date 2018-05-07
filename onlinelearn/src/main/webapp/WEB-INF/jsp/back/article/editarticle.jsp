@@ -13,11 +13,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
-<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-<link href="/js/utf8-jsp/themes/default/css/umeditor.css"
-	type="text/css" rel="stylesheet">
+<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
+<link href="/js/utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="common/bootstrap/css/bootstrap.css" media="all">
+<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 <link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
@@ -82,7 +81,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">图片</label>
 					<div class="layui-input-block">
-						<img alt="" src="${article.image_url }" name="image_urls"
+						<img alt="" src="${article.image_url }" name="image_urls" id="blah"
 							style="height: 200px; width: 200px" /><input type="file"
 							name="file" id="file">
 					</div>
@@ -121,15 +120,24 @@
 		layui.use([ 'form', 'upload' ], function() {
 			var form = layui.form();
 		});
-	</script>
-	</section>
-	<script type="text/javascript">
-		layui.use([ 'form', 'upload' ], function() {
-			var form = layui.form();
+		
+		
+	//  图片显示
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#blah').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$("#file").change(function() {
+			readURL(this);
 		});
-
-
 	</script>
+
 </body>
 <!-- 实例化编辑器 -->
 <script type="text/javascript">

@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
-<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 <link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
 <script type="text/javascript">
 	function getList() {
-		document.forms[0].action = "listAll";
+		document.forms[0].action = "showlist";
 		document.forms[0].submit();
 	}
 </script>
@@ -40,9 +40,7 @@
 								<input value="${qname }" name="qname" placeholder="请输入关键字"
 									class="layui-input search_input" type="text">
 							</div>
-
-			
-							
+	
 							<label class="layui-inline">创建时间:</label>
 							<div class="layui-input-inline">
 								<input class="layui-input search_input" type="text" onClick="WdatePicker()" name="create_time" value="${create_time }"/>
@@ -62,12 +60,12 @@
 								class="layui-btn layui-btn-normal newsAdd_btn">添加文章</a> 
 						</div>
 
-						<div class="layui-inline">
-							<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
-						</div>
 <!-- 						<div class="layui-inline">
-							<div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的文章外所有操作无效，关闭页面所有数据重置</div>
+							<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
 						</div> -->
+ 						<div class="layui-inline">
+							<div class="layui-form-mid layui-word-aux">本页面刷新后除新添加的文章外所有操作无效，关闭页面所有数据重置</div>
+						</div> 
 					</form>
 				</blockquote>
 
@@ -107,6 +105,25 @@
 											class="btn btn-default">修改</a></td>
 									</tr>
 								</c:forEach>
+								
+								<!-- 分页 -->
+								<tr>
+						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+							color="black">一共${page.pages}页</font> 
+							<font face="微软雅黑" size="3px"
+							color="black">每页${page.pageSize }条/</font>
+							<a class="layui-btn"
+							href="/admin/article/showlist?page=${page.firstPage}">首页</a>
+							<a class="layui-btn"
+							href="/admin/article/showlist?page=${page.prePage}">上一页</a>
+							<a class="layui-btn"
+							href="/admin/article/showlist?page=${page.nextPage}">下一页</a>
+							<a class="layui-btn"
+							href="/admin/article/showlist?page=${page.lastPage}">最后页</a></td>
+					</tr>
+								
+								
+								
 
 							</tbody>
 						</table>
@@ -160,42 +177,5 @@
 		$("#qname").val("${qname}");
 	</script>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
-	<script type="text/javascript">
-		layui.use([ 'jquery', 'layer', 'element', 'laypage' ], function() {
-			window.jQuery = window.$ = layui.jquery;
-			window.layer = layui.layer;
-			var element = layui.element(), laypage = layui.laypage;
-
-			laypage({
-				cont : 'page',
-				pages : 10 //总页数
-				,
-				groups : 5 //连续显示分页数
-				,
-				jump : function(obj, first) {
-					//得到了当前页，用于向服务端请求对应数据
-					var curr = obj.curr;
-					if (!first) {
-						//layer.msg('第 '+ obj.curr +' 页');
-					}
-				}
-			});
-
-			laypage({
-				cont : 'page2',
-				pages : 10 //总页数
-				,
-				groups : 5 //连续显示分页数
-				,
-				jump : function(obj, first) {
-					//得到了当前页，用于向服务端请求对应数据
-					var curr = obj.curr;
-					if (!first) {
-						//layer.msg('第 '+ obj.curr +' 页');
-					}
-				}
-			});
-		});
-	</script>
 </body>
 </html>

@@ -8,6 +8,11 @@
   select * from sys_subject
   </select>
   
+  <select id="getById" parameterType="int" resultType="SubjectBean">
+  select * from sys_subject where parent_id=0
+  
+  </select>
+  
    <select id="getByIdSM" parameterType="int" resultType="SubjectBean"> 
   select * from sys_subject where subject_id=#{value}
   </select>

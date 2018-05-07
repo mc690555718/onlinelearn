@@ -13,7 +13,7 @@
 			<ul class="nav">
 			<li><a href="/" title="首页" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>首页</a></li>
 			<li><a href="/course" title="课程" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>课程</a></li>
-			<li><a href="/teacher" title="名师" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>名师</a></li>
+			<li><a href="/front/teacher/list" title="名师" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>名师</a></li>
 			<li><a href="/article" title="文章" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>文章</a></li>
 			<li><a href="question" title="问答" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>问答</a></li>
 <%-- 				<c:forEach items="${navigatemap.INDEX}" var="indexNavigate"> --%>

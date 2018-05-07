@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.SubjectBean;
+import com.bean.SysSubject;
 import com.bean.TreeBean;
 import com.mapper.SubjectMapper;
 
@@ -43,6 +44,12 @@ public class SubjectServiceImpl implements SubjectService{
 			ztrees.add(tb);
 			}
 		return ztrees;
+	}
+
+	@Override
+	public List<SubjectBean> getById(int id) {
+		List<SubjectBean> list=subjectMapper.getById(id);
+		return list;
 	}
 	
 

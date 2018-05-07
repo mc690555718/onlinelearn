@@ -49,7 +49,7 @@
              and add_time &lt; #{end_time}
          </if>
          <if test="qname != null">
-             and course_name like '%${course_name}%'
+             and course_name like '%${qname}%'
          </if>
          <if test="subject_id > 0">
              and subject_id = #{subject_id}

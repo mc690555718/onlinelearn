@@ -6,7 +6,7 @@ import com.bean.EduCourse;
 
 public interface EduCourseService {
 
-//	public void add(EduCourse course);
+	public void add(EduCourse course,String teacher_id);
 //	
 //	public void remove(int course_id);
 //	

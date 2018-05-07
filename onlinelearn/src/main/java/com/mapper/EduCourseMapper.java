@@ -2,7 +2,6 @@ package com.mapper;
 
 import java.util.List;
 import java.util.Map;
-
 import com.bean.EduCourse;
 
 public interface EduCourseMapper {
@@ -16,5 +15,7 @@ public interface EduCourseMapper {
 //	public EduCourse getById();
 	
 	public List<EduCourse> query(Map<Object, Object> map);
+	
+	public void add(EduCourse course);
 
 }

@@ -13,8 +13,10 @@ public class EduCourseServiceImpl implements EduCourseService{
 	@Autowired
 	private EduCourseMapper mapper;
 
-//	public void add(EduCourse course);
-//	
+	public void add(EduCourse course,String teacher_id){
+		
+	}
+	
 //	public void remove(int course_id);
 //	
 //	public void update(EduCourse course);

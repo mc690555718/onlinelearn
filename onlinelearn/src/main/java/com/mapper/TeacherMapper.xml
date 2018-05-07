@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.TeacherMapper">
+  
+   <resultMap type="TeacherBean" id="TeacherBeanMap">
+  	<id property="id" column="id"/>
+  	<result property="name" column="name"/>
+  	<result property="th_name" column="th_name"/>
+  	<result property="th_pw" column="th_pw"/>
+  	<result property="education" column="education"/>
+  	<result property="career" column="career"/>
+  	<result property="is_star" column="is_star"/>
+  	<result property="pic_path" column="pic_path"/>
+  	<result property="status" column="status"/>
+  	<result property="create_time" column="create_time"/>
+  	<result property="update_time" column="update_time"/>
+  	<result property="sort" column="sort"/>
+  	<association property="subject_id" column="subject_id" select="com.mapper.SubjectMapper.getByIdSM"></association>
+  </resultMap> 
+  
+   <insert id="save" parameterType="TeacherBean">
+  insert into edu_teacher(name,is_star,education,career,create_time,subject_id,sort,pic_path)
+   VALUES (#{name},#{is_star},#{education},#{career},#{create_time},#{subject_id.subject_id},#{sort},#{pic_path})
+  </insert>
+
+  <delete id="delete" parameterType="int">
+  delete from edu_teacher where id=#{value} 
+  </delete>
+  
+   <update id="update" parameterType="TeacherBean"> 
+  update edu_teacher set name=#{name},education=#{education},career=#{career},is_star=#{is_star},pic_path=#{pic_path},update_time=#{update_time},subject_id=#{subject_id.subject_id},sort=#{sort} where id=#{id} 
+  </update>
+  
+  <select id="listAll" resultMap="TeacherBeanMap" parameterType="java.util.Map"> 
+  select * from edu_teacher
+  
+   <where>
+ 	<if test="qname!=null">
+ and name like '%${qname}%'
+	</if>
+ 	<if test="star!=null">
+		<if test="emp!=null">
+		 and create_time between #{star} and #{emp}
+		</if>
+	</if>
+	<if test="isstar!=null">
+	and is_star like '%${isstar}%'
+	</if>
+		</where>
+  </select>
+
+   <select id="getById" parameterType="int" resultMap="TeacherBeanMap">
+  select * from edu_teacher where id=#{value}
+  </select>
+  
+ </mapper>

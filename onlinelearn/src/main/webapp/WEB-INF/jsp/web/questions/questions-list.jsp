@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/base.jsp"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +11,17 @@
 			<section class="i-question">
 				<div class="fl col-7">
 					<section class="mr30 pt10">
-						<section class="c-infor-tabTitle c-tab-title">
-							<a href="/questions/getByType/0" title="全部问答"
+						<%--  <section class="c-infor-tabTitle c-tab-title">
+							<a href="javascript: void(0)" title="全部问答"
 								onclick="submitForm(0,'type')"
 								<c:if test="${questions.type==0 }">class="current"</c:if>>全部问答</a>
-							<a href="/questions/getByType/1" title="课程问答"
+							<a href="javascript: void(0)" title="课程问答"
 								onclick="submitForm(1,'type')"
 								<c:if test="${questions.type==1 }">class="current"</c:if>>课程问答</a>
-							<a href="/questions/getByType/2" title="学习分享"
+							<a href="javascript: void(0)" title="学习分享"
 								onclick="submitForm(2,'type')"
 								<c:if test="${questions.type==2 }">class="current"</c:if>>学习分享</a>
-						</section>
+						</section> --%>
 						<div class="js-wrap">
 							<section class="fr">
 								<span class="c-ccc"> <tt class="c-master f-fM">${page.currentPage}</tt>/<tt
@@ -31,18 +30,9 @@
 							</section>
 							<section class="fl">
 								<ol class="js-tap clearfix">
-									<li
-										<c:if test="${questions.orderFalg=='addTime' }">class="current bg-orange"</c:if>><a
-										onclick="submitForm('addTime','order')"
-										href="javascript:void(0)" title="最新">最新</a></li>
-									<li
-										<c:if test="${questions.orderFalg=='replycount' }">class="current bg-orange"</c:if>><a
-										onclick="submitForm('replycount','order')"
-										href="javascript:void(0)" title="热门">热门</a></li>
-									<li
-										<c:if test="${questions.orderFalg=='status0' }">class="current bg-orange"</c:if>><a
-										onclick="submitForm('status0','order')"
-										href="javascript:void(0)" title="等待回答">等待回答</a></li>
+									<li><a href="/front/listAll/1" title="最新">最新</a></li>
+									<li><a href="/front/listAll/2" title="热门">热门</a></li>
+									<li><a href="/front/listAll/3" title="等待回答">等待回答</a></li>
 								</ol>
 							</section>
 						</div>
@@ -60,12 +50,12 @@
 							<c:if test="${not empty questions }">
 								<section class="q-all-list">
 									<ul>
-										<c:forEach items="${questions }" var="q">
+										<c:forEach items="${questions }" var="question">
 											<li>
 												<aside class="q-head-pic">
 													<c:choose>
-														<c:when test="${not empty q.edu_user.picImg}">
-															<img src="<%=staticImage %>${q.edu_user.picImg }" alt="">
+														<c:when test="${not empty question.edu_user.pic_img }">
+															<img src="${question.edu_user.pic_img }" alt="">
 														</c:when>
 														<c:otherwise>
 															<img src="${ctx }/static/inxweb/img/avatar-boy.gif"
@@ -74,8 +64,8 @@
 													</c:choose>
 													<p class="hLh30 txtOf">
 														<span class="c-999"> <c:if
-																test="${empty q.edu_user.showName }">${q.edu_user.email }</c:if>
-															<c:if test="${not empty q.edu_user.showName }">${q.edu_user.showName }</c:if>
+																test="${empty question.edu_user.show_name }">${question.edu_user.email }</c:if>
+															<c:if test="${not empty question.edu_user.show_name }">${question.edu_user.show_name }</c:if>
 														</span>
 													</p>
 												</aside>
@@ -83,13 +73,13 @@
 													<a class="replyBrowseNum"
 														href="${ctx }/questions/info/${question.id }" title="">
 														<div class="replyNum">
-															<span class="r-b-num">${question.replyCount }</span>
+															<span class="r-b-num">${question.reply_count }</span>
 															<p class="hLh30">
 																<span class="c-999 f-fA">回答数</span>
 															</p>
 														</div>
 														<div class="browseNum">
-															<span class="r-b-num">${question.browseCount }</span>
+															<span class="r-b-num">${question.browse_count }</span>
 															<p class="hLh30">
 																<span class="c-999 f-fA">浏览数</span>
 															</p>
@@ -102,18 +92,17 @@
 													</h3>
 													<h3 class="hLh30 txtOf mt5">
 														<em class="icon16 q-hd">&nbsp;</em>
-														<c:if test="${empty question.questionsCommentList }">
+														<c:if test="${empty question.content }">
 															<span class="fsize12 c-999 vam">哈~~~
 																此问题大家还有苦思冥想中...</span>
 															<!-- 没有回答时的内容 -->
 														</c:if>
-														<c:if test="${not empty question.questionsCommentList }">
+														<c:if test="${not empty question.content }">
 															<c:if test="${question.status==0 }">
 																<span class="fsize12 c-999 vam"> <tt
 																		class="c-ccc f-fM mr5">[最新回答]</tt> <c:forEach
-																		items="${question.questionsCommentList }"
-																		var="questionsComment">
-																		<c:out value="${questionsComment.content }"></c:out>
+																		items="${question.content }" var="questionsComment">
+																		<c:out value="${question.content }"></c:out>
 																	</c:forEach>
 																</span>
 																<!-- 有回答时显示最新一条的回答内容 -->
@@ -122,30 +111,25 @@
 															<c:if test="${question.status==1 }">
 																<span class="fsize12 c-999 vam"> <tt
 																		class="c-green f-fM mr5">[最佳回答]</tt> <c:forEach
-																		items="${question.questionsCommentList }"
-																		var="questionsComment">
-																		<c:out value="${questionsComment.content }"></c:out>
+																		items="${question.content }" var="questionsComment">
+																		<c:out value="${question.content }"></c:out>
 																	</c:forEach>
 																</span>
 																<!-- 采纳最佳显示最佳答案内容 -->
 															</c:if>
 														</c:if>
 													</h3>
-													<div class="mt15">
-														<span class="c-ccc fl vam">${question.modelTime }</span>
-														<section class="fl ml20 pt10">
-															<div class="taglist clearfix">
-																<c:forEach items="${question.questionsTagRelationList }"
-																	var="questionsTag">
-																	<a title="${questionsTag.tagName }"
-																		data-id="${questionsTag.questionsTagId }"
-																		onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')"
-																		class="list-tag" href="javascript:;">${questionsTag.tagName }</a>
-																</c:forEach>
-															</div>
-														</section>
-														<div class="clear"></div>
-													</div>
+													<!-- 													<div class="mt15"> -->
+													<%-- 														<span class="c-ccc fl vam">${question.modelTime }</span> --%>
+													<!-- 														<section class="fl ml20 pt10"> -->
+													<!-- 															<div class="taglist clearfix"> -->
+													<%-- 																<c:forEach items="${question.questionsTagRelationList }" var="questionsTag"> --%>
+													<%-- 																	<a title="${questionsTag.tagName }" data-id="${questionsTag.questionsTagId }" onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')" class="list-tag" href="javascript:;">${questionsTag.tagName }</a> --%>
+													<%-- 																</c:forEach> --%>
+													<!-- 															</div> -->
+													<!-- 														</section> -->
+													<!-- 														<div class="clear"></div> -->
+													<!-- 													</div> -->
 												</section>
 											</li>
 										</c:forEach>
@@ -159,12 +143,12 @@
 								method="post">
 								<input type="hidden" id="pageCurrentPage"
 									name="page.currentPage" value="1" /> <input type="hidden"
-									name="questions.orderFalg" value="${questions.orderFalg}" /> <input
-									type="hidden" name="questions.type" value="${questions.type}" />
+									name="questions.orderFalg" value="${question.orderFalg}" /> <input
+									type="hidden" name="questions.type" value="${question.type}" />
 								<input type="hidden" name="questions.status"
-									value="${questions.status}" /> <input type="hidden"
+									value="${question.status}" /> <input type="hidden"
 									name="questions.questionsTagId"
-									value="${questions.questionsTagId}" />
+									value="${question.questionsTagId}" />
 							</form>
 						</div>
 						<!-- /问题列表 结束 -->
@@ -180,7 +164,7 @@
 							<div class="taglist clearfix">
 								<a onclick="submitForm('0','questionsTagId')"
 									href="javascript:;"
-									class="list-tag <c:if test='${questions.questionsTagId==0 }' >onactive</c:if>"
+									class="list-tag <c:if test='${question.questionsTagId==0 }' >onactive</c:if>"
 									data-id="0" title="JAVA">全部</a>
 								<c:forEach items="${questionsTagList }" var="questionsTag">
 									<a title="${questionsTag.questionsTagName }"

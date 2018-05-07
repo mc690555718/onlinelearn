@@ -31,7 +31,16 @@
 			<if test="end !=null">
 				and add_time &lt; #{end}
 			</if>
+			<if test="flag==3">
+				and status=0
+			</if>
 		</where>
+		<if test="flag==1">
+			order by ADD_TIME desc
+		</if>
+		<if test="flag==2">
+			order by BROWSE_COUNT desc
+		</if>
 	</select>
 	<select id="getById" resultMap="QuestionsMap" parameterType="int">
 		select * from edu_questions where id=#{id}
@@ -39,13 +48,5 @@
 	<delete id="delete" parameterType="int">
 		delete from edu_questions
 		where id=#{id}
-	</delete>   
-	<select id="getByType" resultMap="QuestionsMap" parameterType="com.bean.Questions">
-	    select * from  edu_questions 
-        <where>
-        <if test="type!=0">
-        and type=#{type}
-        </if>
-        </where>
-	</select>
+	</delete>
 </mapper>

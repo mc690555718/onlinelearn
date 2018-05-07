@@ -11,6 +11,5 @@ public interface QuestionsService {
 	public void update(Questions questions);
 	public List<Questions> listAll(Map map);
 	public void delete(int id);
-	public Questions getById(int id);	
-	public List<Questions> getByType(Questions questions);
+	public Questions getById(int id);
 }

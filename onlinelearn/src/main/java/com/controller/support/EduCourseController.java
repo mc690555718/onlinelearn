@@ -37,7 +37,6 @@ public class EduCourseController {
 
 	@RequestMapping(value="/list")
 	public ModelAndView listCourse(ModelAndView mv,String qname,String subject_id,String add_time ,String end_time,String is_avaliable){
-
 		Map<Object, Object> map = new HashMap<>();
 		if (qname != null && qname.trim().length() != 0) {
 			map.put("qname", qname);

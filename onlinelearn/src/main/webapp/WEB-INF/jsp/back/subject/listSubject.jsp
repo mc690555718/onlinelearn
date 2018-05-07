@@ -67,13 +67,6 @@
 								</colgroup>
 								<thead>
 									<tr>
-
-										<!-- 	private int subject_id; -->
-										<!-- 	private String subject_name; -->
-										<!-- 	private int status; -->
-										<!-- 	private Date create_time; -->
-										<!-- 	private int sort; -->
-
 										<th style="text-align: left;">专业ID</th>
 										<th>专业名称</th>
 										<th>所属专业</th>
@@ -113,7 +106,6 @@
 			</div>
 		</section>
 		<script type="text/javascript" src="/common/layui/layui.js"></script>
-		<script type="text/javascript" src="/js/newslist.js"></script>
 		<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 		<script type="text/javascript">
 			$(function() {

@@ -25,69 +25,66 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script>
-/*  function todown(){
-	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.nextPage}";
-	 document.forms[0].submit();
+ function todown(id){
+	 window.location.href="/admin/questions_comment/getById1/"+id+"?page=${page.nextPage}";
  }
- function toup(){
-	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.prePage}";
-	 document.forms[0].submit();
- } */
- </script>
+ function toup(id){
+     window.location.href="/admin/questions_comment/getById1/"+id+"?page=${page.prePage}";
+ }
+</script>
 </head>
 <body>
 	<table class="layui-table">
 		<colgroup>
 			<col width="2%">
 			<col width="10%">
-			<col width="7%">
-			<col width="3%">
-			<col width="3%">
-			<col width="3%">
-			<col width="7%">
+			<col width="30%">
+			<col width="2%">
 			<col width="30%">
 		</colgroup>
 		<tr>
 			<td>问答ID</td>
 			<td>问答标题</td>
-		
+			<td>回复内容</td>
+			<td>是否采纳</td>
 			<td>操作</td>
 		</tr>
 		<c:forEach items="${comments }" var="c">
 			<tr>
 				<td>${c.questions.id }</td>
 				<td>${c.questions.title }</td>
-				
+				<td>${c.content }</td>
+				<td><c:if test="${c.is_best==0 }">
+					否
+				</c:if> <c:if test="${c.is_best==1 }">
+					是
+				</c:if></td>
 				<td><button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="del(${c.id })">
+						onclick="del(${c.id },${c.questions.id })">
 						<i class="layui-icon"></i>
 					</button>
 					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="getById(${c.id })">查看评论详情</button>
-					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="update(${c.id },${c.is_best })">采纳为最佳</button>
-					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="back()">返回</button></td>
+						onclick="update(${c.id },${c.is_best },${c.questions.id })">采纳为最佳</button></td>
 			</tr>
 		</c:forEach>
 		<tr>
 			<td align="center" colspan="9">一共${page.pages}页
-				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
-				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
-				当前第${page.pageNum}页</td>
+				<button class="layui-btn layui-btn-xs" onclick="toup(${id})">上一页</button>
+				<button class="layui-btn layui-btn-xs" onclick="todown(${id})">下一页</button>
+				当前第${page.pageNum}页
+				<button class="layui-btn layui-btn-sm layui-btn-normal"
+					onclick="back()">返回之前页面</button>
+			</td>
 		</tr>
 	</table>
 </body>
 <script type="text/javascript">
-	 function del(id){
-		 location.href = "/admin/questions_comment/delete/"+id;
-	} 
-	 function getById(id){
-		 location.href = "/admin/questions_comment/getById/"+id;
-	 }
-	 function update(id,is_best){
+     function del(id,questionsId){
+	     location.href = "/admin/questions_comment/delete1/"+id+"/"+questionsId;
+    }
+	 function update(id,is_best,questionsId){
 		 if(is_best==0){
-			 location.href = "/admin/questions_comment/update/"+id; 
+			 location.href = "/admin/questions_comment/update1/"+id+"/"+questionsId;
 		 }else{
 			alert("已经采纳为最佳！"); 
 		 }	  

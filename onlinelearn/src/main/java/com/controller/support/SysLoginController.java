@@ -1,17 +1,23 @@
 package com.controller.support;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import com.bean.SysUser;
+import com.service.SysUserService;
 
 @Controller
 @RequestMapping("/admin/back")
 public class SysLoginController {
 	
+	@Autowired
+	private SysUserService userService;
 	@RequestMapping(value="/login")
 	public ModelAndView login(ModelAndView mv){
 		mv.setViewName("/back/login/login");
@@ -39,10 +45,8 @@ public class SysLoginController {
 				return mv;
 			}
 		}
-		subject.hasRole("");
-//		Admin user = as.getAdminByName(admin.getUsername());
-//		System.out.println(user.getAid());
-//		session.setAttribute("user",user);
+		SysUser sysuser = userService.getByName(user.getLogin_name());
+		mv.addObject("user",sysuser);
 		mv.setViewName("/back/operation/index");
 		return mv;
 	}

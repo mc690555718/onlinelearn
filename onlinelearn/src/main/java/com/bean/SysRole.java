@@ -4,12 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class SysRole {
-
-
-	//	  `ROLE_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
-	//	  `ROLE_NAME` varchar(100) DEFAULT NULL COMMENT '角色名',
-	//	  `CREATE_TIME` timestamp NULL DEFAULT NULL COMMENT '创建时间',
-
 	private int role_id;         //角色ID
 	private String role_name;    //角色名
 	private Date create_time;  //创建时间

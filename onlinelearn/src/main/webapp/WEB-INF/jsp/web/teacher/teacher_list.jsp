@@ -14,16 +14,16 @@
 					<span class="c-333">全部讲师</span>
 				</h2>
 				<section class="c-tab-title">
-					<a id="subjectAll" title="全部" href="${list}/front/teacher">全部</a>
-					<c:forEach var="subject" items="${list }">
-						<a id="${subject.subjectId}" title="${subject.subjectName }" href="/front/teacher" onclick="submitForm(${subject.subjectId})">${subject.subjectName }</a>
+					<a id="subjectAll" title="全部" href="${list}/front/teacher/list">全部</a>
+					<c:forEach var="subject" items="${list2}">
+						<a id="${subject.subject_id}" title="${subject.subject_name }" href="/front/teacher/getByIdSM/${subject.subject_id}" >${subject.subject_name }</a>
 					</c:forEach>
 				</section>
 			</header>
 			<section class="c-sort-box unBr">
 				<div>
 					<!-- /无数据提示 开始-->
-					<c:if test="${empty teacherList }">
+					<c:if test="${empty list }">
 						<section class="no-data-wrap">
 							<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
 						</section>
@@ -31,15 +31,15 @@
 					<!-- /无数据提示 结束-->
 					<article class="i-teacher-list">
 						<ul class="of">
-							<c:if test="${not empty teacherList }">
-								<c:forEach var="teacher" items="${teacherList }">
+							<c:if test="${not empty list }">
+								<c:forEach var="teacher" items="${list }">
 									<li>
 										<section class="i-teach-wrap">
 											<div class="i-teach-pic">
-												<a href="${ctx }/teacher/getById/getByIdSM/${teacher.id}" title="${teacher.name }">
+												<a href="${ctx }/front/teacher/getById/getByIdSM/${teacher.id}" title="${teacher.name }">
 													<c:choose>
-														<c:when test="${not empty teacher.picPath }">
-															<img src="${ctx }/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage %>${teacher.picPath}" alt="">
+														<c:when test="${not empty teacher.pic_path }">
+															<img src="${ctx }/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage %>${teacher.pic_path}" alt="">
 														</c:when>
 														<c:otherwise>
 															<img xSrc="${ctx }/static/inxweb/img/default-tea-img.gif" src="${ctx }/static/inxweb/img/default-tea-img.gif" alt="">
@@ -48,7 +48,7 @@
 												</a>
 											</div>
 											<div class="mt10 hLh30 txtOf tac">
-												<a href="${ctx }/front/teacher/${teacher.id}" title="${teacher.name }" class="fsize18 c-666">${teacher.name }</a>
+												<a href="${list}/front/teacher/${teacher.id}" title="${teacher.name }" class="fsize18 c-666">${teacher.name }</a>
 											</div>
 											<div class="hLh30 txtOf tac">
 												<span class="fsize14 c-999">${teacher.career }</span>

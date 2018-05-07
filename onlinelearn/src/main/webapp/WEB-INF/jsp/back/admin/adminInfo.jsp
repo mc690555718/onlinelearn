@@ -28,48 +28,6 @@
 	<section class="layui-larry-box ">
 	<div class="larry-personal">
 		<div class="layui-tab">
-			<blockquote class="layui-elem-quote news_search">
-				<div class="layui-inline">
-					<div class="layui-input-inline">
-						<input value="" placeholder="请输入关键字"
-							class="layui-input search_input" type="text">
-					</div>
-					<a class="layui-btn search_btn">查询</a>
-				</div>
-
-			</blockquote>
-			<blockquote class="layui-elem-quote news_search">
-				<div class="layui-btn-group">
-					<button class="layui-btn layui-btn-small layui-btn-normal">
-						<i class="layui-icon">&#xe61f;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-danger">
-						<i class="layui-icon">&#x1002;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-warm">
-						<i class="layui-icon">&#xe601;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-disabled">
-						<i class="layui-icon">&#xe642;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-primary">
-						<i class="layui-icon">&#xe603;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-primary">
-						<i class="layui-icon">&#xe602;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-primary">
-						<i class="layui-icon">&#xe62d;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-primary">
-						<i class="layui-icon">&#xe609;</i>
-					</button>
-					<button class="layui-btn layui-btn-small layui-btn-primary">
-						<i class="layui-icon">&#xe640;</i>
-					</button>
-				</div>
-			</blockquote>
-
 			<!-- 用户详情 -->
 			<form class="layui-form" action="" method="post"
 				style="height: 530px;">
@@ -143,19 +101,7 @@
 
 	</section>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
-	<script type="text/javascript" src="/js/newslist.js"></script>
 	<script>
-/* //Demo
-layui.use('form', function(){
-  var form = layui.form;
-  
-  //监听提交
-  form.on('submit(formDemo)', function(data){
-    layer.msg(JSON.stringify(data.field));
-    return false;
-  });
-}); */
-
 $(function(){
 
 	var radioIndex = ${user.status};

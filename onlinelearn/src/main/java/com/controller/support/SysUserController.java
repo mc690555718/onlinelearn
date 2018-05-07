@@ -22,8 +22,6 @@ public class SysUserController {
 	@Autowired
 	private SysRoleService rs;
 
-//	/admin/sysuser/userlist
-	
 	@RequestMapping("/userlist")
 	public ModelAndView query(ModelAndView mv,String qname){
 		List<SysUser> users = us.query(qname);
@@ -69,7 +67,6 @@ public class SysUserController {
 	@RequestMapping("/createuser")
 	public ModelAndView createUser(ModelAndView mv,SysUser user,int role_id){
 		user.setRole(rs.getById(role_id));
-		System.out.println(user);
 		us.add(user);
 		mv.setViewName("redirect:/admin/sysuser/userlist");
 		return mv;

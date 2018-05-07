@@ -20,7 +20,7 @@
 							</section>
 						</header>
 						<!-- /无数据提示 开始-->
-						<c:if test="${empty articleList }">
+						<c:if test="${empty list }">
 							<section class="no-data-wrap">
 								<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
 							</section>
@@ -29,14 +29,14 @@
 						<article class="i-article-list">
 							<!-- /文章列表 开始-->
 							<ul>
-								<c:if test="${not empty articleList }">
-									<c:forEach var="article" items="${articleList }">
+								<c:if test="${not empty list }">
+									<c:forEach var="article" items="${list }">
 										<li>
 											<aside class="i-article-pic">
-												<img xSrc="<%=staticImage%>${article.imageUrl }" src="${ctx }/static/inxweb/img/default-img.gif" alt="${article.title }">
-											</aside> <!-- ${ctx }/web/article/showInfor/${article.articleId } -->
+												<img xSrc="<%=staticImage%>${article.image_url }" src="${article.image_url }" alt="${article.title }">
+											</aside> 
 											<h3 class="hLh30 txtOf">
-												<a href="${ctx }/front/articleinfo/${article.articleId}.html" title="${article.title }" class="i-art-title">${article.title }</a>
+												<a href="${ctx }/front/article/listContent?article_id=${article.article_id}" title="${article.title }" class="i-art-title">${article.title }</a>
 											</h3>
 											<section class="i-q-txt mt5 i-q-txt2">
 												<p>
@@ -46,13 +46,13 @@
 											<section class="hLh30 txtOf mt5 pr10 a-list-extrainfo">
 												<span class="fr"><tt class="c-999 f-fM">
 														<!-- 1小时前发布 -->
-														<fmt:formatDate value="${article.publishTime }" pattern="yyyy-MM-dd HH:mm" />
+														<fmt:formatDate value="${article.publish_time }" pattern="yyyy-MM-dd HH:mm" />
 													</tt></span>
 												<div class="fl">
-													<span> <a class="noter-dy vam" title="回答" href="${ctx }/front/articleinfo/${article.articleId}.html">
-															<em class="icon18">&nbsp;</em>(<span>${article.commentNum }</span>)
-														</a> <tt title="赞一下" class="noter-zan vam ml10 f-fM" onclick="addPraise('${article.articleId}',3)">
-															<em class="icon18">&nbsp;</em>(<span class="addPraise${article.articleId}_3 praiseCount">${article.praiseCount }</span>)
+													<span> <a class="noter-dy vam" title="回答" href="${ctx }/front/articleinfo/${article.article_id}.html">
+															<em class="icon18">&nbsp;</em>(<span>${article.comment_num }</span>)
+														</a> <tt title="赞一下" class="noter-zan vam ml10 f-fM" onclick="addPraise('${article.article_id}',3)">
+															<em class="icon18">&nbsp;</em>(<span class="addPraise${article.article_id}_3 praise_count">${article.praise_count }</span>)
 														</tt>
 													</span>
 												</div>

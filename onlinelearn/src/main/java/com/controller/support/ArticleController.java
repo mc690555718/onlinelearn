@@ -90,7 +90,7 @@ public class ArticleController {
 	public String update(@RequestParam("file")MultipartFile file,HttpServletRequest request,Article article,int article_id,String content) throws IOException {
 		if(!file.isEmpty()) {
             //上传文件路径
-            String path = request.getRealPath("/upload/");
+            String path = request.getRealPath("/images/upload/article/");
             //上传文件名
             String filename = file.getOriginalFilename();
             File filepath = new File(path,filename);         
@@ -105,7 +105,7 @@ public class ArticleController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-            article.setImage_url("/upload/"+filename);
+            article.setImage_url("/images/upload/article/"+filename);
 		}
 		ArticleContent articleContent = new ArticleContent();
 		articleContent.setArticle_id(article_id);
@@ -117,7 +117,7 @@ public class ArticleController {
 	}
 
 	
-//	修改  文本框赋值
+//	添加 文本框赋值
 	@RequestMapping("/saveValue")
 	public ModelAndView saveValue() {
 		ModelAndView mv = new ModelAndView();
@@ -131,7 +131,7 @@ public class ArticleController {
 		public String save(@RequestParam("file")MultipartFile file,HttpServletRequest request,Article article, String publish_time) throws IOException {
 			if(!file.isEmpty()) {
 	            //上传文件路径
-	            String path = request.getRealPath("/upload/");
+	            String path = request.getRealPath("/images/upload/article/");
 	            //上传文件名
 	            String filename = file.getOriginalFilename();
 	            File filepath = new File(path,filename);
@@ -146,7 +146,7 @@ public class ArticleController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-	            article.setImage_url("/upload/"+filename);
+	            article.setImage_url("/images/upload/article/"+filename);
 			}
 			
 			String content=request.getParameter("content");

@@ -70,7 +70,7 @@
 			<button class="layui-btn" type="submit">查询</button>
 		</form>
 
-		<a href="/questions/getByType/0">前端</a>
+		<a href="/front/getByType/0">前端</a>
 	</div>
 	<table class="layui-table">
 		<colgroup>

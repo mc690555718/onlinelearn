@@ -1,4 +1,4 @@
-package com.controller.support;
+package com.controller.web;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import com.bean.Questions;
 import com.service.QuestionsService;
 
 @Controller
-@RequestMapping("/questions")
-public class Questions_frontendController {
+@RequestMapping("/front")
+public class Questions_frontController {
 	@Autowired
 	private QuestionsService questionsService;
 

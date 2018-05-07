@@ -14,9 +14,9 @@
 					<span class="c-333">全部讲师</span>
 				</h2>
 				<section class="c-tab-title">
-					<a id="subjectAll" title="全部" href="${ctx }/front/teacherlist">全部</a>
-					<c:forEach var="subject" items="${subjectList }">
-						<a id="${subject.subjectId}" title="${subject.subjectName }" href="javascript:void(0)" onclick="submitForm(${subject.subjectId})">${subject.subjectName }</a>
+					<a id="subjectAll" title="全部" href="${list}/front/teacher">全部</a>
+					<c:forEach var="subject" items="${list }">
+						<a id="${subject.subjectId}" title="${subject.subjectName }" href="/front/teacher" onclick="submitForm(${subject.subjectId})">${subject.subjectName }</a>
 					</c:forEach>
 				</section>
 			</header>
@@ -36,7 +36,7 @@
 									<li>
 										<section class="i-teach-wrap">
 											<div class="i-teach-pic">
-												<a href="${ctx }/front/teacher/${teacher.id}" title="${teacher.name }">
+												<a href="${ctx }/teacher/getById/getByIdSM/${teacher.id}" title="${teacher.name }">
 													<c:choose>
 														<c:when test="${not empty teacher.picPath }">
 															<img src="${ctx }/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage %>${teacher.picPath}" alt="">

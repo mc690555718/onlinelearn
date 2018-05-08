@@ -1,4 +1,5 @@
 package com.controller.support;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,34 +29,33 @@ public class CommentController {
 	@Autowired
 	private Edu_UserService Edu_UserService;
 	
+//	  显示
 	@RequestMapping("/listcomment")
 	public ModelAndView listcomment(@RequestParam(required=true,defaultValue="1")Integer page,HttpServletRequest request){
-		PageHelper.startPage(page,5);
+		PageHelper.startPage(page,10);
 		ModelAndView mv=new ModelAndView();
 		Map map=new HashMap<>();
 		map=initMap(request, map);
 		List<Comment> lists=commentService.listAll(map);
 		PageInfo<Comment> pageInfo=new PageInfo<Comment>(lists);
-		System.out.println("list"+lists);
 		mv.addObject("lists",lists);
 		mv.addObject("page", pageInfo);
-		mv.setViewName("/back/comment/comment");
+		mv.setViewName("/back/comment/comment"); 
 		return mv;
 	}
 
 
-//	��װMAP
+//	封装MAp
 	private Map initMap(HttpServletRequest request,Map map){
-		String content=request.getParameter("content");
-		try{
-			content=new String(content.getBytes("ISO-8859-1"),"utf-8");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		System.out.println(content);
+			try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+	String content=request.getParameter("content");
 		String type = request.getParameter("type");
     	String email = request.getParameter("email");
-        System.out.println(email);
+    	String addtime=request.getParameter("addtime");
 		if (type!=null&&type.trim().length()!=0) {
 			int type2 = Integer.parseInt(type);
 			request.setAttribute("type",type2);
@@ -69,7 +69,9 @@ public class CommentController {
 			request.setAttribute("email",email);
 			map.put("email",email);
 		}
-	
+    	   if (addtime!=null&&addtime.length()>0) {
+           	map.put("addtime", addtime);
+   		}
 		return map;
 	} 
 	
@@ -77,7 +79,7 @@ public class CommentController {
 	
 	
 	
-//	ɾ��
+//	删除
 	@RequestMapping("/delete/{comment_id}")
 	public String delete(@PathVariable(value="comment_id") int comment_id) {
 		commentService.detele(comment_id);

@@ -1,6 +1,7 @@
 package com.controller.support;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class imgController {
 	private imgService imgService;
 	@Autowired
 	private imgTypeService imgTypeService;
-//	 ÏÔÊ¾
+//	æ˜¾ç¤º
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(required=true,defaultValue="1")Integer page,HttpServletRequest request) {
 		PageHelper.startPage(page,5);
@@ -48,20 +49,20 @@ public class imgController {
 		mv.addObject("types",types);
 		mv.addObject("list", list);
 		mv.addObject("page", pageInfo);
-		mv.setViewName("/back/img/img");
+		mv.setViewName("/back/img/aa");
 		return mv;
 	}
 
 
-//	·â×°MAP
+//	å°è£…MAP
 	private Map initMap(HttpServletRequest request,Map map){
-		String title=request.getParameter("title");
-		
-		try{
-			title=new String(title.getBytes("ISO-8859-1"),"utf-8");
-		}catch(Exception e){
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String title=request.getParameter("title");
 		String typeId=request.getParameter("typeId");
 		if (typeId==null) {
 			typeId="-1";
@@ -70,7 +71,7 @@ public class imgController {
 		map.put("typeId", typeId);
 		return map;
 	}
-//	²éÀàĞÍ
+//	æŸ¥æ‰¾ç±»å‹
 	@RequestMapping("/listtype")
 	public ModelAndView listtype() {
 		ModelAndView mv=new ModelAndView();
@@ -80,28 +81,27 @@ public class imgController {
 		return mv;
 	}
 
-//	Ìí¼Ó
+//	æ·»åŠ 
 	@RequestMapping("/save")
 	public String save(@RequestParam("file") MultipartFile file,HttpServletRequest request,img img,int typeId) {
-	        System.out.println(typeId);
 		    imgType imgType=new imgType();
 	        imgType.setTypeId(typeId);
 	        img.setImgType(imgType);
-	        //Í¼Æ¬ÉÏ´«
-			//»ñµÃÎïÀíÂ·¾¶webappËùÔÚÂ·¾¶  
-			String path = request.getRealPath("/upload/");  
+	        //Í¼Æ¬ï¿½Ï´ï¿½
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½webappï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½  
+			String path = request.getRealPath("/images/upload/image/20180408/");  
 			String pathRoot = "";
 			String imgpath = "";
 			if(!file.isEmpty()){  
-				//Éú³Éuuid×÷ÎªÎÄ¼şÃû³Æ  
+				//ï¿½ï¿½ï¿½ï¿½uuidï¿½ï¿½Îªï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½  
 				String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-				//»ñµÃÎÄ¼şÀàĞÍ£¨¿ÉÒÔÅĞ¶ÏÈç¹û²»ÊÇÍ¼Æ¬£¬½ûÖ¹ÉÏ´«£©  
+				//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½Ï´ï¿½ï¿½ï¿½  
 				String contentType=file.getOriginalFilename(); 
-				//»ñµÃÎÄ¼şºó×ºÃû³Æ  
+				//ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½×ºï¿½ï¿½ï¿½ï¿½  
 				String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
 				pathRoot = path+"/"+uuid+"."+imageName;
 				File newfile=new File(pathRoot);
-				imgpath = "/upload/"+uuid+"."+imageName;
+				imgpath = "/images/upload/image/20180408/"+uuid+"."+imageName;
 				try {
 					file.transferTo(newfile);
 				} catch (Exception e) {
@@ -117,7 +117,7 @@ public class imgController {
 	
 	
 	
-//	ÅúÁ¿É¾³ı
+//	æ‰¹é‡åˆ é™¤
 	@RequestMapping("/del")  
 	public void batchDeletes(HttpServletRequest request) {  
 	    String items = request.getParameter("delitems");  
@@ -133,7 +133,7 @@ public class imgController {
 	}
 
 	
-//	Ä£ºı²éÑ¯
+
 	@RequestMapping("/checkName/{title}")
 	@ResponseBody
 	public int checkName(@PathVariable("title")String title) {
@@ -157,7 +157,7 @@ public class imgController {
 
 
 
-//	É¾³ı
+//	åˆ é™¤
 	@RequestMapping("/delete/{imageId}")
 	public String delete(@PathVariable(value="imageId") int imageId) {
 		imgService.delete(imageId);
@@ -165,7 +165,9 @@ public class imgController {
 	}
 
 	
-//	¸ù¾İID²é
+	
+	
+//	æ‹¿ID
 	@RequestMapping("/getById/{imageId}")
 	public ModelAndView  getById(@PathVariable (value="imageId") int imageId) {
 		ModelAndView mv=new ModelAndView();
@@ -178,45 +180,48 @@ public class imgController {
 	}
 	
 	
-//	 ĞŞ¸Ä
+//	 ä¿®æ”¹
 	@RequestMapping("/update")
-	public String update(/*@RequestParam("file") MultipartFile file,HttpServletRequest request,*/img img,int typeId) {
-        imgType imgType=new imgType();
+	public String update(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1,HttpServletRequest request,img img,@RequestParam("typeId") int typeId) {
+		imgType imgType=new imgType();
         imgType.setTypeId(typeId);
         img.setImgType(imgType);
-        
-        //Í¼Æ¬ÉÏ´«
-		//»ñµÃÎïÀíÂ·¾¶webappËùÔÚÂ·¾¶  
-	/*	String path = request.getRealPath("/upload/");  
+//      System.out.println(img);
+		String path = request.getRealPath("/images/upload/image/20180408/");  
 		String pathRoot = "";
 		String imgpath = "";
+		String imgpath1 = "";
 		if(!file.isEmpty()){  
-			//Éú³Éuuid×÷ÎªÎÄ¼şÃû³Æ  
 			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-			//»ñµÃÎÄ¼şÀàĞÍ£¨¿ÉÒÔÅĞ¶ÏÈç¹û²»ÊÇÍ¼Æ¬£¬½ûÖ¹ÉÏ´«£©  
 			String contentType=file.getOriginalFilename(); 
-			//»ñµÃÎÄ¼şºó×ºÃû³Æ  
 			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
 			pathRoot = path+"/"+uuid+"."+imageName;
 			File newfile=new File(pathRoot);
-			imgpath = "/upload/"+uuid+"."+imageName;
+			imgpath = "/images/upload/image/20180408/"+uuid+"."+imageName;
 			try {
 				file.transferTo(newfile);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
+		if(!file1.isEmpty()){  
+			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
+			String contentType=file1.getOriginalFilename(); 
+			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
+			pathRoot = path+"/"+uuid+"."+imageName;
+			File newfile=new File(pathRoot);
+			imgpath1 = "/images/upload/image/20180408/"+uuid+"."+imageName;
+			try {
+				file1.transferTo(newfile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
         img.setImageUrl(imgpath);
-        img.setPreviewUrl(imgpath);*/
+        img.setPreviewUrl(imgpath1);
         imgService.update(img);
 		return "redirect:/admin/hello/list";
 	}
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.bigcolorpicker.css" />
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.bigcolorpicker.min.js"></script>
 
 
@@ -45,6 +45,20 @@
 	height: 60px;
 
 } 
+
+
+
+.t1{
+	width: 140px;
+	height: 90px;
+
+}
+
+.t2{
+	width: 100px;
+	height: 60px;
+
+}
 </style>
 
 
@@ -52,49 +66,21 @@
 
 
  <script type="text/javascript">
-/*  
+  
   function update(){
 	 document.forms[0].action="/admin/hello/update";
 	 document.forms[0].submit();
 	 
- }  */
+ }  
  
  
  
  
-   $(document).ready(function() {
-		$("#cy").click(function() {
-			var title = $("#title").val();
-			var describe = $("#describe").val();
-			var typeName = $("#typeName").val();
-			var linkAddress = $("#linkAddress").val();
-			var seriesNumber = $("#seriesNumber").val(); 
-			var imageUrl = $("#imageUrl").val();
-			var previewUrl = $("#previewUrl").val();
-			var color = $("#color").val();
-			var str = "";
-			$.post("/admin/hello/checkName/" + title, function(t) {
-					document.forms[0].action = "/admin/hello/update";
-					document.forms[0].submit();
-				
-			});
-
-		});
-	});  
 	
 
 
   
-  function check(){
-      var file = document.getElementById("file1").value;
-      if(file == ""){
-        alert('请选择要上传的文件');
-        return false;
-       }else{
-        window.returnValue=file;
-        return true;
-       }
-     }
+
 	
 	
 	$(function() {
@@ -104,7 +90,7 @@
 </head>
 
 <body>
-	<form class="form-horizontal" id="div1" method="post">
+	<form class="form-horizontal" id="div1" method="post" enctype="multipart/form-data">
 		<br>
 		<br>
 		<br>
@@ -113,7 +99,7 @@
 		<div class="form-group">
 			<label for="inputEmail3" class="col-sm-2 control-label">图片标题:</label>
 			<div class="col-sm-10">
-				<input type="" class="form-control" id="title" id="title"
+				<input type="" class="form-control" name="title" id="title"
 					value="${img.title }" placeholder="请输入标题">
 			</div>
 		</div>
@@ -156,20 +142,20 @@
 			<label for="inputPassword3" class="col-sm-2 control-label">图片:</label>
 			<div class="col-sm-10">
 				<div>
-					<img id="t1" alt="" src="${img.imageUrl}"><label
+					<img id="imageUrl" alt="" src="${img.imageUrl}" name="imageUrl" class="t1" ><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" onclick="check()" accept='image/*' />
+						name="file" id="file" accept='image/*' />
 				</div>
 			</div>
 		</div>
-
+	
 
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label>
 			<div class="col-sm-10">
-				<img id="t2" alt="" src="${img.previewUrl}"><label
+				<img id="previewUrl" name="previewUrl" alt="" src="${img.previewUrl}" class="t2"><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" onclick="check()" accept='image/*' />
+						name="file1" id="file1" accept='image/*' />
 			</div>
 		</div>
 	  
@@ -181,9 +167,9 @@
   </div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-default" id="cy" onclick="update()">修改</button>
+				<button type="button" class="btn btn-default" id="cy" onclick="update()">修改</button>
 				<button type="button" class="btn btn-default">
-					<a href="/hello/list" id="a1">返回</a>
+					<a href="/admin/hello/list" id="a1">返回</a>
 				</button>
 			</div>
 		</div>
@@ -193,5 +179,24 @@
 
 
 </body>
+<script type="text/javascript">
+document.getElementById('file').onchange = function() {
+	var imgFile = this.files[0];
+	var fr = new FileReader();
+	fr.onload = function() {
+		document.getElementById('imageUrl').src = fr.result;
+	};
+	fr.readAsDataURL(imgFile);
+}
+document.getElementById('file1').onchange = function() {
+	var imgFile = this.files[0];
+	var fr = new FileReader();
+	fr.onload = function() {
+		document.getElementById('previewUrl').src = fr.result;
+	};
+	fr.readAsDataURL(imgFile);
+}
+
+</script>
   
 </html>

@@ -99,9 +99,7 @@
 	</head>
 	<body>
 
-		<form action="post">
-			<!-- 示例-970 -->
-
+		<form action="" method="post"> 
 			<p>
 				<input value="" placeholder="邮箱" id="it"  name="email" type="text" >
 				<input value="" placeholder="内容" id="it" name="content" type="text" > 
@@ -110,17 +108,14 @@
 									<option value="1">文章</option>
 									<option value="2">课程</option>
 								</select>
-			开始时间:<input type="date" name="start" id="it"  value="" placeholder="开始时间" > 
+			             开始时间:<input type="date" name="start" id="it"  value="" placeholder="开始时间" > 
 				结束时间:<input type="date" name="end" id="it"  value="" placeholder="结束时间" > 
 						
-                <button type="submit"  id="in1" onclick="list()" >查找评论</button>
+                 <button type="submit"  id="in1" onclick="list()" >查找评论</button>
                  <button type="reset"  id="in2" onclick="cy()">清空</button>
 			</p>
 			
 			
-			
-			
-		
 				<table border="2" width="1180" height="30">
 					<tr id="tr1">
 						<td>ID</td>
@@ -136,7 +131,7 @@
 				<c:forEach items="${lists}" var="p" varStatus="stat">	
 				<tr>
 				<td>${stat.index+1}</td>
-		        <td>${p.user_id.email }</td>
+		        <td>${p.user.email }</td>
 				<td>
 				<c:if test="${p.type==2}">
 				课程
@@ -149,12 +144,9 @@
 				<td>${p.reply_count}</td>
 				<td>${p.addtime}</td> 
 				<td ><div id="ca" title="${p.content}">${p.content}</div>
-				<td> <a class="layui-btn layui-btn-mini"
-										href="#"><i
-											class="iconfont icon-edit"></i> 回复评论</a> 
-											 <a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
-										href="/cy/delete/${p.comment_id}"><i
-											class="layui-icon" ></i> 删除</a></td> 
+				<td> <a class="layui-btn layui-btn-mini" href="#"><i class="iconfont icon-edit"></i> 回复评论</a> 
+				<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1" href="/admin/cy/delete/${p.comment_id}">
+				<i class="layui-icon" ></i> 删除</a></td> 
 				</tr>
 				</c:forEach>
 					

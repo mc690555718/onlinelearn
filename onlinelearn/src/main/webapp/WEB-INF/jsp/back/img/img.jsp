@@ -144,12 +144,12 @@
  
 
 </script>
-</script>
+
 	</head>
 
 	<body>
 
-		<form action="post">
+		<form action="" method="post">
 			<!-- 示例-970 -->
 			<ins class="adsbygoogle" style="display: inline-block; width: 970px; height: 90px" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
 

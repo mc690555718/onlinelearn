@@ -5,26 +5,30 @@ import java.util.Date;
 public class Comment {
 
 	private int comment_id;   //ID
-	private Edu_User user_id;      //ÓÃ»§id
-	private int p_comment_id;  //¸¸¼¶ÆÀÂÛid(Îª0ÔòÊÇÒ»¼¶ÆÀÂÛ,²»Îª0ÔòÊÇ»Ø¸´)
-	private String content;  //ÆÀÂÛÄÚÈİ
-	private String addtime;   //´´½¨Ê±¼ä
-	private int other_id;   //ÆÀÂÛµÄÏà¹Øid
-	private int praise_count;  //µãÔŞÊıÁ¿
-	private int  reply_count;   //»Ø¸´ÊıÁ¿
-	private int type;         //1ÎÄÕÂ 2¿Î³Ì
+	private Edu_User user;      //ï¿½Ã»ï¿½id
+	private int p_comment_id;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id(Îª0ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Îª0ï¿½ï¿½ï¿½Ç»Ø¸ï¿½)
+	private String content;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String addtime;   //ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	private int other_id;   //ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ï¿½id
+	private int praise_count;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int  reply_count;   //ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int type;         //1ï¿½ï¿½ï¿½ï¿½ 2ï¿½Î³ï¿½
 	public int getComment_id() {
 		return comment_id;
 	}
+
+	public Edu_User getUser() {
+		return user;
+	}
+
+	public void setUser(Edu_User user) {
+		this.user = user;
+	}
+
 	public void setComment_id(int comment_id) {
 		this.comment_id = comment_id;
 	}
-	public Edu_User getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(Edu_User user_id) {
-		this.user_id = user_id;
-	}
+
 	public int getP_comment_id() {
 		return p_comment_id;
 	}

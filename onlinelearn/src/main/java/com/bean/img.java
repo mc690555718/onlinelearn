@@ -1,6 +1,12 @@
 package com.bean;
 
 public class img {
+	@Override
+	public String toString() {
+		return "img [imageId=" + imageId + ", imageUrl=" + imageUrl + ", linkAddress=" + linkAddress + ", title="
+				+ title + ", imgType=" + imgType + ", seriesNumber=" + seriesNumber + ", previewUrl=" + previewUrl
+				+ ", color=" + color + ", describes=" + describes + "]";
+	}
 	private int imageId;  // ID
 	private  String imageUrl; //Í¼Æ¬µØÖ·
 	private  String linkAddress;  //Í¼Æ¬Á´½ÓµØÖ·
@@ -10,6 +16,9 @@ public class img {
 	private  String  previewUrl;  //ÂÔËõÍ¼Æ¬µØÖ·
 	private  String  color;        //±³¾°É«
 	private  String describes;      //Í¼Æ¬ÃèÊö
+	
+	
+	
 	public int getImageId() {
 		return imageId;
 	}

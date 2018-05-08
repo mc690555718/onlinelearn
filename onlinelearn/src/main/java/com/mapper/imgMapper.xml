@@ -23,7 +23,7 @@
 		</insert>
 	
 	 <update id="update" parameterType="img">
-    update edu_website_images  set title=#{title},describes=#{describes},typeId=#{typeId},linkAddress=#{linkAddress},seriesNumber=#{seriesNumber},imageUrl=#{imageUrl},previewUrl=#{previewUrl},color=#{color}  where imageId=#{imageId}
+    update edu_website_images  set title=#{title},describes=#{describes},typeId=#{imgType.typeId},linkAddress=#{linkAddress},seriesNumber=#{seriesNumber},imageUrl=#{imageUrl},previewUrl=#{previewUrl},color=#{color}  where imageId=#{imageId}
     </update>
 
 	<select id="listAll" resultType="img" parameterType="java.util.Map" resultMap="imgMap">

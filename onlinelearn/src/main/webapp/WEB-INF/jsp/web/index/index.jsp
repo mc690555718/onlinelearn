@@ -20,7 +20,7 @@
 					<c:forEach var="image" items="${websiteImagesList}" varStatus="status">
 						<div class="swiper-slide" style="background: <c:if test="${empty image.color}">#EF550F;</c:if><c:if test="${!empty image.color}">${image.color}</c:if>;">
 							<a target="_blank" href="<c:if test='${image.linkAddress!=null&&image.linkAddress!=""}'>${image.linkAddress}</c:if>">
-								<img class="imgload" src="${image.imagesUrl}" alt="${image.title}">
+								<img class="imgload" src="${image.imageUrl}" alt="${image.title}">
 							</a>
 						</div>
 					</c:forEach>

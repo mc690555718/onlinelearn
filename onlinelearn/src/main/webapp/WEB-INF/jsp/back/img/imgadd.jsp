@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
 <link rel="stylesheet" type="text/css" href="/css/jquery.bigcolorpicker.css" />
-<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.bigcolorpicker.min.js"></script>
 
 
@@ -135,9 +135,9 @@ function save(){
 			<label for="inputPassword3" class="col-sm-2 control-label">图片:</label>
 			<div class="col-sm-10">
 				<div>
-					<img id="imageUrl" name="imageUrl" class="t1"><label
+					<img id="imageUrl" src="" name="imageUrl" class="t1"><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" onclick="check()" accept='image/*' />
+						name="file" id="file" accept='image/*' />
 				</div>
 			</div>
 		</div>
@@ -146,9 +146,9 @@ function save(){
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label>
 			<div class="col-sm-10">
-				<img id="previewUrl" name="previewUrl" class="t2"><label
+				<img id="previewUrl" src="" name="previewUrl" class="t2"><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" onclick="check()" accept='image/*' />
+						name="file" id="file1" accept='image/*' />
 			</div>
 		</div>
   
@@ -167,7 +167,7 @@ function save(){
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default" id="cy" onclick="save()">添加</button>
-      <button type="button"  class="btn btn-default" ><a href="/hello/list" id="a1">返回</a></button>
+      <button type="button"  class="btn btn-default" ><a href="/admin/hello/list" id="a1">返回</a></button>
     </div>
   </div>
 
@@ -176,6 +176,26 @@ function save(){
 
 
 	</body>
+	
+<script type="text/javascript">
+document.getElementById('file').onchange = function() {
+	var imgFile = this.files[0];
+	var fr = new FileReader();
+	fr.onload = function() {
+		document.getElementById('imageUrl').src = fr.result;
+	};
+	fr.readAsDataURL(imgFile);
+}
+document.getElementById('file1').onchange = function() {
+	var imgFile = this.files[0];
+	var fr = new FileReader();
+	fr.onload = function() {
+		document.getElementById('previewUrl').src = fr.result;
+	};
+	fr.readAsDataURL(imgFile);
+}
+
+</script>
 
 </html>
 

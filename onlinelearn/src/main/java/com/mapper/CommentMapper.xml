@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.CommentMapper">
 <resultMap type="Comment" id="CommentMap">
-<!--   <id column="comment_id"   property="comment_id" /> --> 
+<!--  <id column="comment_id"   property="comment_id" />  -->
  <result  column="p_comment_id"  property="p_comment_id" />
   <result  column="content"  property="content" />
   <result  column="addtime"  property="addtime" />
@@ -12,8 +12,8 @@
   <result  column="praise_count" property="praise_count" />
  <result  column="reply_count" property="reply_count" />
  <result  column="type" property="type" />
-<!--  <association property="Edu_User" column="user_id" select="com.mapper.Edu_UserMapper.getById"></association> 
- --></resultMap>
+ <association property="user" column="user_id" select="com.mapper.Edu_UserDao.getById"></association>
+</resultMap>
   
 
 <select id="listAll"  resultType="Comment" parameterType="java.util.Map" resultMap="CommentMap">
@@ -28,12 +28,15 @@
  <if test="email!=null">
  and user_id in(SELECT user_id FROM edu_user WHERE email LIKE '%${email}%')
  </if>
+ 
+ 
  <if test="start!=null">
  and addtime &gt; #{start}
  </if>
  <if test="end!=null">
  and addtime &lt; #{end}
  </if>
+
   </where>
   </select>
 

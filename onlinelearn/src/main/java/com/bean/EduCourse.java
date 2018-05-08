@@ -40,7 +40,7 @@ public class EduCourse {
 	private int page_buyCount;   //销售数量
 	private int page_viewCount;  //浏览数量
 	private Date end_time;       //-有效结束时间
-	private int lose_type;       //-有效期类型，0：到期时间，1：按天数
+	private int loseType;       //-有效期类型，0：到期时间，1：按天数
 	private String lose_time;    //-有效期:商品订单过期时间点
 	private int sequence;        //序列
 
@@ -152,11 +152,11 @@ public class EduCourse {
 	public void setEnd_time(Date end_time) {
 		this.end_time = end_time;
 	}
-	public int getLose_type() {
-		return lose_type;
+	public int getLoseType() {
+		return loseType;
 	}
-	public void setLose_type(int lose_type) {
-		this.lose_type = lose_type;
+	public void setLoseType(int loseType) {
+		this.loseType = loseType;
 	}
 	public String getLose_time() {
 		return lose_time;
@@ -176,7 +176,7 @@ public class EduCourse {
 	public void setSubject_link(String subject_link) {
 		this.subject_link = subject_link;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "EduCourse [course_id=" + course_id + ", course_name=" + course_name + ", is_avaliable=" + is_avaliable
@@ -184,8 +184,8 @@ public class EduCourse {
 				+ ", source_price=" + source_price + ", current_price=" + current_price + ", title=" + title
 				+ ", context=" + context + ", lession_num=" + lession_num + ", logo=" + logo + ", update_time="
 				+ update_time + ", page_buyCount=" + page_buyCount + ", page_viewCount=" + page_viewCount
-				+ ", end_time=" + end_time + ", lose_type=" + lose_type + ", lose_time=" + lose_time + ", sequence="
+				+ ", end_time=" + end_time + ", loseType=" + loseType + ", lose_time=" + lose_time + ", sequence="
 				+ sequence + "]";
 	}
-	
+
 }

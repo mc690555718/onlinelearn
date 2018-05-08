@@ -61,6 +61,7 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 									<option value="-1" selected="selected">请选择</option>
 									<option value="1">上架</option>
 									<option value="2">下架</option>
+									<option value="2">删除</option>
 								</select>
 							</div>
 							<label class="layui-inline tt">专业:</label>
@@ -129,6 +130,9 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 										<c:if test="${ec.is_avaliable==2 }">
 											<td>下架</td>
 										</c:if>
+										<c:if test="${ec.is_avaliable==3 }">
+											<td>删除</td>
+										</c:if>
 										<td>${ec.subject.subject_name }</td>
 										<td>${ec.source_price }</td>
 										<td>${ec.current_price }</td>
@@ -139,10 +143,11 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 												pattern="yyyy-MM-dd HH:mm" /></td>
 										<td><fmt:formatDate value="${ec.end_time }"
 												pattern="yyyy-MM-dd HH:mm" /></td>
-										<td><a
-											href="/admin/course/toCourseUpdate/${ec.course_id }"
+										<td><a href="/admin/cou/toCourseKpoint/${ec.course_id }"
+											class="layui-btn layui-btn-xs">章节</a>
+										    <a href="/admin/cou/toCourseUpdate/${ec.course_id }"
 											class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i></a>
-											<a href="/admin/course/courseDelete/${ec.course_id }"
+											<a href="/admin/cou/delCourse/${ec.course_id }"
 											class="layui-btn layui-btn-danger layui-btn-xs"> <i
 												class="layui-icon">&#xe640;</i></a></td>
 									</tr>
@@ -192,22 +197,14 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-
-
 		<script type="text/html" id="barDemo">
   <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
-	</div>
-=======
 	</section>
->>>>>>> branch 'master' of https://github.com/mc690555718/onlinelearn.git
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
-<<<<<<< HEAD
-=======
 	<script type="text/javascript">
 	layui.use(['jquery','layer','element','laypage'],function(){
 	      window.jQuery = window.$ = layui.jquery;
@@ -247,6 +244,5 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 				});
     });
 </script>
->>>>>>> branch 'master' of https://github.com/mc690555718/onlinelearn.git
 </body>
 </html>

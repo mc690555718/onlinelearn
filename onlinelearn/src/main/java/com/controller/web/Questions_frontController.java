@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Questions;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.service.QuestionsService;
@@ -26,7 +27,7 @@ public class Questions_frontController {
 	@Autowired
 	private QuestionsService questionsService;
 
-	@RequestMapping("/listAll/{flag}")
+	@RequestMapping("/questions/{flag}")
 	public ModelAndView listAll(@PathVariable("flag") int flag){
 		ModelAndView mv = new ModelAndView();
 		Map map = new HashMap<>();
@@ -37,5 +38,18 @@ public class Questions_frontController {
 		return mv;
 	}
 	
+	@RequestMapping("/info/{id}")
+	public ModelAndView info(@PathVariable("id")int id){
+		ModelAndView mv = new ModelAndView();
+		Questions question = questionsService.getById(id);
+		mv.setViewName("/web/questions/questions-info");
+		mv.addObject("question", question);
+		return mv;
+	}
 	
+	@RequestMapping("/updatePraise/{id}")
+	public String updatePraise(@PathVariable("id")int id) {
+		questionsService.updatePraise(id);
+		return "redirect:/front/info/"+id;
+	}
 }

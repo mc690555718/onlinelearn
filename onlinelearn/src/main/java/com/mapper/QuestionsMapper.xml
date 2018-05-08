@@ -34,6 +34,12 @@
 			<if test="flag==3">
 				and status=0
 			</if>
+			<if test="flag==4">
+				and type=1
+			</if>
+			<if test="flag==5">
+				and type=2
+			</if>
 		</where>
 		<if test="flag==1">
 			order by ADD_TIME desc
@@ -46,7 +52,10 @@
 		select * from edu_questions where id=#{id}
 	</select>
 	<delete id="delete" parameterType="int">
-		delete from edu_questions
+		delete from edu_questions 
 		where id=#{id}
 	</delete>
+	<update id="updatePraise" parameterType="int">
+	    update edu_questions set PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
+	</update>
 </mapper>

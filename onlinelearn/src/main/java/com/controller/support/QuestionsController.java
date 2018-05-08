@@ -43,12 +43,12 @@ public class QuestionsController {
 	}
 	
 	private Map initMap(HttpServletRequest request,Map map) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
 		String title = request.getParameter("title");
 		String type = request.getParameter("type");
 		String start = request.getParameter("start");
 		String end = request.getParameter("end");
 		if (title!=null && title.length() > 0) {
-			title = new String(title.getBytes("ISO-8859-1"), "utf8");
 			map.put("title", title);
 			request.setAttribute("title", title);
 		}

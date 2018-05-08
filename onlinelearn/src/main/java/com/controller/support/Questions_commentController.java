@@ -27,7 +27,7 @@ public class Questions_commentController {
 	@Autowired
 	private Questions_commentService questions_commentService;
 	
-	@RequestMapping("listAll")
+	@RequestMapping("/listAll")
 	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) throws UnsupportedEncodingException {
 		PageHelper.startPage(page, 5);
 		ModelAndView mv = new ModelAndView();
@@ -42,6 +42,7 @@ public class Questions_commentController {
 	}
 
 	private Map initMap(HttpServletRequest request,Map map) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
 		String question_id = request.getParameter("question_id");
 		String is_best = request.getParameter("is_best");
 		String name = request.getParameter("name");
@@ -56,7 +57,6 @@ public class Questions_commentController {
 			request.setAttribute("is_best", Integer.valueOf(is_best));
 		}
 		if (name!=null && name.length() > 0) {
-			name = new String(name.getBytes("ISO-8859-1"), "utf8");
 			map.put("name", name);
 			request.setAttribute("name", name);
 		}

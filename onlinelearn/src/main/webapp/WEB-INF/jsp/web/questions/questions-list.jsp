@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/base.jsp"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +12,17 @@
 			<section class="i-question">
 				<div class="fl col-7">
 					<section class="mr30 pt10">
-						<%--  <section class="c-infor-tabTitle c-tab-title">
-							<a href="javascript: void(0)" title="全部问答"
+						<section class="c-infor-tabTitle c-tab-title">
+							<a href="/front/questions/0" title="全部问答"
 								onclick="submitForm(0,'type')"
-								<c:if test="${questions.type==0 }">class="current"</c:if>>全部问答</a>
-							<a href="javascript: void(0)" title="课程问答"
+								<c:if test="${question.type==0 }">class="current"</c:if>>全部问答</a>
+							<a href="/front/questions/4" title="课程问答"
 								onclick="submitForm(1,'type')"
-								<c:if test="${questions.type==1 }">class="current"</c:if>>课程问答</a>
-							<a href="javascript: void(0)" title="学习分享"
+								<c:if test="${question.type==1 }">class="current"</c:if>>课程问答</a>
+							<a href="/front/questions/5" title="学习分享"
 								onclick="submitForm(2,'type')"
-								<c:if test="${questions.type==2 }">class="current"</c:if>>学习分享</a>
-						</section> --%>
+								<c:if test="${question.type==2 }">class="current"</c:if>>学习分享</a>
+						</section>
 						<div class="js-wrap">
 							<section class="fr">
 								<span class="c-ccc"> <tt class="c-master f-fM">${page.currentPage}</tt>/<tt
@@ -30,9 +31,9 @@
 							</section>
 							<section class="fl">
 								<ol class="js-tap clearfix">
-									<li><a href="/front/listAll/1" title="最新">最新</a></li>
-									<li><a href="/front/listAll/2" title="热门">热门</a></li>
-									<li><a href="/front/listAll/3" title="等待回答">等待回答</a></li>
+									<li><a href="/front/questions/1" title="最新">最新</a></li>
+									<li><a href="/front/questions/2" title="热门">热门</a></li>
+									<li><a href="/front/questions/3" title="等待回答">等待回答</a></li>
 								</ol>
 							</section>
 						</div>
@@ -87,7 +88,7 @@
 													</a>
 													<h3 class="hLh30 txtOf">
 														<em class="icon16 q-tw">&nbsp;</em> <a
-															href="${ctx }/questions/info/${question.id }" title=""
+															href="/front/info/${question.id }" title=""
 															class="fsize16 c-333 vam">${question.title }</a>
 													</h3>
 													<h3 class="hLh30 txtOf mt5">
@@ -119,17 +120,19 @@
 															</c:if>
 														</c:if>
 													</h3>
-													<!-- 													<div class="mt15"> -->
-													<%-- 														<span class="c-ccc fl vam">${question.modelTime }</span> --%>
-													<!-- 														<section class="fl ml20 pt10"> -->
-													<!-- 															<div class="taglist clearfix"> -->
-													<%-- 																<c:forEach items="${question.questionsTagRelationList }" var="questionsTag"> --%>
-													<%-- 																	<a title="${questionsTag.tagName }" data-id="${questionsTag.questionsTagId }" onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')" class="list-tag" href="javascript:;">${questionsTag.tagName }</a> --%>
-													<%-- 																</c:forEach> --%>
-													<!-- 															</div> -->
-													<!-- 														</section> -->
-													<!-- 														<div class="clear"></div> -->
-													<!-- 													</div> -->
+													<div class="mt15">
+														<span class="c-ccc fl vam"><fmt:formatDate
+																value="${question.add_time }" type="date"
+																pattern="yyyy-MM-dd hh:mm:ss" /></span>
+
+														<!-- 															<div class="taglist clearfix"> -->
+														<%-- 																<c:forEach items="${question.questionsTagRelationList }" var="questionsTag"> --%>
+														<%-- 																	<a title="${questionsTag.tagName }" data-id="${questionsTag.questionsTagId }" onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')" class="list-tag" href="javascript:;">${questionsTag.tagName }</a> --%>
+														<%-- 																</c:forEach> --%>
+														<!-- 															</div> -->
+														<!-- 														</section> -->
+														<!-- 														<div class="clear"></div> -->
+													</div>
 												</section>
 											</li>
 										</c:forEach>
@@ -197,7 +200,10 @@
 		</section>
 		<!-- /提问题 结束 -->
 	</div>
-	<script type="text/javascript"
-		src="${ctx}/static/inxweb/questions/questions.js"></script>
+	<script type="text/javascript">
+		
+	 src="${ctx}/static/inxweb/questions/questions.js">
+		
+	</script>
 </body>
 </html>

@@ -39,7 +39,11 @@ public class QuestionsServiceImpl implements QuestionsService{
 
 	@Override
 	public Questions getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return QuestionsMapper.getById(id);
+	}
+
+	@Override
+	public void updatePraise(int id) {
+		QuestionsMapper.updatePraise(id);
 	}
 }

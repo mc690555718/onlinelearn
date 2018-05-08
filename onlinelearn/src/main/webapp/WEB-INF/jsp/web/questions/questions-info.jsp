@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/base.jsp"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 						<section class="path-wrap txtOf hLh30">
 							<a href="${ctx }" title="" class="c-999 fsize14">首页</a> \ <a
 								href="${ctx }/questions/list" title="" class="c-999 fsize14">全部问答</a>
-							\ <span class="c-333 fsize14">${questions.title }</span>
+							 <span class="c-333 fsize14">${questions.title }</span>
 						</section>
 						<!-- /问题详情 开始 -->
 						<div>
@@ -22,8 +23,8 @@
 								<div class="pr">
 									<aside class="q-head-pic">
 										<c:choose>
-											<c:when test="${not empty questions.picImg }">
-												<img src="<%=staticImage %>${questions.picImg }" alt="">
+											<c:when test="${not empty question.edu_user.pic_img }">
+												<img src="<%=staticImage %>${questions.edu_user.pic_img }" alt="">
 											</c:when>
 											<c:otherwise>
 												<img src="${ctx }/static/inxweb/img/avatar-boy.gif" alt="">
@@ -53,38 +54,40 @@
 										<h3 class="hLh30 txtOf">
 											<em class="icon16 q-tw">&nbsp;</em> <span
 												class="c-blue fsize14"> <c:if
-													test="${empty questions.showName }">${questions.email }</c:if>
-												<c:if test="${not empty questions.showName }">${questions.showName }</c:if>
+													test="${empty question.edu_user.show_name }">${question.edu_user.email }</c:if>
+												<c:if test="${not empty question.edu_user.show_name }">${question.edu_user.show_name }</c:if>
 											</span> <span class="c-999 fsize14"> <c:if
-													test="${questions.type==1 }">课程提问</c:if> <c:if
-													test="${questions.type==2 }">学习分享</c:if>
+													test="${question.type==1 }">课程提问</c:if> <c:if
+													test="${question.type==2 }">学习分享</c:if>
 											</span>
 										</h3>
 									</section>
 									<section class="ml50 pl10">
 										<div class="mt20">
 											<h3 class="hLh30 txtOf">
-												<span class="fsize18 c-333 vam">${questions.title }</span>
+												<span class="fsize18 c-333 vam">${question.title }</span>
 											</h3>
 										</div>
 										<div class="i-q-txt mt15">
 
 											<span class="c-999 f-fA"><c:out
-													value="${questions.content}"></c:out></span>
+													value="${question.content}"></c:out></span>
 
 										</div>
 										<div class="mt20 pr10">
 											<section class="fr">
 												<span> <a href="#i-art-comment" title="评论"
 													class="noter-dy vam"> <em class="icon18">&nbsp;</em>(<span
-														id="questionsReplyCount">${questions.replyCount }</span>)
+														id="questionsReplyCount">${question.reply_count }</span>)
 												</a> <tt class="noter-zan vam ml10 f-fM" title="赞一下"
-														onclick="addPraise(${questions.id },1,this)">
-														<em class="icon18">&nbsp;</em>(<span>${questions.praiseCount }</span>)
+														onclick="onclick="addPraise(${question.id },1,this)">
+														<em class="icon18">&nbsp;</em>(<span>${question.praise_count }</span>)
 													</tt>
 												</span>
 											</section>
-											<span class="c-ccc fl vam">${questions.modelTime }</span>
+											<span class="c-ccc fl vam"><fmt:formatDate
+																value="${question.add_time }" type="date"
+																pattern="yyyy-MM-dd hh:mm:ss" /></span>
 											<section class="fl ml20 pt10">
 												<div class="taglist clearfix">
 													<c:forEach items="${questions.questionsTagRelationList }"
@@ -156,11 +159,18 @@
 		<!-- /提问题 结束 -->
 	</div>
 	<script>
-	var questionsId="${questions.id}";
+	var questionId="${question.id}";
 	</script>
 	<script type="text/javascript"
-		src="${ctx}/static/inxweb/questions/questions_info.js"></script>
+		src="${ctx}/static/inxweb/questions/questions_info.js">
+	</script>
 	<script type="text/javascript"
-		src="${ctx}/static/inxweb/questions/questions.js"></script>
+		src="${ctx}/static/inxweb/questions/questions.js">
+	</script>
+	<script type="text/javascript">
+	   /*  function addPraise(id){
+	    	location.href = "/front/updatePraise/"+id;
+	    } */
+	</script>
 </body>
 </html>

@@ -82,7 +82,7 @@
 			<col width="20%">
 		</colgroup>
 		<tr>
-			<td>问答ID</td>
+			<td>回复ID</td>
 			<td>问答标题</td>
 			<td>发表人</td>
 			<td>是否采纳</td>
@@ -93,7 +93,7 @@
 		</tr>
 		<c:forEach items="${comments }" var="c">
 			<tr>
-				<td>${c.questions.id }</td>
+				<td>${c.id }</td>
 				<td>${c.questions.title }</td>
 				<td>${c.edu_user.email }</td>
 				<td><c:if test="${c.is_best==0 }">

@@ -2,6 +2,8 @@ package com.bean;
 
 import java.util.Date;
 
+import org.springframework.stereotype.Component;
+@Component
 public class SubjectBean {
 	private int subject_id;
 	private String subject_name;

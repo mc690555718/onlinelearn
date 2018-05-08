@@ -29,7 +29,7 @@
 	
 <script type="text/javascript">
  	function update() {
-		document.forms[0].action = "/teacher/update";
+		document.forms[0].action = "/admin/teacher/update";
 		document.forms[0].submit();
 
 	}
@@ -45,7 +45,7 @@
 			<span>添加讲师</span>
 		</header><!-- /header -->
 		<div class="larry-personal-body clearfix changepwd">
-			<form class="layui-form col-lg-4" method="post" action="/teacher/update" enctype="multipart/form-data">
+			<form class="layui-form col-lg-4" method="post" action="/admin/teacher/update" enctype="multipart/form-data">
 			<input type="hidden" name="id"  value="${a.id }" class="layui-input layui-disabled"   >
 			 	<div class="layui-form-item">
 					<label class="layui-form-label">讲师名称</label>
@@ -62,7 +62,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师专业</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="subject_id" value="${a.subject_id }"   class="layui-input" >
+					  	<input type="text" name="subject" value="${a.subject_id }"   class="layui-input" >
 					</div>
 				</div>
 				<div class="layui-form-item">
@@ -95,8 +95,8 @@
 					<div class="layui-input-block">
 					<div>
 					<div class="col-sm-4">
-				<img id="blah" style="width:530px; height:250px;" />
-				<input type="file" name="file" id="imgInp">
+				<img id="blah" style="width:200px; height:150px;" src="${a.pic_path }" name="pic_path"/>
+				<input type="file" name="file" id="imgInp" >
 			</div>
 					</div>
 					</div>
@@ -115,18 +115,17 @@
 <script type="text/javascript" src="/common/layui/layui.js"></script>
 <script type="text/javascript">
 //div显示图片
-function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#blah').attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-$("#imgInp").change(function() {
-	readURL(this);
-});
+
+document.getElementById('file').onchange = function() {
+	var imgFile = this.files[0];
+	var fr = new FileReader();
+	fr.onload = function() {
+		document.getElementById('pic_path').src = fr.result;
+	};
+	fr.readAsDataURL(imgFile);
+}
+
+
 
 
 	layui.use(['form','upload'],function(){

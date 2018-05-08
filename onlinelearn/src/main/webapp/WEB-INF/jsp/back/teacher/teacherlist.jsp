@@ -60,9 +60,9 @@ function list(){
 
 							<div class="layui-input-inline">
 								<select class="form-control" name="isstar" value="${is_star}">
-									<option>---请选择---</option>
-									<option>首席讲师</option>
-									<option>高级讲师</option>
+									<option value="-1">---请选择---</option>
+									<option value="2">首席讲师</option>
+									<option value="1">高级讲师</option>
 								</select>
 							</div>
 							开始时间
@@ -126,9 +126,8 @@ function list(){
 											<th width="10%">
 												<fmt:formatDate value="${p.create_time}" type="date" pattern="yyyy-MM-dd"/>
 											</th>
-											<th><a href="/admin/teacher/delete/${p.id}"
-												class="btn btn-default ">删除</a> <a
-												href="/admin/teacher/upinit/${p.id }" class="btn btn-default">修改</a></th>
+											<th><a href="/admin/teacher/delete/${p.id}" class="btn btn-default">删除</a> 
+												<a href="/admin/teacher/upinit/${p.id }" class="btn btn-default">修改</a></th>
 										</tr>
 				
 									</c:forEach>

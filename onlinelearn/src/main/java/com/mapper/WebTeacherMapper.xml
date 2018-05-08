@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.mapper.WebTeacherMapper">
+
+
+<resultMap id="CourseMap" type="WebTeacherBean" >
+    <id column="COURSE_ID" property="course_id" />
+    <result column="COURSE_NAME" property="course_name" />
+    <result column="IS_AVALIABLE" property="is_avaliable" />
+    <result column="SUBJECT_ID" property="subject_id" />
+    <result column="SUBJECT_LINK" property="subject_link" />
+    <result column="ADD_TIME" property="add_time" />
+    <result column="SOURCE_PRICE" property="source_price" />
+    <result column="CURRENT_PRICE" property="current_price" />
+    <result column="TITLE" property="title" />
+    <result column="LESSION_NUM" property="lession_num" />
+    <result column="LOGO" property="logo" />
+    <result column="UPDATE_TIME" property="update_time" />
+    <result column="PAGE_BUYCOUNT" property="page_buycount" />
+    <result column="PAGE_VIEWCOUNT" property="page_viewcount" />
+    <result column="END_TIME" property="end_time" />
+    <result column="LOSETYPE" property="losetype" />
+    <result column="LOSE_TIME" property="lose_time" />
+    <result column="SEQUENCE" property="sequence" />
+    <result column="COURSE_GROSS_INCOME" property="course_gross_income"/>
+	</resultMap>
+	<select id="list" resultMap="CourseMap" parameterType="int">
+		select * from edu_course where subject_id = #{value}
+	</select>
+	
+	</mapper>

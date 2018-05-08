@@ -14,7 +14,7 @@
 					<span class="c-333">全部讲师</span>
 				</h2>
 				<section class="c-tab-title">
-					<a id="subjectAll" title="全部" href="${list}/front/teacher/list">全部</a>
+					<a id="subjectAll" title="全部" href="${ctx}/front/teacher/list">全部</a>
 					<c:forEach var="subject" items="${list2}">
 						<a id="${subject.subject_id}" title="${subject.subject_name }" href="/front/teacher/getByIdSM/${subject.subject_id}" >${subject.subject_name }</a>
 					</c:forEach>
@@ -36,7 +36,7 @@
 									<li>
 										<section class="i-teach-wrap">
 											<div class="i-teach-pic">
-												<a href="${ctx }/front/teacher/getById/getByIdSM/${teacher.id}" title="${teacher.name }">
+												<a href="${ctx }/front/teacher/${teacher.id}" title="${teacher.name }">
 													<c:choose>
 														<c:when test="${not empty teacher.pic_path }">
 															<img src="${ctx }/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage %>${teacher.pic_path}" alt="">
@@ -46,9 +46,9 @@
 														</c:otherwise>
 													</c:choose>
 												</a>
-											</div>
+											</div>			
 											<div class="mt10 hLh30 txtOf tac">
-												<a href="${list}/front/teacher/${teacher.id}" title="${teacher.name }" class="fsize18 c-666">${teacher.name }</a>
+												<a href="${ctx }/front/teacher/${teacher.id}" title="${teacher.name }" class="fsize18 c-666">${teacher.name }</a>
 											</div>
 											<div class="hLh30 txtOf tac">
 												<span class="fsize14 c-999">${teacher.career }</span>
@@ -59,8 +59,20 @@
 										</section>
 									</li>
 								</c:forEach>
+				
+								
 							</c:if>
 						</ul>
+						
+							<div align="center">
+						<td><font face="微软雅黑" size="4px"
+							color="blue">一共${page.pages}页</font> 
+							<a class="layui-btn"
+							href="/front/teacher/list/${teacher.id}?page=${page.prePage}">上一页</a>
+							<a class="layui-btn"
+							href="/front/teacher/list/${teacher.id}?page=${page.nextPage}">下一页</a>
+							</td>
+					</div>
 						<div class="clear"></div>
 					</article>
 				</div>
@@ -68,15 +80,17 @@
 				<div>
 					<form action="${ctx }/front/teacherlist" method="post" id="searchForm">
 						<input type="hidden" name="page.currentPage" id="pageCurrentPage" value="1">
-						<input type="hidden" name="queryTeacher.subjectId" id="" value="${subjectId }">
+						<input type="hidden" name="queryTeacher.subjectId" id="" value="${subject_Id }">
 					</form>
-					<jsp:include page="/WEB-INF/jsp/common/front_page.jsp"></jsp:include>
+				 	<%-- <jsp:include page="/WEB-INF/jsp/common/front_page.jsp"></jsp:include>  --%>
 				</div>
 				<!-- 公共分页 结束 -->
 			</section>
 		</section>
 		<!-- /课程列表 结束 -->
 	</div>
+	
+		
 <script type="text/javascript">
 	$(function() {
 		if ('${subjectId}' == null || '${subjectId}' == 0) {
@@ -86,7 +100,6 @@
 		};
 		scrollLoad(); //响应滚动加载课程图片
 	})
-	
 	/**
 	 * 条件查询
 	 */

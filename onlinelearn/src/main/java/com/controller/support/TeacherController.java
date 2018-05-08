@@ -1,6 +1,7 @@
 package com.controller.support;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -66,21 +67,26 @@ public class TeacherController {
 		String star=request.getParameter("star");
 		String emp = request.getParameter("emp");
 		String isstar=request.getParameter("isstar");
-		if (qname!=null) {
+		if (qname!=null&&qname.trim().length()>0) {
+			try {
+				qname = new String(qname.getBytes("ISO-8859-1"), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 			map.put("qname", qname);
 			request.setAttribute(qname, qname);
 		}
-		if (star!=null) {
+		if (star!=null&&star.trim().length()>0) {
 			map.put("star", star);
 			request.setAttribute("star", star);
 		}
-		if (emp!=null) {
+		if (emp!=null&&emp.trim().length()>0) {
 			map.put("emp", emp);
 			request.setAttribute("emp", emp);
 		}
-		if (isstar!=null) {
-			map.put("is_star", isstar);
-			request.setAttribute("is_star", isstar);
+		if (isstar!=null&&isstar.trim().length()>0) {
+			map.put("isstar", Integer.valueOf(isstar));
+			request.setAttribute("isstar", isstar);
 		}
 		
 		return map;
@@ -108,10 +114,10 @@ public class TeacherController {
 			}
 
 	//删除
-	@RequestMapping("/teacher/delete/{id}")
+	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id")int id) {
 		teacherService.delete(id);
-		return "redirect:/teacher/list";
+		return "redirect:/admin/teacher/list";
 	}
 	
 	
@@ -140,7 +146,7 @@ public class TeacherController {
 			//获得文件类型	
 			String contextType = file.getOriginalFilename();
 			//获得文件后缀名
-			pic_path = path+ contextType;
+			pic_path ="/images/upload/teacher/20150915/"+ contextType;
 			File file2 = new File(pic_path);
 			try {
 				if(!file2.exists()){
@@ -167,9 +173,11 @@ public class TeacherController {
 		mv.addObject("a",teacherBean);
 		return mv;
 	}
-
+    
+	
 	@RequestMapping("/update")
 	public String update(@RequestParam MultipartFile file,HttpServletRequest request) {
+		System.out.println("5555555555");
 		String id =request.getParameter("id");
 		String name =request.getParameter("name");
 		String th_name =request.getParameter("th_name");
@@ -197,9 +205,11 @@ public class TeacherController {
 			}
 		}
 		SubjectBean subjectBean = new SubjectBean();
-		subjectBean.setSubject_id(Integer.valueOf(subject_id));
+		subjectBean.setSubject_id(Integer.parseInt(subject_id));
+		System.out.println(subject_id+"8888888");
 		TeacherBean teacherBean = new TeacherBean(Integer.valueOf(id), name, th_name, th_pw, education, career, Integer.valueOf(is_star), pic_path, Integer.valueOf(status), null, new Date(), subjectBean, Integer.valueOf(sort));
 		teacherService.update(teacherBean);
+		System.out.println(teacherService+"999999");
 		return "redirect:/admin/teacher/list";
 	}
 

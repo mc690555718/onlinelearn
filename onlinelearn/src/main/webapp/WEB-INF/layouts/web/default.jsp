@@ -27,7 +27,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/static/inxweb/css/web.css">
 <link href="${ctx}/static/inxweb/css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
 <!--[if lt IE 9]><script src="${ctx}/static/common/html5.js"></script><![endif]-->
-<script type="text/javascript" src="${ctx}/static/common/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="${ctx}/static/common/webutils.js"></script>
 <script type="text/javascript" src="${ctx}/static/inxweb/header/header.js"></script>
 <script type="text/javascript" src="${ctx }/static/inxweb/js/common.js"></script>

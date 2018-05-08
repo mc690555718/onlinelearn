@@ -115,7 +115,7 @@
 					<div class="layui-input-block">
 					<div>
 			<div class="col-sm-4">
-				<img id="blah" style="width:530px; height:250px;" />
+				<img id="blah" style="width:200px; height:150px;" />
 				<input type="file" name="file" id="imgInp">
 			</div>
 					</div>

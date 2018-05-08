@@ -41,6 +41,11 @@ public  class TeacherServiceImpl implements TeacherService{
 		return teacherMapper.getById(id);
 	}
 
+	@Override
+	public List<TeacherBean> listTea(int id) {
+		return teacherMapper.listTea(id);
+	}
+
 	
 
 }

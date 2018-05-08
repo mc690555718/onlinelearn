@@ -11,6 +11,6 @@ public interface TeacherService {
 	public List<TeacherBean> listAll(Map map);
 	public void delete(int id);
 	public TeacherBean getById(int id);
-	
+	List<TeacherBean> listTea(int id);
 
 }

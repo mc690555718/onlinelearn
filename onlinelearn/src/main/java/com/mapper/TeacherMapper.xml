@@ -34,7 +34,7 @@
   </update>
   
   <select id="listAll" resultMap="TeacherBeanMap" parameterType="java.util.Map"> 
-  select * from edu_teacher
+  select * from edu_teacher 
   
    <where>
  	<if test="qname!=null">
@@ -45,8 +45,8 @@
 		 and create_time between #{star} and #{emp}
 		</if>
 	</if>
-	<if test="isstar!=null">
-	and is_star like '%${isstar}%'
+	<if test="isstar>0">
+	and is_star=${isstar}
 	</if>
 		</where>
   </select>
@@ -54,5 +54,7 @@
    <select id="getById" parameterType="int" resultMap="TeacherBeanMap">
   select * from edu_teacher where id=#{value}
   </select>
-  
+  <select id="listTea" resultMap="TeacherBeanMap" parameterType="int">
+  	select * from edu_teacher where id in (select teacher_id from edu_course_teacher where subject_id=#{value})
+  </select>
  </mapper>

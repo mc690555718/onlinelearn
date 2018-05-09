@@ -19,6 +19,7 @@
 		<pattern>/admin/main/header</pattern>
 		<pattern>/admin/main/left*</pattern>
 		<pattern>/admin/**</pattern>
+		<pattern>/article/webcomment/*</pattern>
 	</excludes>
 	<!-- 后台管理布局 -->
 <!-- 	<decorator name="admindefault" page="admin/default.jsp"> -->

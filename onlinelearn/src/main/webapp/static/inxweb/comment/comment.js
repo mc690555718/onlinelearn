@@ -1,10 +1,10 @@
 //查询评论
 function queryComment() {
-	ajaxPage("/web/comment/ajax/query", "&otherId=" + otherId + "&type=" + type+ "&order=commentId", 1, commentCallBack);
+	ajaxPage("/front/article/webcomment", "&otherId=" + otherId + "&type=" + type+ "&order=commentId", 1, commentCallBack);
 }
 //查询评论
 function queryWonderfulComment() {
-	ajaxPage("/web/comment/ajax/query", "&otherId=" + otherId + "&type=" + type+ "&order=praiseCount", 1, commentCallBack);
+	ajaxPage("/front/article/webcomment/ajax/query", "&otherId=" + otherId + "&type=" + type+ "&order=praiseCount", 1, commentCallBack);
 }
 function commentCallBack(result) {
 	$(".commentHtml").html(result);

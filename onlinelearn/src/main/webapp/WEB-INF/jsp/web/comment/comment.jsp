@@ -66,24 +66,24 @@
 								<p><c:out value="${ac.content}"></c:out></p>
 							</div>
 							<div class="of mt5">
-								<span class="fr"><font class="fsize12 c-999 ml5"><fmt:formatDate value="${ac.addTime}" pattern="yyyy/MM/dd HH:mm" /></font></span> <span class="fl"> <a class="noter-dy vam" title="回复" href="javascript: void(0)" onclick="queryCommentReply('${ac.commentId}')">
-										<em class="icon18">&nbsp;</em>(<span class="replyCount${ac.commentId}">${ac.replyCount}</span>)
-									</a> <tt title="赞一下" class="noter-zan vam ml10" onclick="addPraise('${ac.commentId}',4)">
-										<em class="icon18">&nbsp;</em>(<span class="addPraise${ac.commentId}_4 praiseCount">${ac.praiseCount }</span>)
+								<span class="fr"><font class="fsize12 c-999 ml5"><fmt:formatDate value="${ac.addtime}" pattern="yyyy/MM/dd HH:mm" /></font></span> <span class="fl"> <a class="noter-dy vam" title="回复" href="javascript: void(0)" onclick="queryCommentReply('${ac.comment_id}')">
+										<em class="icon18">&nbsp;</em>(<span class="replyCount${ac.comment_id}">${ac.reply_count}</span>)
+									</a> <tt title="赞一下" class="noter-zan vam ml10" onclick="addPraise('${ac.comment_id}',4)">
+										<em class="icon18">&nbsp;</em>(<span class="addPraise${ac.comment_id}_4 praiseCount">${ac.praiseCount }</span>)
 									</tt>
 								</span>
 							</div>
 							<div class="n-reply">
 								<section class="n-reply-wrap">
 									<fieldset>
-										<textarea name="" class="commentReplyMsgContent${ac.commentId}"></textarea>
+										<textarea name="" class="commentReplyMsgContent${ac.comment_id}"></textarea>
 									</fieldset>
 									<p class="of mt5 tar pl10 pr10">
-										<span class="fl"><tt class="c-red commentReplyMsg${ac.commentId}"></tt></span>
-										<a onclick="addCommentReply('${ac.commentId}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">回复</a>
+										<span class="fl"><tt class="c-red commentReplyMsg${ac.comment_id}"></tt></span>
+										<a onclick="addCommentReply('${ac.comment_id}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">回复</a>
 									</p>
 								</section>
-								<div class="mt10 pl10 pr10 pb10 commentReply${ac.commentId}"></div>
+								<div class="mt10 pl10 pr10 pb10 commentReply${ac.comment_id}"></div>
 							</div> <!-- /回复盒子 -->
 						</li>
 					</c:forEach>

@@ -12,5 +12,6 @@ public interface Edu_UserService {
 	 public void updateZZ(Map map);
 	 public Edu_User getById(int user_id);
 	 public void save(Edu_User user);
+	 public Edu_User getPwd(String email);
 
 }

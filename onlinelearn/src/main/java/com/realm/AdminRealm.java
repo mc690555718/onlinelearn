@@ -32,7 +32,7 @@ public class AdminRealm extends AuthorizingRealm{
 		 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		 info.setRoles(us.getRoleNameSet(user));
 		 info.setStringPermissions(us.getPermissionNamesSet(user));
-		return info;
+		 return info;
 		
 	}
 	

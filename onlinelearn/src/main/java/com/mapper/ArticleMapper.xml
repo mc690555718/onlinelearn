@@ -2,51 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.ArticleMapper">
- <resultMap type="Article" id="ArticleMap">
-      <result column="article_id" property="article_id"/>
-      <result column="title" property="title"/>
-      <result column="author" property="author"/>
-      <result column="source" property="source"/>
-      <result column="article_type" property="article_type"/>
-      <result column="create_time" property="create_time"/>
-      <result column="publish_time" property="publish_time"/>
-      <result column="click_num" property="click_num"/>
-      <association property="articleContent" column="article_id" select="com.mapper.ArticleContentMapper.getById"></association>
-</resultMap> 
-   
-   <select id="getById" parameterType="int" resultMap="ArticleMap">
-      select * from edu_article where article_id=#{value}
-   </select>
-   <select id="listAll" parameterType="java.util.Map" resultMap="ArticleMap">
-      select * from edu_article 
-       <where>
-         <if test="qname!=null">and title like '%${qname}%'</if>
-         <if test="create_time!=null">
+	<resultMap type="Article" id="ArticleMap">
+		<result column="article_id" property="article_id" />
+		<result column="title" property="title" />
+		<result column="author" property="author" />
+		<result column="image_url" property="image_url" />
+		<result column="source" property="source" />
+		<result column="article_type" property="article_type" />
+		<result column="create_time" property="create_time" />
+		<result column="publish_time" property="publish_time" />
+		<result column="click_num" property="click_num" />
+		<association property="articleContent" column="article_id"
+			select="com.mapper.ArticleContentMapper.getById"></association>
+	</resultMap>
+
+	<select id="getById" parameterType="int" resultMap="ArticleMap">
+		select * from edu_article where article_id=#{value}
+	</select>
+	<select id="listAll" parameterType="java.util.Map" resultMap="ArticleMap">
+		select * from edu_article
+		<where>
+			<if test="qname!=null">and title like '%${qname}%'</if>
+			<if test="create_time!=null">
 				and create_time &gt;#{create_time}
 			</if>
 			<if test="publish_time!=null">
 				and publish_time &lt;#{publish_time}
 			</if>
-      </where>
-   </select>
-   
-   <delete id="delete" parameterType="int">
-    delete  from edu_article where article_id=#{value}
-   </delete>
-   
-   <update id="update" parameterType="Article">
-   update edu_article set title=#{title},summary=#{summary},author=#{author},source=#{source},image_url=#{image_url},sort=#{sort} where article_id=#{article_id}
-   </update>
-   
-   <update id="updateContent" parameterType="Article">
+		</where>
+	</select>
+
+	<delete id="delete" parameterType="int">
+		delete from edu_article where article_id=#{value}
+	</delete>
+
+	<update id="update" parameterType="Article">
+		update edu_article set
+		title=#{title},summary=#{summary},author=#{author},source=#{source},image_url=#{image_url},sort=#{sort}
+		where article_id=#{article_id}
+	</update>
+
+	<update id="updateContent" parameterType="Article">
 		update
 		edu_article_content set content=#{articleContent.content} where
 		article_id=#{articleContent.article_id}
 	</update>
-   
-   
-   <insert id="save" parameterType="Article">
-   <selectKey resultType="int" order="AFTER" keyProperty="article_id">
+
+
+	<insert id="save" parameterType="Article">
+		<selectKey resultType="int" order="AFTER" keyProperty="article_id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 		insert into
@@ -59,7 +63,7 @@
 		edu_article_content (article_id,content) values
 		(#{article_id},#{articleContent.content})
 	</insert>
-
-   
-
+	<select id="listComment" resultType="Comment" parameterType="int">
+       select * from edu_comment where other_id=#{other_id}
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bean.Article;
+import com.bean.Comment;
 import com.mapper.ArticleMapper;
 
 @Service
@@ -67,4 +68,9 @@ public   class ArticleServiceImpl implements ArticleService{
 		articleMapper.saveContent(map);
 	}
 
+	@Override
+	public List<Comment> listComment(int other_id) {
+		List<Comment> listAll=articleMapper.listComment(other_id);
+		return listAll;
+	}
 }

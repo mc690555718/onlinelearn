@@ -18,7 +18,6 @@ public class Article {
 	private Date create_time;   //  文章创建时间
 	private Date publish_time;   //  文章发布时间
 	private String like;   //  文章访问链接
-	private ArticleType articleType;   //  文章类型 2文章
 	private int article_type;
 	private int click_num;  //  文章点击量
 	private int praise_count;  //  点赞数量
@@ -135,14 +134,9 @@ public class Article {
 		this.like = like;
 	}
 
-
-	public ArticleType getArticleType() {
-		return articleType;
-	}
-
-
-	public void setArticleType(ArticleType articleType) {
-		this.articleType = articleType;
+	@Override
+	public String toString() {
+		return "Article [image_url=" + image_url + "]";
 	}
 
 
@@ -195,14 +189,5 @@ public class Article {
 		this.sort = sort;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Article [ title=" + title + ", source=" + source + ", author="
-				+ author + ", click_num=" + click_num + ", praise_count=" + praise_count + ", comment_num="
-				+ comment_num + ", sort=" + sort + "]";
-	}
-	
-	
 
 }

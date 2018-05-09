@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bean.Article;
+import com.bean.Comment;
 
 public interface ArticleService {
 
@@ -15,4 +16,5 @@ public interface ArticleService {
 	public int getTotalCount(Map map);
 	public void updateContent(Article map);
 	public void saveContent(Article map);
+	public List<Comment> listComment(int other_id);
 }

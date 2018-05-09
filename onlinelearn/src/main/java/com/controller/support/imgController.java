@@ -49,7 +49,7 @@ public class imgController {
 		mv.addObject("types",types);
 		mv.addObject("list", list);
 		mv.addObject("page", pageInfo);
-		mv.setViewName("/back/img/aa");
+		mv.setViewName("/back/img/img");
 		return mv;
 	}
 

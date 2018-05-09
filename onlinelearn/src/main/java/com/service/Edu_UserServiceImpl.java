@@ -42,6 +42,12 @@ public class Edu_UserServiceImpl  implements Edu_UserService{
 		return Edu_UserDao.getById(user_id);
 	}
 
+	@Override
+	public Edu_User getPwd(String email) {
+		
+		return Edu_UserDao.getPwd(email);
+	}
+
 
 
 }

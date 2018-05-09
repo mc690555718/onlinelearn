@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<link href="/js/font-awesome-4.7.0/css/font-awesome.min.css"
+	type="text/css" rel="stylesheet">
 <script type="text/javascript">
 function xiugai(id) { 
 	layer.open({
@@ -114,8 +116,6 @@ function xiugai(id) {
 </script>
 </head>
 <body>
-
-
 	<div class="larry-personal">
 		<div class="layui-tab">
 			<form action="" method="post">
@@ -146,6 +146,7 @@ function xiugai(id) {
 						</div>
 					</div>
 					<a class="layui-btn" onclick="getList()">查询</a>
+					<a class="layui-btn" href="/admin/user/excel"></a>
 				</div>
 			</form>
 			<!-- 操作日志 -->
@@ -186,22 +187,30 @@ function xiugai(id) {
 							</c:if>
 							<c:if test="${list.sex==1 }">
 								<td>女</td>
-
 							</c:if>
 							<td>${list.age }</td>
 							<c:if test="${list.is_avalible==1 }">
 								<td>正常</td>
+								<td>
+									<button title="修改密码" onclick="xiugai(${list.user_id})"
+										class="layui-btn layui-btn-normal">修改密码</button>
+
+									<button title="冻结"
+										onclick="dongjie(${list.user_id},${list.is_avalible})"
+										class="layui-btn layui-btn-danger">冻结</button>
+								</td>
 							</c:if>
 							<c:if test="${list.is_avalible==2 }">
 								<td>冻结</td>
+								<td>
+									<button title="修改密码" onclick="xiugai(${list.user_id})"
+										class="layui-btn layui-btn-normal">修改密码</button>
+
+									<button title="解冻"
+										onclick="dongjie(${list.user_id},${list.is_avalible})"
+										class="layui-btn layui-btn-danger">解冻</button>
+								</td>
 							</c:if>
-							<td>
-								<button title="修改密码" onclick="xiugai(${list.user_id})"
-									class="layui-btn layui-btn-normal layui-btn-sm">修改密码</button>
-								<button title="冻结"
-									onclick="dongjie(${list.user_id},${list.is_avalible})"
-									class="layui-btn layui-btn-danger">冻结</button>
-							</td>
 						</tr>
 					</c:forEach>
 					<tr>
@@ -218,5 +227,7 @@ function xiugai(id) {
 	</div>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
 	<script type="text/javascript" src="/js/newslist.js"></script>
+
+
 </body>
 </html>

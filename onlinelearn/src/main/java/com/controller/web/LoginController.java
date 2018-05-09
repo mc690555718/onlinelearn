@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.bean.Edu_User;
 import com.service.Edu_UserService;
-import com.util.MD5Utils;
+import com.util.Encryption;
 import com.util.Result;
 @Controller
 public class LoginController {
@@ -22,7 +21,7 @@ public class LoginController {
 	@RequestMapping("/front/login")
 	@ResponseBody
 	public Result frontLogin(HttpServletRequest request,
-			HttpServletResponse response,HttpSession session) {
+		HttpServletResponse response,HttpSession session) {
 		String email = request.getParameter("account");
 		String pwd = request.getParameter("password");
 		Result result = new Result();
@@ -31,7 +30,8 @@ public class LoginController {
 			result.setSuccess(false);
 			return result;
 		}
-		pwd = MD5Utils.md5(pwd);
+		pwd = Encryption.encryptionByMD5(email, pwd);
+		System.out.println(pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
 		if (edu_User.getPassword().equals(pwd)) {
@@ -71,7 +71,7 @@ public class LoginController {
 			return new Result(false, null, null);
 		} else {
 			user.setEmail(email);
-			user.setPassword(MD5Utils.md5(request.getParameter("user.password")));
+			user.setPassword( Encryption.encryptionByMD5(email,request.getParameter("user.password") ));
 			user.setMobile(request.getParameter("user.mobile"));
 			service.save(user);		
 		}

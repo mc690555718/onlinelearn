@@ -24,7 +24,7 @@ function isLogin(){
 function getLoginUser(){
 	var user = null;
 	$.ajax({
-		url:baselocation+'/uc/getloginUser',
+		url:baselocation+'/front/uc/getloginUser',
 		type:'post',
 		async:false,
 		dataType:'json',
@@ -40,7 +40,7 @@ function getLoginUser(){
  */
 function exit(){
 	$.ajax({
-		url:baselocation+'/uc/exit',
+		url:baselocation+'/front/uc/exit',
 		type:'post',
 		dataType:'json',
 		async:true,

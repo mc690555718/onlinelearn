@@ -19,8 +19,22 @@
 <mvc:resources location="/json/" mapping="/json/**"/>
 <mvc:resources location="/jsplug/" mapping="/jsplug/**"/>
 <mvc:resources location="/common/" mapping="/common/**"/>
-<bean  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-<property name="prefix"  value="/WEB-INF/jsp/"></property>
-<property name="suffix"  value=".jsp"></property>
-</bean>
+
+
+	<bean id="htmlviewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		  <property name="contentType" value="text/html"/>  
+		<property name="prefix" value="/WEB-INF/layouts/" />
+		<property name="suffix" value=".jsp" />
+		<property name="viewNames" value="/web/header*"></property> 
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
 </beans>

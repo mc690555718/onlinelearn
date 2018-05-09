@@ -472,7 +472,6 @@ function goTopFun() {
  */
 function dialogLogin(type){
 	var userName=$("#u-email").val();
-	alert(userName)
     var pwd = $("#u-password").val();
     var autoThirty=$("#autoThirty").prop("checked")
     $("#u-email").next().html('');
@@ -500,11 +499,7 @@ function dialogLogin(type){
 				$(".e-l-jy").html('<font class="fsize12 c-orange">'+result.message+'</font>');
 			}else{
 				if(type==1){
-				    $(".dialogWrap").hide();
-					$("#no-login").hide();
-					$("#is-login-two").show();
-					$("#is-login-one").show();
-					window.location.href="/front/uc/index/userName="+userName;
+					window.location.href="/front";
 				}else{
 					window.location.reload();
 

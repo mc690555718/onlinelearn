@@ -57,8 +57,8 @@
 	insert into edu_user(mobile,email,password,user_name,show_name,sex,age,create_time,is_avalible,pic_img,banner_url,msg_num,sys_msg_num,LAST_SYSTEM_TIME) values(#{mobile},#{mobile},#{password},#{user_name},#{show_name},#{sex},#{age},#{create_time},1,'/img/src/','/img/src/local',0,0,#{last_system_time})
 	</insert>
 	
-	<select id="getPwd" parameterType="string">
-	select *  FROM edu_user  where email=#{email}
+	<select id="getPwd" parameterType="string"  resultMap="Edu_UserMap">
+	select * from edu_user  where email=#{value}
 	
 	
 	

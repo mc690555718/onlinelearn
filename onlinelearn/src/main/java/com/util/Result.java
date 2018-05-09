@@ -6,11 +6,9 @@ public class Result {
 	private Object entity;
 	
 	public Result() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Result(boolean success, String message, Object entity) {
-		super();
 		this.success = success;
 		this.message = message;
 		this.entity = entity;

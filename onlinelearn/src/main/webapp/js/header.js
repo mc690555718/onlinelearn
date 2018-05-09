@@ -20,7 +20,7 @@ function showUserInfo() {
 			useImg = baselocation + '/static/inxweb/img/avatar-boy.gif';
 		} else {
 			useImg = imagesPath + useImg;
-		}
+		};
 		$("#userName").text(showName);
 		$(".userImgPhoto").attr("src", useImg);
 		$(".userImgPhoto").attr("alt", showName);

@@ -12,7 +12,7 @@
 		<section class="container">
 			<header class="comm-title">
 				<h2 class="fl tac">
-					<span class="c-333">全部课程</span>
+					<span class="c-333"><a href="/front/toCourseslist">全部课程</a></span>
 				</h2>
 			</header>
 			<section class="c-sort-box">
@@ -23,9 +23,9 @@
 						</dt>
 						<dd class="c-s-dl-li">
 							<ul class="clearfix">
-								<li <c:if test="${queryCourse.subjectId==0}">class="current"</c:if>><a onclick="submitForm(1,0)" title="全部" href="javascript:void(0)">全部</a></li>
+								<li <c:if test="${queryCourse.subject_id==0}">class="current"</c:if>><a onclick="submitForm(1,0)" title="全部" href="javascript:void(0)">全部</a></li>
 								<c:forEach items="${subjectList}" var="subject">
-									<li <c:if test="${queryCourse.subjectId==subject.subjectId or subjectParentId==subject.subjectId}">class="current"</c:if>><a onclick="submitForm(1,${subject.subjectId})" title="${subject.subjectName}" href="javascript:void(0)">${subject.subjectName}</a></li>
+									<li <c:if test="${queryCourse.subject_id==subject.subject_id or subjectParentId==subject.subject_id}">class="current"</c:if>><a onclick="submitForm(1,${subject.subject_id})" title="${subject.subject_name}" href="/front/toCourseslist?Sid=${subject.subject_id}">${subject.subject_name}</a></li>
 								</c:forEach>
 							</ul>
 							<aside class="c-s-more">
@@ -39,9 +39,10 @@
 								<span class="c-999 fsize14"></span>
 							</dt>
 							<dd class="c-s-dl-li">
+							
 								<ul class="clearfix">
 									<c:forEach items="${sonSubjectList}" var="subject">
-										<li <c:if test="${queryCourse.subjectId==subject.subjectId}">class="current"</c:if>><a onclick="submitForm(1,${subject.subjectId})" title="${subject.subjectName}" href="javascript:void(0)">${subject.subjectName}</a></li>
+										<li <c:if test="${queryCourse.subject_id==subject.subject_id}">class="current"</c:if>><a onclick="submitForm(1,${subject.subject_id})" title="${subject.subject_name}" href="javascript:void(0)">${subject.subject_name}</a></li>
 									</c:forEach>
 								</ul>
 								<aside class="c-s-more">
@@ -58,7 +59,7 @@
 							<ul class="clearfix">
 								<li <c:if test="${queryCourse.teacherId==0}">class="current"</c:if>><a onclick="submitForm(2,0)" title="全部" href="javascript:void(0)">全部</a></li>
 								<c:forEach items="${teacherList}" var="teacher">
-									<li <c:if test="${teacher.id==queryCourse.teacherId}">class="current"</c:if>><a title="${teacher.name}" onclick="submitForm(2,${teacher.id})" href="javascript:void(0)">${teacher.name}</a></li>
+									<li <c:if test="${teacher.id==queryCourse.teacherId}">class="current"</c:if>><a title="${teacher.name}" onclick="submitForm(2,${teacher.id})" href="/front/toCourseslist?Tid=${teacher.id}">${teacher.name}</a></li>
 								</c:forEach>
 							</ul>
 							<aside class="c-s-more">
@@ -105,20 +106,20 @@
 													</c:otherwise>
 												</c:choose>
 												<div class="cc-mask">
-													<a href="${ctx}/front/couinfo/${course.courseId}" title="" class="comm-btn c-btn-1">开始学习</a>
+													<a href="/front/tocourseinfor?courseid=${course.course_id}" title="" class="comm-btn c-btn-1">开始学习</a>
 												</div>
 											</section>
 											<h3 class="hLh30 txtOf mt10">
-												<a href="${ctx}/front/couinfo/${course.courseId}" title="${course.courseName}" class="course-title fsize18 c-333">${course.courseName}</a>
+												<a href="${ctx}/front/couinfo/${course.course_id}" title="${course.course_name}" class="course-title fsize18 c-333">${course.course_name}</a>
 											</h3>
 											<section class="mt10 hLh20 of">
-												<c:if test="${course.currentPrice=='0.00' }">
+												<c:if test="${course.current_price=='0.00' }">
 													<span class="fr jgTag bg-green"><tt class="c-fff fsize12 f-fA">免费</tt></span>
 												</c:if>
-												<c:if test="${course.currentPrice!='0.00' }">
-													<span class="fr jgTag bg-orange"><tt class="c-fff fsize14 f-fG">￥${course.currentPrice }</tt></span>
+												<c:if test="${course.current_price!='0.00' }">
+													<span class="fr jgTag bg-orange"><tt class="c-fff fsize14 f-fG">￥${course.current_price }</tt></span>
 												</c:if>
-												<span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA">${course.pageBuycount }人学习</tt> | <tt class="c-999 f-fA">${course.pageViewcount }浏览</tt>
+												<span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA">${course.page_buyCount }人学习</tt> | <tt class="c-999 f-fA">${course.page_viewCount }浏览</tt>
 												</span>
 											</section>
 										</div>
@@ -135,7 +136,7 @@
 				<form action="${ctx}/front/showcoulist" id="searchForm" method="post">
 					<input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" />
 					<input type="hidden" name="queryCourse.teacherId" value="${queryCourse.teacherId}" />
-					<input type="hidden" name="queryCourse.subjectId" value="${queryCourse.subjectId}" />
+					<input type="hidden" name="queryCourse.subject_id" value="${queryCourse.subject_id}" />
 					<input type="hidden" name="queryCourse.order" value="${queryCourse.order}" />
 				</form>
 			</section>

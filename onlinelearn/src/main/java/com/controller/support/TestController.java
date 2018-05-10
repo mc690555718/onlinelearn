@@ -1,5 +1,5 @@
 package com.controller.support;
-import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -97,14 +97,19 @@ public class TestController {
 			row1.createCell(7).setCellValue(user.getIs_avalible()); 
 			
 		}  
-		response.addHeader("Content-Disposition", "attachment;filename="+ new String(filename.getBytes()));    
-        OutputStream os= new BufferedOutputStream(response.getOutputStream());    
-        response.setContentType("application/vnd.ms-excel;charset=gb2312");    
-        os.write();    
-        os.flush();    
-        os.close();    
-
-	   
+		//将文件保存到指定的位置  
+		try   
+		{  
+			FileOutputStream fos = new FileOutputStream(filename);  
+			workbook.write(fos);  
+			System.out.println("恭喜您！导入成功！！！！！！");  
+			fos.close();  
+		}   
+		catch (IOException e)   
+		{  
+			System.out.println("写入文件出错啦！");  
+			e.printStackTrace();  
+		}  
 		return "/admin/user/listUser";
 
 	}

@@ -17,4 +17,8 @@
     <insert id="save" parameterType="Questions_tag">
     insert into edu_questions_tag(questions_tag_name,status,create_time,parent_id) values(#{questions_tag_name},#{status},#{create_time},#{parent_id})
     </insert>
+    <select id="getBylistId" resultType="Questions_tag" parameterType="int">
+    select * from edu_questions_tag where questions_tag_id
+    in (select questions_tag_id from edu_questions_tag_relation where  questions_id=#{value})
+    </select>
 </mapper>

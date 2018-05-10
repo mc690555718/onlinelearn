@@ -8,4 +8,5 @@ import com.bean.EduCourseKpoint;
 public interface KpointNoseMapper {
 
 	List<EduCourseKpoint> listbyKpoint(int courseId);
+	EduCourseKpoint bykopint(int kopintid);
 }

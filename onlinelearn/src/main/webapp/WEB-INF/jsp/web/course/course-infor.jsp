@@ -74,8 +74,8 @@
 											</c:if>
 							</span>
 						</section>
-						<section class="c-attr-mt"><!-- isLogin() -->
-									<a href="javascript:void(0)" title="立即观看" onclick="if(1==1){ window.location.href='/front/tovedioplay?courseid=${course.course_id }'} else{lrFun();} " class="comm-btn c-btn-3">立即观看</a>
+						<section class="c-attr-mt"><!--  -->
+									<a href="javascript:void(0)" title="立即观看" onclick="if(isLogin()){ window.location.href='/front/tovedioplay?courseid=${course.course_id }'} else{lrFun();} " class="comm-btn c-btn-3">立即观看</a>
 							<span class="ml10"><tt class="c-yellow f-fM">*咨询 ${websitemap.web.phone}</tt></span>
 						</section>
 						<section class="c-attr-mt of ml10">
@@ -125,7 +125,6 @@
 								<section id="c-i-tabTitle" class="c-infor-tabTitle c-tab-title">
 									<a name="c-i" class="current" title="课程详情" href="javascript: void(0)">课程详情</a>
 									<a name="c-g" title="课程大纲" href="javascript: void(0)">课程大纲</a>
-									<a name="c-c" title="课程评论" href="javascript: void(0)">课程评论</a>
 								</section>
 							</div>
 							<article class="ml10 mr10 pt20">

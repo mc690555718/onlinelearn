@@ -45,6 +45,9 @@
 	size: 10px;
 	color: white;
 }
+
+
+
 	</style>
 	
 <script type="text/javascript">
@@ -57,35 +60,34 @@
  }
 
  
- /*批量删除  */
- function batchDeletes(){  
-     //判断至少写了一项  
-     var checkedNum = $("input[name='subcheck']:checked").length;  
-     if(checkedNum==0){  
-         alert("请至少选择一项!");  
-         return false;  
-     }  
-     if(confirm("确定删除所选项目?")){  
-     var checkedList = new Array();  
-     $("input[name='subcheck']:checked").each(function(){  
-         checkedList.push($(this).val());  
-     });  
-     $.ajax({  
-         type:"POST",  
-         url:"del",  
-         data:{"delitems":checkedList.toString()},  
-         datatype:"jsp",  
-         success:function(data){  
-             $("[name='checkbox2']:checkbox").attr("checked",false);  
-             location.reload();//页面刷新  
-         },  
-         error:function(data){  
-             art.dialog.tips('删除失败!');  
-         }  
-     });  
-     }  
-}  
- 
+//批量删除
+ function batchDeletes() {
+ 	//判断至少写了一项
+ 	var num = $("input[name='subcheck']:checked").length;
+ 	if (num==0) {
+ 		alert("请至少选择一项");
+ 		return false;
+ 	}
+ 	if (confirm("确认删除所选项?")) {
+ 		var checkdList = new Array();
+ 		$("input[name='subcheck']:checked").each(function() {
+ 			checkdList.push($(this).val());
+ 		});
+ 		$.ajax({
+ 			type:"post",
+ 			url:"/admin/hello/del",
+ 			data:{"delitems":checkdList.toString()},
+ 			datetype:"html",
+ 			success:function(date){
+ 			$("[name='checkbox2']:checked").attr("checked",false);
+ 			location.reload();//刷新页面
+ 			},
+ 			error:function(date) {
+ 				art.dialog.tips("删除失败!");
+ 			}
+ 		});
+ 	}
+ }
  
  /*清空  */
  function cy(){ 
@@ -97,6 +99,21 @@
 	  });  
 	  });  
  }
+ 
+//全选反选
+ function fun1() {
+ 	var checklist = document.getElementsByName("subcheck");
+ 	if (document.getElementById("checkbox").checked) {
+ 		for (var i=0;i<checklist.length;i++) {
+ 			checklist[i].checked = 1;
+ 		}
+ 	} else{
+ 		for (var j=0;j<checklist.length;j++) {
+ 			checklist[j].checked = 0;
+ 		}
+ 	}
+ }
+
 </script>
 
 </head>
@@ -144,7 +161,7 @@
 						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
 							<thead>
 								<tr>
-									<th><input type="checkbox" id="selected-all"></th>
+									<th><input type="checkbox" id="checkbox" name="checkbox" onclick="fun1()"></th>
 									<th>ID</th>
 									<th>标题</th>
 									<th>图片URL</th>
@@ -158,7 +175,7 @@
 
 								<c:forEach items="${list }" var="p" varStatus="stat">
 									<tr>
-										<td><input type="checkbox"></td>
+										<td><input type="checkbox" id="subcheck" name="subcheck" value="${p.imageId}"></td>
 										<td>${stat.index+1}</td>
 										<td>${p.title }</td>
 										<td>${p.imageUrl}</td>
@@ -173,14 +190,19 @@
 												class="layui-icon"></i> 删除</a></td>
 									</tr>
 								</c:forEach>
- <tr>
-						<td align="center" colspan="9">
-						<font face="微软雅黑" size="4px" color="blue">一共${page.pages}页</font> 
+					<tr>
+						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+							color="black">一共${page.pages}页</font> 
+							<font face="微软雅黑" size="3px"
+							color="black">每页${page.pageSize }条/</font>
 							<a class="layui-btn"
-							href="/admin/hello/list/${p.imageId}?page=${page.prePage}">上一页</a>
+							href="/admin/hello/list?page=${page.firstPage}">首页</a>
 							<a class="layui-btn"
-							href="/admin/hello/list/${p.imageId}?page=${page.nextPage}">下一页</a>
-							</td>
+							href="/admin/hello/list?page=${page.prePage}">上一页</a>
+							<a class="layui-btn"
+							href="/admin/hello/list?page=${page.nextPage}">下一页</a>
+							<a class="layui-btn"
+							href="/admin/hello/list?page=${page.lastPage}">最后页</a></td>
 					</tr>
 
 
@@ -188,12 +210,6 @@
 							</tbody>
 						</table>
 
-
-					<!-- 	<div class="larry-table-page clearfix">
-							<a href="javascript:;" class="layui-btn layui-btn-small"><i
-								class="iconfont icon-shanchu1"></i>删除</a>
-							<div id="page" class="page"></div>
-						</div> -->
 					</div>
 					<!-- 登录日志 -->
 					<div class="layui-tab-item layui-field-box">

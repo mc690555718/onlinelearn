@@ -22,7 +22,6 @@ public class WebFrontController {
 	public ModelAndView websiteImagesList(HttpServletRequest request) {
 		ModelAndView mv=new ModelAndView();
 		List<img> websiteImagesList=imgService.listAll(new HashMap<>());
-		System.out.println("0:"+websiteImagesList.size());
 		mv.addObject("websiteImagesList", websiteImagesList);
 		mv.setViewName("/web/index/index");
 		return mv;

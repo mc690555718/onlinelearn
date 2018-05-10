@@ -31,7 +31,6 @@ public class LoginController {
 			return result;
 		}
 		pwd = Encryption.encryptionByMD5(email, pwd);
-		System.out.println(pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
 		if (edu_User.getPassword().equals(pwd)) {
@@ -47,7 +46,6 @@ public class LoginController {
 	@ResponseBody
 	public Result getLoginUser(HttpSession session,HttpServletResponse response) {
 		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
-		System.out.println(edu_User==null);
 		if (edu_User == null) {
 			return new Result(false, null, null);
 		}else {

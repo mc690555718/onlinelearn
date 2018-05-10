@@ -502,7 +502,6 @@ function dialogLogin(type){
 					window.location.href="/front";
 				}else{
 					window.location.reload();
-
 				}
 			}
 		},

@@ -1,8 +1,8 @@
 package com.controller.support;
-import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.cert.PKIXCertPathBuilderResult;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,7 +19,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,8 +53,7 @@ public class TestController {
 	}
 
 	@RequestMapping("/excel")
-	public String excel(String path,HttpServletRequest request){
-		System.out.println(path);
+	public String excel(String filename,HttpServletRequest request,HttpServletResponse response){
 		Map map=new HashMap<>();
 		map=initMap(request, map);
 		List<Edu_User> list=edu_UserService.listUser(map);
@@ -99,19 +97,14 @@ public class TestController {
 			row1.createCell(7).setCellValue(user.getIs_avalible()); 
 			
 		}  
-		//将文件保存到指定的位置  
-		try   
-		{  
-			FileOutputStream fos = new FileOutputStream(path);  
-			workbook.write(fos);  
-			System.out.println("恭喜您！导入成功！！！！！！");  
-			fos.close();  
-		}   
-		catch (IOException e)   
-		{  
-			System.out.println("写入文件出错啦！");  
-			e.printStackTrace();  
-		}  
+		response.addHeader("Content-Disposition", "attachment;filename="+ new String(filename.getBytes()));    
+        OutputStream os= new BufferedOutputStream(response.getOutputStream());    
+        response.setContentType("application/vnd.ms-excel;charset=gb2312");    
+        os.write();    
+        os.flush();    
+        os.close();    
+
+	   
 		return "/admin/user/listUser";
 
 	}
@@ -125,11 +118,9 @@ public Map initMap(HttpServletRequest request,Map map){
 	String end=request.getParameter("end");
 	if (statr!=null&&statr.length()>0) {
 		map.put("start", statr);
-
 	}
 	if (end!=null&&end.length()>0) {
 		map.put("end", end);
-
 	}
 
 	if (type==null) {

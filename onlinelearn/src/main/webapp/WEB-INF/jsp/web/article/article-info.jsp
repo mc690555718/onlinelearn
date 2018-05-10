@@ -46,7 +46,7 @@
 									</a> <tt title="赞一下" onclick="addPraise('${article.article_id}',3)"
 											class="noter-zan vam ml5 f-fM">
 											<em class="icon18">&nbsp;</em>(<span
-												class="addPraise${article.article_id}_3 praise_count">0</span>)
+												class="addPraise(${article.article_id})_3 praise_count">0</span>)
 										</tt>
 									</span>
 								</div>

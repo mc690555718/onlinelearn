@@ -67,7 +67,14 @@
 		edu_questions(cus_id,title,content,type,status,reply_count,praise_count,add_time)
 		values(#{edu_user.user_id},#{title},#{content},#{type},#{status},#{reply_count},#{praise_count},#{add_time})
 	</insert>
-	<insert id="saveRelation" parameterType="java.util.Map">
-	    insert into edu_questions_tag_relation(QUESTIONS_ID,QUESTIONS_TAG_ID) value(#{qid},#{tid})
+	<insert id="saveRelation" parameterType="int">
+		insert into
+		edu_questions_tag_relation(QUESTIONS_ID,QUESTIONS_TAG_ID)
+		value(#{qid},#{tid})
 	</insert>
+	<select id="getId" resultType="Questions" parameterType="Questions">
+		select *
+		from edu_questions where
+		title=#{title},content=#{content},type=#{type},status=#{status},reply_count=#{reply_count},#{praise_count}
+	</select>
 </mapper>

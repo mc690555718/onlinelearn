@@ -24,7 +24,7 @@ public class LoginController {
 	@RequestMapping(value="/front/login",produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Result frontLogin(HttpServletRequest request,
-			HttpServletResponse response,HttpSession session) {
+		HttpServletResponse response,HttpSession session) {
 		String email = request.getParameter("account");
 		String pwd = request.getParameter("password");
 		Result result = new Result();
@@ -36,7 +36,6 @@ public class LoginController {
 		pwd = Encryption.encryptionByMD5(email, pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
-		System.out.println(edu_User);
 		if (edu_User==null) {
 			return new Result(false,"The account number does not exist!",null);
 		}else {
@@ -50,9 +49,10 @@ public class LoginController {
 					Edu_User user=(Edu_User)session.getAttribute("login_success");
 					return result;
 				}
+			}else {
+				return new Result(false,"password is filed!",null);
 			}
 		}
-		return result;
 	}
 	@RequestMapping("/front/uc/getloginUser")
 	@ResponseBody

@@ -69,7 +69,7 @@ public class CouseNoseController {
 		try {
 			PrintWriter out=response.getWriter();
 			EduCourseKpoint courseKpoint= kpointNoseService.bykopint(kpointId);
-			System.out.println(courseKpoint.getVideo_Type());
+			System.out.println(courseKpoint.getVideo_type());
 			// 当传入数据不正确时直接返回
 			if (ObjectUtils.isNull(courseKpoint)) {
 				out.println("<script>var noCover=true; dialog dialog('提示','参数错误！',1);</script>");
@@ -77,17 +77,17 @@ public class CouseNoseController {
 			}
 			
 			//获取课程
-			EduCourse course = conurseNoseService.byIdcourse(courseKpoint.getCourse_Id());
+			EduCourse course = conurseNoseService.byIdcourse(courseKpoint.getCourse_id());
 			if (course==null) {
 				return "web/course/videocode";
 			}
 			model.addAttribute("courseKpoint",courseKpoint);
 			model.addAttribute("course",course);
 				// 视频url
-			String videourl = courseKpoint.getVideo_Url();
+			String videourl = courseKpoint.getVideo_url();
 			System.out.println("视频url"+videourl);
 				// 播放类型
-			String videotype = courseKpoint.getVideo_Type();
+			String videotype = courseKpoint.getVideo_type();
 				// 放入数据
 			model.addAttribute("videourl", videourl);
 			model.addAttribute("videotype", videotype);

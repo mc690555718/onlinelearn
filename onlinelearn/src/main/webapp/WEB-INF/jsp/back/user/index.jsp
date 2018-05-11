@@ -113,6 +113,12 @@ function xiugai(id) {
 	 document.forms[0].action="/admin/user/listUser/${list.user_id }?page=${page.prePage}";
 	 document.forms[0].submit();
  }
+ function daochu() {
+	 document.forms[0].action ="/admin/user/excel";
+	 document.forms[0].submit();
+	
+	
+}
 </script>
 </head>
 <body>
@@ -145,8 +151,8 @@ function xiugai(id) {
 								onClick="WdatePicker()" />
 						</div>
 					</div>
-					<a class="layui-btn" onclick="getList()">查询</a>
-					<a class="layui-btn" href="/admin/user/excel"></a>
+					<a class="layui-btn" onclick="getList()">查询</a> <a
+					class="layui-btn" onclick="daochu()">查询并导出</a>
 				</div>
 			</form>
 			<!-- 操作日志 -->
@@ -164,7 +170,7 @@ function xiugai(id) {
 						<col width="20%">
 					</colgroup>
 					<tr>
-						<td>用户Id</td>
+						<td>学员Id</td>
 						<td>手机号</td>
 						<td>邮箱号</td>
 						<td>用户名</td>

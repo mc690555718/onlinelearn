@@ -29,6 +29,9 @@
 			document.forms[0].action = "/admin/questions_tag/update";
 			document.forms[0].submit();
 		});
+		$("#btn1").click(function(){
+			location.href = "/admin/questions_tag/listAll";
+		});
 	});	
 </script>
 </head>
@@ -42,6 +45,7 @@
 				id="questions_tag_name" class="layui-input" type="text">
 		</div>
 		<input class="layui-btn" type="button" value="修改" id="btn" />
+		<input class="layui-btn" type="button" value="返回" id="btn1" />
 	</form>
 </body>
 </html>

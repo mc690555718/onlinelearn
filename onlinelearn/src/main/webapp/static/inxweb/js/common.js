@@ -495,6 +495,7 @@ function dialogLogin(type){
 			"ipForget":autoThirty
 		},
 		success:function(result){
+			alert(result.message);
 			if(result.success==false){
 				$(".e-l-jy").html('<font class="fsize12 c-orange">'+result.message+'</font>');
 			}else{

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.ConurseNoseMapper">
+  
+  <select id="listbyCourse" parameterType="com.bean.EduCourse" resultType="com.bean.EduCourse">
+  select a.* from edu_course a left join sys_subject b on a.subject_id=b.subject_id
+  left join edu_teacher c on b.subject_id=c.subject_id
+  <where>
+  <if test="Sid!=0 ">
+   b.subject_id=#{Sid}
+  </if>
+  <if test="Tid!=0 ">
+   c.id=#{Tid}
+  </if>
+  </where>
+  </select>
+    <select id="byIdcourse" parameterType="int" resultType="com.bean.EduCourse">
+  select * from edu_course where course_id=#{courseid}
+  <where>
+  </where>
+  </select>
+ </mapper>

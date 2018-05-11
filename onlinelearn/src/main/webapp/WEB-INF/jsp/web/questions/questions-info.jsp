@@ -80,7 +80,7 @@
 													class="noter-dy vam"> <em class="icon18">&nbsp;</em>(<span
 														id="questionsReplyCount">${question.reply_count }</span>)
 												</a> <tt class="noter-zan vam ml10 f-fM" title="赞一下"
-														onclick="onclick="addPraise(${question.id },1,this)">
+														onclick="addPraise(${question.id },1,this)">
 														<em class="icon18">&nbsp;</em>(<span>${question.praise_count }</span>)
 													</tt>
 												</span>
@@ -159,18 +159,13 @@
 		<!-- /提问题 结束 -->
 	</div>
 	<script>
-	var questionId="${question.id}";
+	var questionsId="${question.id}";
 	</script>
 	<script type="text/javascript"
 		src="${ctx}/static/inxweb/questions/questions_info.js">
 	</script>
 	<script type="text/javascript"
 		src="${ctx}/static/inxweb/questions/questions.js">
-	</script>
-	<script type="text/javascript">
-	   /*  function addPraise(id){
-	    	location.href = "/front/updatePraise/"+id;
-	    } */
 	</script>
 </body>
 </html>

@@ -7,14 +7,15 @@
 <head>
 <meta charset="utf-8">
 		<title>layui</title>
+		
 		<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
 
-<link rel="stylesheet" type="text/css" href="css/main.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.bigcolorpicker.css" />
-<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="js/jquery.bigcolorpicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.bigcolorpicker.css" />
+<script type="text/javascript" src="/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.bigcolorpicker.min.js"></script>
 
 
 
@@ -73,15 +74,6 @@
 	 
  }  
  
- 
- 
- 
-	
-
-
-  
-
-	
 	
 	$(function() {
 		$("#bt").bigColorpicker("c2");
@@ -162,7 +154,7 @@
      <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">背景颜色:</label>
     <div class="col-sm-10">
-    <input type="text" id="c2"/><input id="bt" type="button" value="选色" />
+    <input type="text" id="c2" name="color" value="${img.color }" /><input id="bt" type="button" value="选色" />
    </div>
   </div>
 		<div class="form-group">

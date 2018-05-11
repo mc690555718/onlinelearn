@@ -38,7 +38,7 @@ function submitForm(keyWord,type){
  */
 function hotQuestions(){
 	$.ajax({
-		url:baselocation + "/questions/ajax/hotRecommend",
+		url:baselocation + "/front/questions/ajax/hotRecommend",
 		data:{
 		},
 		type:"post",

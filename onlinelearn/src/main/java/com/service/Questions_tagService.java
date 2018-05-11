@@ -11,4 +11,5 @@ public interface Questions_tagService {
 	public void update(Questions_tag tag);
 	public Questions_tag getById(int id);
 	public void updateStatus(int id);
+	public List<Questions_tag> getBylistId(int id);
 }

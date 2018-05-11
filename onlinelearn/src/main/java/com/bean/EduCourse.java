@@ -31,7 +31,7 @@ public class EduCourse {
 	private String subject_link;  //-课程专业ID
 	private Date add_time;       //-添加时间
 	private int source_price;    //-课程原价格（只显示）
-	private int current_price;   //-课程销售价格（实际支付价格）设置为0则可免费观看
+	private double current_price;   //-课程销售价格（实际支付价格）设置为0则可免费观看
 	private String title;        //-课程简介
 	private String context;      //-课程详情
 	private int lession_num;     //-总课时
@@ -43,7 +43,27 @@ public class EduCourse {
 	private int loseType;       //-有效期类型，0：到期时间，1：按天数
 	private String lose_time;    //-有效期:商品订单过期时间点
 	private int sequence;        //序列
-
+	private int Sid;//用于前台课程
+	private int Tid;//用于前台课程
+	private int subject_id;//用于前台课程
+	public int getSubject_id() {
+		return subject_id;
+	}
+	public void setSubject_id(int subject_id) {
+		this.subject_id = subject_id;
+	}
+	public int getSid() {
+		return Sid;
+	}
+	public void setSid(int sid) {
+		Sid = sid;
+	}
+	public int getTid() {
+		return Tid;
+	}
+	public void setTid(int tid) {
+		Tid = tid;
+	}
 
 	//	course_name
 	//	parent_id
@@ -98,8 +118,11 @@ public class EduCourse {
 	public void setSource_price(int source_price) {
 		this.source_price = source_price;
 	}
-	public int getCurrent_price() {
+	public double getCurrent_price() {
 		return current_price;
+	}
+	public void setCurrent_price(double current_price) {
+		this.current_price = current_price;
 	}
 	public void setCurrent_price(int current_price) {
 		this.current_price = current_price;

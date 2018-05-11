@@ -46,4 +46,7 @@
 	<select id="getById1" resultMap="Questions_commentMap" parameterType="int">
 	     select * from edu_questions_comment where question_id = #{id}
 	</select>
+	<update id="updatePraise" parameterType="int">
+	     update edu_questions_comment set PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
+	</update>
 </mapper>

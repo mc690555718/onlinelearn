@@ -107,16 +107,15 @@
 									<option value="2">课程</option>
 								</select>
 							</div>
+							开始时间
 							<div class="layui-input-inline">
-								开始时间:<input type="date" name="start"  value=""
-									placeholder="开始时间" id="inp1">
+							<input class="layui-input search_input" type="text" name="start" onclick="WdatePicker()" id="inp1">
 							</div>
+							结束时间:
 							<div class="layui-input-inline">
-								结束时间:<input type="date" name="end"  value=""
-									placeholder="结束时间" id="inp1">
+								<input class="layui-input search_input" type="text" name="end" onclick="WdatePicker()" id="inp1">
+
 							</div>
-
-
 
 							<button type="submit" id="in1" onclick="list()">查找评论</button>
 							<button type="reset" id="in1" onclick="cy()">清空</button>
@@ -153,13 +152,13 @@
 										<td>${stat.index+1}</td>
 										<td>${p.user.email }</td>
 										<td><c:if test="${p.type==2}">
-				课程
-				</c:if> <c:if test="${p.type==1}">
-				文章
-				</c:if></td>
+			                                                                                                     课程
+			                           	</c:if> <c:if test="${p.type==1}">
+				                                                                                        文章
+				                        </c:if></td>
 										<td>${p.praise_count}</td>
 										<td>${p.reply_count}</td>
-										<td>${p.addtime}</td>
+										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
 										<td><a class="layui-btn layui-btn-mini" href="#"><i
 												class="iconfont icon-edit"></i> 回复评论</a> <a
@@ -169,28 +168,28 @@
 										</a></td>
 									</tr>
 								</c:forEach>
-						   <tr>
-						<td align="center" colspan="9">
-						<font face="微软雅黑" size="4px" color="blue">一共${page.pages}页</font> 
+						<tr>
+						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+							color="black">一共${page.pages}页</font> 
+							<font face="微软雅黑" size="3px"
+							color="black">每页${page.pageSize }条/</font>
 							<a class="layui-btn"
-							href="/admin/cy/listcomment/${p.comment_id}?page=${page.prePage}">上一页</a>
+							href="/admin/cy/listcomment?page=${page.firstPage}">首页</a>
 							<a class="layui-btn"
-							href="/admin/cy/listcomment/${p.comment_id}?page=${page.nextPage}">下一页</a>
-							</td>
-							
+							href="/admin/cy/listcomment?page=${page.prePage}">上一页</a>
+							<a class="layui-btn"
+							href="/admin/cy/listcomment?page=${page.nextPage}">下一页</a>
+							<a class="layui-btn"
+							href="/admin/cy/listcomment?page=${page.lastPage}">最后页</a></td>
 					</tr>
 
 
 
-							</tbody>
+						</tbody>
 						</table>
 
 
-						<!-- 	<div class="larry-table-page clearfix">
-							<a href="javascript:;" class="layui-btn layui-btn-small"><i
-								class="iconfont icon-shanchu1"></i>删除</a>
-							<div id="page" class="page"></div>
-						</div> -->
+					
 					</div>
 					<!-- 登录日志 -->
 					<div class="layui-tab-item layui-field-box">

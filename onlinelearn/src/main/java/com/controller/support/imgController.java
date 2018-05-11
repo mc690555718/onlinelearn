@@ -109,6 +109,7 @@ public class imgController {
 				}
 			}
 	    img.setImageUrl(imgpath);
+	    System.out.println(imgpath);
 	    img.setPreviewUrl(imgpath);
 		imgService.save(img);
 		return "redirect:/admin/hello/list";

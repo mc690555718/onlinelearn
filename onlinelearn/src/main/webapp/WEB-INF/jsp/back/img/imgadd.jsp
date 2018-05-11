@@ -15,8 +15,8 @@
 
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
 <link rel="stylesheet" type="text/css" href="/css/jquery.bigcolorpicker.css" />
-<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="js/jquery.bigcolorpicker.min.js"></script>
+<script type="text/javascript" src="/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.bigcolorpicker.min.js"></script>
 
 
 
@@ -61,9 +61,6 @@
 		</style>
 		
  <script type="text/javascript">
- $(function(){
-		$("#btn").bigColorpicker("c2");
-	});
 
  
  
@@ -137,7 +134,7 @@ function save(){
 				<div>
 					<img id="imageUrl" src="" name="imageUrl" class="t1"><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" id="file" accept='image/*' />
+						name="file" id="file" accept='image/*' /> 
 				</div>
 			</div>
 		</div>
@@ -156,7 +153,7 @@ function save(){
     <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">背景颜色:</label>
     <div class="col-sm-10">
-    <input type="text" id="c2" name="color"/><input id="bt" type="button" value="选色" />
+    <input type="text" id="c2" name="color"/><input id="btun" type="button" value="选色" />
    </div>
   </div>
 
@@ -194,6 +191,11 @@ document.getElementById('file1').onchange = function() {
 	};
 	fr.readAsDataURL(imgFile);
 }
+
+$(function(){
+	$("#btun").bigColorpicker("c2");
+});
+
 
 </script>
 

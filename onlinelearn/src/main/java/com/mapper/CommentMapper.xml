@@ -19,7 +19,7 @@
 <select id="listAll"  resultType="Comment" parameterType="java.util.Map" resultMap="CommentMap">
   select * from edu_comment 
   <where>
-  <if test="content!=null">
+<if test="content!=null">
   and content like '%${content}%'
   </if>
  <if test="type>0">
@@ -28,8 +28,6 @@
  <if test="email!=null">
  and user_id in(SELECT user_id FROM edu_user WHERE email LIKE '%${email}%')
  </if>
- 
- 
  <if test="start!=null">
  and addtime &gt; #{start}
  </if>

@@ -16,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Questions;
 import com.bean.Questions_comment;
+import com.bean.Questions_tag;
 import com.service.QuestionsService;
 import com.service.Questions_commentService;
+import com.service.Questions_tagService;
 import com.util.Result;
 
 @Controller
@@ -27,6 +29,8 @@ public class Questions_frontController {
 	private QuestionsService questionsService;
 	@Autowired
     private Questions_commentService questions_commentService;
+	@Autowired
+	private Questions_tagService questions_tagService;
 	@RequestMapping("/questions/{flag}")
 	public ModelAndView listAll(@PathVariable("flag") int flag){
 		ModelAndView mv = new ModelAndView();
@@ -88,7 +92,11 @@ public class Questions_frontController {
 	}
 	
 	@RequestMapping("/jump")
-	public String jump(){
-		return "/web/questions/questions-add";
+	public ModelAndView jump(){
+		ModelAndView mv=new ModelAndView();
+		List<Questions_tag> tags = questions_tagService.listAll();
+		mv.addObject("tags", tags);
+		mv.setViewName("/web/questions/questions-add");
+		return mv;
 	}
 }

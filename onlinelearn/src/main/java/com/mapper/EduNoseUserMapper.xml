@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.EduNoseUserMapper">
+  
+    <select id="SomeoneHas" parameterType="int" resultType="com.bean.Edu_User">
+  	SELECT
+	c.*
+	FROM
+	edu_course a LEFT join  edu_course_studyhistory b ON a.course_id = b.course_id
+	left join edu_user c on b.user_id=c.user_id
+	where a.course_id=#{courseid}
+  	</select>
+ </mapper>

@@ -7,4 +7,7 @@
   <select id="listbyKpoint" parameterType="int" resultType="com.bean.EduCourseKpoint">
   select * from edu_course_kpoint  where course_id=#{course_id}
   </select>
+  <select id="bykopint" parameterType="int" resultType="com.bean.EduCourseKpoint">
+  select * from edu_course_kpoint  where kpoint_id=#{kpoint_id}
+  </select>
  </mapper>

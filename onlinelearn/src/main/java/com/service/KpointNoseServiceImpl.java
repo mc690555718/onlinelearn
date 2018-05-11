@@ -13,8 +13,11 @@ public class KpointNoseServiceImpl implements KpointNoseService{
 	@Autowired
 	private KpointNoseMapper Kpointmapper;
 
-	@Override
 	public List<EduCourseKpoint> listbyKpoint(int courseId) {
 		return Kpointmapper.listbyKpoint(courseId);
+	}
+
+	public EduCourseKpoint bykopint(int kopintid) {
+		return Kpointmapper.bykopint(kopintid);
 	}
 }

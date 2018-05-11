@@ -48,11 +48,11 @@
 					<div class="layui-form news_list">
 						<table class="layui-table" id="table1">
 							<colgroup>
-								<col width="3%">
+								<col width="5%">
 								<col width="7%">
-								<col width="12%">
 								<col width="7%">
 								<col width="5%">
+								<col width="12%">
 								<col width="10%">
 								<col width="10%">
 								<col width="8%">
@@ -61,7 +61,7 @@
 							<thead>
 								<tr>
 
-									<th style="text-align: left;">用户ID</th>
+									<th style="text-align: left;">ID</th>
 									<th>用户名</th>
 									<th>真实姓名</th>
 									<th>状态</th>

@@ -12,6 +12,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
+<link href="/js/utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="/common/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css"
@@ -24,6 +25,9 @@
 	type="text/css" rel="stylesheet">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/common/layui/layui.js"></script>
+ <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.min.js"></script>
+  <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <style type="text/css">
 #time1 {
 	display: none
@@ -42,6 +46,9 @@
 	display: inline-block; //
 	使li对象显示为一行 width: 130px;
 	border: 1px solid black;
+}
+#context{
+    display:none;
 }
 </style>
 <script type="text/javascript">
@@ -343,8 +350,7 @@
 								style="width: 650px; height: 240px;">
                                 <p>请输入课程详情</p>
                             </script>
-							<textarea rows="5" id="context" name="context" cols="78"
-								class="layui-textarea"></textarea>
+							<textarea id="context" name="context" ></textarea>
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -372,8 +378,8 @@
 		  });
 		});
 
-		// 		//实例化编辑器
-		// 		var um = UM.getEditor("myEditor");
+		//实例化编辑器
+		var um = UM.getEditor("myEditor");
 	</script>
 </body>
 </html>

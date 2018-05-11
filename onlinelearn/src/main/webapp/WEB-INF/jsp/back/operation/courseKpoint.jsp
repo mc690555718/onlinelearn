@@ -73,7 +73,7 @@ td{
 		 var node_id = $("#node_id").val();
 		 if(treeNode.pId == null){//如果是父节点则右侧显示父节点域
 			 $("#parent_id").val(0);
-			 $("#iframe_right").attr("src","/admin/cou/toParentKpoint/"+node_id);
+			 $("#iframe_right").attr("src","/admin/cou/toUpdateParentKpoint/"+node_id);
 		 }else{//子节点进入子节点域
 			 $("#iframe_right").attr("src","/admin/cou/toUpdateKpoint/"+node_id);
 		 }
@@ -88,6 +88,7 @@ td{
 	//点击删除时触发，用来提示用户是否确定删除
 	function beforeRemove(treeId, treeNode) {
 		return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+		$("#iframe_right").attr("src","");
 	}
 	
 	//编辑结束时触发，用来验证输入的数据是否符合要求

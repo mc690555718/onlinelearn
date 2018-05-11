@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,9 +32,12 @@ form {
 </head>
 <body>
 	<form id="kpointForm" class="layui-form" action="" method="post">
-		<input type="hidden" id="course_id" name="course_id"
-			value="${kpoint.course_id}" /> <input type="hidden" id="parent_id"
-			name="parent_id" value="${kpoint.parent_id}" />
+	
+		<input type="hidden" id="course_id"
+			name="course_id" value="${kpoint.course_id}" />
+			
+		<input type="hidden" id="kpoint_id"
+			name="kpoint_id" value="${kpoint.kpoint_id}" />
 
 		<!-- 节点名称 -->
 		<div class="layui-form-item">
@@ -48,11 +52,10 @@ form {
 		<div class="layui-form-item">
 			<label class="layui-form-label">视频上传</label>
 			<div class="layui-input-inline">
-				<input type="password" name="password" required
-					lay-verify="required" placeholder="请输入密码" autocomplete="off"
-					class="layui-input">
+			    <input name="vedio" class="layui-upload-file" type="file" lay-type="video"  /> 
+				<input type="hidden" name="video_url" id="vedio_url"/>
 			</div>
-			<div class="layui-form-mid layui-word-aux">辅助文字</div>
+			<div class="layui-form-mid layui-word-aux" id="upload_tittle">点击框内开始上传视频</div>
 		</div>
 
 		<!-- 排序 -->
@@ -83,13 +86,24 @@ form {
 		</div>
 
 		<!-- 收费 :1免费 2收费 -->
+		<c:if test="${kpoint.is_free==1}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">收费</label>
 			<div class="layui-input-block">
-				<input type="checkbox" name="free" id="free" lay-skin="switch">
+				<input type="checkbox" name="free" id="free" lay-skin="switch" lay-text="免费|收费">
 				<input type="hidden" value="${kpoint.is_free}" id="is_free" name="is_free" />
 			</div>
 		</div>
+		</c:if>
+		<c:if test="${kpoint.is_free==2}">
+		<div class="layui-form-item">
+			<label class="layui-form-label">收费</label>
+			<div class="layui-input-block">
+				<input type="checkbox" name="free" id="free" lay-skin="switch" lay-text="免费|收费" checked="checked">
+				<input type="hidden" value="${kpoint.is_free}" id="is_free" name="is_free" />
+			</div>
+		</div>
+		</c:if>
 
 		<!-- 选择讲师 -->
 		<div class="layui-form-item">
@@ -103,7 +117,7 @@ form {
 
 		<div class="layui-form-item">
 			<div class="layui-input-block">
-				<button type="button" class="layui-btn" onclick="addKpoint()">立即提交</button>
+				<button type="button" class="layui-btn" onclick="updateKpoint()">确认修改</button>
 				<button type="button" class="layui-btn layui-btn-primary"
 					onclick="cleanText()">重置</button>
 			</div>
@@ -113,22 +127,30 @@ form {
 	<script>
 	
 	$(function(){
+		//加载上传组件
+		layui.use('upload', function(){
+				layui.upload({
+					  url: '/admin/cou/uploadVideo'
+					  ,before: function(input){
+					    alert("before");
+					  }
+					  ,success: function(res){
+					    alert(res);
+					  }
+					});  
+			});
+		
 		layui.use('form', function(){
 			var form = layui.form(); //只有执行了这一步，部分表单元素才会修饰成功 
 			$.post("/admin/cou/getTeacher/"+$("#course_id").val(),function(msg){
 				for(var i = 0;i < msg.length;i++){
 					$("#teacher_id").append("<option value='"+msg[i].id+"' >"+msg[i].name+"</option>");
 				}
-				form.render();
 				var teacher = ${kpoint.teacher_id};
 				$("#teacher_id").val(teacher) ;
+				form.render();
 			},"json");
 		}); 
-		var free = ${kpoint.is_free};
-		if(free == 2){
-			$("#free").attr("selected","selected");
-		}
-		
 	});
 
 	
@@ -142,34 +164,25 @@ form {
 		    $("#teacher_id").val("");
 	}
 	//异步提交按钮,添加
-	function addKpoint(){
+	function updateKpoint(){
 		var freecheck  =  $("#free").is(":checked");
 		if(freecheck){
-			$("#is_free").val(1);
-		}else{
 			$("#is_free").val(2);
+		}else{
+			$("#is_free").val(1);
 		}
 		
 		 $.ajax({
-             url:"/admin/cou/addKpoint",
+             url:"/admin/cou/updateKpoint",
              data:$('#kpointForm').serialize(),
              dataType:"json",
              success:function(data){
- 		    	$(window.parent).location.href="/admin/cou/toCourseKpoint/"+$("#course_id").val();
+            	 parent.location.reload();
              }
          });
 
 	}
-		//
-		// layui.use('form', function(){
-		//   var form = layui.form;
-
-		//   //监听提交
-		//   form.on('submit(formDemo)', function(data){
-		//     layer.msg(JSON.stringify(data.field));
-		//     return false;
-		//   });
-		// });
+	
 	</script>
 </body>
 </html>

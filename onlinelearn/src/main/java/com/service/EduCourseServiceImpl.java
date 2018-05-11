@@ -1,13 +1,18 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.bean.EduCourse;
+import com.bean.EduCourseKpoint;
 import com.bean.TeacherBean;
-import com.mapper.EduCourseMapper;;
+import com.mapper.EduCourseMapper;
+import com.vo.TreeVo;;
 
 @Service
 public class EduCourseServiceImpl implements EduCourseService{
@@ -83,6 +88,66 @@ public class EduCourseServiceImpl implements EduCourseService{
 				}
 				mapper.setTeacher(map);
 			}
+		}
+	}
+
+	@Override
+	public List<TreeVo> getCourseNodes(int course_id) {
+		//加载该课程所有  章节数据 ,打包为Ztree数据发出
+		List<EduCourseKpoint> kpoints = mapper.getKpointByCourseId(course_id);
+		List<TreeVo> vos = new ArrayList<>();
+		for (EduCourseKpoint point : kpoints) {
+			TreeVo vo = new TreeVo();
+			vo.setId(point.getKpoint_id());
+			vo.setName(point.getName());
+			vo.setpId(point.getParent_id());
+			vos.add(vo);
+		}
+		return vos;
+	}
+
+	@Override
+	//对章节表进行删除操作
+	public void removeKpoint(int kpoint_id, int parent_id) {
+		if (parent_id == 0) {//如果是一个父节点
+			//删除该父节点下所有节点数据
+			mapper.removeKpointByParentId(kpoint_id);
+		}
+		//删除该节点
+		mapper.removeKpointById(kpoint_id);
+	}
+
+	@Override
+	//增加章节父节点
+	public void addKpointParent(EduCourseKpoint kpoint) {
+		if (kpoint != null) {
+			mapper.addKpointParent(kpoint);
+		}
+	}
+
+	@Override
+	//添加节点
+	public void addKpoint(EduCourseKpoint kpoint) {
+		if (kpoint != null) {
+			mapper.addKpoint(kpoint);
+		}
+		
+	}
+
+	@Override
+	//通过ID查询该节点数据并返回
+	public EduCourseKpoint getKpointById(int kpoint_id) {
+		if(kpoint_id > 0){
+			return mapper.getKpointById(kpoint_id);
+		}
+		return null;
+	}
+
+	@Override
+	//修改节点
+	public void updateKpoint(EduCourseKpoint kpoint) {
+		if (kpoint != null) {
+			mapper.updateKpoint(kpoint);
 		}
 	}
 

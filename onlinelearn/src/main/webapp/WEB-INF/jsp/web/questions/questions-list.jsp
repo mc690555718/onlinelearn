@@ -203,8 +203,6 @@
 		</section>
 		<!-- /提问题 结束 -->
 	</div>
-	<script type="text/javascript">
-		src = "${ctx}/static/inxweb/questions/questions.js"
-	</script>
+	<script type="text/javascript" src="${ctx}/static/inxweb/questions/questions.js"></script>
 </body>
 </html>

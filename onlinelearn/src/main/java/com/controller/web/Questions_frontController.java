@@ -82,11 +82,13 @@ public class Questions_frontController {
 		int id=Integer.parseInt(request.getParameter("questionsComment.questionId"));
 		ModelAndView mv=new ModelAndView();
 	    List<Questions_comment> comments = questions_commentService.getById1(id);
-	    System.out.println(comments);
 		mv.addObject("comments", comments);
 		mv.setViewName("/web/comment/comment1");
 		return mv;
 	}
 	
-	
+	@RequestMapping("/jump")
+	public String jump(){
+		return "/web/questions/questions-add";
+	}
 }

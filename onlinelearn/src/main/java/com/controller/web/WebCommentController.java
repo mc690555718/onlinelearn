@@ -31,22 +31,6 @@ public class WebCommentController {
 		mv.setViewName("/web/comment/comment");
 		return mv;
 	}
-//	µ„‘ﬁ
-	@RequestMapping("/praise/ajax/add")
-	public Result addPraise(HttpSession session,HttpServletResponse response,int comment_id,int type) {
-		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
-		Comment comment = new Comment();
-		comment.setComment_id(comment_id);
-		comment.setType(type);
-		boolean b = true;
-		Result result = new Result();
-		if (b) {
-			commentService.praiseEdit(comment);
-			b=true;
-		}
-		result.setSuccess(b);
-		return result;
-	}
 	
 //  ÃÌº”∆¿¬€
 	@RequestMapping("/front/comment/ajax/addcomment")

@@ -30,7 +30,6 @@ function queryCommentReply(pCommentId) {
 function addCommentReply(commentId) {
 	// 点击时清空错误提示
 	$(".commentReplyMsg" + commentId).val("").hide();
-
 	// 评论必须先登陆
 	if (!isLogin()) {
 		lrFun();

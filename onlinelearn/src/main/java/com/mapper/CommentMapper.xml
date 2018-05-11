@@ -52,7 +52,7 @@
        select * from edu_comment where other_id=#{other_id}
 </select>
 
-<update id="addPraise" parameterType="Comment">
+<update id="praiseEdit" parameterType="int">
    update edu_comment set
 		PRAISE_COUNT=PRAISE_COUNT+1 where comment_id=#{comment_id}
 </update>

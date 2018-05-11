@@ -43,10 +43,12 @@ private CommentMapper CommentMapper;
 	}
 
 	@Override
-	public void praiseEdit(Comment comment) {
+	public void praiseEdit(int comment_id) {
 		// TODO Auto-generated method stub
-		CommentMapper.praiseEdit(comment);
+		CommentMapper.praiseEdit(comment_id);
 	}
+
+
  
 
 

@@ -68,5 +68,11 @@ public   class ArticleServiceImpl implements ArticleService{
 		articleMapper.saveContent(map);
 	}
 
+	@Override
+	public void praiseEdit(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.praiseEdit(article_id);
+	}
+
 	
 }

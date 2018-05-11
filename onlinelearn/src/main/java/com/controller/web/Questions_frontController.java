@@ -23,6 +23,8 @@ import com.bean.Edu_User;
 import com.bean.Questions;
 import com.bean.Questions_comment;
 import com.bean.Questions_tag;
+import com.service.ArticleService;
+import com.service.CommentService;
 import com.service.QuestionsService;
 import com.service.Questions_commentService;
 import com.service.Questions_tagService;
@@ -37,6 +39,10 @@ public class Questions_frontController {
 	private Questions_commentService questions_commentService;
 	@Autowired
 	private Questions_tagService questions_tagService;
+	@Autowired
+	private CommentService commentService;
+	@Autowired
+	private ArticleService articleService;
 	@RequestMapping("/questions/{flag}")
 	public ModelAndView listAll(@PathVariable("flag") int flag){
 		ModelAndView mv = new ModelAndView();
@@ -68,6 +74,14 @@ public class Questions_frontController {
 			result.setSuccess(b);
 		}else if (type==2){
 			questions_commentService.updatePraise(targetId);
+			b=true;
+			result.setSuccess(b);
+		}else if (type==3) {
+		    articleService.praiseEdit(targetId);
+		    b=true;
+		    result.setSuccess(b);
+		}else if (type==4) {
+			commentService.praiseEdit(targetId);
 			b=true;
 			result.setSuccess(b);
 		}

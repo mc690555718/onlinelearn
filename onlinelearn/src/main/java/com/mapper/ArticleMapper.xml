@@ -64,4 +64,9 @@
 		(#{article_id},#{articleContent.content})
 	</insert>
 	
+<update id="praiseEdit" parameterType="int">
+   update edu_article set
+		praise_count=praise_count+1 where article_id=#{article_id}
+</update>
+	
 </mapper>

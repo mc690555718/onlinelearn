@@ -36,7 +36,6 @@ public class LoginController {
 		pwd = Encryption.encryptionByMD5(email, pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
-		System.out.println(edu_User);
 		if (edu_User==null) {
 			return new Result(false,"The account number does not exist!",null);
 		}else {

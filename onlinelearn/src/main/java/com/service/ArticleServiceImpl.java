@@ -68,9 +68,5 @@ public   class ArticleServiceImpl implements ArticleService{
 		articleMapper.saveContent(map);
 	}
 
-	@Override
-	public List<Comment> listComment(int other_id) {
-		List<Comment> listAll=articleMapper.listComment(other_id);
-		return listAll;
-	}
+	
 }

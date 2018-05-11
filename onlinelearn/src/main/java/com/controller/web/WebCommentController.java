@@ -4,38 +4,52 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.runner.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.bean.ArticleComment;
 import com.bean.Comment;
 import com.bean.Edu_User;
-import com.mapper.CommentMapper;
-import com.service.ArticleService;
+import com.service.CommentService;
+import com.util.Result;
 
 @Controller
 public class WebCommentController {
+
 	@Autowired
-	ArticleService articleService;
-	@Autowired
-	private CommentMapper commentMapper;
+	CommentService commentService;
 	@RequestMapping("/front/article/webcomment")
 //  显示评论
 	public ModelAndView webcomment(int otherId) {
 		ModelAndView mv=new ModelAndView();
-		List<Comment> listAll=articleService.listComment(otherId);
+		List<Comment> listAll=commentService.listComment(otherId);
 		mv.addObject("commentList",listAll);
 		mv.setViewName("/web/comment/comment");
 		return mv;
 	}
+//	点赞
+	@RequestMapping("/praise/ajax/add")
+	public Result addPraise(HttpSession session,HttpServletResponse response,int comment_id,int type) {
+		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
+		Comment comment = new Comment();
+		comment.setComment_id(comment_id);
+		comment.setType(type);
+		boolean b = true;
+		Result result = new Result();
+		if (b) {
+			commentService.praiseEdit(comment);
+			b=true;
+		}
+		result.setSuccess(b);
+		return result;
+	}
 	
 //  添加评论
-	@RequestMapping("/web/comment/ajax/addcomment")
+	@RequestMapping("/front/comment/ajax/addcomment")
 	public String addcomment(HttpServletRequest request,HttpSession session,int pCommentId,String content,int type,int otherId) {
 		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
 		Comment comment = new Comment();
@@ -45,17 +59,31 @@ public class WebCommentController {
 		comment.setType(type);
 		comment.setOther_id(otherId);
 		comment.setUser(edu_User);
-		commentMapper.save(comment);
-		return "redirect:/front/article/webcomment";
+		commentService.save(comment);
+		return "/web/comment/comment";
 	}
 	
-//  显示子评论框
-	@RequestMapping("/web/comment/ajax/commentreply")
-	public Result queryCommentReply() {
-		Result result = new Result();
-		return result;
+////  显示子评论框
+//	@RequestMapping("/web/comment/ajax/commentreply")
+//	public Result commentreply() {
+//		System.out.println("1234");
+//		Result result = new Result();
+//		return result;
+//	}
+	
+//  添加子评论
+	@RequestMapping("/front/comment/addcomment")
+	public String addCommentReply(HttpServletRequest request,HttpSession session,int pCommentId,String content,int type,int otherId) {
+		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
+		Comment comment = new Comment();
+		comment.setAddtime(new Date());
+		comment.setP_comment_id(pCommentId);
+		comment.setContent(content);
+		comment.setType(type);
+		comment.setOther_id(otherId);
+		comment.setUser(edu_User);
+		commentService.save(comment);
+		return "/web/comment/comment";
 	}
 	
-	
-
 }

@@ -9,11 +9,10 @@ function queryWonderfulComment() {
 function commentCallBack(result) {
 	$(".commentHtml").html(result);
 }
-//http://127.0.0.1:8080/static/common/jquery-1.7.2.min.js
-// 查询文章评论回复
+//查询文章评论回复
 function queryCommentReply(pCommentId) {
 	$.ajax({
-		url : baselocation + '/web/comment/ajax/commentreply',
+		url : baselocation + '/front/comment/ajax/commentreply',
 		data : {
 			"otherId" : otherId,
 			"pCommentId" : pCommentId
@@ -89,7 +88,7 @@ function addComment() {
 		return;
 	}
 	$.ajax({
-		url : baselocation + '/web/comment/ajax/addcomment',
+		url : baselocation + '/front/comment/ajax/addcomment',
 		type : 'post',
 		data : {
 			"pCommentId" : "0",

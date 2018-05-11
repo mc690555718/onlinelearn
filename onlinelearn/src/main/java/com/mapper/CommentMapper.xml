@@ -43,9 +43,19 @@
   </delete>
   
   
+  <insert id="save" parameterType="Comment">
+    insert into edu_comment(user_id,p_comment_id,content,addtime,other_id,type)
+    values(#{user_id},#{p_comment_id},#{content},#{addtime},#{other_id},#{type})
+  </insert>
   
-  
+<select id="listComment" resultType="Comment" parameterType="int">
+       select * from edu_comment where other_id=#{other_id}
+</select>
 
+<update id="addPraise" parameterType="Comment">
+   update edu_comment set
+		PRAISE_COUNT=PRAISE_COUNT+1 where comment_id=#{comment_id}
+</update>
 
 
 </mapper> 

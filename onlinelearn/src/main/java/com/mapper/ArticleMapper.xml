@@ -63,7 +63,5 @@
 		edu_article_content (article_id,content) values
 		(#{article_id},#{articleContent.content})
 	</insert>
-	<select id="listComment" resultType="Comment" parameterType="int">
-       select * from edu_comment where other_id=#{other_id}
-	</select>
+	
 </mapper>

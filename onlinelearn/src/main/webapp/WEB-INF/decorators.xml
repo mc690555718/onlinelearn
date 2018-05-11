@@ -7,7 +7,6 @@
 		<pattern>/article/*</pattern>
 		<pattern>/kindeditor/*</pattern>
 		<pattern>/*/ajax/*</pattern>
-		<pattern>/admin</pattern>
 		<pattern>/admin/</pattern>
 		<pattern>/admin/main/login</pattern>
 		<pattern>/admin/func/showchild</pattern>
@@ -20,6 +19,7 @@
 		<pattern>/admin/main/left*</pattern>
 		<pattern>/admin/**</pattern>
 		<pattern>/article/webcomment/*</pattern>
+		<pattern>/front/article/webcomment</pattern>
 	</excludes>
 	<!-- 后台管理布局 -->
 <!-- 	<decorator name="admindefault" page="admin/default.jsp"> -->

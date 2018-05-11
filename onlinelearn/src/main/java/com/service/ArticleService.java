@@ -16,5 +16,5 @@ public interface ArticleService {
 	public int getTotalCount(Map map);
 	public void updateContent(Article map);
 	public void saveContent(Article map);
-	public List<Comment> listComment(int other_id);
+
 }

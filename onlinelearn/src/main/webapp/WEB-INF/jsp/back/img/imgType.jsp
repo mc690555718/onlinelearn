@@ -169,11 +169,12 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 									<tr>
 										<td>${p.typeId }</td>
 										<td>${p.typeName}</td>
-										<td>
-											<button class="btn btn-default"
-												onclick="up('${p.typeName}','${p.typeId }')">编辑</button> <a
-											href="/admin/img/delete/${p.typeId}" class="btn btn-default">删除</a>
-										</td>
+										<td><a class="layui-btn layui-btn-mini"
+											onclick="up('${p.typeName}','${p.typeId }')"><i
+												class="iconfont icon-edit"></i> 编辑</a> <a
+											class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
+											href="/admin/img/delete/${p.typeId}" ><i
+												class="layui-icon"></i> 删除</a></td>
 									</tr>
 								</c:forEach>
 									<tr>
@@ -193,36 +194,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 							</tbody>
 						</table>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

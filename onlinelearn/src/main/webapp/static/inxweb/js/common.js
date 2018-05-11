@@ -240,14 +240,15 @@ function goPageAjax(pageNum){
  * targetId 点赞的目标id
  * type 点赞类型 1问答点赞 2问答评论点赞
  * obj 当前标签对象
+ * 沈阳以写  求求你别改了
  */
 function addPraise(targetId,type,obj){
 	if(isLogin()){
 		$.ajax({
-			url:baselocation + "/praise/ajax/add",
+			url:baselocation + "/front/praise/ajax/add",
 			data:{
-				"praise.targetId":targetId,
-				"praise.type":type
+				"targetId":targetId,
+				"type":type
 			},
 			type:"post",
 			dataType:"json",
@@ -495,7 +496,6 @@ function dialogLogin(type){
 			"ipForget":autoThirty
 		},
 		success:function(result){
-			alert(result.message);
 			if(result.success==false){
 				$(".e-l-jy").html('<font class="fsize12 c-orange">'+result.message+'</font>');
 			}else{

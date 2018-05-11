@@ -38,7 +38,6 @@
 		var b = "";
 		function xianshi() {
 			var emass = $("#eid").val();
-
 			if (emass == 0) {
 				alert("请选择联系人")
 			} else {

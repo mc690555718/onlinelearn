@@ -6,7 +6,7 @@ $(function(){
 /* 提问前先登录 */
 function toAddQuestions(){
 	if(isLogin()){
-		window.location.href="/questions/toadd";
+		window.location.href="/front/jump";
 	}else{
 		lrFun();
 	}

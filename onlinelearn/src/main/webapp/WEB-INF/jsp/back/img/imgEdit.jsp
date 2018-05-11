@@ -11,12 +11,11 @@
 		<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
-
-<link rel="stylesheet" type="text/css" href="/css/main.css" />
-<link rel="stylesheet" type="text/css" href="/css/jquery.bigcolorpicker.css" />
+		
 <script type="text/javascript" src="/js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="/js/jquery.bigcolorpicker.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.bigcolorpicker.css" />
 
 
 <style type="text/css">

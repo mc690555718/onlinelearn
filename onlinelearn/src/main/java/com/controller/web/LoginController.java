@@ -24,7 +24,7 @@ public class LoginController {
 	@RequestMapping(value="/front/login",produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Result frontLogin(HttpServletRequest request,
-			HttpServletResponse response,HttpSession session) {
+		HttpServletResponse response,HttpSession session) {
 		String email = request.getParameter("account");
 		String pwd = request.getParameter("password");
 		Result result = new Result();
@@ -49,9 +49,10 @@ public class LoginController {
 					Edu_User user=(Edu_User)session.getAttribute("login_success");
 					return result;
 				}
+			}else {
+				return new Result(false,"password is filed!",null);
 			}
 		}
-		return result;
 	}
 	@RequestMapping("/front/uc/getloginUser")
 	@ResponseBody

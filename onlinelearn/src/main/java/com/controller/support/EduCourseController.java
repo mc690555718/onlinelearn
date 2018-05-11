@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.bean.EduCourse;
+import com.bean.EduCourseKpoint;
 import com.bean.SysSubject;
 import com.bean.TeacherBean;
 import com.service.EduCourseService;
 import com.service.SysSubjectService;
 import com.service.TeacherService;
 import com.util.JsonUtils;
+import com.vo.TreeVo;
 
 @Controller
 @RequestMapping("admin/cou")
@@ -142,7 +144,6 @@ public class EduCourseController {
 	}
 
 	
-	
 	/**
 	 *  添加课程功能  ，添加完成后重定向至课程表格
 	 * @param mv
@@ -213,7 +214,7 @@ public class EduCourseController {
 		mv.setViewName("redirect:/admin/cou/list");
 		return mv;
 	}
-	
+	   
 
 	/**
 	 * 跳转课程修改页面  ，将该id查询到的数据传出
@@ -317,8 +318,157 @@ public class EduCourseController {
 	 */
 	@RequestMapping("/toCourseKpoint/{course_id}")
 	public ModelAndView toCourseKpoint(ModelAndView mv,@PathVariable("course_id")int course_id){
+		mv.addObject("course_id", course_id);
 		mv.setViewName("/back/operation/courseKpoint");
 		return mv;
 	}
 	
+	/**
+	 * 根据课程id  查询到章节，初始化树, 异步加载树节点
+	 * @param mv
+	 * @param course_id
+	 * @return List<TreeVo>
+	 */
+	@ResponseBody
+	@RequestMapping("/loadCourseKpoint/{course_id}")
+	public List<TreeVo> loadCourseKpoint(ModelAndView mv,@PathVariable("course_id")int course_id){
+		List<TreeVo> nodes = cs.getCourseNodes(course_id);
+		return nodes;
+	}
+	
+	/**
+	 * 删除章节 节点 
+	 * @param mv
+	 * @param id
+	 * @param pId
+	 * @return int
+	 */
+	@ResponseBody
+	@RequestMapping("/removeKpoint/{id}/{pId}")
+	public int removeKpoint(ModelAndView mv
+			,@PathVariable("id")int id
+			,@PathVariable("pId")int pId){
+		cs.removeKpoint(id,pId);
+		return 0;
+	}
+
+	/** 添加章节父节点
+	 * @param mv
+	 * @param name
+	 * @param sort
+	 * @param course_id
+	 * @return ModelAndView
+	 */
+	@RequestMapping("/addKpointParent")
+	public ModelAndView addKpointParent(ModelAndView mv,String name,String sort,String course_id){
+		EduCourseKpoint kpoint = new EduCourseKpoint();
+		if (name != null && name.trim().length() != 0) {
+			kpoint.setName(name);
+		}
+		if (sort != null && sort.trim().length() != 0) {
+			kpoint.setSort(Integer.valueOf(sort));
+		}
+		if (course_id != null && course_id.trim().length() != 0) {
+			kpoint.setCourse_id(Integer.valueOf(course_id));
+		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			kpoint.setAdd_time(format.parse(format.format(new Date())));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		cs.addKpointParent(kpoint);
+		mv.setViewName("redirect:/admin/cou/toCourseKpoint/"+kpoint.getCourse_id());
+		return mv;
+	}
+
+	/**添加章节子节点,传入课程id(对应课程)，parent_id(对应父节点)
+	 * @param mv
+	 * @param course_id
+	 * @param parent_id
+	 * @return ModelAndView
+	 */
+	@RequestMapping("/toCreateKpoint/{course_id}/{parent_id}")
+	public ModelAndView toCreateKpoint(ModelAndView mv,
+			@PathVariable("course_id")int course_id,@PathVariable("parent_id")int parent_id){
+		EduCourseKpoint kpoint = new EduCourseKpoint();
+		kpoint.setCourse_id(course_id);
+		kpoint.setParent_id(parent_id);
+		mv.addObject("kpoint",kpoint);
+		mv.setViewName("/back/operation/createKpoint");
+		return mv;
+	}
+	
+	/**添加一个节点
+	 * @param mv
+	 * @param kpoint
+	 * @return int
+	 */
+	@RequestMapping("/addKpoint")
+	@ResponseBody
+	public int addKpoint(ModelAndView mv,EduCourseKpoint kpoint){
+		cs.addKpoint(kpoint);
+		return 0;
+	}
+
+	/**跳转到修改节点页面
+	 * @param mv
+	 * @param kpoint_id
+	 * @return ModelAndView
+	 */
+	@RequestMapping("/toUpdateKpoint/{kpoint_id}")
+	public ModelAndView toUpdateKpoint(ModelAndView mv,@PathVariable("kpoint_id")int kpoint_id){
+		EduCourseKpoint kpoint = cs.getKpointById(kpoint_id);
+		mv.addObject("kpoint",kpoint);
+		mv.setViewName("/back/operation/updateKpoint");
+		return mv;
+	}
+
+	/**异步修改节点
+	 * @param mv
+	 * @param kpoint
+	 * @return int
+	 */
+	@RequestMapping("/updateKpoint")
+	@ResponseBody
+	public int updateKpoint(ModelAndView mv,EduCourseKpoint kpoint){
+		cs.updateKpoint(kpoint);
+		return 0;
+	}
+
+    /**跳转到修改父节点
+     * @param mv
+     * @param kpoint_id
+     * @return ModelAndView
+     */
+    @RequestMapping("/toUpdateParentKpoint/{kpoint_id}")
+	public ModelAndView toUpdateParentKpoint(ModelAndView mv,@PathVariable("kpoint_id")int kpoint_id){
+    	EduCourseKpoint kpoint = cs.getKpointById(kpoint_id);
+    	mv.addObject("kpoint", kpoint);
+    	mv.setViewName("/back/operation/updateParentKpoint");
+		return mv;
+	}
+    
+    /** 修改父节点
+     * @param mv
+     * @param kpoint
+     * @return int
+     */
+    @RequestMapping("/updateParentKpoint")
+	public int toUpdateParentKpoint(ModelAndView mv,EduCourseKpoint kpoint){
+    	cs.updateKpoint(kpoint);
+    	return 0 ;
+	}
+
+    /** 异步上传视频并且返回路径
+     * @param video
+     * @param kpoint_id
+     * @return String
+     */
+    @ResponseBody
+    @RequestMapping(value="/uploadVideo",method=RequestMethod.POST)
+    public String uploadVideo(@RequestParam("vedio")MultipartFile video,HttpServletRequest request){
+    	String path="success";
+		return JsonUtils.objectToJson(path);
+    }
 }

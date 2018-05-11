@@ -52,10 +52,12 @@ public class CommentController {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-	String content=request.getParameter("content");
+	    String content=request.getParameter("content");
 		String type = request.getParameter("type");
     	String email = request.getParameter("email");
-    	String addtime=request.getParameter("addtime");
+    	String start=request.getParameter("start");
+    	String end=request.getParameter("end");
+    	
 		if (type!=null&&type.trim().length()!=0) {
 			int type2 = Integer.parseInt(type);
 			request.setAttribute("type",type2);
@@ -68,10 +70,14 @@ public class CommentController {
     	if (email!=null) {
 			request.setAttribute("email",email);
 			map.put("email",email);
+		}if (start!=null) {
+			map.putIfAbsent("start", start);
+			
+		}if (end!=null){
+			map.put("end", end);
+			
 		}
-    	   if (addtime!=null&&addtime.length()>0) {
-           	map.put("addtime", addtime);
-   		}
+    	  
 		return map;
 	} 
 	

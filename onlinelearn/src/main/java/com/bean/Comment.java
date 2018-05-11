@@ -22,6 +22,24 @@ public class Comment {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
+	private String strat;
+	private String end;
+	public String getStrat() {
+		return strat;
+	}
+
+	public void setStrat(String strat) {
+		this.strat = strat;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
 	public int getComment_id() {
 		return comment_id;
 	}
@@ -50,7 +68,6 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 
 
 	public Date getAddtime() {

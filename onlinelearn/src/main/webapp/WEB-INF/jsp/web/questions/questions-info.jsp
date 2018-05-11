@@ -167,8 +167,5 @@
 	<script type="text/javascript"
 		src="${ctx}/static/inxweb/questions/questions.js">
 	</script>
-	<script type="text/javascript">
-	  
-	</script>
 </body>
 </html>

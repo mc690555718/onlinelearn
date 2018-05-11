@@ -55,10 +55,19 @@
 		select * from edu_questions where id=#{id}
 	</select>
 	<delete id="delete" parameterType="int">
-		delete from edu_questions 
+		delete from edu_questions
 		where id=#{id}
 	</delete>
 	<update id="updatePraise" parameterType="int">
-	    update edu_questions set PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
+		update edu_questions set
+		PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
 	</update>
+	<insert id="save" parameterType="Questions">
+		insert into
+		edu_questions(cus_id,title,content,type,status,reply_count,praise_count,add_time)
+		values(#{edu_user.user_id},#{title},#{content},#{type},#{status},#{reply_count},#{praise_count},#{add_time})
+	</insert>
+	<insert id="saveRelation" parameterType="java.util.Map">
+	    insert into edu_questions_tag_relation(QUESTIONS_ID,QUESTIONS_TAG_ID) value(#{qid},#{tid})
+	</insert>
 </mapper>

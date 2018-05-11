@@ -1,11 +1,16 @@
 package com.controller.web;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bean.Edu_User;
 import com.bean.Questions;
 import com.bean.Questions_comment;
 import com.bean.Questions_tag;
@@ -28,7 +34,7 @@ public class Questions_frontController {
 	@Autowired
 	private QuestionsService questionsService;
 	@Autowired
-    private Questions_commentService questions_commentService;
+	private Questions_commentService questions_commentService;
 	@Autowired
 	private Questions_tagService questions_tagService;
 	@RequestMapping("/questions/{flag}")
@@ -41,7 +47,7 @@ public class Questions_frontController {
 		mv.addObject("questions",questions);
 		return mv;
 	}
-	
+
 	@RequestMapping("/info/{id}")
 	public ModelAndView info(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
@@ -50,12 +56,12 @@ public class Questions_frontController {
 		mv.addObject("question", question);
 		return mv;
 	}
-	
+
 	@RequestMapping("/praise/ajax/add")
 	@ResponseBody
 	public Result updatePraise(int targetId,int type) {
-        Result result = new Result();
-        boolean b =false;
+		Result result = new Result();
+		boolean b =false;
 		if (type==1) {
 			b=true;
 			questionsService.updatePraise(targetId);
@@ -63,10 +69,11 @@ public class Questions_frontController {
 		}else {
 			questions_commentService.updatePraise(targetId);
 			b=true;
+			result.setSuccess(b);
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("/questions/ajax/hotRecommend")
 	@ResponseBody
 	public Result hotRecommend(){
@@ -80,17 +87,17 @@ public class Questions_frontController {
 		result.setSuccess(b);
 		return result;
 	}
-    
+
 	@RequestMapping("/questionscomment/ajax/list")
 	public ModelAndView list(HttpServletRequest request){
 		int id=Integer.parseInt(request.getParameter("questionsComment.questionId"));
 		ModelAndView mv=new ModelAndView();
-	    List<Questions_comment> comments = questions_commentService.getById1(id);
+		List<Questions_comment> comments = questions_commentService.getById1(id);
 		mv.addObject("comments", comments);
 		mv.setViewName("/web/comment/comment1");
 		return mv;
 	}
-	
+
 	@RequestMapping("/jump")
 	public ModelAndView jump(){
 		ModelAndView mv=new ModelAndView();
@@ -98,5 +105,38 @@ public class Questions_frontController {
 		mv.addObject("tags", tags);
 		mv.setViewName("/web/questions/questions-add");
 		return mv;
+	}
+
+	@RequestMapping("/questions/ajax/add")
+	public Result add(HttpSession session,HttpServletRequest request){
+	int type=Integer.parseInt(request.getParameter("type"));
+	String a[]= request.getParameter("questionsTag").split(",");
+	int b[] = new int [a.length];
+	for(int i=1;i<a.length;i++){
+		b[i]=Integer.parseInt(a[i]);	
+	}
+		Result result = new Result();
+		boolean bool = true;
+		result.setSuccess(bool);
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		Questions questions = new Questions();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date add_time = null;
+		try {
+			add_time = df.parse(df.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		questions.setEdu_user(user);
+		questions.setTitle(request.getParameter("title"));
+		questions.setContent(request.getParameter("content"));
+		questions.setType(type);
+		questions.setStatus(0);
+		questions.setReply_count(0);
+		questions.setBrowse_count(0);
+		questions.setPraise_count(0);
+		questions.setAdd_time(add_time);
+		questionsService.save(questions);
+		return result;
 	}
 }

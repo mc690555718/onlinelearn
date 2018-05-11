@@ -13,4 +13,5 @@ public interface QuestionsService {
 	public void delete(int id);
 	public Questions getById(int id);
 	public void updatePraise(int id);
+	public void saveRelation(Map map);
 }

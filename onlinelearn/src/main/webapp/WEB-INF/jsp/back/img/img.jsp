@@ -46,7 +46,17 @@
 	color: white;
 }
 
-
+#ca {  
+    width:150px;  
+    overflow:hidden;  
+    white-space:nowrap;  
+    text-overflow:ellipsis;  
+    -o-text-overflow:ellipsis;  
+    -icab-text-overflow: ellipsis;  
+    -khtml-text-overflow: ellipsis;  
+    -moz-text-overflow: ellipsis;  
+    -webkit-text-overflow: ellipsis;  
+}  
 
 	</style>
 	
@@ -127,7 +137,7 @@
 							<div class="layui-input-inline">
 								<input value="${title}" name="title" placeholder="请输入关键字"
 									class="layui-input search_input" type="text">
-							</div>
+							</div>  
 
 							<label class="layui-inline">类型:</label>
 							<div class="layui-input-inline">
@@ -146,14 +156,9 @@
                          <button type="button" id="in1" onclick="batchDeletes()">批量删除</button>
 						 <button type="button"  id="in1"><a href="/admin/hello/listtype" id="a1">新建图片</a></button>
 						</div>
-
-
-
-
-
 					</form>
 				</blockquote>
-
+ 
 				<div
 					class="layui-tab-content larry-personal-body clearfix mylog-info-box">
 					<!-- 操作日志 -->
@@ -178,7 +183,7 @@
 										<td><input type="checkbox" id="subcheck" name="subcheck" value="${p.imageId}"></td>
 										<td>${stat.index+1}</td>
 										<td>${p.title }</td>
-										<td>${p.imageUrl}</td>
+										<td><div id="ca" title="${p.imageUrl}">${p.imageUrl}</td>
 										<td>${p.linkAddress}</td>
 										<td>${p.imgType.typeName}</td>
 										<td>${p.seriesNumber}</td>
@@ -197,17 +202,15 @@
 							color="black">每页${page.pageSize }条/</font>
 							<a class="layui-btn"
 							href="/admin/hello/list?page=${page.firstPage}">首页</a>
-							<a class="layui-btn"
+							<a class="layui-btn" 
 							href="/admin/hello/list?page=${page.prePage}">上一页</a>
 							<a class="layui-btn"
 							href="/admin/hello/list?page=${page.nextPage}">下一页</a>
-							<a class="layui-btn"
-							href="/admin/hello/list?page=${page.lastPage}">最后页</a></td>
+							<a class="layui-btn" 
+							href="/admin/hello/list?page=${page.lastPage}">最后页</a>
+						</td>
 					</tr>
-
-
-
-							</tbody>
+						</tbody>
 						</table>
 
 					</div>
@@ -249,6 +252,6 @@
 			</div>
 		</div>
 	</section>
-<!-- 	<script type="text/javascript" src="/common/layui/layui.js"></script>
- --></body>
+	<script type="text/javascript" src="/common/layui/layui.js"></script>
+</body>
 </html>

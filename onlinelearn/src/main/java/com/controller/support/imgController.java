@@ -218,10 +218,16 @@ public class imgController {
 				e.printStackTrace();
 			}
 		}
-		
+		 
         img.setImageUrl(imgpath);
         img.setPreviewUrl(imgpath1);
+//        if (imgpath==imgpath1) {
+//            imgService.update(img);
+//		}else {
+//			System.out.println("修改失败");
+//		}
         imgService.update(img);
+        System.out.println(img);
 		return "redirect:/admin/hello/list";
 	}
 

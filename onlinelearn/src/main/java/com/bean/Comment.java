@@ -14,6 +14,24 @@ public class Comment {
 	private int praise_count;  //��������
 	private int  reply_count;   //�ظ�����
 	private int type;         //1���� 2�γ�
+	private String strat;
+	private String end;
+	public String getStrat() {
+		return strat;
+	}
+
+	public void setStrat(String strat) {
+		this.strat = strat;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
 	public int getComment_id() {
 		return comment_id;
 	}

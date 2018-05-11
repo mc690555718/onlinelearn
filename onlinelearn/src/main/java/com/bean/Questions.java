@@ -1,6 +1,7 @@
 package com.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Questions {
 
@@ -16,6 +17,13 @@ public class Questions {
     private Date add_time;//ÃÌº” ±º‰
     private String start;
     private String end;
+    private List<Questions_tag> questions_tags;
+	public List<Questions_tag> getQuestions_tags() {
+		return questions_tags;
+	}
+	public void setQuestions_tags(List<Questions_tag> questions_tags) {
+		this.questions_tags = questions_tags;
+	}
 	public String getStart() {
 		return start;
 	}

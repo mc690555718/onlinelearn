@@ -124,14 +124,19 @@
 														<span class="c-ccc fl vam"><fmt:formatDate
 																value="${question.add_time }" type="date"
 																pattern="yyyy-MM-dd hh:mm:ss" /></span>
-
-														<!-- 															<div class="taglist clearfix"> -->
-														<%-- 																<c:forEach items="${question.questionsTagRelationList }" var="questionsTag"> --%>
-														<%-- 																	<a title="${questionsTag.tagName }" data-id="${questionsTag.questionsTagId }" onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')" class="list-tag" href="javascript:;">${questionsTag.tagName }</a> --%>
-														<%-- 																</c:forEach> --%>
-														<!-- 															</div> -->
-														<!-- 														</section> -->
-														<!-- 														<div class="clear"></div> -->
+														<section class="fl ml20 pt10">
+															<div class="taglist clearfix">
+																<div class="taglist clearfix">
+																	<c:forEach items="${question.questions_tags }" var="questionsTag">
+																		<a title="${questionsTag.questions_tag_name }"
+																			data-id="${questionsTag.questions_tag_id }"
+																			onclick="submitForm('${questionsTag.questions_tag_id }','questionsTagId')"
+																			class="list-tag" href="javascript:;">${questionsTag.questions_tag_name }</a>
+																	</c:forEach>
+																</div>
+															</div>
+														</section>
+														<div class="clear"></div>
 													</div>
 												</section>
 											</li>
@@ -167,15 +172,13 @@
 							<div class="taglist clearfix">
 								<a onclick="submitForm('0','questionsTagId')"
 									href="javascript:;"
-									class="list-tag <c:if test='${question.questionsTagId==0 }' >onactive</c:if>"
-									data-id="0" title="JAVA">全部</a>
-								<c:forEach items="${questionsTagList }" var="questionsTag">
-									<a title="${questionsTag.questionsTagName }"
-										data-id="${questionsTag.questionsTagId }"
-										class="list-tag <c:if test='${questionsTag.questionsTagId==questions.questionsTagId }' >onactive</c:if>"
-										href="javascript:;"
-										onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')">${questionsTag.questionsTagName }</a>
-								</c:forEach>
+									class="list-tag <c:if test='${question.questions_tag.questions_tag_id==0 }' >onactive</c:if>"
+									data-id="0" title="JAVA">全部</a> <a
+									title="${question.questions_tag.questions_tag_name }"
+									data-id="${question.questions_tag.questions_tag_id }"
+									class="list-tag <c:if test='${question.questions_tag.questions_tag_id==question.questions_tag.questions_tag_id }' >onactive</c:if>"
+									href="javascript:;"
+									onclick="submitForm('${question.questions_tag.questions_tag_id }','questionsTagId')">${question.questions_tag.questions_tag_name }</a>
 							</div>
 						</section>
 						<!-- /标签云 -->
@@ -201,9 +204,7 @@
 		<!-- /提问题 结束 -->
 	</div>
 	<script type="text/javascript">
-		
-	 src="${ctx}/static/inxweb/questions/questions.js">
-		
+		src = "${ctx}/static/inxweb/questions/questions.js"
 	</script>
 </body>
 </html>

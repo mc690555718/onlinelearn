@@ -11,7 +11,7 @@ var uploadServerUrl="";//上传服务用服务器地址
 function isLogin(){
 	var is = false;
 	var user = getLoginUser();
-	if(user!=null && user.userId>0){
+	if(user!=null && user.user_id>0){
 		is=true;
 	}
 	return is;
@@ -24,7 +24,7 @@ function isLogin(){
 function getLoginUser(){
 	var user = null;
 	$.ajax({
-		url:baselocation+'/uc/getloginUser',
+		url:baselocation+'/front/uc/getloginUser',
 		type:'post',
 		async:false,
 		dataType:'json',
@@ -40,7 +40,7 @@ function getLoginUser(){
  */
 function exit(){
 	$.ajax({
-		url:baselocation+'/uc/exit',
+		url:baselocation+'/front/uc/exit',
 		type:'post',
 		dataType:'json',
 		async:true,

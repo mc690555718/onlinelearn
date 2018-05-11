@@ -9,30 +9,30 @@ $(function() {
  */
 function showUserInfo() {
 	var user = getLoginUser();
-	if(user!=null && user.userId>0){
-		var showName = user.showName;
-		if (showName == null || $.trim(showName) == '') {
-			showName = user.email;
+	if(user!=null && user.user_id>0){
+		var user_name = user.user_name;
+		if (user_name == null || $.trim(user_name) == '') {
+			user_name = user_name;
 		}
 		// 头像
-		var useImg = user.picImg;
-		if (useImg == null || $.trim(useImg) == '') {
-			useImg = baselocation + '/static/inxweb/img/avatar-boy.gif';
+		var pic_img = user.pic_img;
+		if (pic_img == null || $.trim(pic_img) == '') {
+			pic_img = baselocation + '/static/inxweb/img/avatar-boy.gif';
 		} else {
-			useImg = imagesPath + useImg;
+			pic_img = imagesPath + pic_img;
 		}
-		$("#userName").text(showName);
-		$(".userImgPhoto").attr("src", useImg);
-		$(".userImgPhoto").attr("alt", showName);
-		$(".userNameClass").html(showName);
-		$("#showName").text(showName);
-		$("#showName").attr('title', showName);
-		userBannerImage = user.bannerUrl;
+		$("#userName").text(user_name);
+		$(".userImgPhoto").attr("src", pic_img);
+		$(".userImgPhoto").attr("alt", user_name);
+		$(".userNameClass").html(user_name);
+		$("#showName").text(user_name);
+		$("#showName").attr('title', user_name);
+		userBannerImage = user.banner_url;
 		// 头部显示
-		$("#userName").text(showName);
-		$("#userName").attr('title', showName);
+		$("#userName").text(user_name);
+		$("#userName").attr('title', user_name);
 		$("#is-login-one,#is-login-two,#mobileExitDiv").show();
-		$(".picImg").attr("src", useImg);
+		$(".picImg").attr("src", pic_img);
 	} else {
 		$("#no-login").show();
 	}

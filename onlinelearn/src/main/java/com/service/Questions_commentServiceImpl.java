@@ -44,4 +44,9 @@ public class Questions_commentServiceImpl implements Questions_commentService{
 	public List<Questions_comment> getById1(int id) {
 		return Questions_commentMapper.getById1(id);
 	}
+
+	@Override
+	public void updatePraise(int id) {
+		Questions_commentMapper.updatePraise(id);
+	}
 }

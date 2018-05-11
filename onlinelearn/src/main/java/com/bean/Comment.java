@@ -2,13 +2,14 @@ package com.bean;
 
 import java.util.Date;
 
+
 public class Comment {
 
 	private int comment_id;   //ID
 	private Edu_User user;      //�û�id
 	private int p_comment_id;  //��������id(Ϊ0����һ������,��Ϊ0���ǻظ�)
 	private String content;  //��������
-	private String addtime;   //����ʱ��
+	private Date addtime;   //����ʱ��
 	private int other_id;   //���۵����id
 	private int praise_count;  //��������
 	private int  reply_count;   //�ظ�����
@@ -41,12 +42,17 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getAddtime() {
+
+
+
+	public Date getAddtime() {
 		return addtime;
 	}
-	public void setAddtime(String addtime) {
+
+	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
+
 	public int getOther_id() {
 		return other_id;
 	}

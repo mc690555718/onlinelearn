@@ -49,7 +49,7 @@ public class imgController {
 		mv.addObject("types",types);
 		mv.addObject("list", list);
 		mv.addObject("page", pageInfo);
-		mv.setViewName("/back/img/aa");
+		mv.setViewName("/back/img/img");
 		return mv;
 	}
 
@@ -109,6 +109,7 @@ public class imgController {
 				}
 			}
 	    img.setImageUrl(imgpath);
+	    System.out.println(imgpath);
 	    img.setPreviewUrl(imgpath);
 		imgService.save(img);
 		return "redirect:/admin/hello/list";

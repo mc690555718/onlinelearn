@@ -35,5 +35,9 @@ public class Questions_tagServiceImpl implements Questions_tagService{
 	public void updateStatus(int id) {
 		Questions_tagMapper.updateStatus(id);
 	}
+	@Override
+	public List<Questions_tag> getBylistId(int id) {
+		return Questions_tagMapper.getBylistId(id);
+	}
 
 }

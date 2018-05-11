@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.SubjectNoseMapper">
+  
+  <select id="listbySubject" parameterType="com.bean.SysSubject" resultType="com.bean.SysSubject">
+  select * from sys_subject 
+  <where>
+  <if test="subject_id!=0 and subject_id!=null">
+  where id=#{id}
+  </if>
+  </where>
+  </select>
+ </mapper>

@@ -270,7 +270,7 @@ function addPraise(targetId,type,obj){
 	}else{
 		//先关闭 弹出
 		 $("#tisbutt,.dClose,#qujiao").click();
-		lrFun();
+		 lrFun();
 	}
 }
 
@@ -505,7 +505,7 @@ function dialogLogin(type){
 		error:function(error){
 			alert("系统繁忙，请稍后再操作！");
 		}
-	});
+	}); 
 }
 
 /**

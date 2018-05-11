@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.CourseCommentMapper">
+  
+    <select id="listallCourseComment"  resultType="com.bean.CourseCommentUser">
+	 select a.*,b.* from edu_user a left join edu_comment b on a.user_id=b.user_id
+	 where TYPE=2
+  </select>
+ </mapper>

@@ -30,7 +30,7 @@
 <script type="text/javascript" src="${ctx}/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="${ctx}/static/common/webutils.js"></script>
 <script type="text/javascript" src="${ctx}/static/inxweb/header/header.js"></script>
-<script type="text/javascript" src="${ctx }/static/inxweb/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/static/inxweb/js/common.js"></script>
 
 <sitemesh:head></sitemesh:head>
 </head>

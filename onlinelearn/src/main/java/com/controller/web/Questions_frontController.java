@@ -66,7 +66,7 @@ public class Questions_frontController {
 			b=true;
 			questionsService.updatePraise(targetId);
 			result.setSuccess(b);
-		}else {
+		}else if (type==2){
 			questions_commentService.updatePraise(targetId);
 			b=true;
 			result.setSuccess(b);
@@ -137,6 +137,9 @@ public class Questions_frontController {
 		questions.setPraise_count(0);
 		questions.setAdd_time(add_time);
 		questionsService.save(questions);
+		Questions q= questionsService.getId(questions);
+		int pid = q.getId();
+		System.out.println(pid);
 		return result;
 	}
 }

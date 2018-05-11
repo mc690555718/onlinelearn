@@ -48,8 +48,13 @@ public class QuestionsServiceImpl implements QuestionsService{
 	}
 
 	@Override
-	public void saveRelation(Map map) {
-		QuestionsMapper.saveRelation(map);
+	public void saveRelation(int pid,int tid) {
+		QuestionsMapper.saveRelation(pid,tid);
 		
+	}
+
+	@Override
+	public Questions getId(Questions questions) {
+		return QuestionsMapper.getId(questions);
 	}
 }

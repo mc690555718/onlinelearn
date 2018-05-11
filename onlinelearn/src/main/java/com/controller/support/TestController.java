@@ -51,9 +51,8 @@ public class TestController {
 		mv.addObject("page", pageInfo);
 		return mv;
 	}
-
 	@RequestMapping("/excel")
-	public String excel(String filename,HttpServletRequest request,HttpServletResponse response){
+	public void excel(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		Map map=new HashMap<>();
 		map=initMap(request, map);
 		List<Edu_User> list=edu_UserService.listUser(map);
@@ -66,52 +65,49 @@ public class TestController {
 		HSSFRow row = sheet.createRow(0);  
 		//第四步，创建单元格，设置表头  
 		HSSFCell cell = row.createCell(0);  
-		cell.setCellValue("用户Id");  
-		cell = row.createCell(1);  
 		cell.setCellValue("手机号");  
-		cell=row.createCell(2);  
+		cell = row.createCell(1);  
 		cell.setCellValue("邮箱号");  
-		cell=row.createCell(3);  
+		cell=row.createCell(2);  
 		cell.setCellValue("用户名"); 
-		cell=row.createCell(4);  
+		cell=row.createCell(3);  
 		cell.setCellValue("昵称"); 
+		cell=row.createCell(4);  
+		cell.setCellValue("性别");
 		cell=row.createCell(5);  
-		cell.setCellValue("性别"); 
+		cell.setCellValue("年龄");
 		cell=row.createCell(6);  
-		cell.setCellValue("年龄"); 
-		cell=row.createCell(7);  
-		cell.setCellValue("状态"); 
+		cell.setCellValue("状态");
 		//第五步，写入实体数据，实际应用中这些数据从数据库得到,对象封装数据，集合包对象。对象的属性值对应表的每行的值  
 		for (int i = 0; i <list.size(); i++)   
 		{  
 			HSSFRow row1 = sheet.createRow(i+1);  
 			Edu_User user=list.get(i);  
 			//创建单元格设值  
-			row1.createCell(0).setCellValue(user.getUser_id());  
-			row1.createCell(1).setCellValue(user.getMobile());  
-			row1.createCell(2).setCellValue(user.getEmail()); 
-			row1.createCell(3).setCellValue(user.getUser_name()); 
-			row1.createCell(4).setCellValue(user.getShow_name()); 
-			row1.createCell(5).setCellValue(user.getSex()); 
-			row1.createCell(6).setCellValue(user.getAge()); 
-			row1.createCell(7).setCellValue(user.getIs_avalible()); 
+			row1.createCell(0).setCellValue(user.getMobile());  
+			row1.createCell(1).setCellValue(user.getEmail()); 
+			row1.createCell(2).setCellValue(user.getUser_name()); 
+			row1.createCell(3).setCellValue(user.getShow_name()); 
+			if (user.getSex()==0) {
+				row1.createCell(4).setCellValue("男"); 
+			}else {
+				row1.createCell(4).setCellValue("女"); 
+			}
+			row1.createCell(5).setCellValue(user.getAge()); 
+			if (user.getIs_avalible()==1) {
+				row1.createCell(6).setCellValue("正常"); 
+			}else {
+				row1.createCell(6).setCellValue("冻结"); 
+			}
+			
 			
 		}  
-		//将文件保存到指定的位置  
-		try   
-		{  
-			FileOutputStream fos = new FileOutputStream(filename);  
-			workbook.write(fos);  
-			System.out.println("恭喜您！导入成功！！！！！！");  
-			fos.close();  
-		}   
-		catch (IOException e)   
-		{  
-			System.out.println("写入文件出错啦！");  
-			e.printStackTrace();  
-		}  
-		return "/admin/user/listUser";
-
+		OutputStream output = response.getOutputStream();
+		response.reset();
+		response.setHeader("Content-disposition", "attachment; filename=user.xls" );
+		response.setContentType("Content-Type:application/vnd.ms-excel ");
+		workbook.write(output);
+		output.close();
 	}
 
 

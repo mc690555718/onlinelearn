@@ -94,7 +94,7 @@ public class Questions_frontController {
 		ModelAndView mv=new ModelAndView();
 		List<Questions_comment> comments = questions_commentService.getById1(id);
 		mv.addObject("comments", comments);
-		mv.setViewName("/web/comment/comment1");
+		mv.setViewName("/web/questionscomment/questionscomment-ajax-list");
 		return mv;
 	}
 
@@ -137,9 +137,14 @@ public class Questions_frontController {
 		questions.setPraise_count(0);
 		questions.setAdd_time(add_time);
 		questionsService.save(questions);
-		Questions q= questionsService.getId(questions);
-		int pid = q.getId();
-		System.out.println(pid);
+		int qid =questionsService.getMaxId();
+		for (int i = 1; i < b.length; i++) {
+			Map map = new HashMap<>();
+			int tid = b[i];
+			map.put("qid", qid);
+			map.put("tid", tid);
+			questionsService.saveRelation(map);
+		}
 		return result;
 	}
 }

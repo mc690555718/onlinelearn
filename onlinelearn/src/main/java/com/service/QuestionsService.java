@@ -13,6 +13,6 @@ public interface QuestionsService {
 	public void delete(int id);
 	public Questions getById(int id);
 	public void updatePraise(int id);
-	public void saveRelation(int pid,int tid);
-	public Questions getId(Questions questions);
+	public void saveRelation(Map map);
+	public int getMaxId();
 }

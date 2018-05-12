@@ -26,6 +26,9 @@
 	type="text/css" rel="stylesheet">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/common/layui/layui.js"></script>
+ <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.config.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.min.js"></script>
+  <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <style type="text/css">
 #time1 {
 	display: none

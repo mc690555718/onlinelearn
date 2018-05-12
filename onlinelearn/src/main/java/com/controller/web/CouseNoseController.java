@@ -4,15 +4,19 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bean.EduCourse;
 import com.bean.EduCourseKpoint;
+import com.bean.EduCourseNote;
+import com.bean.Edu_User;
 import com.service.ConurseNoseService;
 import com.service.CourseCommentService;
 import com.service.CourseStudyhistoryService;
@@ -20,7 +24,9 @@ import com.service.EduNoseUserService;
 import com.service.KpointNoseService;
 import com.service.SubjectNoseService;
 import com.service.TeacherNoseService;
+import com.util.JsonUtils;
 import com.util.ObjectUtils;
+import com.util.Result;
 
 @Controller
 @RequestMapping("/front")
@@ -59,6 +65,7 @@ public class CouseNoseController {
 		model.addAttribute("interfixCourse",conurseNoseService.byIdcourse(courseid));
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));
 		model.addAttribute("SomeoneHas",eduNoseUserService.SomeoneHas(courseid));
+		model.addAttribute("courseId",courseid);
 		model.addAttribute("commentList",courseCommentService.listallCourseComment());
 		return "web/course/player-video";
 	}
@@ -97,5 +104,35 @@ public class CouseNoseController {
 		}
 		return "web/course/videocode";
 	}
-	
+	@RequestMapping("/courseNote/ajax/addnote")
+	@ResponseBody
+	public Result addnode(EduCourseNote courseNote,HttpSession session){
+		Result result=new Result();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		courseNote.setUserId(user.getUser_id());
+		EduCourseNote querynode = conurseNoseService.querynode(courseNote);
+		System.out.println(courseNote.getContent());
+		if(querynode!=null){
+			if(!"".equals(querynode.getContent())&&querynode.getContent()!=null){
+				conurseNoseService.updatenode(courseNote);
+				System.out.println("执行修改");
+				result.setMessage("success");
+				return result;
+			}
+		}
+			conurseNoseService.addnode(courseNote);
+			System.out.println("执行添加");
+		result.setMessage("success");
+		return result;
+	}
+	@RequestMapping("/courseNote/ajax/querynote")
+	@ResponseBody
+	public String querynode(EduCourseNote courseNote,HttpSession session){
+		Result result=new Result();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		courseNote.setUserId(user.getUser_id());
+		courseNote = conurseNoseService.querynode(courseNote);
+		result.setEntity(courseNote);
+		return JsonUtils.objectToJson(result);
+	}
 }

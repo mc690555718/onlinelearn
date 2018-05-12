@@ -9,19 +9,27 @@
 <title>个人信息</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 <script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
-<link href="/js/utf8-jsp/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
-<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
+<link href="/js/utf8-jsp/themes/default/css/umeditor.css"
+	type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/common/layui/css/layui.css" media="all">
+<link rel="stylesheet" type="text/css"
+	href="/common/bootstrap/css/bootstrap.css" media="all">
+<link rel="stylesheet" type="text/css" href="/common/global.css"
+	media="all">
+<link rel="stylesheet" type="text/css" href="/css/personal.css"
+	media="all">
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.min.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/utf8-jsp/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="/js/utf8-jsp/umeditor.min.js"></script>
 <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 	function update() {
@@ -32,7 +40,7 @@
 
 </head>
 <body>
-<section class="layui-larry-box">
+	<section class="layui-larry-box">
 	<div class="larry-personal">
 		<header class="larry-personal-tit"> <span>修改文章</span> </header>
 		<!-- /header -->
@@ -60,7 +68,7 @@
 							value="${article.summary }" class="layui-input">
 					</div>
 				</div>
-				
+
 				<div class="layui-form-item">
 					<label class="layui-form-label">作者</label>
 					<div class="layui-input-block">
@@ -81,9 +89,10 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">图片</label>
 					<div class="layui-input-block">
-						<img alt="" src="${article.image_url }" name="image_urls" id="blah"
-							style="height: 200px; width: 200px" /><input type="file"
-							name="file" id="file">
+						<img alt="" src="${article.image_url }" id="blah"
+							name="image_urls" style="height: 200px; width: 200px" /> <input
+							type="hidden" name="hiddens" value="${article.image_url }">
+						<input type="file" name="file" id="file">
 					</div>
 				</div>
 

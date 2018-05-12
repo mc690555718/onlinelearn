@@ -97,7 +97,7 @@ function replyFun() {
     $(".question-list>ul>li").each(function() {
         var _this = $(this),
             qxFun = function() {
-                //_this.find(".n-reply").find(".n-reply-wrap").remove();
+               // _this.find(".n-reply").find(".n-reply-wrap").remove();
                 _this.find(".n-reply").slideUp(150);
             };
         _this.find(".noter-dy").click(function() {
@@ -238,7 +238,7 @@ function goPageAjax(pageNum){
 /*
  * 公共点赞
  * targetId 点赞的目标id
- * type 点赞类型 1问答点赞 2问答评论点赞
+ * type 点赞类型 1问答点赞 2问答评论点赞 3文章点赞 4文章评论点赞
  * obj 当前标签对象
  * 沈阳以写  求求你别改了
  */

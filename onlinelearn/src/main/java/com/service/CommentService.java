@@ -12,4 +12,6 @@ public List<Comment> listAll(Map map);
 	public  void  save(Comment comment);
 	public  void  detele(int comment_id);
 	public  Comment  getById(int comment_id);
+	public List<Comment> listComment(int other_id);
+	public  void praiseEdit(int comment_id);
 }

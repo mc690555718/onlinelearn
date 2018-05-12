@@ -58,8 +58,8 @@ public class ArticleController {
 		if (create_time!=null&&create_time.length()>0) {
 			map.put("create_time", create_time);
 		}
-        if (publish_time!=null&&publish_time.length()>0) {
-        	map.put("publish_time", publish_time);
+		if (publish_time!=null&&publish_time.length()>0) {
+			map.put("publish_time", publish_time);
 		}
 		return map;
 	}
@@ -72,7 +72,7 @@ public class ArticleController {
 	}
 
 
-//	修改  文本框赋值
+	//	修改  文本框赋值
 	@RequestMapping("/updateValue")
 	public ModelAndView updateValue(int article_id) {
 		ModelAndView mv = new ModelAndView();
@@ -83,29 +83,28 @@ public class ArticleController {
 		mv.setViewName("/back/article/editarticle");
 		return mv;
 	}
-	
-	
+
+
 	//修改
 	@RequestMapping("/update")
 	public String update(@RequestParam("file")MultipartFile file,HttpServletRequest request,Article article,int article_id,String content) throws IOException {
-		if(!file.isEmpty()) {
-            //上传文件路径
-            String path = request.getRealPath("/images/upload/article/");
-            //上传文件名
-            String filename = file.getOriginalFilename();
-            File filepath = new File(path,filename);         
-            //判断路径是否存在，如果不存在就创建一个
-            if (!filepath.getParentFile().exists()) { 
-                filepath.getParentFile().mkdirs();
-            }
-            //将上传文件保存到一个目标文件当中
-            try {
-				file.transferTo(new File(path + File.separator + filename));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-            article.setImage_url("/images/upload/article/"+filename);
+		String blah1 = request.getParameter("hiddens");
+		//上传文件路径
+		String path = request.getRealPath("/images/upload/article/");
+		//上传文件名
+		String filename = file.getOriginalFilename();
+		File filepath = new File(path,filename);       
+			//如修改图片则修改图片路径，如不修改图片则路径保持不变
+			if (filename.equals("")||filename==null) {
+				article.setImage_url(blah1);
+			}else {
+				article.setImage_url("/images/upload/article/"+filename);
+				try {
+					file.transferTo(filepath);
+				} catch (IllegalStateException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		ArticleContent articleContent = new ArticleContent();
 		articleContent.setArticle_id(article_id);
@@ -116,54 +115,54 @@ public class ArticleController {
 		return "redirect:/admin/article/showlist";
 	}
 
-	
-//	添加 文本框赋值
+
+	//	添加 文本框赋值
 	@RequestMapping("/saveValue")
 	public ModelAndView saveValue() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/back/article/addarticle");
 		return mv;
 	}
-	
+
 
 	//添加
-		@RequestMapping("/save")
-		public String save(@RequestParam("file")MultipartFile file,HttpServletRequest request,Article article, String publish_time) throws IOException {
-			if(!file.isEmpty()) {
-	            //上传文件路径
-	            String path = request.getRealPath("/images/upload/article/");
-	            //上传文件名
-	            String filename = file.getOriginalFilename();
-	            File filepath = new File(path,filename);
-	            //判断路径是否存在，如果不存在就创建一个
-	            if (!filepath.getParentFile().exists()) { 
-	                filepath.getParentFile().mkdirs();
-	            }
-	            //将上传文件保存到一个目标文件当中
-	            try {
-					file.transferTo(new File(path + File.separator + filename));
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-	            article.setImage_url("/images/upload/article/"+filename);
+	@RequestMapping("/save")
+	public String save(@RequestParam("file")MultipartFile file,HttpServletRequest request,Article article, String publish_time) throws IOException {
+		if(!file.isEmpty()) {
+			//上传文件路径
+			String path = request.getRealPath("/images/upload/article/");
+			//上传文件名
+			String filename = file.getOriginalFilename();
+			File filepath = new File(path,filename);
+			//判断路径是否存在，如果不存在就创建一个
+			if (!filepath.getParentFile().exists()) { 
+				filepath.getParentFile().mkdirs();
 			}
-			
-			String content=request.getParameter("content");
-			ArticleContent articleContent = new ArticleContent();
-			SimpleDateFormat sFormat=new SimpleDateFormat("yyyy-MM-dd");
-			Date date = new Date();
-			articleContent.setContent(content);
-			article.setPublish_time(date);
-			article.setCreate_time(date);
-			article.setArticleContent(articleContent);
-			articleService.save(article);
-			articleService.saveContent(article);
-			return "redirect:/admin/article/showlist";
+			//将上传文件保存到一个目标文件当中
+			try {
+				file.transferTo(new File(path + File.separator + filename));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			article.setImage_url("/images/upload/article/"+filename);
 		}
 
+		String content=request.getParameter("content");
+		ArticleContent articleContent = new ArticleContent();
+		SimpleDateFormat sFormat=new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		articleContent.setContent(content);
+		article.setPublish_time(date);
+		article.setCreate_time(date);
+		article.setArticleContent(articleContent);
+		articleService.save(article);
+		articleService.saveContent(article);
+		return "redirect:/admin/article/showlist";
+	}
 
-	
+
+
 
 
 }

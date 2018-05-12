@@ -6,7 +6,7 @@ $(function(){
 /* 提问前先登录 */
 function toAddQuestions(){
 	if(isLogin()){
-		window.location.href="/questions/toadd";
+		window.location.href="/front/jump";
 	}else{
 		lrFun();
 	}
@@ -38,7 +38,7 @@ function submitForm(keyWord,type){
  */
 function hotQuestions(){
 	$.ajax({
-		url:baselocation + "/questions/ajax/hotRecommend",
+		url:baselocation + "/front/questions/ajax/hotRecommend",
 		data:{
 		},
 		type:"post",

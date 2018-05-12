@@ -8,12 +8,12 @@
 		<ul>
 			<li class="unBr">
 				<aside class="noter-pic">
-					<c:if test="${empty user.picImg }">
-						<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif">
-					</c:if>
-					<c:if test="${!empty user.picImg }">
-						<img width="50" height="50" class="picImg" src="<%=staticImage%>${user.picImg }">
-					</c:if>
+<%-- 					<c:if test="${empty user.picImg }"> --%>
+<%-- 						<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif"> --%>
+<%-- 					</c:if> --%>
+<%-- 					<c:if test="${!empty user.picImg }"> --%>
+<%-- 						<img width="50" height="50" class="picImg" src="<%=staticImage%>${user.picImg }"> --%>
+<%-- 					</c:if> --%>
 				</aside>
 				<div class="of">
 					<section class="n-reply-wrap">
@@ -43,21 +43,21 @@
 					<c:forEach items="${commentList }" var="ac">
 						<li>
 							<aside class="noter-pic">
-								<c:if test="${empty ac.picImg }">
-									<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif">
+								<c:if test="${empty ac.user.pic_img }">
+									<img width="50" height="50" class="pic_img" src="${ctx }/static/inxweb/img/avatar-boy.gif">
 								</c:if>
-								<c:if test="${!empty ac.picImg }">
-									<img width="50" height="50" class="picImg" src="<%=staticImage%>${ac.picImg }">
+								<c:if test="${!empty ac.user.pic_img }">
+									<img width="50" height="50" class="picImg" src="<%=staticImage%>${ac.user.pic_img }">
 								</c:if>
 							</aside>
 							<div class="of">
 								<span class="fl"> 
 								<font class="fsize12 c-blue"> 
-									<c:if test="${empty ac.userName }">
-										${ac.email}
+									<c:if test="${empty ac.user.user_name }">
+										${ac.user.email}
 									</c:if>
-									<c:if test="${!empty ac.userName }">
-										${ac.userName}
+									<c:if test="${!empty ac.user.user_name }">
+										${ac.user.user_name}
 									</c:if>
 								</font>
 								<font class="fsize12 c-999 ml5">评论：</font></span>
@@ -69,7 +69,7 @@
 								<span class="fr"><font class="fsize12 c-999 ml5"><fmt:formatDate value="${ac.addtime}" pattern="yyyy/MM/dd HH:mm" /></font></span> <span class="fl"> <a class="noter-dy vam" title="回复" href="javascript: void(0)" onclick="queryCommentReply('${ac.comment_id}')">
 										<em class="icon18">&nbsp;</em>(<span class="replyCount${ac.comment_id}">${ac.reply_count}</span>)
 									</a> <tt title="赞一下" class="noter-zan vam ml10" onclick="addPraise('${ac.comment_id}',4)">
-										<em class="icon18">&nbsp;</em>(<span class="addPraise${ac.comment_id}_4 praiseCount">${ac.praiseCount }</span>)
+										<em class="icon18">&nbsp;</em>(<span class="addPraise${ac.comment_id}_4 praise_count">${ac.praise_count }</span>)
 									</tt>
 								</span>
 							</div>

@@ -79,9 +79,10 @@
 		edu_course_teacher values(#{course_id},#{teacher_id})
 	</insert>
 
-	<!-- 通过id 删除 课程_教师 中间关系表  的该课程所有关系 -->
+	<!-- 通过id 删除 课程_教师 中间关系表 的该课程所有关系 -->
 	<delete id="removeCourseTeacher" parameterType="int">
-		delete from edu_course_teacher where course_id = #{value}
+		delete from
+		edu_course_teacher where course_id = #{value}
 	</delete>
 
 	<!-- 插入课程 -->
@@ -120,7 +121,7 @@
 		<association property="subject_id" column="subject_id"
 			select="com.mapper.SubjectMapper.getByIdSM"></association>
 	</resultMap>
-	
+
 	<!-- 通过课程id获取TeacherBean集合 -->
 	<select id="getTeacherByCourseId" parameterType="int" resultMap="TeacherBeanMap">
 		select * from edu_teacher where id in (
@@ -129,10 +130,10 @@
 		edu_course_teacher where course_id = #{value}
 		)
 	</select>
-	
+
 	<update id="update" parameterType="EduCourse">
-	
-			<!-- private int course_id; //课程编号 -->
+
+		<!-- private int course_id; //课程编号 -->
 		<!-- private String courser_name; //课程名称 -->
 		<!-- private int is_avaliable; //1正常2删除 -->
 		<!-- private SysSubject subject; //课程专业ID -->
@@ -151,26 +152,105 @@
 		<!-- private String lose_time; //有效期:商品订单过期时间点 -->
 		<!-- private int sequence; //序列 -->
 
-<!-- 				null,#{course_name},#{is_avaliable},#{subject.subject_id},#{subject_link},#{add_time},#{source_price}, -->
-<!-- 		#{current_price},#{title},#{context},#{lession_num},#{logo},#{add_time},#{page_buyCount}, -->
-<!-- 		#{page_viewCount},#{end_time},#{loseType},#{lose_time},#{sequence},null -->
+		<!-- null,#{course_name},#{is_avaliable},#{subject.subject_id},#{subject_link},#{add_time},#{source_price}, -->
+		<!-- #{current_price},#{title},#{context},#{lession_num},#{logo},#{add_time},#{page_buyCount}, -->
+		<!-- #{page_viewCount},#{end_time},#{loseType},#{lose_time},#{sequence},null -->
 
-        update edu_course set 
-        course_name=#{course_name},
-	    is_avaliable=#{is_avaliable},
-	    subject_id=#{subject.subject_id},
-	    subject_link=#{subject_link},
-	    source_price=#{source_price},
-	    current_price=#{current_price},
-	    title=#{title},
-	    context=#{context},
-	    lession_num=#{lession_num},
-	    logo=#{logo},
-	    update_time=#{update_time},
-	    logo=#{logo},
-	    end_time=#{end_time},
-	    loseType=#{loseType},
-	    lose_time=#{lose_time}
-	    where course_id = #{course_id}
+		update edu_course set
+		course_name=#{course_name},
+		is_avaliable=#{is_avaliable},
+		subject_id=#{subject.subject_id},
+		subject_link=#{subject_link},
+		source_price=#{source_price},
+		current_price=#{current_price},
+		title=#{title},
+		context=#{context},
+		lession_num=#{lession_num},
+		logo=#{logo},
+		update_time=#{update_time},
+		logo=#{logo},
+		end_time=#{end_time},
+		loseType=#{loseType},
+		lose_time=#{lose_time}
+		where course_id = #{course_id}
+	</update>
+	<!-- 课程id 查询所有课程节点 -->
+	<select id="getKpointByCourseId" resultType="EduCourseKpoint"
+		parameterType="int">
+		select * from edu_course_kpoint where course_id =
+		#{value}
+	</select>
+
+	<!-- 删除章节父节点下的所有子节点 -->
+	<delete id="removeKpointByParentId" parameterType="int">
+		delete from
+		edu_course_kpoint where parent_id = #{value}
+	</delete>
+
+	<!-- 通过节点id删除课程节点 -->
+	<delete id="removeKpointById" parameterType="int">
+		delete from
+		edu_course_kpoint where kpoint_id = #{value}
+	</delete>
+
+
+	<insert id="addKpointParent" parameterType="EduCourseKpoint">
+		<!-- private int kpoint_id; //主键 -->
+		<!-- private int course_id; //课程id -->
+		<!-- private String name; //节点名称 -->
+		<!-- private int parent_id; //父级ID -->
+		<!-- private Date add_time; //添加时间 -->
+		<!-- private int sort; //显示排序 -->
+		<!-- private int play_count; //播放次数 -->
+		<!-- private int is_free; //是否可以试听1免费2收费 -->
+		<!-- private String video_url;//视频地址 -->
+		<!-- private int teacher_id; //讲师id -->
+		<!-- private String play_time;//播放时间 -->
+		<!-- private int kpoint_type; //节点类型 0文件目录 1视频 -->
+		S
+		<!-- private String video_type;//视频类型 -->
+		<!-- private String file_type;//VIDEO视频 AUDIO音频 FILE文档 TXT文本 ATLAS图片集 -->
+		<!-- private String content; //文本 -->
+		insert into edu_course_kpoint values(
+		null,#{course_id},#{name},#{parent_id},#{add_time},#{sort},#{play_count},null
+		,null,null,null,#{kpoint_type},null,null,null
+		)
+	</insert>
+	<insert id="addKpoint" parameterType="EduCourseKpoint">
+		insert into edu_course_kpoint values(
+		null,#{course_id},#{name},#{parent_id},#{add_time},#{sort},#{play_count},#{is_free}
+		,#{video_url},#{teacher_id},#{play_time},#{kpoint_type},#{video_type},#{file_type},null
+		)
+	</insert>
+
+	<select id="getKpointById" parameterType="int" resultType="EduCourseKpoint">
+		select * from edu_course_kpoint where kpoint_id = #{value}
+	</select>
+
+	<update id="updateKpoint" parameterType="EduCourseKpoint">
+		<!-- null,#{course_id},#{name},#{parent_id},#{add_time},#{sort},#{play_count},#{is_free} -->
+		<!-- ,#{video_url},#{teacher_id},#{play_time},#{kpoint_type},#{video_type},#{file_type},null -->
+		update edu_course_kpoint
+		<set>
+			<if test="name!=null">
+				name = #{name},
+			</if>
+			<if test="sort!=null">
+				sort = #{sort},
+			</if>
+			<if test="play_count!=null">
+				play_count = #{play_count},
+			</if>
+			<if test="is_free!=null">
+				is_free = #{is_free},
+			</if>
+			<if test="teacher_id!=null">
+				teacher_id = #{teacher_id},
+			</if>
+			<if test="play_time!=null">
+				play_time = #{play_time},
+			</if>
+		</set>
+	    where kpoint_id = #{kpoint_id}
 	</update>
 </mapper>

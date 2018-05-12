@@ -166,7 +166,7 @@
 											href="/admin/cy/delete/${p.comment_id}"> <i
 												class="layui-icon"></i> 删除
 										</a></td>
-									</tr>
+									</tr> 
 								</c:forEach>
 						<tr>
 						<td align="center" colspan="9"><font face="微软雅黑" size="3px"

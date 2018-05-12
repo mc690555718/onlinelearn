@@ -23,7 +23,6 @@ private CommentMapper CommentMapper;
 	@Override
 	public void save(Comment comment) {
 		CommentMapper.save(comment);
-		
 	}
 
 	@Override
@@ -36,6 +35,20 @@ private CommentMapper CommentMapper;
 	public Comment getById(int comment_id) {
 		return CommentMapper.getById(comment_id);
 	}
+
+	@Override
+	public List<Comment> listComment(int other_id) {
+		List<Comment> listAll=CommentMapper.listComment(other_id);
+		return listAll;
+	}
+
+	@Override
+	public void praiseEdit(int comment_id) {
+		// TODO Auto-generated method stub
+		CommentMapper.praiseEdit(comment_id);
+	}
+
+
  
 
 

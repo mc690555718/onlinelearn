@@ -1,6 +1,6 @@
 $(function() {
 	ganswerFun();
-	ajaxPage("/questionscomment/ajax/list","&questionsComment.questionId="+questionsId,1,commentCallBack);//ajax获得评论
+	ajaxPage("/front/questionscomment/ajax/list","&questionsComment.questionId="+questionsId,1,commentCallBack);//ajax获得评论
 })
 var ganswerFun = function() {
 	$(".good-answer .noter-dy").bind("click", function() {
@@ -28,7 +28,7 @@ function addComment(obj){
 			return;
 		}
 		$.ajax({
-			url:baselocation + "/questionscomment/ajax/add",
+			url:baselocation + "/front/questionscomment/ajax/add",
 			data:{
 				"questionsComment.questionId":questionsId,
 				"questionsComment.content":questionsCommentContent
@@ -66,7 +66,7 @@ function addReply(obj){
 			return;
 		}
 		$.ajax({
-			url:baselocation + "/questionscomment/ajax/addReply",
+			url:baselocation + "/front/questionscomment/ajax/addReply",
 			data:{
 				"questionsComment.commentId":commentId,
 				"questionsComment.content":replyCotent
@@ -98,7 +98,7 @@ function addReply(obj){
 /**采纳为最佳答案**/
 function acceptComment(commentId){
 	$.ajax({
-		url:baselocation + "/questionscomment/ajax/acceptComment",
+		url:baselocation + "/front/questionscomment/ajax/acceptComment",
 		data:{
 			"questionsComment.commentId":commentId,
 			"questionsComment.questionId":questionsId
@@ -109,7 +109,7 @@ function acceptComment(commentId){
 		success:function(result){
 			if(result.success==true){
 				$(obj).parent().prev().find("textarea").val("");
-				ajaxPage("/questionscomment/ajax/list","&questionsComment.questionId="+questionsId,1,commentCallBack);//ajax获得评论
+				ajaxPage("/front/questionscomment/ajax/list","&questionsComment.questionId="+questionsId,1,commentCallBack);//ajax获得评论
 			}else{
 				dialog('提示',result.message,1);
 			}
@@ -122,7 +122,7 @@ function acceptComment(commentId){
 */
 function getCommentById(obj,commentId){
 	$.ajax({
-		url:baselocation + "/questionscomment/ajax/getCommentById/"+commentId,
+		url:baselocation + "/front/questionscomment/ajax/getCommentById/"+commentId,
 		data:{
 		},
 		type:"post",
@@ -140,7 +140,7 @@ function getCommentById(obj,commentId){
 function getAllCommentById(pCommentId) {
 	//ajaxPage("/questionscommentall/ajax/getCommentById/"+pCommentId, "" , 1, dialog("评论列表",result,5));
 	$.ajax({
-		url : baselocation + '/questionscommentall/ajax/getCommentById/'+pCommentId,
+		url : baselocation + '/front/questionscommentall/ajax/getCommentById/'+pCommentId,
 		data : {
 		},
 		type : 'post',

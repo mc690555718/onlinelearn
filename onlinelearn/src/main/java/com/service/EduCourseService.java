@@ -3,7 +3,9 @@ package com.service;
 import java.util.List;
 import java.util.Map;
 import com.bean.EduCourse;
+import com.bean.EduCourseKpoint;
 import com.bean.TeacherBean;
+import com.vo.TreeVo;
 
 public interface EduCourseService {
 
@@ -19,5 +21,16 @@ public interface EduCourseService {
 	
 	public List<TeacherBean> getTeacherByCourseId(String course_id);
 
-	
+	public List<TreeVo> getCourseNodes(int course_id);
+
+	public void removeKpoint(int kpoint_id, int parent_id);
+
+	public void addKpointParent(EduCourseKpoint kpoint);
+
+	public void addKpoint(EduCourseKpoint kpoint);
+
+	public EduCourseKpoint getKpointById(int kpoint_id);
+
+	public void updateKpoint(EduCourseKpoint kpoint);
+
 }

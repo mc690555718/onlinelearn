@@ -17,7 +17,7 @@ public class QuestionsServiceImpl implements QuestionsService{
 
 	@Override
 	public void save(Questions questions) {
-		// TODO Auto-generated method stub
+		QuestionsMapper.save(questions);
 		
 	}
 
@@ -46,4 +46,16 @@ public class QuestionsServiceImpl implements QuestionsService{
 	public void updatePraise(int id) {
 		QuestionsMapper.updatePraise(id);
 	}
+
+	@Override
+	public void saveRelation(Map map) {
+		QuestionsMapper.saveRelation(map);
+		
+	}
+
+	@Override
+	public int getMaxId() {
+		return QuestionsMapper.getMaxId();
+	}
+
 }

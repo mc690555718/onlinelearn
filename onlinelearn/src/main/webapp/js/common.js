@@ -97,7 +97,7 @@ function replyFun() {
     $(".question-list>ul>li").each(function() {
         var _this = $(this),
             qxFun = function() {
-                //_this.find(".n-reply").find(".n-reply-wrap").remove();
+               // _this.find(".n-reply").find(".n-reply-wrap").remove();
                 _this.find(".n-reply").slideUp(150);
             };
         _this.find(".noter-dy").click(function() {

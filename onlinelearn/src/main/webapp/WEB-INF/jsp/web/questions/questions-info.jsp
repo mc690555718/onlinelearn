@@ -112,7 +112,7 @@
 				<aside class="fl col-3">
 					<div class="mt30 pl10">
 						<section class="pt10">
-							<a href="javascript:void(0)" onclick="toAddQuestions()"
+							<a href="javascript:void(0)" onclick="addQuestions()"
 								title="我要提问" class="comm-btn c-btn-5">我要提问</a>
 						</section>
 						<section class="pt20">
@@ -166,9 +166,6 @@
 	</script>
 	<script type="text/javascript"
 		src="${ctx}/static/inxweb/questions/questions.js">
-	</script>
-	<script type="text/javascript">
-	  
 	</script>
 </body>
 </html>

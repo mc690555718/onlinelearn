@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+encoding//src/main/java/com/controller/web/LoginController.java=UTF-8
+=======
 encoding//src/main/java/com/bean/Comment.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/mc690555718/onlinelearn.git
 encoding//src/main/java/com/util/CommonConstants.java=UTF-8
 encoding//src/main/resources/project.properties=UTF-8

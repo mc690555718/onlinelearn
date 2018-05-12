@@ -45,6 +45,9 @@
 	使li对象显示为一行 width: 130px;
 	border: 1px solid black;
 }
+#context{
+    display:none;
+}
 </style>
 <script type="text/javascript">
 	//教师id数组
@@ -436,8 +439,8 @@
 		  });
 		});
 	
-		// 		//实例化编辑器
-		// 		var um = UM.getEditor("myEditor");
+		//实例化编辑器
+		var um = UM.getEditor("myEditor");
 	</script>
 </body>
 </html>

@@ -69,8 +69,10 @@ public   class ArticleServiceImpl implements ArticleService{
 	}
 
 	@Override
-	public List<Comment> listComment(int other_id) {
-		List<Comment> listAll=articleMapper.listComment(other_id);
-		return listAll;
+	public void praiseEdit(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.praiseEdit(article_id);
 	}
+
+	
 }

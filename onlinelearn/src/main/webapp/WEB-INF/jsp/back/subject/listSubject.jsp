@@ -135,9 +135,8 @@
 						+ "     </select>                                                                                     "
 						+ "     </div>                                                                                        "
 						+ "     </div>                                                                                        ";
-
-				layer
-						.open({
+			        layui.use('layer', function(){
+				        layer.open({
 							type : 1,
 							title : '添加专业',
 							skin : 'layui-layer-rim',
@@ -159,6 +158,7 @@
 								document.forms[0].submit();
 							}
 						});
+			        });
 			}
 
 			function updateSubject(subject_id) {
@@ -189,6 +189,7 @@
 			            	        + "         placeholder='请输入热度数值' autocomplete='off' class='layui-input'>                          "
 						+ "     </div>                                                                                        "
 						+ "     </div>                                                                                        ";
+		    layui.use('layer', function(){
 				layer.open({
 					type : 1,
 					title : '编辑专业',
@@ -212,6 +213,7 @@
 						document.forms[0].submit();
 					}
 				});
+		    });
 
 				$.post("/admin/subj/loadSubjectById/" + subject_id, function(
 						data) {

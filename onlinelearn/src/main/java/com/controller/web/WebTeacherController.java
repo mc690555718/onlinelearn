@@ -47,11 +47,7 @@ public class WebTeacherController {
 		mv.addObject("page", pageInfo);
 		return mv;
 	}
-	
 
-	
-	
-	
 
 	@RequestMapping("/front/teacher/{id}")
 	public ModelAndView getById(@PathVariable("id") int id) {
@@ -60,14 +56,12 @@ public class WebTeacherController {
 		List<WebTeacherBean> list2=webTeacherService.list(id);
 		mv.addObject("teacher", tB);
 		mv.addObject("courseList",list2);
-		
 		mv.setViewName("/web/teacher/teacher_info");
 		return mv;
 	}
 
 	@RequestMapping("/front/teacher/getByIdSM/{id}")
 	public ModelAndView getSubId(@PathVariable("id")int id) {
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", teacherService.listTea(id));
 		mav.addObject("list2", subjectService.listAll());

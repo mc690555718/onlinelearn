@@ -84,6 +84,7 @@
 					  <div class="layui-input-block">  
 					  <input id="citySel" type="text" readonly class="layui-input"/>
 		&nbsp;<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>
+		<input type="hidden" name="subjectids" value="${a.subject_id.subject_id}">
 					  
 					</div>  
 				</div>

@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.method.annotation.JsonViewRequestBody
 
 import com.bean.SubjectBean;
 import com.bean.SysFunction;
-import com.bean.SysSubject;
 import com.bean.TeacherBean;
 import com.bean.TreeBean;
 import com.github.pagehelper.PageHelper;
@@ -46,6 +45,8 @@ public class TeacherController {
 
 	@Autowired
 	private SubjectService subjectService;
+
+	private Object subjectids;
 
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(required=true,defaultValue="1")Integer 
@@ -114,10 +115,6 @@ public class TeacherController {
 		return mv ;
 	}
 
-
-
-
-
 	//删除
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id")int id) {
@@ -126,68 +123,52 @@ public class TeacherController {
 	}
 
 
+
 	@RequestMapping("/getByIdSM/{id}")
 	public ModelAndView getByIdSM(@PathVariable("id")int id) {
 		ModelAndView mv =new ModelAndView();
 		SubjectBean subjectBean=subjectService.getByIdSM(id);
-		mv.setViewName("teacherupdate");
+		mv.setViewName("teacherlist");
 		mv.addObject("a",subjectBean);
 		return mv;
 	}
 
-	
-/*		String filename=file.getOriginalFilename();
+	//添加
+	@RequestMapping("/tosave")
+	public String save(@PathVariable("file")MultipartFile file,HttpServletRequest request,TeacherBean tb) {
+		//图片上传
+		//获得物理路径webapp所在路径
+		String filename=file.getOriginalFilename();
 		String path = request.getRealPath("/images/upload/teacher/20150915/");
-		
+		File file2=new File(path,filename);
 		if(!file2.exists()){
 			file2.mkdir();
 		}
 		if (filename.equals("")||filename==null) {
-			teacherBean.setPic_path(path);
+			tb.setPic_path(path);
 		}else {
 			try {
 				file.transferTo(file2);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			teacherBean.setPic_path("/images/upload/teacher/20150915/"+filename);
-		}*/
-
-	//添加
-	@RequestMapping("/tosave")
-	public String save(@PathVariable("file")MultipartFile file,HttpServletRequest request,TeacherBean tb) {
-		String subjectId=request.getParameter("subjectId");
-		SubjectBean subjectBean=new SubjectBean();
-		subjectBean.setSubject_id(Integer.valueOf(subjectId));
-		tb.setSubject_id(subjectBean);
-		
-		//图片上传
-		//获得物理路径webapp所在路径
-		String path = request.getRealPath("/images/upload/teacher/20150915/");
-		String pic_path = "";
-		if (!file.isEmpty()) {
-			//获得文件类型	
-			String contextType = file.getOriginalFilename();
-			//获得文件后缀名
-			pic_path =path+ contextType;
-			File file2 = new File(pic_path);
-			try {
-				if(!file2.exists()){
-					file2.createNewFile();
-				}
-				file.transferTo(file2);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
-		tb.setCreate_time(new Date());
-		tb.setPic_path(pic_path);
+		tb.setPic_path("/images/upload/teacher/20150915/"+filename);
+	    tb.setCreate_time(new Date());
 		teacherService.save(tb);
-		tb.setPic_path("/images/upload/teacher/20150915/"+file);
 		return "redirect:/admin/teacher/list";
 	}
 
 
+
+	@RequestMapping("/upinit/{id}")
+	public ModelAndView init(@PathVariable("id")int id) {
+		ModelAndView mv =new ModelAndView();
+		TeacherBean teacherBean =teacherService.getById(id);
+		mv.setViewName("/back/teacher/teacherupdate");
+		mv.addObject("a",teacherBean);
+		return mv;
+	}
 
 	//updateztree显示
 	@RequestMapping("/updateinit/{id}")
@@ -216,7 +197,7 @@ public class TeacherController {
 	public String update(@RequestParam("file") MultipartFile file,HttpServletRequest request,TeacherBean teacherBean,int id,int is_stars) {
 		teacherBean.setId(id);
 		teacherBean.setIs_star(is_stars);
-		
+
 		//图片上传
 		//获得物理路径webapp所在路径
 		String filename=file.getOriginalFilename();

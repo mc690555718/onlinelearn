@@ -37,7 +37,8 @@
 }  
 </style>
 
-<script language="javascript">
+
+<script type="text/javascript">
 function list(){
 	document.froms[0].action="/admin/teacher/list";
 	document.froms[0].submit;
@@ -127,7 +128,7 @@ function list(){
 												<fmt:formatDate value="${p.create_time}" type="date" pattern="yyyy-MM-dd"/>
 											</th>
 											<th><a href="/admin/teacher/delete/${p.id}" class="btn btn-default">删除</a> 
-												<a href="/admin/teacher/upinit/${p.id }" class="btn btn-default">修改</a></th>
+												<a href="/admin/teacher/updateinit/${p.id }" class="btn btn-default">修改</a></th>
 										</tr>
 				
 									</c:forEach>

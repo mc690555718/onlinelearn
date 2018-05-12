@@ -459,6 +459,27 @@ public class EduCourseController {
     	cs.updateKpoint(kpoint);
     	return 0 ;
 	}
+    
+//	@RequestMapping(value="/uploadImg",method=RequestMethod.POST)
+//	@ResponseBody
+//	public String uploadImg(@RequestParam("logo1")MultipartFile logo1,HttpServletRequest request){
+//		//上传图片
+//		if (logo1 != null) {
+//			String filename=logo1.getOriginalFilename();
+//			//upload文件夹的路径
+//			String path=request.getRealPath("/images/upload/course/");
+//			File newfile=new File(path,filename);
+//			try{
+//				//将客户端上传的文件复制到服务器中
+//				logo1.transferTo(newfile);
+//			}catch(Exception e){
+//				e.printStackTrace();
+//			}
+//			String imgPath = "/images/upload/course/"+filename;
+//			return JsonUtils.objectToJson(imgPath);
+//		}
+//	    return null;
+//	}
 
     /** 异步上传视频并且返回路径
      * @param video
@@ -469,6 +490,9 @@ public class EduCourseController {
     @RequestMapping(value="/uploadVideo",method=RequestMethod.POST)
     public String uploadVideo(@RequestParam("vedio")MultipartFile video,HttpServletRequest request){
     	String path="success";
+    	if (video != null) {
+			
+		}
 		return JsonUtils.objectToJson(path);
     }
 }

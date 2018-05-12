@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
-	
+	<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
 	<link rel="stylesheet" href="/js/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<link rel="stylesheet" href="/js/ztree/css/demo.css" type="text/css">
 	<script type="text/javascript" src="/js/ztree/js/jquery.ztree.core.js"></script>
@@ -27,6 +27,8 @@
 	height: 200px;
 	background-image:1px;
 	}
+	
+	
 	</style>
 
 <script type="text/javascript">
@@ -82,7 +84,8 @@
 					  <div class="layui-input-block">  
 					  <input id="citySel" type="text" readonly class="layui-input"/>
 		&nbsp;<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>
-		<input type="hidden" name="subjectId" />
+		<input type="hidden" name="subjectids" value="${a.subject_id.subject_id}">
+					  
 					</div>  
 				</div>
 				<div class="layui-form-item">
@@ -99,7 +102,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师排序</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="sort"    class="layui-input" >
+					  	<input type="text" name="sort" class="layui-input" >
 					</div>
 				</div>
 				
@@ -111,16 +114,18 @@
 				</div>
 				
 				<div class="layui-form-item">
-					<label for="imgInp" class="col-sm-1 control-label">讲师头像</label>
+					<label class="layui-form-label">讲师头像</label>
 					<div class="layui-input-block">
 					<div>
 			<div class="col-sm-4">
 				<img id="blah" style="width:200px; height:150px;" />
+				<input type="hidden" runat="server" id="file" /> 
 				<input type="file" name="file" id="imgInp">
 			</div>
 					</div>
 					</div>
 				</div>
+				
 				
 				<div class="layui-form-item change-submit">
 					<div class="layui-input-block">
@@ -132,6 +137,7 @@
 		</div>
 	</div>
 </section>
+
 <div id="menuContent" class="menuContent" style="display:none; position: absolute;">
 	<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
 </div>
@@ -158,7 +164,7 @@
         var zNodes=${list};
 		function beforeClick(treeId, treeNode) {
 			var check = (treeNode && !treeNode.isParent);
-			if (!check) alert("只能选择城市...");
+			if (!check) alert("只能选择专业课程...");
 			return check;
 		}
 		
@@ -178,10 +184,8 @@
 			cityObj.attr("value", v);
 			$("input[name=subjectId]").val(ids);
 		}
-		 
-
 		function showMenu() {
-
+			alert("1233");
 			var cityObj = $("#citySel");
 			var cityOffset = $("#citySel").offset();
 			$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
@@ -199,7 +203,6 @@
 		}
 
 		$(document).ready(function(){
-			
 			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 		});
 </script>
@@ -210,13 +213,13 @@
          var form = layui.form();
 	});
 	
-	$(function(){
+	$(function(){ 
 		$("#pbid").val("${product.pbrand.pbid}");
 		$("#ptid").val("${product.productType.ptid}");
 	}
-			)
+		)
 			
-			//div显示图片
+//div显示图片
 function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
@@ -230,7 +233,8 @@ function readURL(input) {
 	$("#imgInp").change(function() {
 		readURL(this);
 	});
-
+	
+	
 	
 </script>
  </body>

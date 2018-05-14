@@ -159,7 +159,7 @@
 												<ul>
 													<c:set var="folderIndex" value="1"/>
 													<c:forEach items="${parentKpointList }" var="parentKpoint" varStatus="index">
-														<c:if test="${parentKpoint.kpoint_Type==0 }"><!-- 文件目录 -->
+														<c:if test="${parentKpoint.kpoint_type==0 }"><!-- 文件目录 -->
 															<li class="lh-menu-stair">
 																<a href="javascript: void(0)" title="${parentKpoint.name }" 
 																	<c:if test="${index.first==true}">class="current-1"</c:if>
@@ -170,7 +170,7 @@
 																	<c:if test="${index.first==false}">style="display: none;"</c:if>
 																>
 																	<c:forEach items="${kpointList}" var="sonKpoint">
-																		<li class="lh-menu-second ml30"><a href="javascript:void(0)" <%-- onclick="playVideo('${sonKpoint.videoUrl }',this)" --%> onclick="getPlayerHtml(${sonKpoint.kpoint_Id },${sonKpoint.free },this)" title="">
+																		<li class="lh-menu-second ml30"><a href="javascript:void(0)" <%-- onclick="playVideo('${sonKpoint.videoUrl }',this)" --%> onclick="getPlayerHtml(${sonKpoint.kpoint_id },${sonKpoint.free },this)" title="">
 																				<span class="fr"> 
 																					<c:if test="${sonKpoint.free==1 }">
 																						<tt class="free-icon vam mr10">免费试听</tt>
@@ -187,17 +187,17 @@
 															</li>
 															<c:set var="folderIndex" value="${folderIndex+1 }"/>
 														</c:if>
-														<c:if test="${parentKpoint.kpoint_Type==1 }"><!-- 视频 -->
+														<c:if test="${parentKpoint.kpoint_type==1 }"><!-- 视频 -->
 															<li class="lh-menu-stair">
 																<ul class="lh-menu-ol no-parent-node">
-																	<li class="lh-menu-second"><a title="" <%-- onclick="playVideo('${parentKpoint.videoUrl }',this)" --%> onclick="getPlayerHtml(${parentKpoint.kpoint_Id },${parentKpoint.free },this)" href="javascript:void(0)">
+																	<li class="lh-menu-second"><a title="" <%-- onclick="playVideo('${parentKpoint.videoUrl }',this)" --%> onclick="getPlayerHtml(${parentKpoint.kpoint_id },${parentKpoint.is_free },this)" href="javascript:void(0)">
 																			<span class="fr"> 
-																				<c:if test="${parentKpoint.free==1 }">
+																				<c:if test="${parentKpoint.is_free==1 }">
 																					<tt class="free-icon vam mr10">免费试听</tt>
 																				</c:if>
-																				<c:if test="${!empty parentKpoint.play_Time}">
+																				<c:if test="${!empty parentKpoint.play_time}">
 																					<em class="lh-p-icon icon14 ml5">&nbsp;</em>
-																					${parentKpoint.play_Time}
+																					${parentKpoint.play_time}
 																				</c:if>
 																				</span><em class="lh-menu-i-2 icon14 mr5">&nbsp;</em>${parentKpoint.name }</a>
 																	</li>
@@ -318,8 +318,8 @@
 		<!-- /课程详情 结束 -->
 	</div>
 	<%-- <script type="text/javascript" src="${ctx}/static/common/jquery-1.11.1.min.js"></script> --%>
-	<script type="text/javascript" src="${ctx}/static/inxweb/front/courseInfo.js"></script>
-	<script type="text/javascript" src="${ctx}/static/inxweb/comment/comment.js"></script>
+	<script type="text/javascript" src="/static/inxweb/front/courseInfo.js"></script>
+	<script type="text/javascript" src="/static/inxweb/comment/comment1.js"></script>
 	<script>
 		//评论课程id
 		var otherId = '${course.course_id}';

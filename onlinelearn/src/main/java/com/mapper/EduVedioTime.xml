@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.EduVedioTimeMapper" >
+
+      <select id="vedioTime" parameterType="Map" resultType="com.vo.LoginLogVo">
+		SELECT
+	t.time,
+	count(t.course_id) num
+	FROM
+	(
+		SELECT
+			DATE_FORMAT(add_time, '%Y-%m-%d') time,
+			course_id
+		FROM
+			edu_course_kpoint
+		WHERE
+			add_time LIKE '${createTime}%'
+	) t group by t.time
+    </select>
+</mapper>

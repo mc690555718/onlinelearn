@@ -1,6 +1,6 @@
 $(function() {
 	vP(); // 放器高度动态赋值
-	sB(studyPercent); // 学习进度动画
+	//sB(studyPercent); // 学习进度动画
 	shareShow(); // 课程分享
 	treeMenu(); // 课程树
 	replyFun(); // 回复展开
@@ -278,7 +278,7 @@ function favorites(courseId,obj) {
             return false;
  		}
  		$.ajax({
- 			url : baselocation + "/courseNote/ajax/addnote",
+ 			url : baselocation + "/front/courseNote/ajax/addnote",
  			type : 'post',
  			dataType : 'json',
  			data : {
@@ -308,7 +308,7 @@ function favorites(courseId,obj) {
  */
 function queryNote() {
 	$.ajax({
-		url : baselocation + "/courseNote/ajax/querynote",
+		url : baselocation + "/front/courseNote/ajax/querynote",
 		type : "post",
 		dataType : "json",
 		data : {
@@ -316,8 +316,8 @@ function queryNote() {
 			"courseId" : otherId
 		},
 		success : function(result) {
-			if (result.courseNote != undefined) {
-				KindEditor.html("#notesContextId", result.courseNote.content);
+			if (result.entity != undefined) {
+				KindEditor.html("#notesContextId", result.entity.content);
 			} else {
 				KindEditor.html("#notesContextId", '');
 			}

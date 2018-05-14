@@ -4,8 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
   <mapper namespace="com.mapper.CourseCommentMapper">
   
-    <select id="listallCourseComment"  resultType="com.bean.CourseCommentUser">
+    <select id="listallCourseComment" parameterType="map" resultType="com.bean.CourseCommentUser">
 	 select a.*,b.* from edu_user a left join edu_comment b on a.user_id=b.user_id
-	 where TYPE=2
-  </select>
+	 where b.TYPE=#{type} and b.other_id=#{other_id}
+ 	</select>
+ 	<select id="listallCourseCommentSon" parameterType="map" resultType="com.bean.CourseCommentUser">
+	 select a.*,b.* from edu_user a left join edu_comment b on a.user_id=b.user_id
+	 where b.TYPE=#{type} and b.p_comment_id=#{p_comment_id}
+ 	</select>
  </mapper>

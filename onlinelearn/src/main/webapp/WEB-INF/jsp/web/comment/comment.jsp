@@ -75,12 +75,13 @@
 							</div>
 							<div class="n-reply">
 								<section class="n-reply-wrap">
+									
 									<fieldset>
 										<textarea name="" class="commentReplyMsgContent${ac.comment_id}"></textarea>
 									</fieldset>
 									<p class="of mt5 tar pl10 pr10">
 										<span class="fl"><tt class="c-red commentReplyMsg${ac.comment_id}"></tt></span>
-										<a onclick="addCommentReply('${ac.comment_id}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">回复</a>
+										<a onclick="addCommentReply('${ac.comment_id}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">123456回复</a>
 									</p>
 								</section>
 								<div class="mt10 pl10 pr10 pb10 commentReply${ac.comment_id}"></div>
@@ -99,21 +100,21 @@
 	$(function() {
 		replyFun(); //回复展开
 	});
-	var totalResultSize = ${page.totalResultSize};
-	$(".totalResultComment").html(totalResultSize);
-	var order = "${comment.order}";
-	var title = "评论";
-	if (type == 1) {
-		title = "文章评论（${page.totalPageSize}条）"
-	}
-	if (type == 2) {
-		title = "课程评论"
-		if(order=='praiseCount'){
-			title = "精彩评论"
-			$(".replyhtml").hide();
-		}
+// 	var totalResultSize = ${page.totalResultSize};
+// 	$(".totalResultComment").html(totalResultSize);
+// 	var order = "${comment.order}";
+// 	var title = "评论";
+// 	if (type == 1) {
+// 		title = "文章评论（${page.totalPageSize}条）"
+// 	}
+// 	if (type == 2) {
+// 		title = "课程评论"
+// 		if(order=='praiseCount'){
+// 			title = "精彩评论"
+// 			$(".replyhtml").hide();
+// 		}
 		
-	}
+// 	}
 	
 	$(".commentTitle").html(title);
 </script>

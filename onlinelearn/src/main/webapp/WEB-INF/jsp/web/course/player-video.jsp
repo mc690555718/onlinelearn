@@ -98,7 +98,7 @@
 											<ul>
 												<c:set var="folderIndex" value="1"/>
 												<c:forEach items="${parentKpointList }" var="parentKpoint" varStatus="index">
-													<c:if test="${parentKpoint.kpoint_Type==0 }"><!-- 文件目录 -->
+													<c:if test="${parentKpoint.kpoint_type==0 }"><!-- 文件目录 -->
 															<li class="lh-menu-stair">
 																<a href="javascript: void(0)" title="${parentKpoint.name }" 
 																	<c:if test="${index.first==true}">class="current-1"</c:if>
@@ -109,14 +109,14 @@
 																>
 																	<c:forEach items="${parentKpointList}" var="sonKpoint">
 																		<li class="lh-menu-second ml30">
-																			<a href="javascript:void(0)" onclick="getPlayerHtml(${sonKpoint.kpoint_Id },'${sonKpoint.name }',this)" class="" title="">
+																			<a href="javascript:void(0)" onclick="getPlayerHtml(${sonKpoint.kpoint_id },'${sonKpoint.name }',this)" class="" title="">
 																				<span class="fr">
 																					<%-- <c:if test="${sonKpoint.free==1 }">
 																						<tt class="free-icon vam mr10">免费试听</tt>
 																					</c:if> --%>
-																					<c:if test="${!empty sonKpoint.play_Time}">
+																					<c:if test="${!empty sonKpoint.play_time}">
 																						<em class="lh-p-icon icon14 ml5">&nbsp;</em>
-																						${sonKpoint.play_Time}
+																						${sonKpoint.play_time}
 																					</c:if>
 																				</span><em class="lh-menu-i-2 icon14 mr5">&nbsp;</em>${sonKpoint.name }
 																			</a>
@@ -126,17 +126,17 @@
 															</li>
 															<c:set var="folderIndex" value="${folderIndex+1 }"/>
 														</c:if>
-														<c:if test="${parentKpoint.kpoint_Type==1 }"><!-- 视频 -->
+														<c:if test="${parentKpoint.kpoint_type==1 }"><!-- 视频 -->
 															<li class="lh-menu-stair">
 																<ul class="lh-menu-ol no-parent-node">
-																	<li class="lh-menu-second"><a title="" onclick="getPlayerHtml(${parentKpoint.kpoint_Id },'${parentKpoint.name }',this)" >
+																	<li class="lh-menu-second"><a title="" onclick="getPlayerHtml(${parentKpoint.kpoint_id },'${parentKpoint.name }',this)" >
 																			<span class="fr"> 
 <%-- 																				<c:if test="${parentKpoint.free==1 }">
 <%-- 																					<tt class="free-icon vam mr10">免费试听</tt> --%>
 <%-- 																				</c:if> --%>
-																				<c:if test="${!empty parentKpoint.play_Time}">
+																				<c:if test="${!empty parentKpoint.play_time}">
 																					<em class="lh-p-icon icon14 ml5">&nbsp;</em>
-																					${parentKpoint.play_Time}
+																					${parentKpoint.play_time}
 																				</c:if>
 																				</span><em class="lh-menu-i-2 icon14 mr5">&nbsp;</em>${parentKpoint.name }</a>
 																	</li>
@@ -152,7 +152,7 @@
 								<section class="undis">
 									<div class="mt10">
 										<!-- 课程笔记 位置 -->
-										<textarea name="notesContext" onkeyup="$('#notContextId').hide();" id="notesContextId" style="width:368px;"></textarea>
+								     	<textarea name="notesContext" onclick="queryNote();" onkeyup="$('#notContextId').hide();" id="notesContextId" style="width:368px;"></textarea>
 										<section class="mt5 clearfix">
 											<span class="fr">
 												<tt class="mr5 c-orange" style="display: none;" id="notContextId"></tt>
@@ -180,7 +180,6 @@
 								<a class="current" title="课程评论" href="javascript:void(0);" onclick="comment(1,this)">课程评论</a>
 								<a title="精彩评论" href="javascript:void(0);" onclick="comment(2,this)">精彩评论</a>
 							</section>
-							<jsp:include page="/WEB-INF/jsp/web/course/comment.jsp" />
 						</div>
 						<article class="ml10 mr10 commentHtml"></article>
 					</div>
@@ -264,17 +263,17 @@
 	<!-- 公共底引入 -->
 	<jsp:include page="/WEB-INF/layouts/web/footer.jsp" />
 	<!-- 公共底引入 -->
-	<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
 
 	<script type="text/javascript" src="/static/common/webutils.js"></script>
 	<script type="text/javascript" src="/static/inxweb/js/common.js" ></script>
-	<script src="/static/inxweb/comment/comment.js" type="text/javascript"><!--</script> 评论js -->
+	<script src="/static/inxweb/comment/comment1.js" type="text/javascript"></script> <!--评论js -->
 	<script type="text/javascript" src="/kindeditor/kindeditor-all.js"></script>
 	<script type="text/javascript" src="/static/inxweb/play/playVideo.js"></script>
 	
 	<script>
 	//评论课程id
-	var otherId = '${course.courseId}';
+	var otherId = '${courseId}';
 	//评论类型,类型2为课程
 	var type = 2;
 	var currentKpointId="0";//当前播放视频id(没有视频节点默认为零)

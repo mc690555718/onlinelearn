@@ -20,7 +20,7 @@
 <mvc:resources location="/jsplug/" mapping="/jsplug/**"/>
 <mvc:resources location="/common/" mapping="/common/**"/>
 <mvc:resources location="/upload/" mapping="/upload/**"/>
-
+<mvc:resources location="/kindeditor/" mapping="/kindeditor/**"/>
 	<bean id="htmlviewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

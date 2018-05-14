@@ -21,4 +21,17 @@
   <where>
   </where>
   </select>
+  <insert id="addnode" parameterType="com.bean.EduCourseNote">  
+  insert into edu_course_note(USER_ID,COURSE_ID,KPOINT_ID,CONTENT)
+   values(#{userId},#{courseId},#{kpointId},#{content})
+  </insert>
+   
+  <update id="updatenode" parameterType="com.bean.EduCourseNote">
+update edu_course_note set CONTENT=#{content} where user_id = #{userId}
+   and COURSE_ID=#{courseId} and KPOINT_ID = #{kpointId}
+  </update>
+  <select id="querynode" parameterType="com.bean.EduCourseNote" resultType="com.bean.EduCourseNote">
+  select * from edu_course_note where user_id = #{userId}
+   and COURSE_ID=#{courseId} and KPOINT_ID = #{kpointId}
+  </select>
  </mapper>

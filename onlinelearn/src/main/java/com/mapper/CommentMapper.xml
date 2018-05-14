@@ -45,7 +45,7 @@
   
   <insert id="save" parameterType="Comment">
     insert into edu_comment(user_id,p_comment_id,content,addtime,other_id,type)
-    values(#{user_id},#{p_comment_id},#{content},#{addtime},#{other_id},#{type})
+    values(#{user.user_id},#{p_comment_id},#{content},#{addtime},#{other_id},#{type})
   </insert>
   
 <select id="listComment" resultType="Comment" parameterType="int">

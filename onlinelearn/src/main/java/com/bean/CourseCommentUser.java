@@ -2,6 +2,7 @@ package com.bean;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class CourseCommentUser {
 	
@@ -14,8 +15,14 @@ public class CourseCommentUser {
 	private int praise_count;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int  reply_count;   //ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	private int type;         //1ï¿½ï¿½ï¿½ï¿½ 2ï¿½Î³ï¿½
+	private List<CourseCommentUser> son;
 	
-	
+	public List<CourseCommentUser> getSon() {
+		return son;
+	}
+	public void setSon(List<CourseCommentUser> son) {
+		this.son = son;
+	}
 	private int user_id;//ÓÃ»§Id
 	private String mobile;//ÊÖ»úºÅ
 	private String email;//ÓÊÏäºÅ

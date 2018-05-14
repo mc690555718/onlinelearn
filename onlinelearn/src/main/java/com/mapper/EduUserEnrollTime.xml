@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mapper.EduUserEnrollTimeMapper" >
+
+      <select id="stuEnrollTime" parameterType="Map" resultType="com.vo.LoginLogVo">
+		select t.time,count(t.user_id) num from(
+    select DATE_FORMAT(CREATE_TIME,'%Y-%m-%d') time,user_id from edu_user where CREATE_TIME like '${createTime}%' ) t group by t.time
+    </select>
+</mapper>

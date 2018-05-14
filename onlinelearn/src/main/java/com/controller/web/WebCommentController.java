@@ -32,7 +32,7 @@ public class WebCommentController {
 		return mv;
 	}
 	
-//  添加评论
+//  添加评论			  
 	@RequestMapping("/front/comment/ajax/addcomment")
 	public String addcomment(HttpServletRequest request,HttpSession session,int pCommentId,String content,int type,int otherId) {
 		Edu_User edu_User = (Edu_User) session.getAttribute("login_success");
@@ -44,7 +44,7 @@ public class WebCommentController {
 		comment.setOther_id(otherId);
 		comment.setUser(edu_User);
 		commentService.save(comment);
-		return "/web/comment/comment";
+		return "/web/course/comment";
 	}
 	
 ////  显示子评论框

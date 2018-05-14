@@ -1,6 +1,9 @@
 package com.controller.web;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bean.CourseCommentUser;
 import com.bean.EduCourse;
 import com.bean.EduCourseKpoint;
 import com.bean.EduCourseNote;
@@ -60,15 +64,61 @@ public class CouseNoseController {
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));
 		return "web/course/course-infor";
 	}
+	@RequestMapping("/comment/webcomment2")
+	public String comment2(Model model,int otherId){
+		Map m=new HashMap<>();
+		m.put("type", 2);
+		m.put("other_id", otherId);
+		List<CourseCommentUser> listallCourseComment = courseCommentService.listallCourseComment(m);
+		if(listallCourseComment!=null&&listallCourseComment.size()>0){
+			for(int i=0;i<listallCourseComment.size();i++){
+				Map m2=new HashMap<>();
+				m2.put("p_comment_id", listallCourseComment.get(i).getComment_id());
+				System.out.println("父iD"+listallCourseComment.get(i).getComment_id());
+				m2.put("type", 2);
+				 List<CourseCommentUser> listallCourseCommentSon = courseCommentService.listallCourseCommentSon(m2);
+				 System.out.println(listallCourseCommentSon.size());
+				 if(listallCourseCommentSon!=null&&listallCourseCommentSon.size()>0){
+					 listallCourseComment.get(i).setSon(listallCourseCommentSon);
+					}
+				 }
+			}
+		model.addAttribute("commentList",listallCourseComment);
+		System.out.println("进入了重新请求方法");
+		return "web/course/comment";
+	}
+	@RequestMapping("/article/webcomment1")
+	public String comment(Model model,int otherId){
+		Map m=new HashMap<>();
+		m.put("type", 2);
+		m.put("other_id", otherId);
+		List<CourseCommentUser> listallCourseComment = courseCommentService.listallCourseComment(m);
+		if(listallCourseComment!=null&&listallCourseComment.size()>0){
+			for(int i=0;i<listallCourseComment.size();i++){
+				Map m2=new HashMap<>();
+				m2.put("p_comment_id", listallCourseComment.get(i).getComment_id());
+				System.out.println("父iD"+listallCourseComment.get(i).getComment_id());
+				m2.put("type", 2);
+				 List<CourseCommentUser> listallCourseCommentSon = courseCommentService.listallCourseCommentSon(m2);
+				 System.out.println(listallCourseCommentSon.size());
+				 if(listallCourseCommentSon!=null&&listallCourseCommentSon.size()>0){
+					 listallCourseComment.get(i).setSon(listallCourseCommentSon);
+					}
+				 }
+			}
+		model.addAttribute("commentList",listallCourseComment);
+		System.out.println(listallCourseComment.size());
+		return "web/course/comment";
+	}
 	@RequestMapping("/tovedioplay")
 	public String tovedioplay(Model model,int courseid){
 		model.addAttribute("interfixCourse",conurseNoseService.byIdcourse(courseid));
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));
 		model.addAttribute("SomeoneHas",eduNoseUserService.SomeoneHas(courseid));
 		model.addAttribute("courseId",courseid);
-		model.addAttribute("commentList",courseCommentService.listallCourseComment());
 		return "web/course/player-video";
-	}
+		}
+	
 	@RequestMapping("/ajax/getKopintHtml")
 	public String getKopintHtml(Model model, HttpServletRequest request,@RequestParam("kpointId")int kpointId, HttpServletResponse response) {
 		System.out.println(kpointId+"节点id");

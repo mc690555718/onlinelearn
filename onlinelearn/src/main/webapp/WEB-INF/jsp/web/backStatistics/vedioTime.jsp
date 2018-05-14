@@ -61,7 +61,7 @@ h3{margin:10px 0;}
 </section>
 <script type="text/javascript" src="/js/echarts.min.js"></script>
 <script type="text/javascript" src="/js/laydate.js"></script>
-
+<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript">  
 var myChart = echarts.init(document.getElementById('main'));
 option = {

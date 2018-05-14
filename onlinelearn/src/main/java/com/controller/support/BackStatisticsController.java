@@ -1,4 +1,4 @@
-package com.controller.web;
+package com.controller.support;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.service.EduVedioTimeService;
 import com.vo.LoginLogVo;
 
 @Controller
-@RequestMapping("/statistics")
+@RequestMapping("/admin")
 public class BackStatisticsController {
 	
 	        @Autowired
@@ -31,7 +31,7 @@ public class BackStatisticsController {
 	        @Autowired
 	        private EduVedioTimeService evt;
 	
-	       @RequestMapping("/stuLogin")  
+	       @RequestMapping("/statisticsPage/login")  
 	       public String stuLogin(String stuLogtime,Model model){
 	    	   Map map=new HashMap();
 	    	   map.put("stuLogtime", stuLogtime);
@@ -54,7 +54,7 @@ public class BackStatisticsController {
 	       }
 	       
 
-	       @RequestMapping("/stuEnrollTime")  
+	       @RequestMapping("/statisticsPage/registered")  
 	       public String stuDayLog(String createTime,Model model){
 	    	   Map map=new HashMap();
 	    	   map.put("createTime", createTime);
@@ -77,7 +77,7 @@ public class BackStatisticsController {
 	       }
 	       
 	       
-	       @RequestMapping("/dayCourseTime")  
+	       @RequestMapping("/statisticsPage/dailyCourseNumber")  
 	       public String dayCourseTime(String createTime,Model model){
 	    	   Map map=new HashMap();
 	    	   map.put("createTime", createTime);
@@ -101,7 +101,7 @@ public class BackStatisticsController {
 	       
 	       
 	       
-	       @RequestMapping("/vedioTime")  
+	       @RequestMapping("/statisticsPage/videoViewingNum")  
 	       public String vedioTime(String createTime,Model model){
 	    	   Map map=new HashMap();
 	    	   map.put("createTime", createTime);

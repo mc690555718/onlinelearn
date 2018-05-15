@@ -17,36 +17,65 @@
 			select="com.mapper.QuestionsMapper.getById">
 		</association>
 	</resultMap>
-	<select id="listAll" resultMap="Questions_commentMap" parameterType="java.util.Map">
+	<select id="listAll" resultMap="Questions_commentMap"
+		parameterType="java.util.Map">
 		select * from edu_questions_comment
 		<where>
-           <if test="is_best!=null">
-           and is_best=#{is_best}
-           </if>
-           <if test="name!=null">
-            and question_id in (select id from edu_questions where title like '%${name}%')
-           </if>
-           <if test="start!=null">
-			and question_id in(select id from edu_questions where add_time &gt; #{start})
+			<if test="is_best!=null">
+				and is_best=#{is_best}
+			</if>
+			<if test="name!=null">
+				and question_id in (select id from edu_questions where
+				title like
+				'%${name}%')
+			</if>
+			<if test="start!=null">
+				and question_id in(select id from edu_questions where
+				add_time &gt;
+				#{start})
 			</if>
 			<if test="end !=null">
-			and question_id in(select id from edu_questions where add_time &lt; #{end})
+				and question_id in(select id from edu_questions where
+				add_time &lt;
+				#{end})
 			</if>
+			and comment_id =0
 		</where>
 	</select>
 	<delete id="delete" parameterType="int">
-	     delete from edu_questions_comment where id = #{id}
+		delete from
+		edu_questions_comment where id = #{id}
 	</delete>
-	<select id="getById" resultType="Questions_comment" parameterType="int">
-	     select * from edu_questions_comment where id = #{id}
+	<select id="getById" resultType="Questions_comment"
+		parameterType="int">
+		select * from edu_questions_comment where id = #{id}
 	</select>
 	<update id="update" parameterType="int">
-	     update edu_questions_comment set is_best=1 where id = #{id}
+		update edu_questions_comment
+		set is_best=1 where id = #{id}
 	</update>
-	<select id="getById1" resultMap="Questions_commentMap" parameterType="int">
-	     select * from edu_questions_comment where question_id = #{id}
+	<select id="getById1" resultMap="Questions_commentMap"
+		parameterType="int">
+		select * from edu_questions_comment where question_id =
+		#{id}
 	</select>
 	<update id="updatePraise" parameterType="int">
-	     update edu_questions_comment set PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
+		update
+		edu_questions_comment set PRAISE_COUNT=PRAISE_COUNT+1 where ID=#{id}
 	</update>
+	<select id="getById2" resultMap="Questions_commentMap"
+		parameterType="int">
+		select * from edu_questions_comment where question_id =
+		#{id} and IS_BEST= 0
+	</select>
+	<select id="getById3" resultMap="Questions_commentMap"
+		parameterType="int">
+		select * from edu_questions_comment where question_id =
+		#{id} and IS_BEST= 1
+	</select>
+	<insert id="save" parameterType="Questions_comment">
+		insert into
+		edu_questions_comment(cus_id,question_id,content,is_best,reply_count,praise_count,add_time,comment_id)
+		values(#{edu_user.user_id},#{questions.id},#{content},#{is_best},#{reply_count},#{praise_count},#{add_time},#{comment_id})
+	</insert>
 </mapper>

@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -106,8 +105,10 @@ public class Questions_frontController {
 	public ModelAndView list(HttpServletRequest request){
 		int id=Integer.parseInt(request.getParameter("questionsComment.questionId"));
 		ModelAndView mv=new ModelAndView();
-		List<Questions_comment> comments = questions_commentService.getById1(id);
-		mv.addObject("comments", comments);
+		List<Questions_comment> comments1 = questions_commentService.getById2(id);
+		List<Questions_comment> comments2 = questions_commentService.getById3(id);
+		mv.addObject("comments1", comments1);
+		mv.addObject("comments2", comments2);
 		mv.setViewName("/web/questionscomment/questionscomment-ajax-list");
 		return mv;
 	}
@@ -159,6 +160,64 @@ public class Questions_frontController {
 			map.put("tid", tid);
 			questionsService.saveRelation(map);
 		}
+		return result;
+	}
+	
+	@RequestMapping("/questionscomment/ajax/addComment")
+	@ResponseBody
+	public Result addComment(HttpSession session,HttpServletRequest request){
+		Result result = new Result();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		Questions_comment comment = new Questions_comment();
+		Questions questions = new Questions();
+		questions.setId(Integer.parseInt(request.getParameter("questionsComment.questionId")));
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date add_time = null;
+		try {
+			add_time = df.parse(df.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	    comment.setEdu_user(user);
+	    comment.setQuestions(questions);
+	    comment.setContent(request.getParameter("questionsComment.content"));
+	    comment.setIs_best(0);
+	    comment.setReply_count(0);
+	    comment.setPraise_count(0);
+	    comment.setAdd_time(add_time);
+	    comment.setComment_id(0);
+	    questions_commentService.save(comment);
+	    Boolean b=true;
+	    result.setSuccess(b);
+		return result;
+	}
+	
+	@RequestMapping("/questionscomment/ajax/addReply")
+	@ResponseBody
+	public Result addReply(HttpServletRequest request,HttpSession session){
+		Result result = new Result();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		Questions_comment comment = new Questions_comment();
+		Questions questions = new Questions();
+		questions.setId(0);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date add_time = null;
+		try {
+			add_time = df.parse(df.format(new Date()));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		comment.setEdu_user(user);
+		comment.setQuestions(questions);
+		comment.setContent(request.getParameter("questionsComment.content"));
+		comment.setIs_best(0);
+		comment.setReply_count(0);
+		comment.setPraise_count(0);
+		comment.setAdd_time(add_time);
+		comment.setComment_id(Integer.parseInt(request.getParameter("questionsComment.commentId")));
+		questions_commentService.save(comment);
+		Boolean b=true;
+		result.setSuccess(b);
 		return result;
 	}
 }

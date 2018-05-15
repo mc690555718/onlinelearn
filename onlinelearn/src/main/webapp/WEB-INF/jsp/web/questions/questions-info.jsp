@@ -112,7 +112,7 @@
 				<aside class="fl col-3">
 					<div class="mt30 pl10">
 						<section class="pt10">
-							<a href="javascript:void(0)" onclick="addQuestions()"
+							<a href="javascript:void(0)" onclick="toAddQuestions()"
 								title="我要提问" class="comm-btn c-btn-5">我要提问</a>
 						</section>
 						<section class="pt20">

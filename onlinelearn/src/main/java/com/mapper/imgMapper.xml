@@ -40,7 +40,6 @@
    <if test="title!=null">
    and title=#{title}
    </if>
-   
    </where>
    </select> 
 	<delete id="delete" parameterType="int">

@@ -14,4 +14,6 @@ public interface Questions_commentService {
 	public Questions_comment getById(int id);
 	public List<Questions_comment> getById1(int id);
 	public void updatePraise(int id);
+	public List<Questions_comment> getById2(int id);
+	public List<Questions_comment> getById3(int id);
 }

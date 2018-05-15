@@ -15,8 +15,7 @@ public class Questions_commentServiceImpl implements Questions_commentService{
 	private Questions_commentMapper Questions_commentMapper;
 	@Override
 	public void save(Questions_comment comment) {
-		// TODO Auto-generated method stub
-		
+	     Questions_commentMapper.save(comment);
 	}
 
 	@Override
@@ -48,5 +47,15 @@ public class Questions_commentServiceImpl implements Questions_commentService{
 	@Override
 	public void updatePraise(int id) {
 		Questions_commentMapper.updatePraise(id);
+	}
+
+	@Override
+	public List<Questions_comment> getById2(int id) {
+		return Questions_commentMapper.getById2(id);
+	}
+
+	@Override
+	public List<Questions_comment> getById3(int id) {
+		return Questions_commentMapper.getById3(id);
 	}
 }

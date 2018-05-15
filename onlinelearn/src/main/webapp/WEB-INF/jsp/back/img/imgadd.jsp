@@ -58,17 +58,17 @@
 
 }
 
+
+
 		</style>
 		
  <script type="text/javascript">
 
  
- 
 
 
 
 function save(){
-	
 	document.forms[0].action="/admin/hello/save";
 	document.forms[0].submit();
 }
@@ -86,15 +86,19 @@ function save(){
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">图片标题:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="title" name="title" placeholder="请输入标题">
+      <input type="" class="form-control" id="title" name="title" placeholder="请输入标题"  maxlength="20" >
     </div>
+     
   </div>
+
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片描述:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="describes" name="describes" placeholder="请输入描述">
+      <input type="" class="form-control" id="describes" name="describes" placeholder="请输入描述"  maxlength="30">
     </div>
+     
   </div>
+  
    <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片类型:</label>
     <div class="col-sm-10">
@@ -115,7 +119,7 @@ function save(){
      <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">跳转链接:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="linkAddress" name="linkAddress" placeholder="请输入跳转链接">
+      <input type="" class="form-control" id="linkAddress" name="linkAddress" placeholder="请输入跳转链接"  maxlength="20">
     </div>
   </div>
   
@@ -123,7 +127,7 @@ function save(){
       <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">排序:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="seriesNumber" name="seriesNumber" placeholder="请输入排序">
+      <input type="" class="form-control" id="seriesNumber" name="seriesNumber" placeholder="请输入排序"  maxlength="3">
     </div>
   </div>
   
@@ -140,26 +144,24 @@ function save(){
 		</div>
 
 
-		<div class="form-group">
+<!-- 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label>
 			<div class="col-sm-10">
 				<img id="previewUrl" src="" name="previewUrl" class="t2"><label
 						style="color: red">(请上传图片文件)</label> <input type="file"
 						name="file" id="file1" accept='image/*' />
 			</div>
-		</div>
+		</div>    -->
   
   
     <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">背景颜色:</label>
     <div class="col-sm-10">
-    <input type="text" id="c2" name="color"/><input id="btun" type="button" value="选色" />
+<!--     <input type="text" id="c2" name="color"/><input id="btun" type="button" value="选色" /> -->
+ <input type="text" id="c5" name="color"/>
+
    </div>
   </div>
-
-  
-
-
   
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -168,10 +170,7 @@ function save(){
     </div>
   </div>
 
-</form>
-		
-
-
+    </form> 
 	</body>
 	
 <script type="text/javascript">
@@ -189,13 +188,19 @@ document.getElementById('file1').onchange = function() {
 	fr.onload = function() {
 		document.getElementById('previewUrl').src = fr.result;
 	};
-	fr.readAsDataURL(imgFile);
+	fr.readAsDataURL(imgFile); 
 }
+  
+/* $(function(){6
+	$("#btun").bigColorpicker("c2");
+}); */
 
 $(function(){
-	$("#btun").bigColorpicker("c2");
+	$("#img").bigColorpicker(function(el,color){
+		$(el).css("background-color",color);
+	});
+	$("#c5").bigColorpicker("c5","L",6);
 });
-
 
 </script>
 

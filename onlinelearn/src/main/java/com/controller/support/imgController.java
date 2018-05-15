@@ -183,48 +183,54 @@ public class imgController {
 	
 //	 修改
 	@RequestMapping("/update")
-	public String update(@RequestParam("file") MultipartFile file,@RequestParam("file1") MultipartFile file1,HttpServletRequest request,img img,@RequestParam("typeId") int typeId) {
+	public String update(@RequestParam("file") MultipartFile file,HttpServletRequest request,img img,@RequestParam("typeId") int typeId) {
 		imgType imgType=new imgType();
         imgType.setTypeId(typeId);
         img.setImgType(imgType);
-//      System.out.println(img);
 		String path = request.getRealPath("/images/upload/image/20180408/");  
-		String pathRoot = "";
-		String imgpath = "";
-		String imgpath1 = "";
-		if(!file.isEmpty()){  
-			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-			String contentType=file.getOriginalFilename(); 
-			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
-			pathRoot = path+"/"+uuid+"."+imageName;
-			File newfile=new File(pathRoot);
-			imgpath = "/images/upload/image/20180408/"+uuid+"."+imageName;
+//		String pathRoot = "";
+//		String imgpath = "";
+//		String imgpath1 = "";
+		String filename=file.getOriginalFilename();
+		String hiddens=request.getParameter("hiddens");
+		File file2=new File(path, filename);
+		if (filename.equals("")||filename==null) {
+			img.setImageUrl(hiddens);
+			img.setPreviewUrl(hiddens);
+		}else {
 			try {
-				file.transferTo(newfile);
+				file.transferTo(file2);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			img.setImageUrl("/images/upload/image/20180408/"+filename);
+			img.setPreviewUrl("/images/upload/image/20180408/"+filename);
 		}
-		if(!file1.isEmpty()){  
-			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-			String contentType=file1.getOriginalFilename(); 
-			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
-			pathRoot = path+"/"+uuid+"."+imageName;
-			File newfile=new File(pathRoot);
-			imgpath1 = "/images/upload/image/20180408/"+uuid+"."+imageName;
-			try {
-				file1.transferTo(newfile);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		 
-        img.setImageUrl(imgpath);
-        img.setPreviewUrl(imgpath1);
-//        if (imgpath==imgpath1) {
-//            imgService.update(img);
-//		}else {
-//			System.out.println("修改失败");
+//		if(!file.isEmpty()){  
+//			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
+//			String contentType=file.getOriginalFilename(); 
+//			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
+//			pathRoot = path+"/"+uuid+"."+imageName;
+//			File newfile=new File(pathRoot);
+//			imgpath = "/images/upload/image/20180408/"+uuid+"."+imageName;
+//			try {
+//				file.transferTo(newfile);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		if(!file1.isEmpty()){  
+//			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
+//			String contentType=file1.getOriginalFilename(); 
+//			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
+//			pathRoot = path+"/"+uuid+"."+imageName;
+//			File newfile=new File(pathRoot);
+//			imgpath1 = "/images/upload/image/20180408/"+uuid+"."+imageName;
+//			try {
+//				file1.transferTo(newfile);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 //		}
         imgService.update(img);
         System.out.println(img);

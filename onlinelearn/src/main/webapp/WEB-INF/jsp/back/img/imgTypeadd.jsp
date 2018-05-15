@@ -18,7 +18,7 @@ function save(){
 <body>
 	<form  method="post">
 
-     类型：  <input type="text" name="typeName" id="typeName" value="">
+     类型：  <input type="text" name="typeName" id="typeName" value=""  maxlength="20">
 <button type="submit" class="btn btn-default" id="cy" onclick="save()">添加</button>
 </form>
 

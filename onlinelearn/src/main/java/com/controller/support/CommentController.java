@@ -55,7 +55,7 @@ public class CommentController {
 	    String content=request.getParameter("content");
 		String type = request.getParameter("type");
     	String email = request.getParameter("email");
-    	String start=request.getParameter("start");
+ 	String start=request.getParameter("start");
     	String end=request.getParameter("end");
     	
 		if (type!=null&&type.trim().length()!=0) {
@@ -63,17 +63,20 @@ public class CommentController {
 			request.setAttribute("type",type2);
 			map.put("type",type2);
 		}
-    	if (content!=null) {
+    	if (content!=null&&content.trim().length()!=0) {
 			request.setAttribute("content",content);
 			map.put("content",content);
 		}
-    	if (email!=null) {
+    	if (email!=null&&email.trim().length()!=0) {
 			request.setAttribute("email",email);
 			map.put("email",email);
-		}if (start!=null) {
+		}
+ 	      if (start!=null&&start.trim().length()!=0) {
+	       request.setAttribute("start",start); 
 			map.putIfAbsent("start", start);
 			
-		}if (end!=null){
+		}if (end!=null&&end.trim().length()!=0) {
+			request.setAttribute("end",end); 
 			map.put("end", end);
 			
 		}
@@ -81,9 +84,11 @@ public class CommentController {
 		return map;
 	} 
 	
-
-	
-	
+//	 调方法
+@RequestMapping("/to")
+public String to(){
+	return "/back/comment/commentaa";
+}
 	
 //	删除
 	@RequestMapping("/delete/{comment_id}")

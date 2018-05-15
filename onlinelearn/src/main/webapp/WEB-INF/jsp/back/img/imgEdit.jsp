@@ -25,7 +25,7 @@
 	background-color: #ADADAD;
 }
 
-#a1 {
+#a1 { 
 	width: 80px;
 	height: 30px;
 	font-family: "微软雅黑";
@@ -59,6 +59,9 @@
 	height: 60px;
 
 }
+
+#img{width:25px;height:25px;display:block; border:1px solid #d3d3d3;}
+
 </style>
 
 
@@ -70,13 +73,21 @@
   function update(){
 	 document.forms[0].action="/admin/hello/update";
 	 document.forms[0].submit();
-	 
  }  
  
 	
-	$(function() {
+	/* $(function() {
 		$("#bt").bigColorpicker("c2");
-	}); 
+	}); */ 
+	
+	$(function(){
+		$("#img").bigColorpicker(function(el,color){
+			$(el).css("background-color",color);
+		});
+		$("#c5").bigColorpicker("c5","L",6);
+	});
+
+	
 </script>  
 </head>
 
@@ -90,15 +101,15 @@
 		<div class="form-group">
 			<label for="inputEmail3" class="col-sm-2 control-label">图片标题:</label>
 			<div class="col-sm-10">
-				<input type="" class="form-control" name="title" id="title"
-					value="${img.title }" placeholder="请输入标题">
+				<input type="text" class="form-control" name="title" id="title"
+					value="${img.title }" placeholder="请输入标题" maxlength="20">
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">图片描述:</label>
 			<div class="col-sm-10">
-				<input type="" class="form-control" id="describes" name="describes"
-					value="${img.describes }" placeholder="请输入描述">
+				<input type="text" class="form-control" id="describes" name="describes"
+					value="${img.describes }" placeholder="请输入描述" maxlength="20">
 			</div>
 		</div>
 		<div class="form-group">
@@ -118,7 +129,7 @@
 			<div class="col-sm-10">
 				<input type="" class="form-control" id="linkAddress"
 					name="linkAddress" value="${img.linkAddress }"
-					placeholder="请输入跳转链接">
+					placeholder="请输入跳转链接" maxlength="20">
 			</div>
 		</div>
 		<div class="form-group">
@@ -126,7 +137,7 @@
 			<div class="col-sm-10">
 				<input type="" class="form-control" id="seriesNumber"
 					name="seriesNumber" value="${img.seriesNumber }"
-					placeholder="请输入排序">
+					placeholder="请输入排序" maxlength="3">
 			</div>
 		</div>
 		<div class="form-group">
@@ -134,27 +145,30 @@
 			<div class="col-sm-10">
 				<div>
 					<img id="imageUrl" alt="" src="${img.imageUrl}" name="imageUrl" class="t1" ><label
-						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file" id="file" accept='image/*' />
+						style="color: red">(请上传图片文件)</label> 
+						<input type="hidden" name="hiddens" value="${img.imageUrl }">
+						<input type="file" name="file" id="file" accept='image/*' />
 				</div>
 			</div>
 		</div>
 	
 
-		<div class="form-group">
-			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label>
-			<div class="col-sm-10">
-				<img id="previewUrl" name="previewUrl" alt="" src="${img.previewUrl}" class="t2"><label
-						style="color: red">(请上传图片文件)</label> <input type="file"
-						name="file1" id="file1" accept='image/*' />
-			</div>
-		</div>
+<!-- 		<div class="form-group"> -->
+<!-- 			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label> -->
+<!-- 			<div class="col-sm-10"> -->
+<%-- 				<img id="previewUrl" name="previewUrl" alt="" src="${img.previewUrl}" class="t2"><label --%>
+<!-- 						style="color: red">(请上传图片文件)</label> <input type="file" -->
+<!-- 						name="file1" id="file1" accept='image/*' /> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	  
      <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">背景颜色:</label>
     <div class="col-sm-10">
-    <input type="text" id="c2" name="color" value="${img.color }" /><input id="bt" type="button" value="选色" />
-   </div>
+<%--     <input type="text" id="c2" name="color" value="${img.color }" /><input id="bt" type="button" value="选色" />
+ --%>   
+ <input type="text" id="c5" name="color"  value="${img.color }"/>
+ </div>
   </div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
@@ -163,7 +177,7 @@
 					<a href="/admin/hello/list" id="a1">返回</a>
 				</button>
 			</div>
-		</div>
+		</div> 
 
 	</form>  
 

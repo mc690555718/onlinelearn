@@ -27,6 +27,8 @@
 <link rel="stylesheet" type="text/css"
 	href="/common/bootstrap/css/bootstrap.css" />
 	
+
+
 	<style type="text/css">
 	
 		#in1{
@@ -58,6 +60,11 @@
     -webkit-text-overflow: ellipsis;  
 }  
 
+#img1{
+width: 100px;
+height: 80px;
+
+}
 	</style>
 	
 <script type="text/javascript">
@@ -124,6 +131,7 @@
  	}
  }
 
+
 </script>
 
 </head>
@@ -136,7 +144,7 @@
 						<div class="layui-inline">
 							<div class="layui-input-inline">
 								<input value="${title}" name="title" placeholder="请输入关键字"
-									class="layui-input search_input" type="text">
+									class="layui-input search_input" type="text"  maxlength="20">
 							</div>  
 
 							<label class="layui-inline">类型:</label>
@@ -183,8 +191,9 @@
 										<td><input type="checkbox" id="subcheck" name="subcheck" value="${p.imageId}"></td>
 										<td>${stat.index+1}</td>
 										<td>${p.title }</td>
-										<td><div id="ca" title="${p.imageUrl}">${p.imageUrl}</td>
-										<td>${p.linkAddress}</td>
+										<td><img src="${p.previewUrl}" id="img1"/></td>
+<%-- 										<td><div id="ca" title="${p.imageUrl}">${p.imageUrl}</td>
+ --%>										<td>${p.linkAddress}</td>
 										<td>${p.imgType.typeName}</td>
 										<td>${p.seriesNumber}</td>
 										<td><a class="layui-btn layui-btn-mini"

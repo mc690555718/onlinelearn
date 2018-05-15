@@ -68,12 +68,10 @@
 	function list() {
 		document.forms[0].action = "/admin/cy/listcomment";
 		document.forms[0].submit;
-
 	}
 
 	/*清空  */
 	function cy() {
-		alert(111)
 		$(document).ready(function() {
 			$(function() {
 				$('input:reset').click(function() {
@@ -81,22 +79,29 @@
 				});
 			});
 		});
-	}
-</script>
+	} 
+	
+	
 
+ 	function cly() {
+		document.forms[0].action = "/admin/cy/to";
+		document.forms[0].submit();
+	} 
+</script>
 </head>
-<body>
+<body>						
 	<section class="layui-larry-box">
 		<div class="larry-personal">
-			<div class="layui-tab">
+			<div class="layui-tab"> 
 				<blockquote class="layui-elem-quote news_search">
 					<form action="" method="post">
+					
 						<div class="layui-inline">
 							<div class="layui-input-inline">
-							<input value="" placeholder="请输入邮箱" id="inp1"  name="email" type="text" >
+							<input value="" placeholder="请输入邮箱" id="inp1"  name="email" type="text"  maxlength="20">
 							</div>
 							<div class="layui-input-inline">
-				<input value="" placeholder="请输入内容" id="inp1" name="content" type="text" > 
+				               <input value="" placeholder="请输入内容" id="inp1" name="content" type="text"  maxlength="20"> 
 							</div>
 
 							<label class="layui-inline">类型:</label>
@@ -107,7 +112,7 @@
 									<option value="2">课程</option>
 								</select>
 							</div>
-							开始时间
+							开始时间 
 							<div class="layui-input-inline">
 							<input class="layui-input search_input" type="text" name="start" onclick="WdatePicker()" id="inp1">
 							</div>
@@ -120,10 +125,6 @@
 							<button type="submit" id="in1" onclick="list()">查找评论</button>
 							<button type="reset" id="in1" onclick="cy()">清空</button>
 						</div>
-
-
-
-
 
 					</form>
 				</blockquote>
@@ -160,7 +161,7 @@
 										<td>${p.reply_count}</td>
 										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
-										<td><a class="layui-btn layui-btn-mini" href="#"><i
+										<td><a class="layui-btn layui-btn-mini" href="#" onclick="cly()"><i
 												class="iconfont icon-edit"></i> 回复评论</a> <a
 											class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
 											href="/admin/cy/delete/${p.comment_id}"> <i
@@ -168,8 +169,8 @@
 										</a></td>
 									</tr> 
 								</c:forEach>
-						<tr>
-						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+						    <tr>
+						    <td align="center" colspan="9"><font face="微软雅黑" size="3px"
 							color="black">一共${page.pages}页</font> 
 							<font face="微软雅黑" size="3px"
 							color="black">每页${page.pageSize }条/</font>
@@ -180,18 +181,12 @@
 							<a class="layui-btn"
 							href="/admin/cy/listcomment?page=${page.nextPage}">下一页</a>
 							<a class="layui-btn"
-							href="/admin/cy/listcomment?page=${page.lastPage}">最后页</a></td>
-					</tr>
-
-
-
+							href="/admin/cy/listcomment?page=${page.lastPage}">最后页</a>
+							</td>
+					        </tr>
 						</tbody>
 						</table>
-
-
-					
 					</div>
-					<!-- 登录日志 -->
 					<div class="layui-tab-item layui-field-box">
 						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
 							<thead>
@@ -229,7 +224,7 @@
 			</div>
 		</div>
 	</section>
-	<!-- 	<script type="text/javascript" src="/common/layui/layui.js"></script>
- -->
+	 	<script type="text/javascript" src="/common/layui/layui.js"></script>
+ 
 </body>
 </html>

@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" type="text/css"
-	href="/common/layui/css/layui.css" media="all">
+	href="/static/common/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css"
 	href="/common/bootstrap/css/bootstrap.css" media="all">
 <link rel="stylesheet" type="text/css" href="/common/global.css"
@@ -21,7 +21,8 @@
 <link rel="stylesheet" type="text/css" href="/css/personal.css"
 	media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
-<script type="text/javascript" src="/common/layui/layui.js"></script>
+<script type="text/javascript" src="/static/common/layui/layui.js"></script>
+<script type="text/javascript" src="/static/common/layui/layui.all.js"></script>
 <script type="text/javascript" src="/js/jquery-form.js"></script>
 <style type="text/css">
 form {
@@ -47,12 +48,12 @@ form {
 		<!-- 视频上传 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">视频上传</label>
-			<div class="layui-input-inline">
-				<input type="password" name="password" required
-					lay-verify="required" placeholder="请输入密码" autocomplete="off"
-					class="layui-input">
+			<div class="layui-input-block">
+  			        <button class="layui-btn layui-btn-normal" id="vedio_btn" name="vedioFile" type="button">选择文件</button>
+  			        <button class="layui-btn" id="start_upload" type="button">开始上传</button>
+					<input type="hidden" name="video_url" id="video_url" value=""/>
 			</div>
-			<div class="layui-form-mid layui-word-aux">辅助文字</div>
+			<div class="layui-form-mid layui-word-aux" id="upload_tittle">请选择视频文件</div>
 		</div>
 
 		<!-- 排序 -->
@@ -112,17 +113,67 @@ form {
 
 	<script>
 	
+	var num = 0;
+	var t1 = null;
+	//一个上传动画定时器
+	function uploading(){ 
+		var title = "上传中,请耐心等待";
+		for(var i = 0 ; i<=num;i++){
+			if(num<6){
+				title+=".";
+			}else{
+				num = 0;
+				title+=".";
+			}
+		}
+		num++;
+		$("#upload_tittle").text(title);
+	} 
+	
+	
 	$(function(){
 		layui.use('form', function(){
-			var form = layui.form(); //只有执行了这一步，部分表单元素才会修饰成功 
+			var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
+			//异步加载教师下拉框
 			$.post("/admin/cou/getTeacher/"+$("#course_id").val(),function(msg){
 				for(var i = 0;i < msg.length;i++){
-					alert(msg[i].id);
 					$("#teacher_id").append("<option value='"+msg[i].id+"' >"+msg[i].name+"</option>");
 				}
 				form.render();
 			},"json");
 		}); 
+		
+		
+		//加载上传组件
+		layui.use('upload', function() {
+			
+			var upload = layui.upload; //得到 upload 对象
+			  upload.render({
+				  elem: '#vedio_btn'//上传资源
+					    ,url: '/admin/cou/uploadVideo'
+					    ,auto: false//自动上传  取消
+					    ,accept: 'file' //普通文件
+					    ,exts: 'ram|avi|mov|qt|wmv|vob|mpeg|asf|mp4|mpg|mpe|rmvb' //只允许上传视频文件
+					    ,method:'post'
+					    ,size:'524288000'//kb
+					    ,bindAction: '#start_upload'//激活上传
+				    ,before : function(input) {
+				    	t1 = window.setInterval(uploading,200); 
+					}
+				    ,done: function(res){
+				    	window.clearInterval(t1);
+				    	$("#upload_tittle").css({"color":"green"});
+				    	$("#upload_tittle").text("上传成功");
+				    	$("#video_url").val(res.video_url);
+				    }
+				    ,error : function(){
+				    	window.clearInterval(t1);
+				    	$("#upload_tittle").css({"color":"red"});
+				    	$("#upload_tittle").text("上传失败");
+				    }
+			 });
+		});
+		
 		
 	});
 

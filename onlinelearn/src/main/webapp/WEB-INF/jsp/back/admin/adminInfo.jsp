@@ -14,7 +14,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" type="text/css"
-	href="/common/layui/css/layui.css" media="all">
+	href="/static/common/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css"
 	href="/common/bootstrap/css/bootstrap.css" media="all">
 <link rel="stylesheet" type="text/css" href="/common/global.css"
@@ -30,12 +30,12 @@
 		<div class="layui-tab">
 			<!-- 用户详情 -->
 			<form class="layui-form" action="" method="post"
-				style="height: 530px;">
+				style="height: 550px;">
 				<input type="hidden" id="aid" name="user_id" value="${user.user_id}" />
 				<!-- 用户名 -->
 				<div class="layui-form-item">
 					<label class="layui-form-label">用户名</label>
-					<div class="layui-input-block">
+					<div class="layui-input-inline">
 						<input type="text" name="login_name" value="${user.login_name}"
 							required lay-verify="required" autocomplete="off"
 							class="layui-input layui-disabled" disabled>
@@ -44,7 +44,7 @@
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">真实姓名</label>
-					<div class="layui-input-block">
+					<div class="layui-input-inline">
 						<input type="text" name="user_name" value="${user.user_name}"
 							required lay-verify="required" autocomplete="off"
 							class="layui-input">
@@ -69,7 +69,7 @@
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">角色</label>
-					<div class="layui-input-block">
+					<div class="layui-input-inline">
 						<select name="role_id" lay-verify="required" id="sel_role">
 							<option value="-1">--------请选择角色-------</option>
 							<c:forEach items="${roles}" var="role">
@@ -100,15 +100,17 @@
 	</div>
 
 	</section>
-	<script type="text/javascript" src="/common/layui/layui.js"></script>
+	<script type="text/javascript" src="/static/common/layui/layui.js"></script>
 	<script>
 $(function(){
+	
+	layui.use('form', function(){
+		var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
+	});
 
 	var radioIndex = ${user.status};
 	$('input:radio[name=user_status]')[radioIndex].checked = true;
 	$("#btn_submit").click(function(){
-		/* var r1 = $('input:radio[name=user_status]:checked').val();
-		alert(r1); */
 		document.forms[0].action="/admin/sysuser/sysuseredit";
 		document.forms[0].submit();
 	});

@@ -23,8 +23,12 @@
 	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/css/adminstyle.css" media="all">
-	
-	
+	<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
+	<script type="text/javascript">
+	    function toMyInfo(){
+	    	$("#iframe_body").attr("src","/admin/sysuser/toeditsysuser/${user.user_id}");
+	    }
+	</script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin" id="layui_layout">
@@ -44,12 +48,6 @@
                        <li class="layui-nav-item layui-this">
                  	   	   <a href="javascirpt:;"><i class="iconfont icon-wangzhanguanli"></i>内容管理</a>
                  	   </li>
-                 	   <li class="layui-nav-item">
-                 	   	   <a href="javascirpt:;"><i class="iconfont icon-weixin3"></i>微信公众</a>
-                 	   </li>
-                 	   <li class="layui-nav-item">
-                 	   	   <a href="javascirpt:;"><i class="iconfont icon-ht_expand"></i>扩展模块</a>
-                 	   </li>
                  </ul>
             </div>
             <!-- 右侧导航 -->
@@ -59,23 +57,18 @@
             		</li>
             		<li class="layui-nav-item first">
 						<a href="javascript:;">			
-							<cite>默认站点</cite>
+							<cite>用户</cite>
 							<span class="layui-nav-more"></span>
 						</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="">站点1</a>
+								<a href="javascript:;" onclick="toMyInfo()">个人资料</a>
 							</dd>
 							<dd>
-								<a href="">站点2</a>
+								<a href="">修改密码</a>
 							</dd>
 							
 						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a href="javascript:;" id="lock">
-                        <i class="iconfont icon-diannao1"></i>
-						锁屏</a>
 					</li>
 					<li class="layui-nav-item">
 						<a href="/admin/logout">
@@ -123,7 +116,6 @@
 			</li>
 			 </c:if> 
 			</c:forEach>
-			
 				
 				<li class="layui-nav-item">
 					<a href="javascript:;">
@@ -247,7 +239,7 @@
 				</ul>
 			<div class="layui-tab-content" style="min-height: 150px; ">
 				<div class="layui-tab-item layui-show">
-					<iframe class="larry-iframe" data-id='0' src="/admin/back/main"></iframe>
+					<iframe class="larry-iframe" data-id='0' src="/admin/back/main" id="iframe_body"></iframe>
 				</div>
 			</div>
 		</div>
@@ -266,20 +258,6 @@
 	<script type="text/javascript" src="/common/layui/layui.js"></script> 
 	<script type="text/javascript" src="/js/larry.js"></script>
 	<script type="text/javascript" src="/js/index.js"></script>
-<!-- 锁屏 -->
-<div class="lock-screen" style="display: none;">
-	<div id="locker" class="lock-wrapper">
-		<div id="time"></div>
-		<div class="lock-box center">
-			<img src="/images/userimg.jpg" alt="">
-			<h1>admin</h1>
-			<duv class="form-group col-lg-12">
-				<input type="password" placeholder='锁屏状态，请输入密码解锁' id="lock_password" class="form-control lock-input" autofocus name="lock_password">
-				<button id="unlock" class="btn btn-lock">解锁</button>
-			</duv>
-		</div>
-	</div>
-</div>
 
 </body>
 </html>

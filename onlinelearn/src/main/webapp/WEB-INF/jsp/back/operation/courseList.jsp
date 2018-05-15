@@ -144,11 +144,11 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 										<td><fmt:formatDate value="${ec.end_time }"
 												pattern="yyyy-MM-dd HH:mm" /></td>
 										<td><a href="/admin/cou/toCourseKpoint/${ec.course_id }"
-											class="layui-btn layui-btn-xs">章节</a>
+											class="layui-btn layui-btn-sm">章节</a>
 										    <a href="/admin/cou/toCourseUpdate/${ec.course_id }"
-											class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i></a>
+											class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></a>
 											<a href="/admin/cou/delCourse/${ec.course_id }"
-											class="layui-btn layui-btn-danger layui-btn-xs"> <i
+											class="layui-btn layui-btn-danger layui-btn-sm"> <i
 												class="layui-icon">&#xe640;</i></a></td>
 									</tr>
 								</c:forEach>

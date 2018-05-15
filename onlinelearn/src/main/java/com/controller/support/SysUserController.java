@@ -3,8 +3,10 @@ package com.controller.support;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.bean.SysRole;
 import com.bean.SysUser;
@@ -56,6 +58,26 @@ public class SysUserController {
 		return mv;
 	}
 	
+	
+	@RequestMapping("/updatepwd")
+	@ResponseBody
+	public int updatepwd(ModelAndView mv,String login_pwd,String user_id,String login_name){
+		SysUser user = new SysUser();
+		if (login_pwd != null && login_pwd.trim().length() != 0) {
+			user.setLogin_pwd(login_pwd);
+		}
+		if (user_id != null && user_id.trim().length() != 0) {
+			user.setUser_id(Integer.valueOf(user_id));
+		}
+		if (login_name != null && login_name.trim().length() != 0) {
+			user.setLogin_name(login_name);
+		}
+		//若此行代码不加，会报    source is null for getProperty(null, "role_id")   异常
+		user.setRole(new SysRole());
+		us.edit(user);
+		return 0;
+	}
+	
 	@RequestMapping("/tocreateuser")
 	public ModelAndView toCreateUser(ModelAndView mv){
 		List<SysRole> roles = rs.query();
@@ -71,5 +93,7 @@ public class SysUserController {
 		mv.setViewName("redirect:/admin/sysuser/userlist");
 		return mv;
 	}
+	
+	
 	
 }

@@ -22,34 +22,35 @@
 
 	<div class="layui-canvs"></div>
 	<div class="layui-layout layui-layout-login">
-	<form action="" method="post" >
+	<form action="" method="post" id="login_form">
 		<h1>
-			<strong>LarryCMS管理系统后台</strong> <em>Management System</em>
+			<strong>三阳科技在线学习管理系统后台</strong> <em>Management System</em>
 		</h1>
 	<div class="layui-user-icon larry-login">
-		 <input type="text" placeholder="请输入账号..." class="login_txtbx" name="login_name"/>
+	    <p>
+		   <input type="text" placeholder="请输入账号..." class="login_txtbx" name="login_name"/>
+		</p>
 	</div>
 	<div class="layui-pwd-icon larry-login">
-		 <input type="password" placeholder="请输入密码..." class="login_txtbx" name="login_pwd"/>
+	    <p>
+		   <input type="password" placeholder="请输入密码..." class="login_txtbx" name="login_pwd"/>
+		</p>
 	</div>
-    <div class="layui-val-icon larry-login">
-    	<div class="layui-code-box">
-    		<input type="text" id="code" name="code" placeholder="请输入验证码..." maxlength="4" class="login_txtbx">
-            <img src="images/verifyimg.png" alt="" class="verifyImg" id="verifyImg" onClick="javascript:this.src='xxx'+Math.random();">
-    	</div>
-    </div>
     <div class="layui-submit larry-login">
     	<input type="button" value="立即登陆" class="submit_btn"/>
     </div>
     </form>
     <div class="layui-login-text">
-    	<p>© 2016-2017 Larry 版权所有</p>
+    	<p>© 2017-2018 三阳科技 版权所有</p>
         <p>鄂xxxxxx</p>
     </div>
 </div>
 <script type="text/javascript" src="/common/layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 <script type="text/javascript" src="/jsplug/jparticle.jquery.js"></script>
+<!-- <script type="text/javascript" src="/validate/lib/jquery.js"></script> -->
+<!-- <script type="text/javascript" src="/validate/dist/jquery.validate.js"></script> -->
+<!-- <script type="text/javascript" src="/validate/dist/localization/messages_zh.js"></script> -->
 <script type="text/javascript">
 $(function(){
 	$(".layui-canvs").jParticle({
@@ -58,20 +59,35 @@ $(function(){
 	});
 	//登录链接测试，使用时可删除
 	$(".submit_btn").click(function(){
-		var username=$( "input[name='login_name' ]").val();
-		var password=$("input[name='login_pwd' ]").val();
-		var code=$("#code").val();
-		var up_check = true;
-		if(username==null || username.trim().length==0 || password==null || password.trim().length==0){
-			up_check = false;
-			alert("用户名或密码不能为空!");
-		}
-		if(up_check){
+
 			document.forms[0].action="/admin/back/checkAdmin";
 			document.forms[0].submit();
-		}
-        	
 	});
+	
+// 	// 在键盘按下并释放及提交后验证提交表单
+// 	  $("#login_form").validate({
+// 	    rules: {
+// 	      username: {
+// 	        required: true,
+// 	        minlength: 5
+// 	      },
+// 	      password: {
+// 	        required: true,
+// 	        minlength: 6
+// 	      }
+// 	    },
+// 	    messages: {
+// 	      username: {
+// 	        required: "请输入用户名",
+// 	        minlength: "用户名必需由5个字母组成"
+// 	      },
+// 	      password: {
+// 	        required: "请输入密码",
+// 	        minlength: "密码长度不能小于 6 个字母"
+// 	      }
+// 	     }
+// 	    })
+
 });
 </script>
 

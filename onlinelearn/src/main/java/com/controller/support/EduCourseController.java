@@ -433,6 +433,7 @@ public class EduCourseController {
 	@ResponseBody
 	public int updateKpoint(ModelAndView mv,EduCourseKpoint kpoint){
 		cs.updateKpoint(kpoint);
+		System.out.println(kpoint);
 		return 0;
 	}
 
@@ -488,11 +489,25 @@ public class EduCourseController {
      */
     @ResponseBody
     @RequestMapping(value="/uploadVideo",method=RequestMethod.POST)
-    public String uploadVideo(@RequestParam("vedio")MultipartFile video,HttpServletRequest request){
-    	String path="success";
-    	if (video != null) {
-			
+    public String uploadVideo(@RequestParam("file")MultipartFile file,HttpServletRequest request){
+		//上传视频
+		if (file != null) {
+			String filename=file.getOriginalFilename();
+			//upload文件夹的路径
+			String path=request.getRealPath("/images/upload/video/");
+			File newfile=new File(path,filename);
+			try{
+				//将客户端上传的文件复制到服务器中
+				file.transferTo(newfile);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			String videoPath = "/images/upload/video/"+filename;
+			EduCourseKpoint point = new EduCourseKpoint();
+			point.setVideo_url(videoPath);
+			String json = JsonUtils.objectToJson(point);
+			return json;
 		}
-		return JsonUtils.objectToJson(path);
+		return null;
     }
 }

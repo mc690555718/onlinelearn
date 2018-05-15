@@ -130,7 +130,7 @@
 		edu_course_teacher where course_id = #{value}
 		)
 	</select>
-
+    <!-- 修改课程 -->
 	<update id="update" parameterType="EduCourse">
 
 		<!-- private int course_id; //课程编号 -->
@@ -193,7 +193,7 @@
 		edu_course_kpoint where kpoint_id = #{value}
 	</delete>
 
-
+<!-- 添加课程章节 -->
 	<insert id="addKpointParent" parameterType="EduCourseKpoint">
 		<!-- private int kpoint_id; //主键 -->
 		<!-- private int course_id; //课程id -->
@@ -207,7 +207,6 @@
 		<!-- private int teacher_id; //讲师id -->
 		<!-- private String play_time;//播放时间 -->
 		<!-- private int kpoint_type; //节点类型 0文件目录 1视频 -->
-		S
 		<!-- private String video_type;//视频类型 -->
 		<!-- private String file_type;//VIDEO视频 AUDIO音频 FILE文档 TXT文本 ATLAS图片集 -->
 		<!-- private String content; //文本 -->
@@ -226,7 +225,7 @@
 	<select id="getKpointById" parameterType="int" resultType="EduCourseKpoint">
 		select * from edu_course_kpoint where kpoint_id = #{value}
 	</select>
-
+<!-- 修改节点 -->
 	<update id="updateKpoint" parameterType="EduCourseKpoint">
 		<!-- null,#{course_id},#{name},#{parent_id},#{add_time},#{sort},#{play_count},#{is_free} -->
 		<!-- ,#{video_url},#{teacher_id},#{play_time},#{kpoint_type},#{video_type},#{file_type},null -->
@@ -243,6 +242,9 @@
 			</if>
 			<if test="is_free!=null">
 				is_free = #{is_free},
+			</if>
+			<if test="video_url!=null">
+			    video_url = #{video_url},
 			</if>
 			<if test="teacher_id!=null">
 				teacher_id = #{teacher_id},

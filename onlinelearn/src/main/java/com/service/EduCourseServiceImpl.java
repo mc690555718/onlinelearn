@@ -150,6 +150,4 @@ public class EduCourseServiceImpl implements EduCourseService{
 			mapper.updateKpoint(kpoint);
 		}
 	}
-
-
 }

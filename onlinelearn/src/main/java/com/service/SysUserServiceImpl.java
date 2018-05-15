@@ -48,6 +48,9 @@ public class SysUserServiceImpl implements SysUserService{
 	@Override
 	public void edit(SysUser user) {
 		if (user!= null) {
+			if (user.getLogin_pwd() != null && user.getLogin_pwd().trim().length()!= 0) {
+				user.setLogin_pwd(Encryption.encryptionByMD5(user.getLogin_name(), user.getLogin_pwd()));
+			}
 			mapper.edit(user);
 		}
 	}

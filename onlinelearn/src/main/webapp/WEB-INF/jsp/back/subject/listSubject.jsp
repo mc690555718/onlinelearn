@@ -86,11 +86,11 @@
 											<td>${sub.sort}</td>
 											<td><shiro:hasPermission name="subject_upd">
 													<a href="javascript:updateSubject(${sub.subject_id})"
-														class="layui-btn layui-btn-xs"> <i class="layui-icon">&#xe642;</i>
+														class="layui-btn layui-btn-sm"> <i class="layui-icon">&#xe642;</i>
 													</a>
 												</shiro:hasPermission> <shiro:hasPermission name="subject_del">
 													<a href="/admin/subj/deletesubject/${sub.subject_id}"
-														class="layui-btn layui-btn-danger layui-btn-xs"> <i
+														class="layui-btn layui-btn-danger layui-btn-sm"> <i
 														class="layui-icon">&#xe640;</i>
 													</a>
 												</shiro:hasPermission></td>

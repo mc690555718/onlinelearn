@@ -56,7 +56,7 @@
 								<col width="10%">
 								<col width="10%">
 								<col width="8%">
-								<col width="10%">
+								<col width="15%">
 							</colgroup>
 							<thead>
 								<tr>
@@ -83,13 +83,18 @@
 												type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 										<td>${user.tel}</td>
 										<td>${user.role.role_name}</td>
-										<td><shiro:hasPermission name="user_update">
+										<td>
+										
+										<shiro:hasPermission name="user_update">
+										        <a href="javascript:;" onclick="updatePwd(${user.user_id},${user.login_name})"
+													class="layui-btn layui-btn-sm"> 修改密码
+												</a>
 												<a href="/admin/sysuser/toeditsysuser/${user.user_id}"
-													class="layui-btn layui-btn-xs"> <i class="layui-icon">&#xe642;</i>
+													class="layui-btn layui-btn-sm"> <i class="layui-icon">&#xe642;</i>
 												</a>
 											</shiro:hasPermission> <shiro:hasPermission name="user_delete">
 												<a href="/admin/sysuser/deleteuser/${user.user_id}"
-													class="layui-btn layui-btn-xs"> <i class="layui-icon">&#xe640;</i>
+													class="layui-btn layui-btn-sm layui-btn-danger"> <i class="layui-icon">&#xe640;</i>
 												</a>
 											</shiro:hasPermission></td>
 									</tr>
@@ -107,11 +112,66 @@
 	<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 	<script type="text/javascript">
 		$(function(){
+			layui.use('layer', function(){ //独立版的layer无需执行这一句
+				  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+			});
+			
 			$("#btn_search").click(function(){
 				document.forms[0].action="/admin/sysuser/userlist";
 				document.forms[0].submit();
 			});
+			
 		});
+		
+		function updatePwd(user_id,login_name){
+			//修改密码
+			var html = 
+				  "     <div class='layui-form-item'>                                                                 "
+				+ "     <label class='layui-form-label'>原密码</label>                                                  "
+				+ "     <div class='layui-input-block'>                                                               "
+				+ "        <input type='password' name='olderPwd' id='olderPwd' required lay-verify='required'        "
+				+ "           autocomplete='off' class='layui-input' placeholder='请输入原密码'/>                         "
+				+ "     </div>                                                                                        "
+				+ "     </div>                                                                                        "
+				+ "     <div class='layui-form-item'>                                                                 "
+				+ "     <label class='layui-form-label'>新密码</label>                                                  "
+				+ "     <div class='layui-input-block'>                                                               "
+				+ "        <input type='password' name='newPwd' id='newPwd' required lay-verify='required'            "
+				+ "           autocomplete='off' class='layui-input' placeholder='请输入新密码'/>                         "
+				+ "     </div>                                                                                        "
+				+ "     </div>                                                                                        "
+				+ "     <div class='layui-form-item'>                                                                 "
+				+ "     <label class='layui-form-label'>再次输入密码</label>                                                  "
+				+ "     <div class='layui-input-block'>                                                               "
+				+ "        <input type='password' name='confimPwd' id='confimPwd' required lay-verify='required'            "
+				+ "           autocomplete='off' class='layui-input' placeholder='请再次输入新密码'/>                         "
+				+ "     </div>                                                                                        "
+				+ "     </div>                                                                                        ";
+	        layui.use('layer', function(){
+		        layer.open({
+					type : 1,
+					title : '修改密码',
+					skin : 'layui-layer-rim',
+					offset : '150px',
+					btnAlign : 'c', //按钮居中
+					shade : 0, //不显示遮罩
+					maxmin : true, //开启最大化最小化按钮
+					area : [ '420px', 'auto' ],
+					btn : '确定',
+					content : html,
+					yes : function() {
+//			 			/admin/sysuser/sysuseredit
+// 						layer.tips('Hi，我是tips', '#olderPwd');
+                        var newPwd = $("#newPwd").val();
+                        $.post("/admin/sysuser/updatepwd?user_id="+user_id+"&login_pwd="+newPwd+"&login_name="+login_name
+                        		,function(res){
+                        	layer.closeAll();
+                        	layer.msg('修改成功', {icon: 6});
+                        });
+					}
+				});
+	        });
+		}
 	</script>
 </body>
 </html>

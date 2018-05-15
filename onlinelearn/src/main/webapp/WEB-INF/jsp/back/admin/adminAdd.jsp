@@ -12,7 +12,7 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">	
 	<meta name="apple-mobile-web-app-capable" content="yes">	
 	<meta name="format-detection" content="telephone=no">	
-	<link rel="stylesheet" type="text/css" href="/common/layui/css/layui.css" media="all">
+	<link rel="stylesheet" type="text/css" href="/static/common/layui/css/layui.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 	<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
@@ -24,11 +24,11 @@
 	<div class="larry-personal">
 	    <div class="layui-tab">
 		         <!-- 用户添加 -->
-                <form class="layui-form" action="" method="post" style="height: 530px;">
+                <form class="layui-form" action="" method="post" style="height: 550px;">
                    <!-- 用户名 -->
 				  <div class="layui-form-item">
 				    <label class="layui-form-label" >用户名</label>
-				    <div class="layui-input-block">
+				    <div class="layui-input-inline">
 				      <input type="text" name="login_name" value="" required  lay-verify="required"  autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
@@ -36,13 +36,13 @@
                   <!--  密码 -->
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">密码</label>
-				    <div class="layui-input-inline">
+				    <div class="layui-input-block">
 				      <input type="password" name="login_pwd" value="" required lay-verify="required" autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">真实姓名</label>
-				    <div class="layui-input-block">
+				    <div class="layui-input-inline">
 				      <input type="text" name="user_name" value="" required  lay-verify="required"  autocomplete="off" class="layui-input">
 				    </div>
 				  </div>
@@ -56,7 +56,7 @@
 
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">角色</label>
-				    <div class="layui-input-block">
+				    <div class="layui-input-inline">
 				    <select name="role_id" lay-verify="required" id="sel_role">
                          <option value="-1">--------请选择角色-------</option>
                          <c:forEach items="${roles}" var="role">
@@ -81,9 +81,14 @@
 		</div>
 	
 </section>
-<script type="text/javascript" src="/common/layui/layui.js"></script>
+<script type="text/javascript" src="/static/common/layui/layui.js"></script>
 <script>
 $(function(){
+	
+	layui.use('form', function(){
+		var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
+	});
+	
 	$("#btn_submit").click(function(){
 		document.forms[0].action="/admin/sysuser/createuser";
 		document.forms[0].submit();

@@ -185,7 +185,6 @@
 			$("input[name=subjectId]").val(ids);
 		}
 		function showMenu() {
-			alert("1233");
 			var cityObj = $("#citySel");
 			var cityOffset = $("#citySel").offset();
 			$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");

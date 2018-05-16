@@ -6,6 +6,6 @@ import com.bean.WebTeacherBean;
 
 public interface WebTeacherMapper {
 	
-	List<WebTeacherBean> list(int id);
+	List<WebTeacherBean> list(int cousrse_id);
 
 }

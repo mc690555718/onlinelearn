@@ -25,7 +25,8 @@
 					<!-- /无数据提示 开始-->
 					<c:if test="${empty list }">
 						<section class="no-data-wrap">
-							<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
+							<em class="icon30 no-data-ico">&nbsp;</em>
+							 <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
 						</section>
 					</c:if>
 					<!-- /无数据提示 结束-->

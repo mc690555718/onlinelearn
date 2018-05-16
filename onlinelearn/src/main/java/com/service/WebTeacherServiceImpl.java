@@ -14,8 +14,8 @@ public class WebTeacherServiceImpl implements WebTeacherService{
 	private WebTeacherMapper webTeacherMapper;
 
 	@Override
-	public List<WebTeacherBean> list(int id) {
-		List<WebTeacherBean> list =webTeacherMapper.list(id);
+	public List<WebTeacherBean> list(int cousrse_id) {
+		List<WebTeacherBean> list =webTeacherMapper.list(cousrse_id);
 		return list;
 	}
 

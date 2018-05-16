@@ -200,6 +200,7 @@ public class TeacherController {
 
 		//图片上传
 		//获得物理路径webapp所在路径
+		String pic=request.getParameter("hiddens");
 		String filename=file.getOriginalFilename();
 		String path = request.getRealPath("/images/upload/teacher/20150915/");
 		File file2=new File(path,filename);
@@ -207,6 +208,7 @@ public class TeacherController {
 			file2.mkdir();
 		}
 		if (filename.equals("")||filename==null) {
+			teacherBean.setPic_path(pic);
 			teacherBean.setPic_path(path);
 		}else {
 			try {

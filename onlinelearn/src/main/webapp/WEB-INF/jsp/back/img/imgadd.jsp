@@ -26,8 +26,8 @@
 <style type="text/css">
 
    #div1{
-	width: 1180px;
-	height: 680px;
+	width: 1580px;
+	height: 800px;
 	background-color: #ADADAD;
    }
    
@@ -90,7 +90,7 @@ function save(){
     </div>
      
   </div>
-
+<br>
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片描述:</label>
     <div class="col-sm-10">
@@ -98,7 +98,7 @@ function save(){
     </div>
      
   </div>
-  
+  <br>
    <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片类型:</label>
     <div class="col-sm-10">
@@ -114,7 +114,7 @@ function save(){
     
   </div> 
   
-               
+     <br>          
 			
      <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">跳转链接:</label>
@@ -122,7 +122,7 @@ function save(){
       <input type="" class="form-control" id="linkAddress" name="linkAddress" placeholder="请输入跳转链接"  maxlength="20">
     </div>
   </div>
-  
+  <br>
   
       <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">排序:</label>
@@ -130,7 +130,7 @@ function save(){
       <input type="" class="form-control" id="seriesNumber" name="seriesNumber" placeholder="请输入排序"  maxlength="3">
     </div>
   </div>
-  
+  <br>
   
      <div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">图片:</label>
@@ -142,7 +142,7 @@ function save(){
 				</div>
 			</div>
 		</div>
-
+<br>
 
 <!-- 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">略缩图片:</label>
@@ -153,7 +153,7 @@ function save(){
 			</div>
 		</div>    -->
   
-  
+  <br>
     <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">背景颜色:</label>
     <div class="col-sm-10">
@@ -162,7 +162,7 @@ function save(){
 
    </div>
   </div>
-  
+  <br>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default" id="cy" onclick="save()">添加</button>

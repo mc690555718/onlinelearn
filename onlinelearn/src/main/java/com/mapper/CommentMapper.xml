@@ -65,5 +65,10 @@
 		select * from edu_comment where other_id=#{other_id} and p_comment_id
 		=#{p_comment_id}
 	</select>
+	
+	<update id="addNum" parameterType="int">
+   update edu_comment set
+		reply_count=reply_count+1 where other_id=#{other_id}
+</update>
 
 </mapper> 

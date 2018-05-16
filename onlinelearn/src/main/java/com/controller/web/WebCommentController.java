@@ -46,6 +46,7 @@ public class WebCommentController {
 	public ModelAndView updateValue(@PathVariable int article_id) {
 		ModelAndView mv = new ModelAndView();
 		Article article = articleService.getById(article_id);
+		articleService.addClickNum(article_id);
 		mv.addObject("article", article);
 		mv.setViewName("/web/article/article-info");
 		return mv;
@@ -72,6 +73,7 @@ public class WebCommentController {
 		comment.setType(type);
 		comment.setOther_id(otherId);
 		comment.setUser(edu_User);
+		articleService.addNum(otherId);
 		commentService.save(comment);
 		return "/web/course/comment";
 	}
@@ -89,6 +91,7 @@ public class WebCommentController {
 		comment.setType(type);
 		comment.setOther_id(otherId);
 		comment.setUser(edu_User);
+		commentService.addNum(otherId);
 		commentService.save(comment);
 		return "/web/comment/comment";
 	}

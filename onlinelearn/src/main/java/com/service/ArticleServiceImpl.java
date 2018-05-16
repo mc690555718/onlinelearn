@@ -87,5 +87,17 @@ public   class ArticleServiceImpl implements ArticleService{
 		articleMapper.releaseEdit(article);
 	}
 
+	@Override
+	public void addNum(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.addNum(article_id);
+	}
+
+	@Override
+	public void addClickNum(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.addClickNum(article_id);
+	}
+
 	
 }

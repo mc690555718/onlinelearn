@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,6 +101,7 @@
 							pattern="yyyy-MM-dd hh:mm:ss" /></td>
 										<td>${a.click_num }</td>
 										<td>
+										<shiro:hasPermission name="article_open">
 										<c:if test="${a.releases==0 }">
 										<a href="/admin/article/releaseEdit/${a.article_id }/${a.releases}"
 											class="btn btn-default ">未发布</a>
@@ -108,10 +110,14 @@
 										<a href="/admin/article/releaseEdit/${a.article_id }/${a.releases}"
 											class="btn btn-default ">已发布</a>
 										</c:if>
+										</shiro:hasPermission>
 										<a href="/admin/article/delete?article_id=${a.article_id }"
 											class="btn btn-default ">删除</a>
+											<shiro:hasPermission name="article_update">
 											<a href="/admin/article/updateValue?article_id=${a.article_id }"
-											class="btn btn-default">修改</a></td>
+											class="btn btn-default">修改</a>
+											</shiro:hasPermission>
+											</td>
 									</tr>
 								</c:forEach>
 								

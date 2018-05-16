@@ -13,8 +13,8 @@
 				<div class="fl col-7">
 					<section class="mr30 pt10">
 						<section class="path-wrap txtOf hLh30">
-							<a href="${ctx }" title="" class="c-999 fsize14">首页</a> \ <a
-								href="${ctx }/questions/list" title="" class="c-999 fsize14">全部问答</a>
+							<!-- <a href="" title="" class="c-999 fsize14">首页</a> \ --> <a
+								href="/front/questions/0" title="" class="c-999 fsize14">全部问答</a>
 							 <span class="c-333 fsize14">${questions.title }</span>
 						</section>
 						<!-- /问题详情 开始 -->
@@ -24,7 +24,7 @@
 									<aside class="q-head-pic">
 										<c:choose>
 											<c:when test="${not empty question.edu_user.pic_img }">
-												<img src="<%=staticImage %>${questions.edu_user.pic_img }" alt="">
+												<img src="<%=staticImage %>${question.edu_user.pic_img }" alt="">
 											</c:when>
 											<c:otherwise>
 												<img src="${ctx }/static/inxweb/img/avatar-boy.gif" alt="">
@@ -115,7 +115,7 @@
 							<a href="javascript:void(0)" onclick="toAddQuestions()"
 								title="我要提问" class="comm-btn c-btn-5">我要提问</a>
 						</section>
-						<section class="pt20">
+						<%-- <section class="pt20">
 							<div class="taglist clearfix">
 								<form action="${ctx}/questions/list" id="searchForm"
 									method="post">
@@ -135,7 +135,7 @@
 										onclick="submitForm('${questionsTag.questionsTagId }','questionsTagId')">${questionsTag.questionsTagName }</a>
 								</c:forEach>
 							</div>
-						</section>
+						</section> --%>
 						<!-- /标签云 -->
 						<section class="mt30">
 							<section class="c-infor-tabTitle c-tab-title">

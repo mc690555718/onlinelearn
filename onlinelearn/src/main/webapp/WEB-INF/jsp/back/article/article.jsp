@@ -111,8 +111,10 @@
 											class="btn btn-default ">已发布</a>
 										</c:if>
 										</shiro:hasPermission>
+										<shiro:hasPermission name="article_del">
 										<a href="/admin/article/delete?article_id=${a.article_id }"
 											class="btn btn-default ">删除</a>
+										</shiro:hasPermission>
 											<shiro:hasPermission name="article_update">
 											<a href="/admin/article/updateValue?article_id=${a.article_id }"
 											class="btn btn-default">修改</a>

@@ -81,7 +81,7 @@
 									</fieldset>
 									<p class="of mt5 tar pl10 pr10">
 										<span class="fl"><tt class="c-red commentReplyMsg${ac.comment_id}"></tt></span>
-										<a onclick="addCommentReply('${ac.comment_id}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">123456回复</a>
+										<a onclick="addCommentReply('${ac.comment_id}')" class="lh-reply-btn" title="回复" href="javascript: void(0)">回复</a>
 									</p>
 								</section>
 								<div class="mt10 pl10 pr10 pb10 commentReply${ac.comment_id}"></div>

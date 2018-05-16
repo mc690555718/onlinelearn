@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="utf-8">
+
 		<title>layui</title>
-		
 		<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/common/global.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/css/personal.css" media="all">
@@ -88,6 +88,10 @@
 	});
 
 	
+	
+
+
+	
 </script>  
 </head>
 
@@ -102,14 +106,14 @@
 			<label for="inputEmail3" class="col-sm-2 control-label">图片标题:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" name="title" id="title"
-					value="${img.title }" placeholder="请输入标题" maxlength="20">
+					value="${img.title }" placeholder="请输入标题,只能输入中文汉字" maxlength="20" >
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword3" class="col-sm-2 control-label">图片描述:</label>
 			<div class="col-sm-10">
 				<input type="text" class="form-control" id="describes" name="describes"
-					value="${img.describes }" placeholder="请输入描述" maxlength="20">
+					value="${img.describes }" placeholder="请输入描述,只能输入中文汉字" maxlength="20">
 			</div>
 		</div>
 		<div class="form-group">
@@ -129,7 +133,7 @@
 			<div class="col-sm-10">
 				<input type="" class="form-control" id="linkAddress"
 					name="linkAddress" value="${img.linkAddress }"
-					placeholder="请输入跳转链接" maxlength="20">
+					placeholder="请输入跳转链接" maxlength="20"  onKeyUp="value=value.replace(/[\W]/g,'')">
 			</div>
 		</div>
 		<div class="form-group">
@@ -137,7 +141,7 @@
 			<div class="col-sm-10">
 				<input type="" class="form-control" id="seriesNumber"
 					name="seriesNumber" value="${img.seriesNumber }"
-					placeholder="请输入排序" maxlength="3">
+					placeholder="请输入排序,只能输入数字" maxlength="3" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
 			</div>
 		</div>
 		<div class="form-group">

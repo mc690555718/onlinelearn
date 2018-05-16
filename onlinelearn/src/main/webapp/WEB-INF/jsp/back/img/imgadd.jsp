@@ -8,6 +8,7 @@
 
 	<head>
 		<meta charset="utf-8">
+
 		<title>layui</title>
 		<link rel="stylesheet" type="text/css" href="/common/bootstrap/css/bootstrap.css" media="all">
 		<link rel="stylesheet" type="text/css" href="/common/global.css" media="all"> 
@@ -59,12 +60,11 @@
 }
 
 
+#img{width:25px;height:25px;display:block; border:1px solid #d3d3d3;}
 
 		</style>
 		
  <script type="text/javascript">
-
- 
 
 
 
@@ -74,7 +74,6 @@ function save(){
 }
 
 </script> 
-
 	</head>
 
 	<body>
@@ -82,22 +81,21 @@ function save(){
 		<br>
 		<br>
 		<br>
+		
 		<br>
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">图片标题:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="title" name="title" placeholder="请输入标题"  maxlength="20" >
+      <input type="" class="form-control" id="title" name="title" placeholder="请输入标题，只能输入中文汉字"  maxlength="20" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" >
     </div>
-     
   </div>
 
   <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片描述:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="describes" name="describes" placeholder="请输入描述"  maxlength="30">
+      <input type="" class="form-control" id="describes" name="describes" placeholder="请输入描述，只能输入中文汉字"  maxlength="30" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
     </div>
-     
-  </div>
+   </div>
   
    <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">图片类型:</label>
@@ -127,7 +125,7 @@ function save(){
       <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">排序:</label>
     <div class="col-sm-10">
-      <input type="" class="form-control" id="seriesNumber" name="seriesNumber" placeholder="请输入排序"  maxlength="3">
+      <input type="" class="form-control" id="seriesNumber" name="seriesNumber" placeholder="请输入排序,只能输入数字"  maxlength="3" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
     </div>
   </div>
   
@@ -159,6 +157,7 @@ function save(){
     <div class="col-sm-10">
 <!--     <input type="text" id="c2" name="color"/><input id="btun" type="button" value="选色" /> -->
  <input type="text" id="c5" name="color"/>
+ 
 
    </div>
   </div>
@@ -191,7 +190,7 @@ document.getElementById('file1').onchange = function() {
 	fr.readAsDataURL(imgFile); 
 }
   
-/* $(function(){6
+/* $(function(){
 	$("#btun").bigColorpicker("c2");
 }); */
 

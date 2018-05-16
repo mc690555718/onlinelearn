@@ -23,8 +23,19 @@ public class Article {
 	private int praise_count;  //  点赞数量
 	private int comment_num;  //   评论数
 	private int sort;  //  排序值
+	private int releases; //0未发布 1发布
 
 	
+	public int getReleases() {
+		return releases;
+	}
+
+
+	public void setReleases(int releases) {
+		this.releases = releases;
+	}
+
+
 	public int getArticle_id() {
 		return article_id;
 	}

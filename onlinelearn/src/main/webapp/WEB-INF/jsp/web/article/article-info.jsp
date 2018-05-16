@@ -39,7 +39,7 @@
 								<span class="i-art-title">${article.title }</span>
 							</h3>
 							<section class="hLh30 txtOf mt5 pb20 mreadnum">
-								<div class="fr">
+								<%-- <div class="fr">
 									<span> <a class="noter-dy vam" title="评论"
 										href="#i-art-comment"> <em class="icon18">&nbsp;</em>(<span
 											class="totalResultComment">0</span>)
@@ -49,7 +49,7 @@
 												class="addPraise(${article.article_id})_3 praise_count">0</span>)
 										</tt>
 									</span>
-								</div>
+								</div> --%>
 								<div class="fl pt3">
 									<%--  <tt class="c-999 f-fM">来源：${article.source }</tt>  --%>
 									<tt class="c-999 f-fM">

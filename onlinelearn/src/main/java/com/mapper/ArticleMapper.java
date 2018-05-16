@@ -16,6 +16,8 @@ public interface ArticleMapper {
 	public int getTotalCount(Map map);
 	public void updateContent(Article map);
 	public void saveContent(Article map);
-	public List<Comment> listComment(int other_id);
 	public void praiseEdit(int article_id);
+	
+	public List<Article> alistAll(Map map);
+	public void releaseEdit(Article article);
 }

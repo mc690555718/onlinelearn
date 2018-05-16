@@ -99,7 +99,16 @@
 										<td><fmt:formatDate value="${a.publish_time }" type="date"
 							pattern="yyyy-MM-dd hh:mm:ss" /></td>
 										<td>${a.click_num }</td>
-										<td><a href="/admin/article/delete?article_id=${a.article_id }"
+										<td>
+										<c:if test="${a.releases==0 }">
+										<a href="/admin/article/releaseEdit/${a.article_id }/${a.releases}"
+											class="btn btn-default ">未发布</a>
+										</c:if>
+										<c:if test="${a.releases==1 }">
+										<a href="/admin/article/releaseEdit/${a.article_id }/${a.releases}"
+											class="btn btn-default ">已发布</a>
+										</c:if>
+										<a href="/admin/article/delete?article_id=${a.article_id }"
 											class="btn btn-default ">删除</a>
 											<a href="/admin/article/updateValue?article_id=${a.article_id }"
 											class="btn btn-default">修改</a></td>

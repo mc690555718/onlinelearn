@@ -33,12 +33,62 @@
 <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 	function update() {
-		document.forms[0].action = "update";
-		document.forms[0].submit();
+		
+		var title = $("#title").val();
+		var summary = $("#summary").val();
+		var author = $("#author").val();
+		var source = $("#source").val();
+		var content = $("#content").val();
+		if(title.trim().length==0||summary.trim().length==0||author.trim().length==0||source.trim().length==0||content.trim().length==0){
+			alert("数据不能为空");
+		}else{
+			document.forms[0].action = "update";
+			document.forms[0].submit();
+		}
+		
+		
 	}
 </script>
 
 </head>
+<script type="text/javascript">
+		function fun(a, b) {
+			var v = a.value;
+			var t;
+			if(b == 1) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d1");
+				if(v.trim().length == 0) {
+					t.innerText = "标题不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				}else if(reg.test(v)){
+					t.innerText = "标题不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+
+			} else if(b == 2) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d2");
+				if(v.trim().length == 0) {
+					t.innerText = "摘要不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				} else if(reg.test(v)){
+					t.innerText = "标题不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+			} 
+		}
+</script>
+
+
 <body>
 	<section class="layui-larry-box">
 	<div class="larry-personal">
@@ -58,15 +108,17 @@
 					<label class="layui-form-label">标题</label>
 					<div class="layui-input-block">
 						<input type="text" name="title" id="title"
-							value="${article.title }" class="layui-input">
+							value="${article.title }" class="layui-input" onblur="fun(this,1)" maxlength="25" placeholder="文章标题不得超过25个字">
 					</div>
+					<span id="d1"></span>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">摘要</label>
 					<div class="layui-input-block">
 						<input type="text" name="summary" id="summary"
-							value="${article.summary }" class="layui-input">
+							value="${article.summary }" class="layui-input" onblur="fun(this,2)" maxlength="40" placeholder="文章标题不得超过40个字">
 					</div>
+					<span id="d2"></span>
 				</div>
 
 				<div class="layui-form-item">
@@ -82,7 +134,7 @@
 					<label class="layui-form-label">来源</label>
 					<div class="layui-input-block">
 						<input type="text" name="source" id="source"
-							value="${article.source }" class="layui-input">
+							value="${article.source }" class="layui-input" readonly="readonly">
 					</div>
 				</div>
 
@@ -126,9 +178,17 @@
 	</div>
 	</section>
 	<script type="text/javascript">
-		layui.use([ 'form', 'upload' ], function() {
-			var form = layui.form();
-		});
+	layui.use(['form','upload'],function(){
+        var form = layui.form();
+        layui.upload({ 
+            url: '' ,//上传接口 
+            success: function(res){
+             //上传成功后的回调 
+             console.log(res) 
+           } 
+        });
+
+	});
 		
 		
 	//  图片显示
@@ -159,6 +219,5 @@ var um = UM.getEditor('content');
     arr.push(UM.getEditor('contene').getContentTxt());
     alert(arr.join("\n")); 
 }
-
 </script>
 </html>

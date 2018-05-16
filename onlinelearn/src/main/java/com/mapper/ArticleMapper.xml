@@ -68,5 +68,12 @@
    update edu_article set
 		praise_count=praise_count+1 where article_id=#{article_id}
 </update>
-	
+
+<select id="alistAll"  resultMap="ArticleMap">
+   select * from edu_article where releases=1 order by sort desc
+</select>
+
+<update id="releaseEdit" parameterType="Article">
+  update edu_article set releases=#{releases} where article_id=#{article_id}
+</update>	
 </mapper>

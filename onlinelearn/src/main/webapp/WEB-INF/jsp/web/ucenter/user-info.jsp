@@ -62,10 +62,9 @@ $(function(){
 							<ol class="u-account-li">
 								<li><label class="u-a-title"> <span
 										class="fsize16 c-999">邮 箱</span>
-								</label> <input type="text" class="u-a-inpt"
-									name="email" value="${login_success.email}"
-									placeholder="" readonly="readonly" disabled="disabled">
-									<!-- <span class="u-a-error"><em class="u-a-zq icon16">&nbsp;</em></span> -->
+								</label> <input type="text" class="u-a-inpt" name="email"
+									value="${login_success.email}" placeholder=""
+									readonly="readonly" disabled="disabled"> <!-- <span class="u-a-error"><em class="u-a-zq icon16">&nbsp;</em></span> -->
 								</li>
 								<li><label class="u-a-title"> <span
 										class="fsize16 c-999">手机号</span>

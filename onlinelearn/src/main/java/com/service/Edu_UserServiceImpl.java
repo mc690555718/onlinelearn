@@ -19,11 +19,6 @@ public class Edu_UserServiceImpl  implements Edu_UserService{
 		return Edu_UserDao.listUser(map);
 	}
 
-	@Override
-	public void update(Map map) {
-		Edu_UserDao.update(map);
-
-	}
 
 	@Override
 	public void updateZZ(Map map) {

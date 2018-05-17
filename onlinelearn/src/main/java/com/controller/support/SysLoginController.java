@@ -1,7 +1,4 @@
 package com.controller.support;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -41,7 +38,6 @@ public class SysLoginController {
 			    subject.login(token);
 			    subject.hasRole("");
 			}catch(Exception e){
-//				e.printStackTrace();  //��֤ʧ�ܴ����ӡ��Ϣ
 				mv.setViewName("/back/login/login");
 				return mv;
 			}

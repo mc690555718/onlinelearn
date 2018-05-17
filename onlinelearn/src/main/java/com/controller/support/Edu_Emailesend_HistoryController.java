@@ -82,7 +82,6 @@ public class Edu_Emailesend_HistoryController {
 		ModelAndView mv=new ModelAndView();
 		Map map=new HashMap<>();
 		String parameter = request.getParameter("type");
-		System.out.println(parameter);
 		if (parameter==null) {
 			request.setAttribute("type", 1);
 		}else {
@@ -96,15 +95,14 @@ public class Edu_Emailesend_HistoryController {
 		return mv;
 	}
 
-	@RequestMapping("/saveEmail")
+	@RequestMapping("/admin/email/sendEmail")
 	public String sendEmail(Model model, HttpServletRequest request) throws Exception{
+		System.out.println("22");
 		String email=request.getParameter("email");
 		String title=request.getParameter("title");
 		String content=request.getParameter("content");
 		String type=request.getParameter("type");
 		String send_time=request.getParameter("send_time");
-		
-		System.out.println(email+":"+title+":"+content+":"+type+":"+send_time);
 		Edu_Emailesend_History e=new Edu_Emailesend_History();
 		e.setType(Integer.valueOf(type));
 		String emailArray[] = email.split(";");

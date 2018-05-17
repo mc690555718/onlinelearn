@@ -28,6 +28,7 @@ import com.bean.Edu_User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.service.Edu_UserService;
+import com.util.Encryption;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -135,13 +136,15 @@ public Map initMap(HttpServletRequest request,Map map){
 @ResponseBody
 public int update(@RequestParam int id,@RequestParam String fir) {
 	Map map = new HashMap<>();
-	map.put("user_id", id);
-	map.put("password", fir);
-	edu_UserService.update(map);
+	Edu_User user=new Edu_User();
+	Edu_User user2=edu_UserService.getById(id);
+	String emial=user2.getEmail();
+	user.setUser_id(id);
+	fir=Encryption.encryptionByMD5(emial, fir);
+	user.setPassword(fir);
+	edu_UserService.updatepwd(user);
 	return 1;
 }
-
-
 @RequestMapping("/dongjiezz")
 @ResponseBody
 public int update(@RequestParam int id,@RequestParam int zz) {

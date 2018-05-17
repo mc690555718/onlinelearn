@@ -3,10 +3,11 @@
  * @param userId 用户ID
  */
 function updateUserInfo(){
-	 
+	var params ='';
 	$("#updateForm input,#updateForm select").each(function(){
 		params+=$(this).serialize()+"&";
     });
+	alert(params);
 	$.ajax({
 		url:baselocation+'/uc/updateUser',
 		type:'post',

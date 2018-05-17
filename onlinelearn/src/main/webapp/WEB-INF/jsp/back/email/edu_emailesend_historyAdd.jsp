@@ -37,6 +37,8 @@
 						$("#div1").show();
 					}
 				});
+				
+				
 				$("#btn").click(function() {
 					var content = UM.getEditor('myEditor').getContentTxt();
 					$("#tx").val(content);
@@ -158,7 +160,7 @@
 	</div>
 	<!--</form>-->
 
-	<form action="/admin/email/sendEmail" method="post">
+	<form action="/admin/email/sendEmail" method="post" id="form1">
 		<table style="margin-top: 30px; width: 1200px">
 			<tr>
 				<td>

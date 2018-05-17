@@ -30,6 +30,7 @@ public class AdminRealm extends AuthorizingRealm{
 		 SysUser user = us.getByName(username);
 		 SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		 info.setRoles(us.getRoleNameSet(user));
+		 System.out.println();
 		 info.setStringPermissions(us.getPermissionNamesSet(user));
 		 return info;
 		 

@@ -1,3 +1,4 @@
+
 <%@page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ include file="/base.jsp"%>
 <menu class="col-3 fl uMenu">
@@ -5,7 +6,7 @@
 		<dt> 
 			<section class="of">
 				<div class="u-face-pic">
-					<img src="<%=staticImage%>${login_success.pic_img} alt="" class="userImgPhoto">
+					<img src="${login_success.pic_img}" class="userImgPhoto">
 					<a href="${ctx}/uc/initUpdateUser/1" title="" class="c-fff">修改头像</a>
 				</div>
 				<h4 class="mt10"><span class="fsize16 c-666 userNameClass">${ login_success.show_name}</span></h4>

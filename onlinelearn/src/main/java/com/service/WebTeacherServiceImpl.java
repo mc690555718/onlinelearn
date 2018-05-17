@@ -12,11 +12,9 @@ import com.mapper.WebTeacherMapper;
 public class WebTeacherServiceImpl implements WebTeacherService{
 	@Autowired
 	private WebTeacherMapper webTeacherMapper;
-
 	@Override
 	public List<WebTeacherBean> list(int cousrse_id) {
 		List<WebTeacherBean> list =webTeacherMapper.list(cousrse_id);
 		return list;
 	}
-
 }

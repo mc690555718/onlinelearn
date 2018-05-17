@@ -39,10 +39,6 @@
 			</if>
 		</where>
 	</select>
-	<update id="update" parameterType="java.util.Map">
-		update edu_user set password=#{password} where USER_ID=#{user_id}
-	</update>
-
 	<update id="updateZZ" parameterType="java.util.Map">
 		update edu_user set IS_AVALIBLE=#{zz} where USER_ID=#{user_id}
 

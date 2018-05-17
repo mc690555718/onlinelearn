@@ -2,7 +2,7 @@
  * 修改用户信息
  * @param userId 用户ID
  */
-function updateUserInfo(userId){
+function updateUserInfo(){
 	var params='';
 	$("#updateForm input,#updateForm select").each(function(){
 		params+=$(this).serialize()+"&";
@@ -78,7 +78,7 @@ function updatePwd(){
 		url:baselocation+'/uc/updatePwd',
 		type:'post',
 		dataType:'json',
-		data:params,
+		data:{"nowPassword":oldPwd,"newPassword":newPassword,"confirmPwd":confirmPwd},
 		success:function(result){
 			if(result.success==true){
 				dialog('提示信息',result.message,0);

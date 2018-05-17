@@ -1,11 +1,13 @@
 package com.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bean.Questions_tag;
+import com.bean.ZtreeNode;
 import com.mapper.Questions_tagMapper;
 
 @Service
@@ -38,6 +40,20 @@ public class Questions_tagServiceImpl implements Questions_tagService{
 	@Override
 	public List<Questions_tag> getBylistId(int id) {
 		return Questions_tagMapper.getBylistId(id);
+	}
+	@Override
+	public List<ZtreeNode> listAll1() {
+		List<Questions_tag> list=Questions_tagMapper.listAll();
+		List<ZtreeNode> notes=new ArrayList<ZtreeNode>();
+		for (int i = 0; i < list.size(); i++) {
+			 Questions_tag qTag=list.get(i);
+			 ZtreeNode ztreeNode=new ZtreeNode();
+			 ztreeNode.setId(qTag.getQuestions_tag_id());
+			 ztreeNode.setName(qTag.getQuestions_tag_name());
+			 ztreeNode.setPid(Integer.parseInt(qTag.getParent_id()));
+			 notes.add(ztreeNode);
+		}
+		return notes;
 	}
 
 }

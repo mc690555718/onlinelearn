@@ -44,21 +44,84 @@
 	       }
 
  function save() {
+	 
+	 var name = $("#name").val();
+		var education = $("#education").val();
+		var sort = $("#sort").val();
+		var career = $("#career").val();
+		if(name!=""&&education!=""&&sort!=""&&career!=""){
 			document.forms[0].action="/teacher/tosave";
 			document.forms[0].subject();
+		}else{
+			alert("添加的数据不能为空")
 		}
-	     function tj() {
-			var tj=$("#tj").val();
 			
-			if ($("#name").val()=="") {
-				alert("名字不能为空")
-			}
-			if ($("#is_star").val()=="") {
-				alert("讲师等级不能为空")
-			}
 		}
+	     
+
 </script>
 </head>
+<script type="text/javascript">
+		function fun(a, b) {
+			var v = a.value;
+			var t;
+			if(b == 1) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d1");
+				if(v.trim().length == 0) {
+					t.innerText = "教师名称不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				}else if(reg.test(v)){
+					t.innerText = "教师名称不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+
+			} else if(b == 2) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d2");
+				if(v.trim().length == 0) {
+					t.innerText = "讲师资历不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				} else if(reg.test(v)){
+					t.innerText = "讲师资历不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+			} else if(b == 3) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d3");
+				if(v.trim().length == 0) {
+					t.innerText = "讲师简介不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				}else if(reg.test(v)){
+					t.innerText = "讲师不能为纯数字";
+					t.style.color = "red";
+				}  else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+		}
+			else if(b == 4) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d4");
+				if(!reg.test(v)){
+					t.innerText = "排序值为数字";
+					t.style.color = "red";
+				}  else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+		}
+		}
+</script>
 <body>
 <section class="layui-larry-box">
 	<div class="larry-personal">
@@ -70,14 +133,20 @@
 			 	<div class="layui-form-item">
 					<label class="layui-form-label">讲师名称</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="name" id="name" class="layui-input"   >
+					  	<input type="text" name="name" id="name" class="layui-input"   maxlength="5" placeholder="文章标题不得超过5个字"
+					  	onblur="fun(this,1)">
+					  	<span id="d1"></span>
 					</div>
+					
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师资历</label>
 					<div class="layui-input-block">  
-					  	<input type="text" id="education" name="education"   class="layui-input"  >
+					  	<input type="text" id="education" name="education"   class="layui-input"  maxlength="50" placeholder="文章标题不得超过50个字"
+					  	onblur="fun(this,2)">
+					  	<span id="d2"></span>
 					</div>
+					
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师专业</label>
@@ -102,15 +171,19 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师排序</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="sort" class="layui-input" >
+					  	<input type="text" name="sort" class="layui-input" onblur="fun(this,4)">
+					  	<span id="d4"></span>
 					</div>
+					
 				</div>
 				
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师简介</label>
 					<div class="layui-input-block">  
-					  	<textarea class="form-control" name="career" rows="3" ></textarea>
+					  	<textarea class="form-control" name="career" rows="3" maxlength="500" onblur="fun(this,3)">500字以内</textarea>
+					  	<span id="d3"></span>
 					</div>
+					
 				</div>
 				
 				<div class="layui-form-item">

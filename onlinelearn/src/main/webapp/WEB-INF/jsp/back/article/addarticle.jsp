@@ -25,9 +25,19 @@
     <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript">
 	function add() {
-	
+		var title = $("#title").val();
+		var summary = $("#summary").val();
+		var author = $("#author").val();
+		var source = $("#source").val();
+		if(title!=""&&summary!=""&&author!=""&&source!=""){
 			document.forms[0].action = "save";
-			document.forms[0].submit();
+			document.forms[0].submit(); 
+
+		}else{
+			alert("添加的数据不能为空")
+		}
+		
+			
 	}
 </script>
 </head>

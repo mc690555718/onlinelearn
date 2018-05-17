@@ -32,9 +32,18 @@
 	src="/js/utf8-jsp/umeditor.min.js"></script>
 <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
-	function update() {		
+	function update() {
+		var title = $("#title").val();
+		var summary = $("#summary").val();
+		var author = $("#author").val();
+		var source = $("#source").val();
+		if(title!=""&&summary!=""&&author!=""&&source!=""){
 			document.forms[0].action = "update";
 			document.forms[0].submit();
+		}else{
+			alert("添加的数据不能为空")
+		}
+			
 	}
 </script>
 

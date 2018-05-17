@@ -24,8 +24,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <artifactId>poi-ooxml</artifactId>
     <version>3.17</version>
 </dependency>
-	
-	
 	<dependency>
     <groupId>org.apache.xmlbeans</groupId>
     <artifactId>xmlbeans</artifactId>
@@ -42,7 +40,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			<artifactId>mail</artifactId>
 			<version>1.4.5</version>
 		</dependency>
-	
 	<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
@@ -78,7 +75,6 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			<artifactId>mybatis</artifactId>
 			<version>3.4.5</version>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

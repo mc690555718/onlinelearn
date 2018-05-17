@@ -106,19 +106,9 @@ function xiugai(id) {
 
 </script>
 <script>
- function todown(){
-	 document.forms[0].action="/admin/user/listUser/${list.user_id }?page=${page.nextPage}";
-	 document.forms[0].submit();
- }
- function toup(){
-	 document.forms[0].action="/admin/user/listUser/${list.user_id }?page=${page.prePage}";
-	 document.forms[0].submit();
- }
  function daochu() {
 	 document.forms[0].action ="/admin/user/excel";
 	 document.forms[0].submit();
-	
-	
 }
 </script>
 </head>
@@ -222,12 +212,31 @@ function xiugai(id) {
 						</tr>
 					</c:forEach>
 					<tr>
-						<td align="center" colspan="9">一共${page.pages}页
-							<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
-							<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
-							当前第${page.pageNum}页
-						</td>
-					</tr>
+									<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/admin/user/listUser/?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/admin/user/listUser/?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/admin/user/listUser/?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/admin/user/listUser/?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
+								</tr>
 				</table>
 			</div>
 

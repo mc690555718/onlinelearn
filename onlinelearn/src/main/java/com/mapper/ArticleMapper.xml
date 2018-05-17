@@ -70,7 +70,7 @@
 </update>
 
 <select id="alistAll"  resultMap="ArticleMap">
-   select * from edu_article where releases=1 order by sort desc
+   select * from edu_article where releases=1 order by sort asc
 </select>
 
 <update id="releaseEdit" parameterType="Article">

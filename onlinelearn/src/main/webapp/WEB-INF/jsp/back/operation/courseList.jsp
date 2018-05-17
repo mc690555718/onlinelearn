@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <%-- <%     String path=request.getContextPath();  
 String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.getServerPort()+path+"/"; %>
 <base href="<%=basePath%>"> --%>
@@ -26,7 +27,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 <link rel="stylesheet" type="text/css" href="/css/personal.css"
 	media="all">
 <script src="/js/jquery-3.0.0.js" type="text/javascript" charset="utf-8"></script>
-<!--  <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script> -->
 <style type="text/css">
 .tt {
 	margin: auto
@@ -92,8 +92,10 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 							<a class="layui-btn layui-btn-default" onclick="cleanText()">清空</a>
 						</div>
 						<div class="layui-inline">
+						<shiro:hasPermission name="course_add">
 							<a class="layui-btn layui-btn-normal newsAdd_btn"
 								href="/admin/cou/toCourseAdd">创建课程</a>
+						</shiro:hasPermission>
 						</div>
 					</form>
 				</blockquote>
@@ -143,66 +145,32 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 												pattern="yyyy-MM-dd HH:mm" /></td>
 										<td><fmt:formatDate value="${ec.end_time }"
 												pattern="yyyy-MM-dd HH:mm" /></td>
-										<td><a href="/admin/cou/toCourseKpoint/${ec.course_id }"
+										<td>
+										<shiro:hasPermission name="kpoint_ctrl">
+										<a href="/admin/cou/toCourseKpoint/${ec.course_id }"
 											class="layui-btn layui-btn-sm">章节</a>
+										</shiro:hasPermission>
+										<shiro:hasPermission name="course_upd">
 										    <a href="/admin/cou/toCourseUpdate/${ec.course_id }"
 											class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></a>
+									    </shiro:hasPermission>
+									    <shiro:hasPermission name="course_del">
 											<a href="/admin/cou/delCourse/${ec.course_id }"
 											class="layui-btn layui-btn-danger layui-btn-sm"> <i
-												class="layui-icon">&#xe640;</i></a></td>
+												class="layui-icon">&#xe640;</i></a>
+										</shiro:hasPermission>		
+									    </td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						<div class="larry-table-page clearfix">
-							<a href="javascript:;" class="layui-btn layui-btn-small"><i
-								class="iconfont icon-shanchu1"></i>删除</a>
 							<div id="page" class="page"></div>
-						</div>
-					</div>
-					<!-- 登录日志 -->
-					<div class="layui-tab-item layui-field-box">
-						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
-							<thead>
-								<tr>
-									<th><input type="checkbox" id="selected-all"></th>
-									<th>ID</th>
-									<th>管理员账号</th>
-									<th>状态</th>
-									<th>最后登录时间</th>
-									<th>上次登录IP</th>
-									<th>登录IP</th>
-									<th>IP所在位置</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><input type="checkbox"></td>
-									<td>110</td>
-									<td>admin</td>
-									<td>后台登录成功</td>
-									<td>2016-12-19 14:26:03</td>
-									<td>127.0.0.1</td>
-									<td>127.0.0.1</td>
-									<td>Unknown</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="larry-table-page clearfix">
-							<a href="javascript:;" class="layui-btn layui-btn-small"><i
-								class="iconfont icon-shanchu1"></i>删除</a>
-							<div id="page2" class="page"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script type="text/html" id="barDemo">
-  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</script>
-
 	</section>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
 	<script type="text/javascript">
@@ -214,34 +182,33 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 
             
           laypage({
-					cont: 'page',
-					pages: 10 //总页数
-						,
-					groups: 5 //连续显示分页数
-						,
-					jump: function(obj, first) {
-						//得到了当前页，用于向服务端请求对应数据
-						var curr = obj.curr;
-						if(!first) {
-							//layer.msg('第 '+ obj.curr +' 页');
-						}
+				cont: 'page',
+				pages: '${info.pages}' , //总页数
+				curr: '${info.pageNum}',
+				groups: 5 ,    //连续显示分页数
+				jump: function(obj, first) {
+					//得到了当前页，用于向服务端请求对应数据
+					var curr = obj.curr;
+					if(!first) {
+						//layer.msg('第 '+ obj.curr +' 页');
+						document.forms[0].action="/admin/cou/list?currentPage="+curr;
+						document.forms[0].submit();
 					}
-				});
+				}
+			});
 
-          laypage({
-					cont: 'page2',
-					pages: 10 //总页数
-						,
-					groups: 5 //连续显示分页数
-						,
-					jump: function(obj, first) {
-						//得到了当前页，用于向服务端请求对应数据
-						var curr = obj.curr;
-						if(!first) {
-							//layer.msg('第 '+ obj.curr +' 页');
-						}
-					}
-				});
+//           laypage({
+// 					cont: 'page2',
+// 					pages: 10 //总页数,
+// 					groups: 5 //连续显示分页数,
+// 					jump: function(obj, first) {
+// 						//得到了当前页，用于向服务端请求对应数据
+// 						var curr = obj.curr;
+// 						if(!first) {
+// 							//layer.msg('第 '+ obj.curr +' 页');
+// 						}
+// 					}
+// 				});
     });
 </script>
 </body>

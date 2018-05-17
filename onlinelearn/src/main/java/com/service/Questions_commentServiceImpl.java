@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bean.Questions;
 import com.bean.Questions_comment;
 import com.mapper.Questions_commentMapper;
 @Service
@@ -57,5 +58,35 @@ public class Questions_commentServiceImpl implements Questions_commentService{
 	@Override
 	public List<Questions_comment> getById3(int id) {
 		return Questions_commentMapper.getById3(id);
+	}
+
+	@Override
+	public List<Questions_comment> getListById(int commentId) {
+		return Questions_commentMapper.getListById(commentId);
+	}
+
+	@Override
+	public void addReply_count(int id) {
+		Questions_commentMapper.addReply_count(id);
+	}
+
+	@Override
+	public void deleteAll(Questions_comment comment) {
+		Questions_commentMapper.deleteAll(comment);
+	}
+
+	@Override
+	public void deleteSubreview(int id) {
+		Questions_commentMapper.deleteSubreview(id);
+	}
+
+	@Override
+	public List<Questions_comment> getId(Questions_comment comment) {
+		return Questions_commentMapper.getId(comment);
+	}
+
+	@Override
+	public int getQuestions_Id(int id) {
+		return Questions_commentMapper.getQuestions_Id(id);
 	}
 }

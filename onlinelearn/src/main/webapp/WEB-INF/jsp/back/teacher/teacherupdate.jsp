@@ -145,7 +145,7 @@ var setting = {
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师等级</label>
 					<div class="layui-input-block">
-						<select name="is_stars" value="${a.is_star }">
+						<select name="is_stars" value="${a.is_star}">
 							<option value="1">首席讲师</option>
 							<option value="2">高级讲师</option>
 						</select>
@@ -175,8 +175,7 @@ var setting = {
 								<img id="blah" style="width: 200px; height: 150px;"
 									src="${a.pic_path }" name="pic_path" /> <input type="file"
 									name="file" id="imgInp">
-									
-									<input type="hidden" name="file" value="${a.pic_path}">
+									<input type="hidden" name="hiddens" value="${a.pic_path}">
 									
 							</div>
 						</div>
@@ -217,7 +216,6 @@ var setting = {
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
-
 		reader.onload = function(e) {
 			$('#blah').attr('src', e.target.result);
 		}

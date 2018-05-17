@@ -12,8 +12,8 @@ import com.bean.Comment;
 import com.mapper.CommentMapper;
 @Service
 public class CommentServiceImpl implements CommentService {
-@Autowired
-private CommentMapper CommentMapper;
+	@Autowired
+	private CommentMapper CommentMapper;
 	@Override
 	public List<Comment> listAll(Map map) {
 		List<Comment> list=CommentMapper.listAll(map);
@@ -27,8 +27,8 @@ private CommentMapper CommentMapper;
 
 	@Override
 	public void detele(int comment_id) {
-	CommentMapper.detele(comment_id);
-		
+		CommentMapper.detele(comment_id);
+
 	}
 
 	@Override
@@ -48,10 +48,23 @@ private CommentMapper CommentMapper;
 		CommentMapper.praiseEdit(comment_id);
 	}
 
+	@Override
+	public List<Comment> childComment(Map map) {
+		List<Comment> list=CommentMapper.childComment(map);
+		return list;
+	}
 
- 
+	@Override
+	public void addcomment(int comment_id) {
+		// TODO Auto-generated method stub
+		CommentMapper.addcomment(comment_id);
+	}
 
-
-
-
+	@Override
+	public void addNum(int other_id) {
+		// TODO Auto-generated method stub
+		CommentMapper.addNum(other_id);
+	}
+	
+	
 }

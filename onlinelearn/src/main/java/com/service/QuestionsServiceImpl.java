@@ -58,4 +58,24 @@ public class QuestionsServiceImpl implements QuestionsService{
 		return QuestionsMapper.getMaxId();
 	}
 
+	@Override
+	public void addBrowse_count(int id) {
+		QuestionsMapper.addBrowse_count(id);
+	}
+
+	@Override
+	public void addReply_count(int id) {
+		QuestionsMapper.addReply_count(id);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		QuestionsMapper.deleteById(id);
+	}
+
+	@Override
+	public void updateReply_count(int id) {
+		QuestionsMapper.updateReply_count(id);
+	}
+
 }

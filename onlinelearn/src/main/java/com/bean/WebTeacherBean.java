@@ -26,6 +26,8 @@ public class WebTeacherBean {
     private BigDecimal course_gross_income;//该课程总共卖了多少钱
     private String context; //课程详情
     private SysSubject subject;
+    
+    
 	public Integer getCourse_id() {
 		return course_id;
 	}
@@ -151,6 +153,17 @@ public class WebTeacherBean {
 	}
 	public void setSubject(SysSubject subject) {
 		this.subject = subject;
+	}
+	@Override
+	public String toString() {
+		return "WebTeacherBean [course_id=" + course_id + ", course_name=" + course_name + ", is_avaliable="
+				+ is_avaliable + ", subject_id=" + subject_id + ", subject_link=" + subject_link + ", add_time="
+				+ add_time + ", source_price=" + source_price + ", current_price=" + current_price + ", title=" + title
+				+ ", lession_num=" + lession_num + ", logo=" + logo + ", update_time=" + update_time
+				+ ", page_buycount=" + page_buycount + ", page_viewcount=" + page_viewcount + ", end_time=" + end_time
+				+ ", losetype=" + losetype + ", lose_time=" + lose_time + ", sequence=" + sequence
+				+ ", course_gross_income=" + course_gross_income + ", context=" + context + ", subject=" + subject
+				+ "]";
 	}
     
     

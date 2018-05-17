@@ -58,11 +58,11 @@
 							<span class="c-333">主讲课程</span>
 						</h2>
 						<section class="c-tab-title">
-							<a href="javascript: void(0)">&nbsp;</a>
+							<a href="/front/teacher/${id}">&nbsp;</a>
 						</section>
 					</header>
 					<!-- /无数据提示 开始-->
-					<c:if test="${empty courseList }">
+					<c:if test="${not empty list}">
 						<section class="no-data-wrap">
 							<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在努力整理中...</span>
 						</section>
@@ -70,25 +70,25 @@
 					<!-- /无数据提示 结束-->
 					<article class="comm-course-list">
 						<ul class="of">
-							<c:if test="${not empty courseList }">
-								<c:forEach var="course" items="${courseList }">
+							<c:if test="${not empty courseList}">
+								<c:forEach var="course" items="${courseList}">
 									<li>
 										<div class="cc-l-wrap">
 											<section class="course-img">
 												<c:choose>
 													<c:when test="${not empty course.logo }">
-														<img xSrc="<%=staticImage%>${course.logo}" src="${ctx }/static/inxweb/img/default-img.gif" class="img-responsive" alt="">
+														<img src="${course.logo}" class="img-responsive" alt="">
 													</c:when>
 													<c:otherwise>
 														<img xSrc="/static/inxweb/img/default-img.gif" src="${ctx }/static/inxweb/img/default-img.gif" class="img-responsive" alt="">
 													</c:otherwise>
 												</c:choose>
 												<div class="cc-mask">
-													<a href="${ctx }/front/couinfo/${course.courseId}" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
+													<a href="${ctx }/front/couinfo/${course.course_id}" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
 												</div>
 											</section>
 											<h3 class="hLh30 txtOf mt10">
-												<a href="${ctx }/front/couinfo/${course.courseId}" title="${course.courseName }" class="course-title fsize18 c-333">${course.courseName }</a>
+												<a href="${ctx }/front/couinfo/${course.course_id}" title="${course.course_name}" class="course-title fsize18 c-333">${course.course_name}</a>
 											</h3>
 										</div>
 									</li>

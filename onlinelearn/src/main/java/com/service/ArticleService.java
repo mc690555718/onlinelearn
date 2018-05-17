@@ -17,5 +17,10 @@ public interface ArticleService {
 	public void updateContent(Article map);
 	public void saveContent(Article map);
 	public void praiseEdit(int article_id);
+	public void addNum(int article_id);
+	public void addClickNum(int article_id);
+	
+	public List<Article> alistAll(Map map);
+	public void releaseEdit(Article article);
 
 }

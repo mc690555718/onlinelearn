@@ -57,7 +57,7 @@
 										<span class="fl "><tt class="c-red commentContentmeg"
 												style="display: none;"></tt></span> <a
 											href="javascript:addComment();" title="回复"
-											class="lh-reply-btn">回复</a>
+											class="lh-reply-btn" onclick="addReply(this)">回复</a>
 									</p>
 								</section>
 								<input type="hidden" id="" name=""
@@ -180,7 +180,7 @@
 								<div>
 									<section class="n-reply-wrap mt10">
 										<fieldset>
-											<textarea name="comment"
+											<textarea name=""
 												onkeyup="$(this).parent().next().find('tt').html('');"></textarea>
 										</fieldset>
 										<p class="of mt5 tar pl10 pr10">

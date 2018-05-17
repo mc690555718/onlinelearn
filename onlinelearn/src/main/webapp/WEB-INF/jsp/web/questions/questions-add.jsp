@@ -85,7 +85,7 @@
 								<dt>
 									<span class="c-999 fsize14">&nbsp;</span>
 								</dt>
-								<dd class="pr">
+								<%-- <dd class="pr">
 									<label class=""><input type="text" style="width: 80px;"
 										name="randomCode" placeholder="输入验证码" value=""
 										onkeyup='$(this).parent().next().next().html("<img width=\"
@@ -99,7 +99,7 @@
 											class="c-green"> 换一换 </a>
 									</div>
 									<aside class="q-c-jy"></aside>
-								</dd>
+								</dd> --%>
 							</dl>
 							<dl>
 								<dt>

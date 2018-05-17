@@ -39,7 +39,7 @@
 								<span class="i-art-title">${article.title }</span>
 							</h3>
 							<section class="hLh30 txtOf mt5 pb20 mreadnum">
-								<div class="fr">
+								<%-- <div class="fr">
 									<span> <a class="noter-dy vam" title="评论"
 										href="#i-art-comment"> <em class="icon18">&nbsp;</em>(<span
 											class="totalResultComment">0</span>)
@@ -49,7 +49,7 @@
 												class="addPraise(${article.article_id})_3 praise_count">0</span>)
 										</tt>
 									</span>
-								</div>
+								</div> --%>
 								<div class="fl pt3">
 									<%--  <tt class="c-999 f-fM">来源：${article.source }</tt>  --%>
 									<tt class="c-999 f-fM">
@@ -62,10 +62,10 @@
 							<div id="art-infor-body">${article.articleContent.content }
 								<div>
 									<tt class="c-999 f-fM">
-										评论：<span class="totalResultComment">0</span>
+										评论：<span class="totalResultComment">${article.comment_num }</span>
 									</tt>
 									<tt class="c-999 f-fM ml20">
-										点赞：<span class="addPraise${article.article_id}_3 praiseCount">0</span>
+										点赞：<span class="addPraise${article.article_id}_3 praiseCount">${article.praise_count }</span>
 									</tt>
 									<tt class="c-999 f-fM ml20">
 										阅读：<span class="clickNum">${article.click_num }</span>

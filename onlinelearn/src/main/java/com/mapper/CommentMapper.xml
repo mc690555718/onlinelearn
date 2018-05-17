@@ -3,59 +3,72 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.CommentMapper">
-<resultMap type="Comment" id="CommentMap">
-<!--  <id column="comment_id"   property="comment_id" />  -->
- <result  column="p_comment_id"  property="p_comment_id" />
-  <result  column="content"  property="content" />
-  <result  column="addtime"  property="addtime" />
-  <result  column="other_id"   property="other_id" />
-  <result  column="praise_count" property="praise_count" />
- <result  column="reply_count" property="reply_count" />
- <result  column="type" property="type" />
- <association property="user" column="user_id" select="com.mapper.Edu_UserDao.getById"></association>
-</resultMap>
-  
+	<resultMap type="Comment" id="CommentMap">
+		<!-- <id column="comment_id" property="comment_id" /> -->
+		<result column="p_comment_id" property="p_comment_id" />
+		<result column="content" property="content" />
+		<result column="addtime" property="addtime" />
+		<result column="other_id" property="other_id" />
+		<result column="praise_count" property="praise_count" />
+		<result column="reply_count" property="reply_count" />
+		<result column="type" property="type" />
+		<association property="user" column="user_id"
+			select="com.mapper.Edu_UserDao.getById"></association>
+	</resultMap>
 
-<select id="listAll"  resultType="Comment" parameterType="java.util.Map" resultMap="CommentMap">
-  select * from edu_comment 
-  <where>
-<if test="content!=null">
-  and content like '%${content}%'
-  </if>
- <if test="type>0">
- and type = #{type}
- </if>
- <if test="email!=null">
- and user_id in(SELECT user_id FROM edu_user WHERE email LIKE '%${email}%')
- </if>
- <if test="start!=null">
- and addtime &gt; #{start}
- </if>
- <if test="end!=null">
- and addtime &lt; #{end}
- </if>
 
-  </where>
-  </select>
+	<select id="listAll" resultType="Comment" parameterType="java.util.Map"
+		resultMap="CommentMap">
+		select * from edu_comment
+		<where>
+			<if test="content!=null">
+				and content like '%${content}%'
+			</if>
+			<if test="type>0">
+				and type = #{type}
+			</if>
+			<if test="email!=null">
+				and user_id in(SELECT user_id FROM edu_user WHERE email LIKE
+				'%${email}%')
+			</if>
+			<if test="start!=null">
+				and addtime &gt; #{start}
+			</if>
+			<if test="end!=null">
+				and addtime &lt; #{end}
+			</if>
 
-  <delete id="detele" parameterType="int"> 
-    delete from edu_comment where comment_id=#{value}
-  </delete>
-  
-  
-  <insert id="save" parameterType="Comment">
-    insert into edu_comment(user_id,p_comment_id,content,addtime,other_id,type)
-    values(#{user.user_id},#{p_comment_id},#{content},#{addtime},#{other_id},#{type})
-  </insert>
-  
-<select id="listComment" resultType="Comment" parameterType="int">
-       select * from edu_comment where other_id=#{other_id}
-</select>
+		</where>
+	</select>
 
-<update id="praiseEdit" parameterType="int">
+	<delete id="detele" parameterType="int">
+		delete from edu_comment where comment_id=#{value}
+	</delete>
+
+
+	<insert id="save" parameterType="Comment">
+		insert into edu_comment(user_id,p_comment_id,content,addtime,other_id,type)
+		values(#{user.user_id},#{p_comment_id},#{content},#{addtime},#{other_id},#{type})
+	</insert>
+
+	<select id="listComment" resultType="Comment" parameterType="int">
+		select * from edu_comment where other_id=#{other_id} and p_comment_id
+		= 0
+	</select>
+
+	<update id="praiseEdit" parameterType="int">
+		update edu_comment set
+		PRAISE_COUNT=PRAISE_COUNT+1 where
+		comment_id=#{comment_id}
+	</update>
+	<select id="childComment" resultMap="CommentMap" parameterType="java.util.Map">
+		select * from edu_comment where other_id=#{other_id} and p_comment_id
+		=#{p_comment_id}
+	</select>
+	
+	<update id="addNum" parameterType="int">
    update edu_comment set
-		PRAISE_COUNT=PRAISE_COUNT+1 where comment_id=#{comment_id}
+		reply_count=reply_count+1 where other_id=#{other_id}
 </update>
-
 
 </mapper> 

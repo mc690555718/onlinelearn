@@ -168,7 +168,7 @@
 							<a href="javascript:void(0)" onclick="toAddQuestions()"
 								title="我要提问" class="comm-btn c-btn-5">我要提问</a>
 						</section>
-						<section class="pt20">
+						<%-- <section class="pt20">
 							<div class="taglist clearfix">
 								<a onclick="submitForm('0','questionsTagId')"
 									href="javascript:;"
@@ -180,7 +180,7 @@
 									href="javascript:;"
 									onclick="submitForm('${question.questions_tag.questions_tag_id }','questionsTagId')">${question.questions_tag.questions_tag_name }</a>
 							</div>
-						</section>
+						</section> --%>
 						<!-- /标签云 -->
 						<section class="mt30">
 							<section class="c-infor-tabTitle c-tab-title">

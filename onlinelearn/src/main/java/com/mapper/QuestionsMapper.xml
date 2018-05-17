@@ -43,6 +43,9 @@
 			<if test="flag==5">
 				and type=2
 			</if>
+			<if test="flag==6">
+				and BROWSE_COUNT &gt; 50
+			</if>
 		</where>
 		<if test="flag==1">
 			order by ADD_TIME desc
@@ -73,6 +76,24 @@
 		values(#{qid},#{tid})
 	</insert>
 	<select id="getMaxId" resultType="int">
-	select max(id) from edu_questions
+		select max(id) from
+		edu_questions
 	</select>
+	<update id="addBrowse_count" parameterType="int">
+		update edu_questions
+		set browse_count=browse_count+1 where ID=#{id}
+	</update>
+	<update id="addReply_count" parameterType="int">
+		update edu_questions
+		set reply_count=reply_count+1 where ID=#{id}
+	</update>
+	<delete id="deleteById" parameterType="int">
+		delete from
+		edu_questions_tag_relation where QUESTIONS_ID=#{value}
+	</delete>
+	<update id="updateReply_count" parameterType="int">
+		update
+		edu_questions
+		set reply_count=reply_count-1 where ID=#{id}
+	</update>
 </mapper>

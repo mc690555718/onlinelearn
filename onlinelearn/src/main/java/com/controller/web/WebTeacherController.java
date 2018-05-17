@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bean.EduCourse;
 import com.bean.Edu_User;
 import com.bean.SubjectBean;
 import com.bean.SysSubject;
@@ -20,6 +21,7 @@ import com.bean.TeacherBean;
 import com.bean.WebTeacherBean;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.service.EduCourseService;
 import com.service.SubjectService;
 import com.service.TeacherService;
 import com.service.WebTeacherService;
@@ -34,7 +36,7 @@ public class WebTeacherController {
 	private WebTeacherService webTeacherService;
 	
 	@RequestMapping("/front/teacher/list")
-	public ModelAndView teacherlist(@RequestParam(required=true,defaultValue="1") Integer page, HttpServletRequest request) {
+	public ModelAndView teacherlist(@RequestParam(required=true,defaultValue="1")Integer page, HttpServletRequest request) {
 		PageHelper.startPage(page,8);
 		Map map=new HashMap();
 		ModelAndView mv =new ModelAndView();

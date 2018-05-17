@@ -57,6 +57,7 @@ public class Questions_frontController {
 	public ModelAndView info(@PathVariable("id")int id){
 		ModelAndView mv = new ModelAndView();
 		Questions question = questionsService.getById(id);
+		questionsService.addBrowse_count(id);
 		mv.setViewName("/web/questions/questions-info");
 		mv.addObject("question", question);
 		return mv;
@@ -92,7 +93,7 @@ public class Questions_frontController {
 	public Result hotRecommend(){
 		Result result = new Result();
 		boolean b = true;
-		int flag = 2;
+		int flag = 6;
 		Map map = new HashMap<>();
 		map.put("flag", flag);
 		List<Questions> questions = questionsService.listAll(map);
@@ -123,6 +124,7 @@ public class Questions_frontController {
 	}
 
 	@RequestMapping("/questions/ajax/add")
+	@ResponseBody
 	public Result add(HttpSession session,HttpServletRequest request){
 	int type=Integer.parseInt(request.getParameter("type"));
 	String a[]= request.getParameter("questionsTag").split(",");
@@ -160,6 +162,8 @@ public class Questions_frontController {
 			map.put("tid", tid);
 			questionsService.saveRelation(map);
 		}
+		result.setEntity(qid);
+		result.setSuccess(true);
 		return result;
 	}
 	
@@ -187,6 +191,7 @@ public class Questions_frontController {
 	    comment.setAdd_time(add_time);
 	    comment.setComment_id(0);
 	    questions_commentService.save(comment);
+	    questionsService.addReply_count(Integer.parseInt(request.getParameter("questionsComment.questionId")));
 	    Boolean b=true;
 	    result.setSuccess(b);
 		return result;
@@ -216,8 +221,19 @@ public class Questions_frontController {
 		comment.setAdd_time(add_time);
 		comment.setComment_id(Integer.parseInt(request.getParameter("questionsComment.commentId")));
 		questions_commentService.save(comment);
+		questions_commentService.addReply_count(Integer.parseInt(request.getParameter("questionsComment.commentId")));
 		Boolean b=true;
 		result.setSuccess(b);
 		return result;
+	}
+	
+	@RequestMapping("/questionscomment/ajax/getCommentById/{commentId}")
+	@ResponseBody
+	public ModelAndView getCommentById(@PathVariable("commentId")int commentId){
+		ModelAndView mv = new ModelAndView();
+		List<Questions_comment> comments = questions_commentService.getListById(commentId);
+		mv.addObject("comments", comments);
+		mv.setViewName("web/questionscomment/questionscomment-ajax-listreply");
+		return mv;
 	}
 }

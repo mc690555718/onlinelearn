@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,6 +69,21 @@ public class ArticleController {
 	@RequestMapping("/delete")
 	public String delete(int article_id) {
 		articleService.delete(article_id);
+		return "redirect:/admin/article/showlist";
+	}
+	
+	@RequestMapping("/releaseEdit/{article_id}/{releases}")
+	public String releaseEdit(@PathVariable int article_id,@PathVariable int releases) {
+		Article article = new Article();
+		if (releases==1) {
+			releases=0;
+			article.setReleases(releases);
+		}else if (releases==0) {
+			releases=1;
+			article.setReleases(releases);
+		}
+		article.setArticle_id(article_id);
+		articleService.releaseEdit(article);
 		return "redirect:/admin/article/showlist";
 	}
 

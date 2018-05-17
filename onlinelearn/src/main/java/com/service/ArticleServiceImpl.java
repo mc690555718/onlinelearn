@@ -74,5 +74,30 @@ public   class ArticleServiceImpl implements ArticleService{
 		articleMapper.praiseEdit(article_id);
 	}
 
+	@Override
+	public List<Article> alistAll(Map map) {
+		// TODO Auto-generated method stub
+		List<Article> list = articleMapper.alistAll(map);
+		return list;
+	}
+
+	@Override
+	public void releaseEdit(Article article) {
+		// TODO Auto-generated method stub
+		articleMapper.releaseEdit(article);
+	}
+
+	@Override
+	public void addNum(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.addNum(article_id);
+	}
+
+	@Override
+	public void addClickNum(int article_id) {
+		// TODO Auto-generated method stub
+		articleMapper.addClickNum(article_id);
+	}
+
 	
 }

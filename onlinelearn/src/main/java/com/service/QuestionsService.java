@@ -15,4 +15,8 @@ public interface QuestionsService {
 	public void updatePraise(int id);
 	public void saveRelation(Map map);
 	public int getMaxId();
+	public void addBrowse_count(int id);
+	public void addReply_count(int id);
+	public void deleteById(int id);
+	public void updateReply_count(int id);
 }

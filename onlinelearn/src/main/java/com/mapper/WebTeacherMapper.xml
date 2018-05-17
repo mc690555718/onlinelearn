@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
  <mapper namespace="com.mapper.WebTeacherMapper">
-
-
 <resultMap id="CourseMap" type="WebTeacherBean" >
     <id column="COURSE_ID" property="course_id" />
     <result column="COURSE_NAME" property="course_name" />
@@ -25,9 +22,10 @@
     <result column="LOSE_TIME" property="lose_time" />
     <result column="SEQUENCE" property="sequence" />
     <result column="COURSE_GROSS_INCOME" property="course_gross_income"/>
+    
 	</resultMap>
-	<select id="list" resultMap="CourseMap" parameterType="int">
-		select * from edu_course where subject_id = #{value}
-	</select>
+	<select id="list" parameterType="int" resultMap="CourseMap">
+	 select * from edu_course where course_id in (select course_id from edu_course_teacher where teacher_id=#{value})
+    </select>
 	
 	</mapper>

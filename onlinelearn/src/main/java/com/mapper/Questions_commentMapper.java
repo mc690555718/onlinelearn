@@ -3,6 +3,7 @@ package com.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.bean.Questions;
 import com.bean.Questions_comment;
 
 public interface Questions_commentMapper {
@@ -16,4 +17,10 @@ public interface Questions_commentMapper {
 	public void updatePraise(int id);
 	public List<Questions_comment> getById2(int id);
 	public List<Questions_comment> getById3(int id);
+	public List<Questions_comment> getListById(int commentId);
+	public void addReply_count(int id);
+	public void deleteAll(Questions_comment comment);
+	public void deleteSubreview(int id);
+	public List<Questions_comment> getId(Questions_comment comment);
+	public int getQuestions_Id(int id);
 }

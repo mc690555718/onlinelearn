@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bean.Questions_comment;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.service.QuestionsService;
 import com.service.Questions_commentService;
 
 @Controller
@@ -26,6 +27,8 @@ public class Questions_commentController {
 
 	@Autowired
 	private Questions_commentService questions_commentService;
+	@Autowired
+	private QuestionsService questionsService;
 	
 	@RequestMapping("/listAll")
 	public ModelAndView listAll(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request,Model md) throws UnsupportedEncodingException {
@@ -73,7 +76,10 @@ public class Questions_commentController {
 	
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id")int id) {
+	 	int cid =questions_commentService.getQuestions_Id(id);
+	 	questionsService.updateReply_count(cid);
 		questions_commentService.delete(id);
+		questions_commentService.deleteSubreview(id);
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	

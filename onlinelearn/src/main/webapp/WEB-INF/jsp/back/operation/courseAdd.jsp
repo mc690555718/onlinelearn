@@ -23,11 +23,16 @@
 	media="all">
 <link href="/js/utf8-jsp/themes/default/css/umeditor.css"
 	type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="/validate/dist/validation.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/common/layui/layui.js"></script>
- <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.config.js"></script>
-  <script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.min.js"></script>
-  <script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/utf8-jsp/umeditor.min.js"></script>
+<script type="text/javascript" src="/js/utf8-jsp/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/validate/lib/jquery.js"></script>
+<script type="text/javascript" src="/validate/dist/jquery.validate.js"></script>
+<script type="text/javascript" src="/validate/dist/localization/messages_zh.js"></script>
 <style type="text/css">
 #time1 {
 	display: none
@@ -37,8 +42,6 @@
 	display: block;
 	overflow: hidden;
 	white-space: nowrap;
-	//
-	处理块元素中的空白符和换行符的，这个属性保证图片不换行
 }
 
 #tea1.li {
@@ -56,7 +59,7 @@
 	var teas = new Array();
 	var tean = new Array();
 
-	//从新加载表单
+	//layui加载表单
 	function renderForm() {
 		layui.use('form', function() {
 			var form = layui.form();//高版本建议把括号去掉，有的低版本，需要加()
@@ -64,18 +67,7 @@
 		});
 	}
 
-	$(function() {
-		//父专业下拉框赋值
-		$.post("/admin/cou/getParent", function(data) {
-			for (var i = 0; i < data.length; i++) {
-				$("#parent_id").append(
-						"<option value='"+data[i].subject_id+"'>"
-								+ data[i].subject_name + "</option>");
-			}
-			renderForm();
-		}, "json");
-		
-	});
+	
 
 	//子专业下拉框动态赋值
 	layui.use('form', function() {
@@ -184,8 +176,6 @@
 		}
 	}
 	
-	
-	
 			//清空输入框
 			function cleanText(){
 				$("#course_name").val("");
@@ -195,7 +185,6 @@
 				$("#source_price").val("");
 				$("#current_price").val("");
 				$("#loseType").val("1");
-				$("#id").val("-1");
 				$("#tea1").remove("li");
 				$("#lose_time").val("");
 				$("#end_time").val("");
@@ -204,25 +193,10 @@
 				$("#context").val("");
 				teas.length=0;
 				tean.length=0;
+				$("#subject_id").empty();
+				$("#subject_id").append("<option value='-1'>--请选择--</option>");
 			}
-	//确定提交		
-	function toAddCourse(){
-		//添加教师链   字符串
-		var teach = "";
-		for(var i = 0;i < teas.length;i++){
-			teach += teas[i];
-			if(i < teas.length-1){
-				teach += ",";
-			}
-		}
-		$("#teacher_id").val(teach);
-		
-		var img = $("#pic").attr("src");
-		var imgPath = img.substring(12); 
-		$("#logo").val(imgPath);
-		document.forms[0].action="/admin/cou/addCourse";
-		document.forms[0].submit();
-	}		
+
 			
 
 </script>
@@ -235,12 +209,12 @@
 			</header>
 			<!-- /header -->
 			<div class="larry-personal-body clearfix">
-				<form class="layui-form col-lg-6" action="#" method="post">
+				<form class="layui-form col-lg-6" action="#" method="post" id="courseAddForm">
 					<div class="layui-form-item">
 						<label class="layui-form-label ">课程名称:</label>
 						<div class="layui-input-block">
-							<input type="text" id="course_name" name="course_name"
-								autocomplete="off" class="layui-input ">
+							<input type="text" id="course_name" name="course_name" 
+								autocomplete="off" class="layui-input" placeholder="请输入两位以上字符">
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -271,22 +245,22 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">总课时:</label>
 						<div class="layui-input-block">
-							<input type="text" id="lession_num" name="lession_num"
-								autocomplete="off" class="layui-input ">
+							<input type="number" id="lession_num" name="lession_num"
+								autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">课程原价格:</label>
 						<div class="layui-input-block">
-							<input type="text" id="source_price" name="source_price"
-								autocomplete="off" class="layui-input ">
+							<input type="number" id="source_price" name="source_price"
+								autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">课程销售价格:</label>
 						<div class="layui-input-block">
-							<input type="text" id="current_price" name="current_price"
-								autocomplete="off" class="layui-input ">
+							<input type="number" id="current_price" name="current_price"
+								autocomplete="off" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -302,7 +276,7 @@
 					<div class="layui-form-item" id="day1">
 						<label class="layui-form-label">按天数:</label>
 						<div class="layui-input-block">
-							<input type="text" id="lose_time" name="lose_time"
+							<input type="number" id="lose_time" name="lose_time"
 								autocomplete="off" class="layui-input" />天
 						</div>
 					</div>
@@ -355,7 +329,7 @@
 					</div>
 					<div class="layui-form-item">
 						<div class="layui-input-block">
-							<button class="layui-btn" onclick="toAddCourse()" type="button">立即提交</button>
+							<button class="layui-btn" id="btn_submit" type="button">立即提交</button>
 							<button type="reset" onclick="cleanText()"
 								class="layui-btn layui-btn-primary">重置</button>
 						</div>
@@ -365,6 +339,121 @@
 		</div>
 	</section>
 	<script type="text/javascript">
+	
+$(function() {
+		
+		layui.use('form', function() {
+			var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
+		});
+		
+		layui.use('layer', function(){ //独立版的layer无需执行这一句
+			  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+		});
+		
+		//父专业下拉框赋值
+		$.post("/admin/cou/getParent", function(data) {
+			for (var i = 0; i < data.length; i++) {
+				$("#parent_id").append(
+						"<option value='"+data[i].subject_id+"'>"
+								+ data[i].subject_name + "</option>");
+			}
+			renderForm();
+		}, "json");
+		
+	
+// 		    var res = /^[0-9]+(.[0-9]{1,2})?$/;/*/^1(3|4|5|7|8)\d{9}$/*/
+
+// 				$("#course_name").val("");
+// 				$("#parent_id").val("-1");
+// 				$("#is_avaliable").val("-1");
+// 				$("#lession_num").val("");
+// 				$("#source_price").val("");
+// 				$("#current_price").val("");
+// 				$("#loseType").val("1");
+// 				$("#tea1").remove("li");
+// 				$("#lose_time").val("");
+// 				$("#end_time").val("");
+// 				$("#title").val("");
+// 				$("#logo").val("");
+// 				$("#context").val("");
+// 				teas.length=0;
+// 				tean.length=0;
+// 				$("#subject_id").empty();
+// 				$("#subject_id").append("<option value='-1'>--请选择--</option>");
+
+		
+		
+		//验证提交
+		$("#btn_submit").click(function() {
+	 		//添加教师链   字符串
+	 		var teach = "";
+	 		for(var i = 0;i < teas.length;i++){
+	 			teach += teas[i];
+	 			if(i < teas.length-1){
+	 				teach += ",";
+	 			}
+	 		}
+	 		$("#teacher_id").val(teach);
+			
+	 		var img = $("#pic").attr("src");
+	 		var imgPath = img.substring(12); 
+	 		$("#logo").val(imgPath);
+	 		
+	 		var courseName = $("#course_name").val();
+	 		var lessNum = $("#lession_num").val();
+	 		var souPri = $("#source_price").val();
+	 		var curPri = $("#current_price").val();
+	 		if(courseName == null || courseName.trim().length == 0){
+	 			layer.msg('创建失败,请检查输入信息', {icon: 5});
+	 			layer.tips('请输入课程名称','#course_name');
+	 		}else{
+	 			var checkCname =  /^[\u4E00-\u9FA5A-Za-z0-9]{3,20}$/;
+	 			if(!checkCname.test(courseName)){
+	 				layer.msg('课程名称格式不匹配,请检查输入', {icon: 5});
+	 				layer.tips('请输入长度为3~20的字符','#course_name');
+	 			}else{
+	 				if(lessNum == null || lessNum.trim().length == 0){
+	 					layer.msg('创建失败,请检查输入信息', {icon: 5});
+	 					layer.tips('请输入总课时','#lessNum');
+	 				}else{
+	 					var checkNum = /^[1-9]\d*$ /;
+	 					if(!checkNum.test(lessNum)){
+	 						layer.msg('总课时格式不匹配,请检查输入', {icon: 5});
+	 						layer.tips('请输入整数','#lessNum');
+	 					}else{
+	 						if(souPri == null || souPri.trim().length == 0){
+	 							layer.msg('创建失败,请检查输入信息', {icon: 5});
+	 							layer.tips('请输入原价金额','#sourse_price');
+	 						}else{
+	 							var res = /^[0-9]+(.[0-9]{1,2})?$/;
+	 							if(!res.test(souPri)){
+	 								layer.msg('课程原价格式不匹配,请检查输入', {icon: 5});
+	 								layer.tips('请输入合法的金额,可留小数点后两位','#sourse_price');
+	 							}else{
+	 								if(curPri == null || curPri.trim().length == 0){
+	 									layer.msg('创建失败,请检查输入信息', {icon: 5});
+	 									layer.tips('请输入售价金额','#sourse_price');
+	 								}else{
+	 									if(!res.test(curPri)){
+	 		 								layer.msg('课程售价格式不匹配,请检查输入', {icon: 5});
+	 										layer.tips('请输入合法的金额,可留小数点后两位','#current_price');
+	 									}else{
+	 										alert("tijiao");
+	 									}
+	 								}
+	 							}
+	 						}
+	 						
+	 					}
+	 				}
+	 			}
+	 		}
+	 		
+// 	 		document.forms[0].action="/admin/cou/addCourse";
+// 	 		document.forms[0].submit();
+		});
+		
+	});
 	
 	layui.use('upload', function(){
 		  

@@ -52,7 +52,7 @@ function hotQuestions(){
 					str+='<li>'
 						+'	<aside class="q-r-r-num">'
 						+'		<div class="replyNum">'
-						+'			<span class="r-b-num">'+resultList[i].replyCount+'</span>'
+						+'			<span class="r-b-num">'+resultList[i].reply_count+'</span>'
 						+'			<p class="hLh20">'
 						+'				<span class="c-999 f-fA">回答数</span>'
 						+'			</p>'
@@ -60,7 +60,7 @@ function hotQuestions(){
 						+'	</aside>'
 						+'	<h4 class="hLh30 txtOf">'
 						+'		<em class="icon16 q-tw">&nbsp;</em>'
-						+'		<a href="/questions/info/'+resultList[i].id+'" title="" class="fsize14 c-333 ml5">'+resultList[i].title+'</a>'
+						+'		<a href="/front/info/'+resultList[i].id+'" title="" class="fsize14 c-333 ml5">'+resultList[i].title+'</a>'
 						+'	</h4>'
 						+'</li>';
 				}

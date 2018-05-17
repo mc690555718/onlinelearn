@@ -30,7 +30,7 @@ public class EduCourse {
 	private SysSubject subject;  //-课程专业ID
 	private String subject_link;  //-课程专业ID
 	private Date add_time;       //-添加时间
-	private int source_price;    //-课程原价格（只显示）
+	private double source_price;    //-课程原价格（只显示）
 	private double current_price;   //-课程销售价格（实际支付价格）设置为0则可免费观看
 	private String title;        //-课程简介
 	private String context;      //-课程详情
@@ -112,7 +112,7 @@ public class EduCourse {
 	public void setAdd_time(Date add_time) {
 		this.add_time = add_time;
 	}
-	public int getSource_price() {
+	public double getSource_price() {
 		return source_price;
 	}
 	public void setSource_price(int source_price) {

@@ -3,7 +3,6 @@ package com.controller.support;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +11,7 @@ import com.bean.SysRole;
 import com.bean.SysUser;
 import com.service.SysRoleService;
 import com.service.SysUserService;
+import com.util.Encryption;
 
 
 
@@ -61,19 +61,15 @@ public class SysUserController {
 	
 	@RequestMapping("/updatepwd")
 	@ResponseBody
-	public int updatepwd(ModelAndView mv,String login_pwd,String user_id,String login_name){
-		SysUser user = new SysUser();
+	public int updatepwd(ModelAndView mv,String login_pwd,String user_id){
+		SysUser user = null;
+		if (user_id != null && user_id.trim().length() != 0) {
+			user =  us.getById(Integer.valueOf(user_id));
+		}
 		if (login_pwd != null && login_pwd.trim().length() != 0) {
 			user.setLogin_pwd(login_pwd);
 		}
-		if (user_id != null && user_id.trim().length() != 0) {
-			user.setUser_id(Integer.valueOf(user_id));
-		}
-		if (login_name != null && login_name.trim().length() != 0) {
-			user.setLogin_name(login_name);
-		}
-		//若此行代码不加，会报    source is null for getProperty(null, "role_id")   异常
-		user.setRole(new SysRole());
+		user.setLogin_pwd(Encryption.encryptionByMD5(user.getLogin_name(), user.getLogin_pwd()));
 		us.edit(user);
 		return 0;
 	}
@@ -94,6 +90,20 @@ public class SysUserController {
 		return mv;
 	}
 	
-	
+	/** 异步验证用户名是否存在
+	 * @param login_name
+	 * @return boolean
+	 */
+	@RequestMapping("/checkusername")
+	@ResponseBody
+	public boolean checkUsername(String login_name){
+		if (login_name != null && login_name.trim().length() != 0) {
+			SysUser user = us.getByName(login_name);
+			if (user != null) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }

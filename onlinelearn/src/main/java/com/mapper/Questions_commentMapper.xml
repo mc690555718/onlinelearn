@@ -78,4 +78,25 @@
 		edu_questions_comment(cus_id,question_id,content,is_best,reply_count,praise_count,add_time,comment_id)
 		values(#{edu_user.user_id},#{questions.id},#{content},#{is_best},#{reply_count},#{praise_count},#{add_time},#{comment_id})
 	</insert>
+	<select id="getListById" resultMap="Questions_commentMap"
+		parameterType="int">
+		select * from edu_questions_comment where comment_id
+		=#{value}
+	</select>
+	<update id="addReply_count" parameterType="int">
+	   update edu_questions_comment
+		set reply_count=reply_count+1 where ID=#{id}
+	</update>
+	<delete id="deleteAll" parameterType="Questions_comment">
+	   delete from edu_questions_comment where QUESTION_ID=#{questions.id}
+	</delete>
+	<delete id="deleteSubreview" parameterType="int">
+	   delete from edu_questions_comment where comment_id=#{value}
+	</delete>
+	<select id="getId" resultType="Questions_comment" parameterType="Questions_comment">
+	  select * from edu_questions_comment where QUESTION_ID=#{questions.id}
+	</select>
+	<select id="getQuestions_Id" resultType="int" parameterType="int">
+	   select QUESTION_ID from edu_questions_comment where id=#{value}
+	</select>
 </mapper>

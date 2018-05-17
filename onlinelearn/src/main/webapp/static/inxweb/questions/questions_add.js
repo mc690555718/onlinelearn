@@ -118,7 +118,7 @@ function addQuestions(){
 		async:true,
 		success:function(result){
 			if(result.success==true){
-				window.location.href="/front/questions/info/"+result.entity;
+				window.location.href="/front/info/"+result.entity;
 			}else{
 				dialog('提示信息',result.message,1);
 			}

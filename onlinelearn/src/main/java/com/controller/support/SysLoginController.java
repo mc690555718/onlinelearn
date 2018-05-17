@@ -39,8 +39,9 @@ public class SysLoginController {
 		if (!subject.isAuthenticated()) {
 			try{
 			    subject.login(token);
+			    subject.hasRole("");
 			}catch(Exception e){
-//				e.printStackTrace();  //ÑéÖ¤Ê§°Ü´íÎó´òÓ¡ÐÅÏ¢
+//				e.printStackTrace();  //ï¿½ï¿½Ö¤Ê§ï¿½Ü´ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½Ï¢
 				mv.setViewName("/back/login/login");
 				return mv;
 			}

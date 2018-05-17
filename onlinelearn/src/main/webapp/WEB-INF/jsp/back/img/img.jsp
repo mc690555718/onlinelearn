@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +163,9 @@ height: 80px;
 						 <button type="submit" id="in1" onclick="list()">查找评论</button>
 						 <button type="reset"  id="in1" onclick="cy()" >清空</button>
                          <button type="button" id="in1" onclick="batchDeletes()">批量删除</button>
+                         	<shiro:hasPermission name="img_add">
 						 <button type="button"  id="in1"><a href="/admin/hello/listtype" id="a1">新建图片</a></button>
+						 		</shiro:hasPermission>
 						</div>
 					</form>
 				</blockquote>
@@ -196,12 +199,18 @@ height: 80px;
  --%>										<td>${p.linkAddress}</td>
 										<td>${p.imgType.typeName}</td>
 										<td>${p.seriesNumber}</td>
-										<td><a class="layui-btn layui-btn-mini"
+										<td>
+										<shiro:hasPermission name="img_update">
+										<a class="layui-btn layui-btn-mini"
 											href="/admin/hello/getById/${p.imageId}"><i
-												class="iconfont icon-edit"></i> 编辑</a> <a
-											class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
+												class="iconfont icon-edit"></i> 编辑</a>
+												</shiro:hasPermission> 
+												<shiro:hasPermission name="img_del">
+												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
 											href="/admin/hello/delete/${p.imageId}"><i
-												class="layui-icon"></i> 删除</a></td>
+												class="layui-icon"></i> 删除</a>
+												</shiro:hasPermission>
+												</td>
 									</tr>
 								</c:forEach>
 					<tr>

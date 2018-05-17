@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <%-- <%     String path=request.getContextPath();  
 String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.getServerPort()+path+"/"; %>
 <base href="<%=basePath%>"> --%>
@@ -145,8 +146,10 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 						<div class="layui-inline">
 
 							<div class="layui-inline">
+								<shiro:hasPermission name="imgType_add">
 								<button type="button" class="layui-btn search_btn"
 									onclick="jump()">添加类型</button>
+										</shiro:hasPermission>
 							</div>
 						</div>
 
@@ -169,12 +172,18 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 									<tr>
 										<td>${p.typeId }</td>
 										<td>${p.typeName}</td>
-										<td><a class="layui-btn layui-btn-mini"
+										<td>
+										<shiro:hasPermission name="imgType_upd">
+										<a class="layui-btn layui-btn-mini"
 											onclick="up('${p.typeName}','${p.typeId }')"><i
-												class="iconfont icon-edit"></i> 编辑</a> <a
-											class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
+												class="iconfont icon-edit"></i> 编辑</a> 
+												</shiro:hasPermission> 
+												<shiro:hasPermission name="imgType_del">
+												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
 											href="/admin/img/delete/${p.typeId}" ><i
-												class="layui-icon"></i> 删除</a></td>
+												class="layui-icon"></i> 删除</a>
+											</shiro:hasPermission> 
+												</td>
 									</tr>
 								</c:forEach>
 									<tr>

@@ -32,7 +32,7 @@ public class AdminRealm extends AuthorizingRealm{
 		 info.setRoles(us.getRoleNameSet(user));
 		 info.setStringPermissions(us.getPermissionNamesSet(user));
 		 return info;
-		
+		 
 	}
 	
 	@Override
@@ -41,10 +41,10 @@ public class AdminRealm extends AuthorizingRealm{
 		UsernamePasswordToken uptoken = (UsernamePasswordToken) token;
 		String username = uptoken.getUsername();
 		if("unknow".equals(username)){
-			throw new UnknownAccountException("ÓÃ»§²»´æÔÚ");
+			throw new UnknownAccountException("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		if("monster".equals(username)){
-			throw new LockedAccountException("ÓÃ»§±»Ëø¶¨");
+			throw new LockedAccountException("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}
 		SysUser user = us.getByName(username);	
 		if (user == null) {

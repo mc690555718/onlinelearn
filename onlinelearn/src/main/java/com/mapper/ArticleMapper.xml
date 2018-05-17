@@ -75,5 +75,15 @@
 
 <update id="releaseEdit" parameterType="Article">
   update edu_article set releases=#{releases} where article_id=#{article_id}
+</update>
+
+<update id="addNum" parameterType="int">
+   update edu_article set
+		comment_num=comment_num+1 where article_id=#{article_id}
 </update>	
+
+<update id="addClickNum" parameterType="int">
+   update edu_article set
+		click_num=click_num+1 where article_id=#{article_id}
+</update>
 </mapper>

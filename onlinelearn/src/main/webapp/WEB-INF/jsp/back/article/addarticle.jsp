@@ -73,12 +73,16 @@
 					$("#btn").removeAttr("disabled");
 				}
 			} else if(b == 3) {
+				var reg =/^[0-9]*$/;
 				t = document.getElementById("d3");
 				if(v.trim().length == 0) {
 					t.innerText = "作者不能为空!";
 					t.style.color = "red";
 					$("#btn").attr({ disabled: "disabled" });
-				} else{
+				}else if(reg.test(v)){
+					t.innerText = "标题不能为纯数字";
+					t.style.color = "red";
+				}  else{
 					t.innerText = "";
 					$("#btn").removeAttr("disabled");
 				}

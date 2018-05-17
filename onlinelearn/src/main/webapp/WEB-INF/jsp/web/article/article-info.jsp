@@ -62,10 +62,10 @@
 							<div id="art-infor-body">${article.articleContent.content }
 								<div>
 									<tt class="c-999 f-fM">
-										评论：<span class="totalResultComment">0</span>
+										评论：<span class="totalResultComment">${article.comment_num }</span>
 									</tt>
 									<tt class="c-999 f-fM ml20">
-										点赞：<span class="addPraise${article.article_id}_3 praiseCount">0</span>
+										点赞：<span class="addPraise${article.article_id}_3 praiseCount">${article.praise_count }</span>
 									</tt>
 									<tt class="c-999 f-fM ml20">
 										阅读：<span class="clickNum">${article.click_num }</span>

@@ -15,4 +15,7 @@ public interface CommentMapper {
 	public  void praiseEdit(int comment_id);
 	public List<Comment> childComment(Map map);
 	public  void addcomment(int comment_id);
+	public void addNum(int other_id);
+
+	
 }

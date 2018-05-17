@@ -158,31 +158,31 @@
 				<div>
 					<article class="i-teacher-list">
 						<ul class="of">
-<%-- 							<c:forEach items="${teacherList}" var="teacher" varStatus="index"> --%>
-<!-- 								<li> -->
-<!-- 									<section class="i-teach-wrap"> -->
-<!-- 										<div class="i-teach-pic"> -->
-<%-- 											<a href="${ctx}/front/teacher/${teacher.id}" title="${teacher.name}"> --%>
-<%-- 												<c:if test="${not empty teacher.picPath&&teacher.picPath!=''}"> --%>
-<%-- 													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage%>${teacher.picPath}"> --%>
-<%-- 												</c:if> --%>
-<%-- 												<c:if test="${empty teacher.picPath||teacher.picPath==''}"> --%>
-<%-- 													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-img.gif" xsrc="${ctx}/static/inxweb/img/default-img.gif"> --%>
-<%-- 												</c:if> --%>
-<!-- 											</a> -->
-<!-- 										</div> -->
-<!-- 										<div class="mt10 hLh30 txtOf tac"> -->
-<%-- 											<a href="${ctx}/front/teacher/${teacher.id}" title="${teacher.name}" class="fsize18 c-666">${teacher.name}</a> --%>
-<!-- 										</div> -->
-<!-- 										<div class="hLh30 txtOf tac"> -->
-<%-- 											<span class="fsize14 c-999">${teacher.education }</span> --%>
-<!-- 										</div> -->
-<!-- 										<div class="mt15 i-q-txt"> -->
-<%-- 											<p class="c-999 f-fA">${teacher.career }</p> --%>
-<!-- 										</div> -->
-<!-- 									</section> -->
-<!-- 								</li> -->
-<%-- 							</c:forEach> --%>
+ 							<c:forEach items="${teacherList}" var="teacher" varStatus="index"> 
+ 								<li> 
+									<section class="i-teach-wrap">
+										<div class="i-teach-pic"> 
+											<a href="${ctx}/front/teacher/${teacher.id}" title="${teacher.name}"> 
+ 												<c:if test="${not empty teacher.picPath&&teacher.picPath!=''}"> 
+													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage%>${teacher.picPath}"> 
+ 												</c:if> 
+ 												<c:if test="${empty teacher.picPath||teacher.picPath==''}"> 
+ 													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-img.gif" xsrc="${ctx}/static/inxweb/img/default-img.gif"> 
+ 												</c:if> 
+											</a> 
+										</div> 
+										<div class="mt10 hLh30 txtOf tac">
+ 											<a href="${ctx}/front/teacher/${teacher.id}" title="${teacher.name}" class="fsize18 c-666">${teacher.name}</a> 
+ 										</div> 
+ 										<div class="hLh30 txtOf tac"> 
+											<span class="fsize14 c-999">${teacher.education }</span>
+										</div> 
+ 										<div class="mt15 i-q-txt"> 
+ 											<p class="c-999 f-fA">${teacher.career }</p> 
+ 										</div> 
+ 									</section>
+								</li> 
+ 							</c:forEach> 
 						</ul>
 						<div class="clear"></div>
 					</article>

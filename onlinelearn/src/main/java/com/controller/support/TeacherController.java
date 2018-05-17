@@ -42,7 +42,6 @@ public class TeacherController {
 
 	@Autowired
 	private TeacherService teacherService;
-
 	@Autowired
 	private SubjectService subjectService;
 
@@ -200,27 +199,21 @@ public class TeacherController {
 
 		//图片上传
 		//获得物理路径webapp所在路径
-		String pic=request.getParameter("hiddens");
+		String hiddens =request.getParameter("hiddens");
 		String filename=file.getOriginalFilename();
 		String path = request.getRealPath("/images/upload/teacher/20150915/");
 		File file2=new File(path,filename);
-		if(!file2.exists()){
-			file2.mkdir();
-		}
 		if (filename.equals("")||filename==null) {
-			teacherBean.setPic_path(pic);
-			teacherBean.setPic_path(path);
+			teacherBean.setPic_path(hiddens);
 		}else {
 			try {
 				file.transferTo(file2);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			teacherBean.setPic_path("/images/upload/teacher/20150915/"+filename);
 		}
-		teacherBean.setPic_path("/images/upload/teacher/20150915/"+filename);
 		teacherService.update(teacherBean);
 		return "redirect:/admin/teacher/list";
 	}
-
-
 }

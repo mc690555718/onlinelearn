@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
  <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -127,8 +128,13 @@ function list(){
 											<th width="10%">
 												<fmt:formatDate value="${p.create_time}" type="date" pattern="yyyy-MM-dd"/>
 											</th>
-											<th><a href="/admin/teacher/delete/${p.id}" class="btn btn-default">删除</a> 
+											<th>
+											<shiro:hasPermission name="teacher_delete">
+											<a href="/admin/teacher/delete/${p.id}" class="btn btn-default">删除</a> 
+											</shiro:hasPermission>
+											<shiro:hasPermission name="teacher_update">
 												<a href="/admin/teacher/updateinit/${p.id }" class="btn btn-default">修改</a></th>
+										    </shiro:hasPermission>
 										</tr>
 				
 									</c:forEach>

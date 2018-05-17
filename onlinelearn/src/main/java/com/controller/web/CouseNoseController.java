@@ -35,7 +35,6 @@ import com.util.Result;
 @Controller
 @RequestMapping("/front")
 public class CouseNoseController {
-
 	@Autowired
 	private ConurseNoseService conurseNoseService;
 	@Autowired

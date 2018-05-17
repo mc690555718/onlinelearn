@@ -1,5 +1,4 @@
 package com.controller.support;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -136,7 +135,6 @@ public Map initMap(HttpServletRequest request,Map map){
 @ResponseBody
 public int update(@RequestParam int id,@RequestParam String fir) {
 	Map map = new HashMap<>();
-	System.out.println(id+","+fir);
 	map.put("user_id", id);
 	map.put("password", fir);
 	edu_UserService.update(map);
@@ -246,6 +244,4 @@ public String parseExcel(@RequestParam("file")MultipartFile file,Edu_User user)t
 	}  
 	return "redirect:/admin/user/listUser";
 }
-
-
 }

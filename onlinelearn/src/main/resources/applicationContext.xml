@@ -124,6 +124,7 @@
 				/static/**=anon
 				/kindeditor/**=anon
 				/front/**=anon
+				/uc/**=anon
 				/admin/back/login=anon
 				/admin/back/checkAdmin=anon
 				/admin/logout=logout

@@ -13,5 +13,7 @@ public interface Edu_UserDao {
 	 public Edu_User getById(int user_id);
 	 public void save(Edu_User user);
 	 public Edu_User getPwd(String email);
+	 public void updatepwd(Edu_User edu_User);
+	 public void updateUser(Edu_User edu_User);
          
 }

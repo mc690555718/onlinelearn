@@ -2,8 +2,8 @@
  * 修改用户信息
  * @param userId 用户ID
  */
-function updateUserInfo(userId){
-	var params='';
+function updateUserInfo(){
+	 
 	$("#updateForm input,#updateForm select").each(function(){
 		params+=$(this).serialize()+"&";
     });
@@ -45,6 +45,8 @@ function showTab(_in){
  * 修改密码
  */
 function updatePwd(){
+	
+	var userId=$("input[name='userId'").val();
 	var oldPwd=$("input[name='nowPassword'").val();
 	if(oldPwd.trim()==""){
 		$("input[name='nowPassword'").next().html('<em class="u-a-cw icon16">&nbsp;</em>请输入原始密码');
@@ -78,7 +80,7 @@ function updatePwd(){
 		url:baselocation+'/uc/updatePwd',
 		type:'post',
 		dataType:'json',
-		data:params,
+		data:{"nowPassword":oldPwd,"newPassword":newPassword,"confirmPwd":confirmPwd},
 		success:function(result){
 			if(result.success==true){
 				dialog('提示信息',result.message,0);

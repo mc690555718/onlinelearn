@@ -5,12 +5,12 @@
 		<dt> 
 			<section class="of">
 				<div class="u-face-pic">
-					<img src="${ctx }/static/inxweb/img/avatar-boy.gif" alt="" class="userImgPhoto">
+					<img src="<%=staticImage%>${login_success.pic_img} alt="" class="userImgPhoto">
 					<a href="${ctx}/uc/initUpdateUser/1" title="" class="c-fff">修改头像</a>
 				</div>
-				<h4 class="mt10"><span class="fsize16 c-666 userNameClass"><!-- 用户名 --></span></h4>
+				<h4 class="mt10"><span class="fsize16 c-666 userNameClass">${ login_success.show_name}</span></h4>
 				<div class="hLh30 mt10">
-					<a href="${ctx}/uc/initUpdateUser/0" title="" class="c-blue">个人资料设置</a>
+					<a href="#" title="" class="c-blue">个人资料设置</a>
 				</div>
 				<div class="clear"></div>
 			</section><!-- /u-face-attr -->

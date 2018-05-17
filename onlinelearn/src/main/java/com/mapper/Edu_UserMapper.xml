@@ -59,9 +59,14 @@
 	
 	<select id="getPwd" parameterType="string"  resultMap="Edu_UserMap">
 	select * from edu_user  where email=#{value}
-	
-	
-	
 	</select>
+	
+	<update id="updatepwd" parameterType="Edu_User">
+	update edu_user set password=#{password} where user_id=#{user_id}
+	</update>
+	
+	<update id="updateUser" parameterType="Edu_User">
+	update edu_user set user_name=#{user_name},show_name=#{show_name},sex=#{sex},age=#{age} where user_id=#{user_id}
+	</update>
 </mapper>
 

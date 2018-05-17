@@ -26,7 +26,6 @@ import com.service.Edu_UserService;
 import com.tools.JavaEmailSender;
 import com.tools.MyJob;
 import com.tools.QuartzManager;
-
 @Controller
 public class Edu_Emailesend_HistoryController {
 
@@ -54,7 +53,6 @@ public class Edu_Emailesend_HistoryController {
 		mv.addObject("page", pageInfo);
 		return mv;
 	}
-
 	@RequestMapping("/admin/email/sendEmailinit/{id}")
 	public ModelAndView init(@PathVariable("id")int id) {
 		ModelAndView mv = new ModelAndView();
@@ -63,7 +61,6 @@ public class Edu_Emailesend_HistoryController {
 		mv.addObject("list",list);
 		return mv;
 	}
-
 	public Map initMap(HttpServletRequest request,Map map) {
 		String email = request.getParameter("email");
 		String type = request.getParameter("type");
@@ -80,12 +77,22 @@ public class Edu_Emailesend_HistoryController {
 	}
 
 	@RequestMapping("/admin/email/toEmail")
-	public ModelAndView send(HttpServletRequest request){
+	public ModelAndView send(@RequestParam(required=true,defaultValue="1") Integer page,HttpServletRequest request){
+		PageHelper.startPage(page, 5);
 		ModelAndView mv=new ModelAndView();
 		Map map=new HashMap<>();
+		String parameter = request.getParameter("type");
+		System.out.println(parameter);
+		if (parameter==null) {
+			request.setAttribute("type", 1);
+		}else {
+			request.setAttribute("type", Integer.parseInt(parameter));
+		}
 		List<Edu_User> list=Edu_UserService.listUser(map);
+		PageInfo<Edu_User> pageInfo=new PageInfo<Edu_User>(list);
 		mv.setViewName("/back/email/edu_emailesend_historyAdd");
 		mv.addObject("list", list);
+		mv.addObject("page", pageInfo);
 		return mv;
 	}
 

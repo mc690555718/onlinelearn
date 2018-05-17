@@ -48,6 +48,18 @@ public class Edu_UserServiceImpl  implements Edu_UserService{
 		return Edu_UserDao.getPwd(email);
 	}
 
+	@Override
+	public void updatepwd(Edu_User edu_User) {
+		Edu_UserDao.updatepwd(edu_User);
+		
+	}
+
+	@Override
+	public void updateUser(Edu_User edu_User) {
+		Edu_UserDao.updateUser(edu_User);
+		
+	}
+
 
 
 }

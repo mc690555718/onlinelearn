@@ -12,7 +12,7 @@
 		<div class="h-r-nsl">
 			<ul class="nav">
 			<li><a href="/front" title="首页" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>首页</a></li>
-			<li><a href="/front/course" title="课程" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>课程</a></li>
+			<li><a href="/front/toCourseslist" title="课程" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>课程</a></li>
 			<li><a href="/front/teacher/list" title="名师" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>名师</a></li>
 			<li><a href="/front/article/articlelist" title="文章" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>文章</a></li>
 			<li><a href="/front/questions/0" title="问答" <c:if test="${indexNavigate.newPage==0}">target="_blank"</c:if>>问答</a></li>
@@ -34,7 +34,7 @@
 					<li class="mr10 undis" id="is-login-one"><a href="${ctx}/uc/letter" title="消息" id="headerMsgCountId">
 							<em class="icon18 news-icon">&nbsp;</em>
 						</a><q class="red-point" style="display: none">&nbsp;</q></li>
-					<li class="h-r-user undis" id="is-login-two"><a href="${ctx}/uc/index" title="">
+					<li class="h-r-user undis" id="is-login-two"><a href="/uc/index" title="">
 							<img src="${ctx }/static/inxweb/img/avatar-boy.gif" width="30" height="30" class="vam picImg" alt="">
 							<span class="vam disIb" id="userName">${user.user_name}</span>
 						</a>

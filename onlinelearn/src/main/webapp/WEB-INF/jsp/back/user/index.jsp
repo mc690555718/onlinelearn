@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -152,7 +153,7 @@ function xiugai(id) {
 						</div>
 					</div>
 					<a class="layui-btn" onclick="getList()">查询</a> <a
-					class="layui-btn" onclick="daochu()">查询并导出</a>
+						class="layui-btn" onclick="daochu()">查询并导出</a>
 				</div>
 			</form>
 			<!-- 操作日志 -->
@@ -197,25 +198,26 @@ function xiugai(id) {
 							<td>${list.age }</td>
 							<c:if test="${list.is_avalible==1 }">
 								<td>正常</td>
-								<td>
-									<button title="修改密码" onclick="xiugai(${list.user_id})"
-										class="layui-btn layui-btn-normal">修改密码</button>
-
-									<button title="冻结"
-										onclick="dongjie(${list.user_id},${list.is_avalible})"
-										class="layui-btn layui-btn-danger">冻结</button>
-								</td>
+								<td><shiro:hasPermission name="updatePwd">
+										<button title="修改密码" onclick="xiugai(${list.user_id})"
+											class="layui-btn layui-btn-normal">修改密码</button>
+									</shiro:hasPermission> <shiro:hasPermission name="updateUser">
+										<button title="冻结"
+											onclick="dongjie(${list.user_id},${list.is_avalible})"
+											class="layui-btn layui-btn-danger">冻结</button>
+									</shiro:hasPermission></td>
 							</c:if>
 							<c:if test="${list.is_avalible==2 }">
 								<td>冻结</td>
-								<td>
-									<button title="修改密码" onclick="xiugai(${list.user_id})"
-										class="layui-btn layui-btn-normal">修改密码</button>
+								<td><shiro:hasPermission name="updatePwd">
+										<button title="修改密码" onclick="xiugai(${list.user_id})"
+											class="layui-btn layui-btn-normal">修改密码</button>
+									</shiro:hasPermission> <shiro:hasPermission name="updateUser">
+										<button title="解冻"
+											onclick="dongjie(${list.user_id},${list.is_avalible})"
+											class="layui-btn layui-btn-danger">解冻</button>
+									</shiro:hasPermission></td>
 
-									<button title="解冻"
-										onclick="dongjie(${list.user_id},${list.is_avalible})"
-										class="layui-btn layui-btn-danger">解冻</button>
-								</td>
 							</c:if>
 						</tr>
 					</c:forEach>

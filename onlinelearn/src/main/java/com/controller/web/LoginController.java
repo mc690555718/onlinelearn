@@ -1,7 +1,4 @@
 package com.controller.web;
-import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,7 +21,7 @@ public class LoginController {
 	@RequestMapping(value="/front/login",produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Result frontLogin(HttpServletRequest request,
-		HttpServletResponse response,HttpSession session) {
+			HttpServletResponse response,HttpSession session) {
 		String email = request.getParameter("account");
 		String pwd = request.getParameter("password");
 		Result result = new Result();
@@ -89,10 +86,6 @@ public class LoginController {
 		}else {
 			return new Result(false, "该账号已被注册！", null);
 		}
-
-
-
-
-
 	}
+	
 }

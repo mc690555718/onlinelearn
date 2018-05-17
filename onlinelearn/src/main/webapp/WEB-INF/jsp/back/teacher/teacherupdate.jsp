@@ -38,19 +38,8 @@
 
 <script type="text/javascript">
 function update() {
-	
-	 var name = $("#name").val();
-		var education = $("#education").val();
-		var sort = $("#sort").val();
-		var career = $("#career").val();
-		if(name!=""&&education!=""&&sort!=""&&career!=""){
-			document.forms[0].action = "/admin/teacher/update";
-			document.forms[0].submit();
-		}else{
-			alert("添加的数据不能为空")
-		}
-	
-	
+	document.forms[0].action = "/admin/teacher/update";
+	document.forms[0].submit();
 }
 
 function list() {
@@ -117,68 +106,6 @@ var setting = {
 	});
 </script>
 </head>
-<script type="text/javascript">
-		function fun(a, b) {
-			var v = a.value;
-			var t;
-			if(b == 1) {
-				var reg =/^[0-9]*$/;
-				t = document.getElementById("d1");
-				if(v.trim().length == 0) {
-					t.innerText = "教师名称不能为空!";
-					t.style.color = "red";
-					$("#btn").attr({ disabled: "disabled" });
-				}else if(reg.test(v)){
-					t.innerText = "教师名称不能为纯数字";
-					t.style.color = "red";
-				} else{
-					t.innerText = "";
-					$("#btn").removeAttr("disabled");
-				}
-
-			} else if(b == 2) {
-				var reg =/^[0-9]*$/;
-				t = document.getElementById("d2");
-				if(v.trim().length == 0) {
-					t.innerText = "讲师资历不能为空!";
-					t.style.color = "red";
-					$("#btn").attr({ disabled: "disabled" });
-				} else if(reg.test(v)){
-					t.innerText = "讲师资历不能为纯数字";
-					t.style.color = "red";
-				} else{
-					t.innerText = "";
-					$("#btn").removeAttr("disabled");
-				}
-			} else if(b == 3) {
-				var reg =/^[0-9]*$/;
-				t = document.getElementById("d3");
-				if(v.trim().length == 0) {
-					t.innerText = "讲师简介不能为空!";
-					t.style.color = "red";
-					$("#btn").attr({ disabled: "disabled" });
-				}else if(reg.test(v)){
-					t.innerText = "讲师不能为纯数字";
-					t.style.color = "red";
-				}  else{
-					t.innerText = "";
-					$("#btn").removeAttr("disabled");
-				}
-		}
-			else if(b == 4) {
-				var reg =/^[0-9]*$/;
-				t = document.getElementById("d4");
-				if(!reg.test(v)){
-					t.innerText = "排序值为数字";
-					t.style.color = "red";
-				}  else{
-					t.innerText = "";
-					$("#btn").removeAttr("disabled");
-				}
-		}
-		}
-</script>
-
 <body>
 	<section class="layui-larry-box">
 	<div class="larry-personal">
@@ -193,18 +120,14 @@ var setting = {
 					<label class="layui-form-label">讲师名称</label>
 					<div class="layui-input-block">
 						<input type="text" name="name" value="${a.name }"
-							class="layui-input" maxlength="5" placeholder="文章标题不得超过5个字"
-					  	onblur="fun(this,1)">
-					  	<span id="d1"></span>
+							class="layui-input">
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师资历</label>
 					<div class="layui-input-block">
 						<input type="text" name="education" value="${a.education }"
-							class="layui-input" maxlength="50" placeholder="文章标题不得超过50个字"
-					  	onblur="fun(this,2)">
-					  	<span id="d2"></span>
+							class="layui-input">
 					</div>
 				</div>
 
@@ -222,27 +145,27 @@ var setting = {
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师等级</label>
 					<div class="layui-input-block">
-						<select name="is_stars" value="${a.is_star}">
-							<option value="1">首席讲师</option>
-							<option value="2">高级讲师</option>
+						<select name="is_stars" > 
+							<option value="2" <c:if test="${a.is_star==2}"> selected="selected" </c:if>>首席讲师</option>
+							<option value="1" <c:if test="${a.is_star==1}"> selected="selected" </c:if>>高级讲师</option>
 						</select>
 					</div>
 				</div>
+				
+				
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师排序</label>
 					<div class="layui-input-block">
 						<input type="text" name="sort" value="${a.sort}"
-							class="layui-input" onblur="fun(this,4)">
-							<span id="d4"></span>
+							class="layui-input">
 					</div>
 				</div>
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师简介</label>
 					<div class="layui-input-block">
-						<textarea class="form-control" name="career" rows="3" id="career" maxlength="500" onblur="fun(this,3)">${a.career }</textarea>
-						<span id="d3"></span>
+						<textarea class="form-control" name="career" rows="3" id="career">${a.career }</textarea>
 					</div>
 				</div>
 
@@ -255,7 +178,6 @@ var setting = {
 									src="${a.pic_path }" name="pic_path" /> <input type="file"
 									name="file" id="imgInp">
 									<input type="hidden" name="hiddens" value="${a.pic_path}">
-									
 							</div>
 						</div>
 					</div>

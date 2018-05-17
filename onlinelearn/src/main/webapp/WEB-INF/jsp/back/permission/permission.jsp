@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <HTML>
 <HEAD>
-<TITLE>ZTREE DEMO - checkbox</TITLE>
+<TITLE>权限管理</TITLE>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/css/demo.css" type="text/css">
 <link rel="stylesheet" href="/css/zTreeStyle.css" type="text/css">
@@ -13,6 +13,7 @@
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/static/common/ztree/jquery.ztree.core-3.5.js"></script>
 <script type="text/javascript" src="/static/common/ztree/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="/common/bootstrap/js/bootstrap.js"></script>
 <SCRIPT type="text/javascript">
 	var setting = {
 		check : {
@@ -77,38 +78,57 @@
 			<button type="button" class="btn btn-primary" data-toggle="modal"
 				data-target="#myModal" id="btn_modal">新建角色</button>
 			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">创建一个新的用户</h4>
-						</div>
-						<div class="modal-body">
+<!-- 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" -->
+<!-- 				aria-labelledby="myModalLabel"> -->
+<!-- 				<div class="modal-dialog" role="document"> -->
+<!-- 					<div class="modal-content"> -->
+<!-- 						<div class="modal-header"> -->
+<!-- 							<button type="button" class="close" data-dismiss="modal" -->
+<!-- 								aria-label="Close"> -->
+<!-- 								<span aria-hidden="true">&times;</span> -->
+<!-- 							</button> -->
+<!-- 							<h4 class="modal-title" id="myModalLabel">创建一个新的用户</h4> -->
+<!-- 						</div> -->
+<!-- 						<div class="modal-body"> -->
 
-							<div class="form-group">
-								<label for="exampleInputEmail1">角色名称</label> <input type="text"
-									class="form-control" id="role_name" name="role_name"
-									placeholder="角色名">
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label for="exampleInputEmail1">角色名称</label> <input type="text" -->
+<!-- 									class="form-control" id="role_name" name="role_name" -->
+<!-- 									placeholder="角色名"> -->
+<!-- 							</div> -->
 
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">取消</button>
-							<button type="button" id="btn_addRole" class="btn btn-primary">确认</button>
-						</div>
-					</div>
-				</div>
-			</div>
+<!-- 						</div> -->
+<!-- 						<div class="modal-footer"> -->
+<!-- 							<button type="button" class="btn btn-default" -->
+<!-- 								data-dismiss="modal">取消</button> -->
+<!-- 							<button type="button" id="btn_addRole" class="btn btn-primary">确认</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 		</form>
 		<ul id="tree" class="ztree"
-			style="width: 500px; height: 500px; margin-left: 300px"></ul>
+			style="width: 350px; height: 500px; margin-left: 300px"></ul>
 	</div>
 
 	<script type="text/javascript">

@@ -130,6 +130,9 @@
 		edu_course_teacher where course_id = #{value}
 		)
 	</select>
+	
+	
+	
     <!-- 修改课程 -->
 	<update id="update" parameterType="EduCourse">
 

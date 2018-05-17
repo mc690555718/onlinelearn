@@ -42,7 +42,7 @@
              <if test="tel!=null">
                  tel=#{tel},
              </if>
-             <if test="role.role_id!=null">
+             <if test="role!=null">
                  role_id=#{role.role_id} ,
              </if>
          </set>

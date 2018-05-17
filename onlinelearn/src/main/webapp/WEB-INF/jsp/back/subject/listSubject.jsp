@@ -38,7 +38,7 @@
 								<select class="layui-input" width="150" name="parent_id"
 									id="parent_id">
 									<option value="-1" selected="selected">--请选择--</option>
-									<option value="0" >父专业</option>
+									<option value="0">父专业</option>
 									<c:forEach items="${subs}" var="su">
 										<option value="${su.subject_id}">${su.subject_name}</option>
 									</c:forEach>
@@ -114,14 +114,18 @@
 					document.forms[0].action = "/admin/subj/toSubjectList";
 					document.forms[0].submit();
 				});
+				
+				layui.use('layer', function(){ //独立版的layer无需执行这一句
+					  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+				});
 			});
 
 			function addSubject() {
-				var html = "     <div class='layui-form-item'>                                                                 "
+				var html = "     <div class='layui-form-item'>                                                                "
 						+ "     <label class='layui-form-label'>专业名称</label>                                                 "
 						+ "     <div class='layui-input-block'>                                                               "
 						+ "     <input type='text' name='subject_name' id='subject_name' required  lay-verify='required'      "            
-			             + "     placeholder='请输入专业' autocomplete='off' class='layui-input'>                                 "
+			            + "     placeholder='请输入专业' autocomplete='off' class='layui-input'>                                 "
 						+ "     </div>                                                                                        "
 						+ "     </div>                                                                                        "
 						+ "     <div class='layui-form-item'>                                                                 "
@@ -151,11 +155,20 @@
 							yes : function() {
 								var subject_name = $("#subject_name").val();
 								var parentId = $("#parentId").val();
-								document.forms[0].action = "/admin/subj/subjectadd?subject_name="
-										+ subject_name
-										+ "&parentId="
-										+ parentId;
-								document.forms[0].submit();
+								if(subject_name == null || subject_name.trim().length == 0){
+										layer.tips('请输入专业名称','#subject_name');
+								}else{
+									var checkName = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
+									if(!checkName.test(subject_name)){
+										layer.tips('请输入2~15长度的中文、英文、数字但不包括下划线等符号','#subject_name');
+									}else{
+									    document.forms[0].action = "/admin/subj/subjectadd?subject_name="
+										    + subject_name
+										    + "&parentId="
+										    + parentId;
+								        document.forms[0].submit();
+									}
+								}
 							}
 						});
 			        });
@@ -167,7 +180,7 @@
 						+ "     <label class='layui-form-label'>专业名称</label>                                                 "
 						+ "     <div class='layui-input-block'>                                                               "
 						+ "     <input type='text' name='subject_name' id='subject_name' required  lay-verify='required'      "          
-			                        + "         placeholder='请输入专业' autocomplete='off' class='layui-input'>                             "
+			            + "         placeholder='请输入专业名称' autocomplete='off' class='layui-input'>                           "
 						+ "     </div>                                                                                        "
 						+ "     </div>                                                                                        "
 						+ "     <div class='layui-form-item'>                                                                 "
@@ -176,7 +189,7 @@
 						+ "     <select class='layui-input' width='150' name='parentId' id='parentId'>                        "
 						+ "        <option value='0' selected='selected'>父专业</option>                                        "
 						+ "     <c:forEach items='${subs}' var='su'>                                                          "
-						+ "     <option value='${su.subject_id}'>${su.subject_name}</option>                                  "
+						+ "         <option value='${su.subject_id}'>${su.subject_name}</option>                              "
 						+ "     </c:forEach>                                                                                  "
 						+ "     </select>                                                                                     "
 						+ "     </div>                                                                                        "
@@ -185,8 +198,8 @@
 						+ "     <input type='hidden' id='subject_id' name='subject_id'/>                                      "
 						+ "     <label class='layui-form-label'>热度</label>                                                   "
 						+ "     <div class='layui-input-block'>                                                               "
-						+ "     <input type='text' name='sort' id='sort' required  lay-verify='required'                      "          
-			            	        + "         placeholder='请输入热度数值' autocomplete='off' class='layui-input'>                          "
+						+ "     <input type='number' name='sort' id='sort' required  lay-verify='required'                    "          
+			            + "         placeholder='请输入热度数值' autocomplete='off' class='layui-input'>                          "
 						+ "     </div>                                                                                        "
 						+ "     </div>                                                                                        ";
 		    layui.use('layer', function(){
@@ -206,21 +219,39 @@
 						var sort = $("#sort").val();
 						var subId = $("#subject_id").val();
 						var parentId = $("#parentId").val();
-						document.forms[0].action = "/admin/subj/subjectupdate?"
-								+ "subject_name=" + subject_name + "&sort="
-								+ sort + "&subject_id=" + subId + "&parentId="
-								+ parentId;
-						document.forms[0].submit();
+						if(subject_name == null || subject_name.trim().length == 0){
+							layer.tips('请输入专业名称','#subject_name');
+					    }else{
+						    var checkName = /^[\u4E00-\u9FA5A-Za-z0-9]{2,20}$/;
+						    if(!checkName.test(subject_name)){
+							    layer.tips('请输入2~15长度的中文、英文、数字但不包括下划线等符号','#subject_name');
+						    }else{
+						    	var checkSort = /^([1-9]\d*|[0]{1,2})$/;
+						    	if(!checkSort.test(sort)){
+						    		layer.tips('请输入2位以内的正整数','#sort');
+						    	}else{
+						  
+								    document.forms[0].action = "/admin/subj/subjectupdate?"
+							    		+ "subject_name=" + subject_name + "&sort="
+							    		+ sort + "&subject_id=" + subId + "&parentId="
+								    	+ parentId;
+							        document.forms[0].submit();
+						  		
+						    	}
+						    }
+					    }
 					}
 				});
 		    });
 
-				$.post("/admin/subj/loadSubjectById/" + subject_id, function(
-						data) {
+				$.post("/admin/subj/loadSubjectById/" + subject_id, function(data) {
 					$("#subject_name").val(data.subject_name);
 					$("#sort").val(data.sort);
 					$("#subject_id").val(data.subject_id);
-					$("#parentId").val(data.sub.subject_id);
+					if(data.sub != null){
+						$("#parentId").val(data.sub.subject_id);
+					}
+					$("#parentId option[value='"+subject_id+"']").remove();  
 				}, "json");
 			}
 			

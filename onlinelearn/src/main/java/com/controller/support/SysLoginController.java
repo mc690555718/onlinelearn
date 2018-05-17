@@ -40,7 +40,7 @@ public class SysLoginController {
 			try{
 			    subject.login(token);
 			}catch(Exception e){
-				e.printStackTrace();
+//				e.printStackTrace();  //验证失败错误打印信息
 				mv.setViewName("/back/login/login");
 				return mv;
 			}

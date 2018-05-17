@@ -21,6 +21,8 @@ import com.bean.EduCourse;
 import com.bean.EduCourseKpoint;
 import com.bean.SysSubject;
 import com.bean.TeacherBean;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.EduCourseService;
 import com.service.SysSubjectService;
 import com.service.TeacherService;
@@ -49,7 +51,10 @@ public class EduCourseController {
 	 * @return
 	 */
 	@RequestMapping(value="/list")
-	public ModelAndView listCourse(ModelAndView mv,String qname,String subject_id,String add_time ,String end_time,String is_avaliable){
+	public ModelAndView listCourse(ModelAndView mv,String qname,String subject_id,
+			String add_time ,String end_time,String is_avaliable,@RequestParam(required=true,defaultValue="1")Integer currentPage){
+		//设置每页显示10调数据
+		PageHelper.startPage(currentPage, 10);
 		Map<Object, Object> map = new HashMap<>();
 		if (qname != null && qname.trim().length() != 0) {
 			map.put("qname", qname);
@@ -78,8 +83,12 @@ public class EduCourseController {
 		}
 		List<EduCourse> eduCourses  = cs.query(map);
 		List<SysSubject> subjects = ss.query(null);
+		//将数据加载为页面信息
+		PageInfo<EduCourse> info = new PageInfo<>(eduCourses);
 		mv.addObject("subjects",subjects);
 		mv.addObject("eduCourses",eduCourses);
+		//分页信息加入mv
+		mv.addObject("info", info);
 		mv.setViewName("/back/operation/courseList");
 		return mv;
 	}

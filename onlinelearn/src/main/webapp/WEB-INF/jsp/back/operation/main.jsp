@@ -159,43 +159,6 @@
       </section>
 		</div>
 		<div class="col-lg-6">
-		     <!-- 快捷操作 -->
-             <section class="panel">
-                  <header class="panel-heading bm0">
-                        <span class='span-title'>快捷操作</span>
-                        <span class="tools pull-right"><a href="javascript:;" class="iconpx-chevron-down"></a></span>
-                  </header>
-                  <div class="panel-body">
-                        <table class="table table-hover personal-task shortcut">
-                            <tr>
-                            	<td>
-                            		<div class="c1">1</div>
-                            		<div class="c2">2</div>
-                            		<br>
-                            	</td>
-                            </tr>
-                        </table>
-                  </div>
-             </section>
-          <!-- 系统公告 -->
-             <section class="panel">
-                 <header class="panel-heading bm0">
-                        <span class='span-title'>系统公告</span>
-                        <span class="tools pull-right"><a href="javascript:;" class="iconpx-chevron-down"></a></span>
-                  </header>
-                  <div class="panel-body">
-                        <table class="table table-hover personal-task shortcut">
-                            <tr>
-                              <td>
-                                <div class="c1">1</div>
-                                <div class="c2">2</div>
-                                <br>
-                              </td>
-                            </tr>
-                        </table>
-                  </div>
-             </section>
-
               <!-- 最新文章 -->
              <section class="panel">
                   <header class="panel-heading bm0">

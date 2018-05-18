@@ -17,5 +17,7 @@ public interface SysRoleMapper {
 	public List<SysRole> query();
 
 	public SysRole getfirstRole();
+
+	public SysRole getByName(String role_name);
 	
 }

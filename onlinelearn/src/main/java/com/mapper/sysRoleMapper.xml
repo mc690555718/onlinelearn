@@ -29,4 +29,7 @@
      <select id="getfirstRole" resultMap="roleMap">
           select * from sys_role limit 1;
      </select>
+     <select id="getByName" parameterType="java.lang.String" resultMap="roleMap">
+         select * from sys_role where role_name = #{value}
+     </select>
 </mapper>

@@ -284,7 +284,7 @@
 						<label class="layui-form-label">有效结束时间:</label>
 						<div class="layui-input-block">
 							<input type="date" id="end_time" name="endTime"
-								autocomplete="off" class="layui-input ">
+								autocomplete="off" class="layui-input" onblur="bulr_endTime()"/>
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -339,6 +339,141 @@
 		</div>
 	</section>
 	<script type="text/javascript">
+	
+
+//验证课程名称
+function bulr_courseName(){
+	var courseName = $("#course_name").val();
+	if(courseName == null || courseName.trim().length == 0){
+		layer.tips('请输入课程名称','#course_name');
+		return false;
+	}else{
+		var checkCname =  /^[\u4E00-\u9FA5A-Za-z0-9]{3,20}$/;
+		if(!checkCname.test(courseName)){
+			layer.tips('请输入长度为3~20的字符','#course_name');
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+//验证总课时
+function bulr_LessNum(){
+	var lessNum = $("#lession_num").val();
+	if(lessNum == null || lessNum.trim().length == 0){
+		layer.tips('请输入总课时','#lessNum');
+		return false;
+	}else{
+		var checkNum = /^[1-9]\d*$/;
+		if(!checkNum.test(lessNum)){
+			layer.tips('请输入正确的课程数,并保证它们是正整数','#lessNum');
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+//验证原价
+function bulr_sourcePrice(){
+	var souPri = $("#source_price").val();
+	if(souPri == null || souPri.trim().length == 0){
+		layer.tips('请输入原价金额','#sourse_price');
+		return false;
+	}else{
+		var res = /^[0-9]+(.[0-9]{1,2})?$/;
+		if(!res.test(souPri)){
+			layer.tips('请输入合法的金额,可留小数点后两位','#sourse_price');
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+//验证售价
+function bulr_currentPrice(){
+	var curPri = $("#current_price").val();
+	if(curPri == null || curPri.trim().length == 0){
+		layer.tips('请输入售价金额','#sourse_price');
+		return false;
+	}else{
+		var res = /^[0-9]+(.[0-9]{1,2})?$/;
+		if(!res.test(curPri)){
+			layer.tips('请输入合法的金额,可留小数点后两位','#current_price');
+			return false;
+		}else{
+			return true;
+		}
+	}
+}
+
+//验证结束时间
+function bulr_endTime(){
+	var endType = $("#loseType").val();
+	if(endType == 0){//按天数
+		
+		var endTime = $("#end_time").val(); 
+	    if(endTime == null || endTime.trim().length == 0){
+	    	layer.msg('请输入结束日期', {icon: 5});
+			return false;
+	    }else{
+// 	    	var res = /\d{4}\/([[0]\d{1}]|[1][12])\/(([0][1-9])|([12]\d{1})|([3][01]))/;
+// 	    	if(!res.test(endTime)){
+// 	    		layer.msg('请输入正确的日期格式', {icon: 5});
+// 				return false;
+// 	    	}else{
+	    		return true;
+// 	    	}
+	    }
+		
+	}else{//按到期时间
+		
+		var loseTime = $("#lose_time").val(); 
+	    if(loseTime == null || loseTime.trim().length == 0){
+	    	layer.msg('请输入到期时间天数', {icon: 5});
+			layer.tips('请输入到期时间天数','#lose_time');
+			return false;
+	    }else{
+	    	var res = /^[1-9]\d*$/;
+	    	if(!res.test(loseTime)){
+		    	layer.msg('请输入正确的天数,并保证它们是正整数格式', {icon: 5});
+				layer.tips('请输入正确的天数,并保证它们是正整数格式','#lose_time');
+				return false;
+	    	}else{
+	    		return true;
+	    	}
+	    }
+	}
+}
+
+function checkSub(){
+    var parentId = $("#parent_id").val();
+    var subjectId = $("#subject_id").val();
+    if(parentId != -1 || subjectId != -1){
+    	return true;
+    }
+    layer.msg('请选择课程专业', {icon: 5});
+    return false;
+}
+
+function checkTeacher(){
+	if(teas.length != 0 || tean.length != 0){
+		return true;
+	}
+	layer.msg('请选择教师', {icon: 5});
+	return false;
+}
+
+function checkForm(){
+	if(bulr_courseName() && bulr_LessNum() && bulr_LessNum() && bulr_sourcePrice() && bulr_currentPrice(),
+			bulr_endTime() && checkSub() && checkTeacher()){
+	    return true;
+	}
+	return false;
+}
+
 	
 $(function() {
 		
@@ -398,59 +533,13 @@ $(function() {
 	 		var img = $("#pic").attr("src");
 	 		var imgPath = img.substring(12); 
 	 		$("#logo").val(imgPath);
-	 		
-	 		var courseName = $("#course_name").val();
-	 		var lessNum = $("#lession_num").val();
-	 		var souPri = $("#source_price").val();
-	 		var curPri = $("#current_price").val();
-	 		if(courseName == null || courseName.trim().length == 0){
-	 			layer.msg('创建失败,请检查输入信息', {icon: 5});
-	 			layer.tips('请输入课程名称','#course_name');
-	 		}else{
-	 			var checkCname =  /^[\u4E00-\u9FA5A-Za-z0-9]{3,20}$/;
-	 			if(!checkCname.test(courseName)){
-	 				layer.msg('课程名称格式不匹配,请检查输入', {icon: 5});
-	 				layer.tips('请输入长度为3~20的字符','#course_name');
-	 			}else{
-	 				if(lessNum == null || lessNum.trim().length == 0){
-	 					layer.msg('创建失败,请检查输入信息', {icon: 5});
-	 					layer.tips('请输入总课时','#lessNum');
-	 				}else{
-	 					var checkNum = /^[1-9]\d*$ /;
-	 					if(!checkNum.test(lessNum)){
-	 						layer.msg('总课时格式不匹配,请检查输入', {icon: 5});
-	 						layer.tips('请输入整数','#lessNum');
-	 					}else{
-	 						if(souPri == null || souPri.trim().length == 0){
-	 							layer.msg('创建失败,请检查输入信息', {icon: 5});
-	 							layer.tips('请输入原价金额','#sourse_price');
-	 						}else{
-	 							var res = /^[0-9]+(.[0-9]{1,2})?$/;
-	 							if(!res.test(souPri)){
-	 								layer.msg('课程原价格式不匹配,请检查输入', {icon: 5});
-	 								layer.tips('请输入合法的金额,可留小数点后两位','#sourse_price');
-	 							}else{
-	 								if(curPri == null || curPri.trim().length == 0){
-	 									layer.msg('创建失败,请检查输入信息', {icon: 5});
-	 									layer.tips('请输入售价金额','#sourse_price');
-	 								}else{
-	 									if(!res.test(curPri)){
-	 		 								layer.msg('课程售价格式不匹配,请检查输入', {icon: 5});
-	 										layer.tips('请输入合法的金额,可留小数点后两位','#current_price');
-	 									}else{
-	 										alert("tijiao");
-	 									}
-	 								}
-	 							}
-	 						}
-	 						
-	 					}
-	 				}
-	 			}
+	 		if (checkForm()){
+				var um = UM.getEditor("myEditor");
+				var p = um.getContentTxt();
+				$("#context").val(p);
+	 		    document.forms[0].action="/admin/cou/addCourse";
+	 		    document.forms[0].submit();
 	 		}
-	 		
-// 	 		document.forms[0].action="/admin/cou/addCourse";
-// 	 		document.forms[0].submit();
 		});
 		
 	});

@@ -44,8 +44,8 @@
 
 #tea1.li {
 	list-style: none;
-	display: inline-block; //
-	使li对象显示为一行 width: 130px;
+	display: inline-block; //使li对象显示为一行 
+	width : 130px;
 	border: 1px solid black;
 }
 #context{
@@ -82,7 +82,7 @@
 			var subs = link.split(",");
 			$("#parent_id").val(subs[0]);
 
-			//根据父下拉加载子下拉框并给下拉框赋值，再给子专业赋值
+			//根据父下拉加载子下拉框并给下拉框，再给子专业赋值
 			var parent_id = $("#parent_id").val();
 			$.post("/admin/cou/getSubject/" + parent_id, function(msg) {
 				for (var i = 0; i < msg.length; i++) {
@@ -103,7 +103,8 @@
                     teas[i] = info[i].id;
                     tean[i] = info[i].name;
                     $("#checkDiv").append("<input name='teacher_ids' title='"+info[i].name+"' type='checkbox' value='"+info[i].id+"'/><span>"+info[i].name+"</span>");
-                    $("#tea1").append("<li value='"+teas[i]+"' c='"+tean[i]+"'>"+tean[i]+"<a href='javascript:;' onclick='removeTeacher(this)'><i class='layui-icon'>&#x1006;</i></a></li>");
+                    $("#tea1").append("<li value='"+teas[i]+"' c='"+tean[i]+"'>"+tean[i]
+                    +"<a href='javascript:;' onclick='removeTeacher(this)'><i class='layui-icon'>&#x1006;</i></a></li>");
             	}
             },"json");
 			
@@ -192,7 +193,7 @@
 
 						for (var i = 0; i < teas.length; i++) {
 							$("#tea1").append(
-								"<li value='"+teas[i]+"' c='"+tean[i]+"'>"+ tean[i]
+								"<li value='"+teas[i]+"' c='"+tean[i]+"'><span class='layui-badge-rim'>"+ tean[i] +"</span>"
 								+ "<a href='javascript:;' onclick='removeTeacher(this)'><i class='layui-icon'>&#x1006;</i></a></li>"
 								);
 						}
@@ -256,6 +257,139 @@
 		teas.length = 0;
 		tean.length = 0;
 	}
+	
+	//验证课程名称
+	function bulr_courseName(){
+		var courseName = $("#course_name").val();
+		if(courseName == null || courseName.trim().length == 0){
+			layer.tips('请输入课程名称','#course_name');
+			return false;
+		}else{
+			var checkCname =  /^[\u4E00-\u9FA5A-Za-z0-9]{3,20}$/;
+			if(!checkCname.test(courseName)){
+				layer.tips('请输入长度为3~20的字符','#course_name');
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
+	//验证总课时
+	function bulr_LessNum(){
+		var lessNum = $("#lession_num").val();
+		if(lessNum == null || lessNum.trim().length == 0){
+			layer.tips('请输入总课时','#lessNum');
+			return false;
+		}else{
+			var checkNum = /^[1-9]\d*$/;
+			if(!checkNum.test(lessNum)){
+				layer.tips('请输入正确的课程数,并保证它们是正整数','#lessNum');
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
+	//验证原价
+	function bulr_sourcePrice(){
+		var souPri = $("#source_price").val();
+		if(souPri == null || souPri.trim().length == 0){
+			layer.tips('请输入原价金额','#sourse_price');
+			return false;
+		}else{
+			var res = /^[0-9]+(.[0-9]{1,2})?$/;
+			if(!res.test(souPri)){
+				layer.tips('请输入合法的金额,可留小数点后两位','#sourse_price');
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
+	//验证售价
+	function bulr_currentPrice(){
+		var curPri = $("#current_price").val();
+		if(curPri == null || curPri.trim().length == 0){
+			layer.tips('请输入售价金额','#sourse_price');
+			return false;
+		}else{
+			var res = /^[0-9]+(.[0-9]{1,2})?$/;
+			if(!res.test(curPri)){
+				layer.tips('请输入合法的金额,可留小数点后两位','#current_price');
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
+
+	//验证结束时间
+	function bulr_endTime(){
+		var endType = $("#loseType").val();
+		if(endType == 0){//按天数
+			
+			var endTime = $("#end_time").val(); 
+		    if(endTime == null || endTime.trim().length == 0){
+		    	layer.msg('请输入结束日期', {icon: 5});
+				return false;
+		    }else{
+// 		    	var res = /\d{4}\/([[0]\d{1}]|[1][12])\/(([0][1-9])|([12]\d{1})|([3][01]))/;
+// 		    	if(!res.test(endTime)){
+// 		    		layer.msg('请输入正确的日期格式', {icon: 5});
+// 					return false;
+// 		    	}else{
+		    		return true;
+// 		    	}
+		    }
+			
+		}else{//按到期时间
+			
+			var loseTime = $("#lose_time").val(); 
+		    if(loseTime == null || loseTime.trim().length == 0){
+				layer.tips('请输入到期时间天数','#lose_time');
+				return false;
+		    }else{
+		    	var res = /^[1-9]\d*$/;
+		    	if(!res.test(loseTime)){
+					layer.tips('请输入正确的天数,并保证它们是正整数格式','#lose_time');
+					return false;
+		    	}else{
+		    		return true;
+		    	}
+		    }
+		}
+	}
+
+	function checkSub(){
+	    var parentId = $("#parent_id").val();
+	    var subjectId = $("#subject_id").val();
+	    if(parentId != -1 || subjectId != -1){
+	    	return true;
+	    }
+	    layer.msg('请选择课程专业', {icon: 5});
+	    return false;
+	}
+
+	function checkTeacher(){
+		if(teas.length != 0 || tean.length != 0){
+			return true;
+		}
+		layer.msg('请选择教师', {icon: 5});
+		return false;
+	}
+
+	function checkForm(){
+		if(bulr_courseName() && bulr_LessNum() && bulr_LessNum() && bulr_sourcePrice() && bulr_currentPrice(),
+				bulr_endTime() && checkSub() && checkTeacher()){
+		    return true;
+		}
+		return false;
+	}
+
+	
 //修改数据提交
 	function toChangeCourse() {
 	//教师数据链
@@ -270,8 +404,16 @@
 		var imgPath = img.substring(12); 
 		$("#logo").val(imgPath);
 		$("#teacher_id").val(teach);
-		document.forms[0].action = "/admin/cou/updateCourse";
-		document.forms[0].submit();
+		if (checkForm()){
+			//实例化编辑器
+			var um = UM.getEditor("myEditor");
+			//获取编辑器的值
+			var p = um.getContentTxt();
+			$("#context").val(p);
+			
+		    document.forms[0].action = "/admin/cou/updateCourse";
+		    document.forms[0].submit();
+		}
 	}
 </script>
 </head>
@@ -298,7 +440,7 @@
 						<label class="layui-form-label">专业分类:</label>
 						<div class="layui-input-inline">
 							<select class="layui-input" width="150" lay-filter="subId"
-								name="parent_id" id="parent_id" value="">
+								name="parent_id" id="parent_id" >
 								<option value="-1" selected="selected">--请选择--</option>
 							</select>
 						</div>
@@ -410,10 +552,10 @@
 						<div class="layui-input-block">
 							<script type="text/plain" id="myEditor"
 								style="width: 650px; height: 240px;">
-                                <p>请输入课程详情</p>
+                                <p>${course.context}</p>
                             </script>
 							<textarea rows="5" id="context" name="context" cols="78"
-								class="layui-textarea">${course.context}</textarea>
+								class="layui-textarea"></textarea>
 						</div>
 					</div>
 					<div class="layui-form-item">

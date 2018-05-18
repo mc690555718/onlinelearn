@@ -270,7 +270,11 @@
 	<script src="/static/inxweb/comment/comment1.js" type="text/javascript"></script> <!--评论js -->
 	<script type="text/javascript" src="/kindeditor/kindeditor-all.js"></script>
 	<script type="text/javascript" src="/static/inxweb/play/playVideo.js"></script>
-	
+	<script type="text/javascript">
+	 $(function(){  
+		 getPlayerHtml('${first}',this);
+     });  
+	</script>
 	<script>
 	//评论课程id
 	var otherId = '${courseId}';

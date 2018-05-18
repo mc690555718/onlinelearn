@@ -115,6 +115,9 @@ public class CouseNoseController {
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));
 		model.addAttribute("SomeoneHas",eduNoseUserService.SomeoneHas(courseid));
 		model.addAttribute("courseId",courseid);
+		if(kpointNoseService.listbyKpoint(courseid)!=null&&kpointNoseService.listbyKpoint(courseid).size()>1){
+			model.addAttribute("first",kpointNoseService.listbyKpoint(courseid).get(0).getKpoint_id());
+		}
 		return "web/course/player-video";
 		}
 	

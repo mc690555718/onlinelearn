@@ -26,10 +26,10 @@
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script>
  function todown(id){
-	 window.location.href="/admin/questions_comment/getById1/"+id+"?page=${page.nextPage}";
+	 window.location.href="/admin/questions_comment/getById1?id="+id+"?page=${page.nextPage}";
  }
  function toup(id){
-     window.location.href="/admin/questions_comment/getById1/"+id+"?page=${page.prePage}";
+     window.location.href="/admin/questions_comment/getById1?id="+id+"?page=${page.prePage}";
  }
 </script>
 </head>
@@ -68,13 +68,13 @@
 			</tr>
 		</c:forEach>
 		<tr>
-			<td align="center" colspan="9">一共${page.pages}页
-				<button class="layui-btn layui-btn-xs" onclick="toup(${id})">上一页</button>
-				<button class="layui-btn layui-btn-xs" onclick="todown(${id})">下一页</button>
-				当前第${page.pageNum}页
+			<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+				color="black">一共${page.pages}页</font> <font face="微软雅黑" size="3px"
+				color="black">每页${page.pageSize }条/当前第${page.pageNum}页</font> <a
+				class="layui-btn" href="javascript:onpage(${id})">上一页</a> <a
+				class="layui-btn" href="javascript:nextpage(${id})">下一页</a>
 				<button class="layui-btn layui-btn-sm layui-btn-normal"
-					onclick="back()">返回之前页面</button>
-			</td>
+					onclick="back()">返回之前页面</button></td>
 		</tr>
 	</table>
 </body>
@@ -89,8 +89,27 @@
 			alert("已经采纳为最佳！"); 
 		 }	  
 	 }
+	 var pageNum = ${pageNum};
 	 function back(){
-		 location.href = "/admin/questions/listAll";
+		 location.href = "/admin/questions/listAll?page="+pageNum;
 	 }
+	 var page = ${total};
+	 function onpage(id){
+		 if(page-1 < 1){
+			 page = 1;
+		 }else{
+			 page = page-1;
+		 }
+		 location.href="/admin/questions_comment/getById1?id="+id+"&page="+page+"&pageNum="+pageNum;
+		 }
+	 var a = ${page.pages};
+	 function nextpage(id){
+		 if(page+1 > a){
+			 page = a;
+		 }else{
+			 page = page+1;
+		 }
+	     location.href="/admin/questions_comment/getById1?id="+id+"&page="+page+"&pageNum="+pageNum;
+		 }
 </script>
 </html>

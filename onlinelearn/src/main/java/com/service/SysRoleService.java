@@ -17,4 +17,6 @@ public interface SysRoleService {
 
 	public SysRole getfirstRole();
 
+	public SysRole getByName(String role_name);
+
 }

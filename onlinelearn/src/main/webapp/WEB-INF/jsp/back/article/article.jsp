@@ -38,8 +38,8 @@
 					<form action="" method="post">
 						<div class="layui-inline">
 							<div class="layui-input-inline">
-								<input value="${qname }" name="qname" placeholder="请输入关键字"
-									class="layui-input search_input" type="text">
+								<input type="text" value="${qname }" name="qname" placeholder="请输入关键字"
+									class="layui-input search_input" >
 							</div>
 	
 							<label class="layui-inline">创建时间:</label>
@@ -56,10 +56,10 @@
 							<a href="#" class="layui-btn" onclick="getList()">查找文章</a>
 						</div>
 
-						<div class="layui-inline">
+						<!-- <div class="layui-inline">
 							 <a href="listPtype"
 								class="layui-btn layui-btn-normal newsAdd_btn">添加文章</a> 
-						</div>
+						</div> -->
 
 <!-- 						<div class="layui-inline">
 							<a class="layui-btn layui-btn-danger batchDel">批量删除</a>
@@ -128,6 +128,7 @@
 									<td align="center" colspan="9"><font face="微软雅黑"
 										size="3px" color="black">一共${page.pages}页</font> <font
 										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<font face="微软雅黑" size="3px" color="black">当前第${page.pageNum }页</font>
 										<c:if test="${page.isFirstPage==true }">
 											<a class="layui-btn">首页</a>
 										</c:if> <c:if test="${page.isFirstPage==false }">

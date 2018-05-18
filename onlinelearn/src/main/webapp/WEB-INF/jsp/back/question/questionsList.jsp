@@ -25,29 +25,20 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
-<script>
- function todown(){
-	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.nextPage}";
-	 document.forms[0].submit();
- }
- function toup(){
-	 document.forms[0].action="/admin/questions/listAll/${q.id }?page=${page.prePage}";
-	 document.forms[0].submit();
- }
-</script>
 </head>
 <body>
 
 	<div class="layui-inline">
-		<form action="/admin/questions/listAll" method="post">
+		<form action="/admin/questions/listAll" method="post" id="myform">
 			<label class="layui-form-label">标题</label>
 			<div class="layui-input-inline">
+				<input type="hidden" name="page" id="page" value="${pageNum }" />
 				<input name="title" value="" id="title" class="layui-input"
 					type="text">
 			</div>
 			<label class="layui-inline">问答标签:</label>
 			<div class="layui-input-inline">
-				<select class="layui-input" name="type" id="type">
+				<select class="layui-input" name="type" id="type1">
 					<option value="-1">全选</option>
 					<option value="1">课程问答</option>
 					<option value="2">学习分享</option>
@@ -57,13 +48,13 @@
 				<label class="layui-inline">开始时间:</label>
 				<div class="layui-input-inline">
 					<input class="Wdate layui-input" type="text" name="start"
-						onClick="WdatePicker()" />
+						id="start" onClick="WdatePicker()" />
 				</div>
 			</div>
 			<div class="layui-input-inline">
 				<label class="layui-inline">结束时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text" name="end"
+					<input class="Wdate layui-input" type="text" name="end" id="end"
 						onClick="WdatePicker()" />
 				</div>
 			</div>
@@ -116,23 +107,45 @@
 			</tr>
 		</c:forEach>
 		<tr>
-			<td align="center" colspan="9">一共${page.pages}页
-				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
-				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
-				当前第${page.pageNum}页</td>
+			<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+				color="black">一共${page.pages}页</font> <font face="微软雅黑" size="3px"
+				color="black">每页${page.pageSize }条/当前第${page.pageNum}页</font> <a
+				class="layui-btn" href="javascript:onpage()">上一页</a> <a
+				class="layui-btn" href="javascript:nextpage()">下一页</a></td>
 		</tr>
 	</table>
 </body>
 
 <script type="text/javascript">
+if("${type1}"==null || "${type1}"==''|| "${type1}"==""){
+	$("#type1").val(-1);
+}else{
+	$("#type1").val("${type}");
+}
 	$("#title").val("${title}");
 	$("#type").val("${type}");
+	$("#start").val("${start}");
+	$("#end").val("${end}");
 	function del(id){
 		location.href = "/admin/questions/delete/"+id;
 	}
+	var page = ${pageNum};
 	function getById(id){
-		location.href = "/admin/questions_comment/getById1/"+id; 
+		location.href = "/admin/questions_comment/getById1?id="+id+"&pageNum="+page; 
 	}
+	 function onpage(){
+		 $("#page").val(page-1);
+		 if(page-1 < 1){
+			 $("#page").val(1);
+		 }
+		 $("#myform").submit();
+	 }
+	 function nextpage(){
+		 $("#page").val(page+1);
+		 if(page+1 > "${page.pages}"){
+			 $("#page").val("${page.pages}");
+		 }
+		 $("#myform").submit();
+	 }
 </script>
-
 </html>

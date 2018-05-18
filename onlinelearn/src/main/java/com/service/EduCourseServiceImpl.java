@@ -12,6 +12,7 @@ import com.bean.EduCourse;
 import com.bean.EduCourseKpoint;
 import com.bean.TeacherBean;
 import com.mapper.EduCourseMapper;
+import com.util.CharTool;
 import com.vo.TreeVo;;
 
 @Service
@@ -121,6 +122,9 @@ public class EduCourseServiceImpl implements EduCourseService{
 	//增加章节父节点
 	public void addKpointParent(EduCourseKpoint kpoint) {
 		if (kpoint != null) {
+			if (kpoint.getName() != null) {//修改编码格式
+				kpoint.setName(CharTool.setCharEncoding(kpoint.getName()));
+			}
 			mapper.addKpointParent(kpoint);
 		}
 	}
@@ -129,9 +133,15 @@ public class EduCourseServiceImpl implements EduCourseService{
 	//添加节点
 	public void addKpoint(EduCourseKpoint kpoint) {
 		if (kpoint != null) {
+			if (kpoint.getName() != null) {//修改编码格式
+				kpoint.setName(CharTool.setCharEncoding(kpoint.getName()));
+			}
+			if (kpoint.getVideo_url() != null) {//修改编码格式
+				kpoint.setVideo_url(CharTool.setCharEncoding(kpoint.getVideo_url()));
+			}
 			mapper.addKpoint(kpoint);
 		}
-		
+
 	}
 
 	@Override
@@ -147,6 +157,12 @@ public class EduCourseServiceImpl implements EduCourseService{
 	//修改节点
 	public void updateKpoint(EduCourseKpoint kpoint) {
 		if (kpoint != null) {
+			if (kpoint.getName() != null) {//修改编码格式
+				kpoint.setName(CharTool.setCharEncoding(kpoint.getName()));
+			}
+			if (kpoint.getVideo_url() != null) {//修改编码格式
+				kpoint.setVideo_url(CharTool.setCharEncoding(kpoint.getVideo_url()));
+			}
 			mapper.updateKpoint(kpoint);
 		}
 	}

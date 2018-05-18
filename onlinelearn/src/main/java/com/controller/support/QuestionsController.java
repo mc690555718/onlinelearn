@@ -44,6 +44,7 @@ public class QuestionsController {
 		PageInfo<Questions>  pageInfo = new PageInfo<Questions>(questions);
 		mv.setViewName("/back/question/questionsList");
 		mv.addObject("page", pageInfo);
+		mv.addObject("pageNum", page);
 		mv.addObject("questions",questions);
 		return mv;
 	}

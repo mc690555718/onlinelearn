@@ -26,6 +26,7 @@ import com.github.pagehelper.PageInfo;
 import com.service.EduCourseService;
 import com.service.SysSubjectService;
 import com.service.TeacherService;
+import com.util.CharTool;
 import com.util.JsonUtils;
 import com.vo.TreeVo;
 
@@ -168,12 +169,11 @@ public class EduCourseController {
 	@RequestMapping(value="/addCourse",method=RequestMethod.POST)
 	public ModelAndView addCourse(ModelAndView mv,EduCourse course,String parent_id,
 			String subject_id,String teacher_id,String endTime){
-		//		System.out.println(logo1);
-		//		System.out.println(course);
-		//		System.out.println("parent_id :"+parent_id);
-		//		System.out.println("subject_id :"+subject_id);
-		//		System.out.println("teacher_id :"+teacher_id);
-		//		System.out.println("endTime :"+endTime);
+				System.out.println(course);
+				System.out.println("parent_id :"+parent_id);
+				System.out.println("subject_id :"+subject_id);
+				System.out.println("teacher_id :"+teacher_id);
+				System.out.println("endTime :"+endTime);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		//解析时间转换date写入课程
 		if (endTime != null && endTime.trim().length()!=0) {
@@ -281,7 +281,11 @@ public class EduCourseController {
 	@RequestMapping(value="/updateCourse",method=RequestMethod.POST)
 	public ModelAndView updateCourse(ModelAndView mv,EduCourse course,String parent_id,
 			String subject_id,String teacher_id,String endTime){
-
+        System.out.println(course);
+        System.out.println("parent_id = "+parent_id);
+        System.out.println("subject_id = "+subject_id);
+        System.out.println("teacher_id = "+teacher_id);
+        System.out.println("endTime = "+endTime);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		//解析时间转换date写入课程
 		if (endTime != null && endTime.trim().length()!=0) {
@@ -372,7 +376,7 @@ public class EduCourseController {
 	public ModelAndView addKpointParent(ModelAndView mv,String name,String sort,String course_id){
 		EduCourseKpoint kpoint = new EduCourseKpoint();
 		if (name != null && name.trim().length() != 0) {
-			kpoint.setName(name);
+			kpoint.setName(CharTool.setCharEncoding(name));
 		}
 		if (sort != null && sort.trim().length() != 0) {
 			kpoint.setSort(Integer.valueOf(sort));
@@ -391,7 +395,7 @@ public class EduCourseController {
 		return mv;
 	}
 
-	/**添加章节子节点,传入课程id(对应课程)，parent_id(对应父节点)
+	/**跳转到添加章节子节点页面,传入课程id(对应课程)，parent_id(对应父节点)
 	 * @param mv
 	 * @param course_id
 	 * @param parent_id
@@ -416,6 +420,9 @@ public class EduCourseController {
 	@RequestMapping("/addKpoint")
 	@ResponseBody
 	public int addKpoint(ModelAndView mv,EduCourseKpoint kpoint){
+		if (kpoint.getName() != null) {//修改编码格式
+			kpoint.setName(CharTool.setCharEncoding(kpoint.getName()));
+		}
 		cs.addKpoint(kpoint);
 		return 0;
 	}
@@ -442,7 +449,6 @@ public class EduCourseController {
 	@ResponseBody
 	public int updateKpoint(ModelAndView mv,EduCourseKpoint kpoint){
 		cs.updateKpoint(kpoint);
-		System.out.println(kpoint);
 		return 0;
 	}
 

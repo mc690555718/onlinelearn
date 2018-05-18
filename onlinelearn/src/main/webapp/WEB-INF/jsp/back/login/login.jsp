@@ -22,6 +22,7 @@
 
 	<div class="layui-canvs"></div>
 	<div class="layui-layout layui-layout-login">
+	<input type="hidden" name="loginState" id="loginState" value="${loginState}">
 	<form action="" method="post" id="login_form">
 		<h1>
 			<strong>三阳科技在线学习管理系统后台</strong> <em>Management System</em>
@@ -48,45 +49,27 @@
 <script type="text/javascript" src="/common/layui/lay/dest/layui.all.js"></script>
 <script type="text/javascript" src="/js/login.js"></script>
 <script type="text/javascript" src="/jsplug/jparticle.jquery.js"></script>
-<!-- <script type="text/javascript" src="/validate/lib/jquery.js"></script> -->
-<!-- <script type="text/javascript" src="/validate/dist/jquery.validate.js"></script> -->
-<!-- <script type="text/javascript" src="/validate/dist/localization/messages_zh.js"></script> -->
 <script type="text/javascript">
 $(function(){
+	
+	layui.use('layer', function(){ //独立版的layer无需执行这一句
+		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+	});
+	
+	if($("#loginState").val() == 1){
+		layer.msg('账号或密码不匹配', {icon: 5});
+	}
+	
 	$(".layui-canvs").jParticle({
 		background: "#141414",
 		color: "#E6E6E6"
 	});
 	//登录链接测试，使用时可删除
 	$(".submit_btn").click(function(){
-
 			document.forms[0].action="/admin/back/checkAdmin";
 			document.forms[0].submit();
 	});
 	
-// 	// 在键盘按下并释放及提交后验证提交表单
-// 	  $("#login_form").validate({
-// 	    rules: {
-// 	      username: {
-// 	        required: true,
-// 	        minlength: 5
-// 	      },
-// 	      password: {
-// 	        required: true,
-// 	        minlength: 6
-// 	      }
-// 	    },
-// 	    messages: {
-// 	      username: {
-// 	        required: "请输入用户名",
-// 	        minlength: "用户名必需由5个字母组成"
-// 	      },
-// 	      password: {
-// 	        required: "请输入密码",
-// 	        minlength: "密码长度不能小于 6 个字母"
-// 	      }
-// 	     }
-// 	    })
 
 });
 </script>

@@ -3,6 +3,7 @@ package com.controller.support;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.SysRole;
@@ -42,5 +43,15 @@ public class SysRoleController {
 		rs.remove(role_id);
 		mv.setViewName("redirect:/admin/sysfunctioin/showfunctionztree");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/checkrolename")
+	public boolean checkRolename(String role_name){
+		SysRole role = rs.getByName(role_name);
+		if (role != null) {
+			return true;
+		}
+		return false;
 	}
 }

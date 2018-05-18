@@ -82,7 +82,8 @@ var setting = {
 		if(ids.length>0) ids=ids.substring(0,ids.length-1);
 		var cityObj = $("#citySel");
 		cityObj.attr("value", v);
-		$("input[name=subjectId]").val(ids);
+		
+		$("#subject").val(ids);
 	}
 	function showMenu() {
 		var cityObj = $("#citySel");
@@ -134,13 +135,12 @@ var setting = {
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师专业</label>
 					<div class="layui-input-block">
-						<input id="citySel" name="" value="${a.subject_id.subject_name}"
+						<input id="citySel" name="citySel" value="${a.subject_id.subject_name}"
 							readonly class="layui-input" /> &nbsp;<a id="menuBtn" href="#"
 							onclick="showMenu(); return false;">选择</a> <input type="hidden"
-							name="subjectids" value="${a.subject_id.subject_id}">
+							name="subject" id="subject" value="${a.subject_id.subject_id}">
 					</div>
 				</div>
-
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师等级</label>

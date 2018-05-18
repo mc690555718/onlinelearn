@@ -26,24 +26,15 @@
 <link rel="stylesheet" href="/common/layui/css/layui.css" media="all">
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
-<script>
- function todown(){
-	 document.forms[0].action="/admin/questions_comment/listAll/${q.id }?page=${page.nextPage}";
-	 document.forms[0].submit();
- }
- function toup(){
-	 document.forms[0].action="/admin/questions_comment/listAll/${q.id }?page=${page.prePage}";
-	 document.forms[0].submit();
- }
-</script>
 </head>
 <body>
 	<div class="layui-inline">
-		<form action="/admin/questions_comment/listAll" method="post">
+		<form action="/admin/questions_comment/listAll" method="post"
+			id="myform">
 			<label>问答标题</label>
 			<div class="layui-input-inline">
-				<input name="name" value="" id="name" class="layui-input"
-					type="text">
+				<input type="hidden" name="page" id="page" value="${pageNum }" /> <input
+					name="name" value="" id="name" class="layui-input" type="text">
 			</div>
 			<label class="layui-inline">是否采纳:</label>
 			<div class="layui-input-inline">
@@ -57,13 +48,13 @@
 				<label class="layui-inline">开始时间:</label>
 				<div class="layui-input-inline">
 					<input class="Wdate layui-input" type="text" name="start"
-						onClick="WdatePicker()" />
+						id="start" onClick="WdatePicker()" />
 				</div>
 			</div>
 			<div class="layui-input-inline">
 				<label class="layui-inline">结束时间:</label>
 				<div class="layui-input-inline">
-					<input class="Wdate layui-input" type="text" name="end"
+					<input class="Wdate layui-input" type="text" name="end" id="end"
 						onClick="WdatePicker()" />
 				</div>
 			</div>
@@ -116,17 +107,24 @@
 			</tr>
 		</c:forEach>
 		<tr>
-			<td align="center" colspan="9">一共${page.pages}页
-				<button class="layui-btn layui-btn-xs" onclick="toup()">上一页</button>
-				<button class="layui-btn layui-btn-xs" onclick="todown()">下一页</button>
-				当前第${page.pageNum}页</td>
+			<td align="center" colspan="9"><font face="微软雅黑" size="3px"
+				color="black">一共${page.pages}页</font> <font face="微软雅黑" size="3px"
+				color="black">每页${page.pageSize }条/当前第${page.pageNum}页</font> <a
+				class="layui-btn" href="javascript:onpage()">上一页</a> <a
+				class="layui-btn" href="javascript:nextpage()">下一页</a></td>
 		</tr>
 	</table>
 </body>
 <script type="text/javascript">
-	$("#is_best").val("${is_best}");
+	if("${is_best}"==null || "${is_best}"==''){
+		$("#is_best").val(-1);
+	}else{
+		$("#is_best").val("${is_best}");
+	}
 	$("#question_id").val("${question_id}");
 	$("#name").val("${name}");
+	$("#start").val("${start}");
+	$("#end").val("${end}");
 	 function del(id){
 		 location.href = "/admin/questions_comment/delete/"+id;
 	} 
@@ -139,6 +137,21 @@
 		 }else{
 			alert("已经采纳为最佳！"); 
 		 }	  
+	 }
+	 var page = ${pageNum};
+	 function onpage(){
+		 $("#page").val(page-1);
+		 if(page-1 < 1){
+			 $("#page").val(1);
+		 }
+		 $("#myform").submit();
+	 }
+	 function nextpage(){
+		 $("#page").val(page+1);
+		 if(page+1 > "${page.pages}"){
+			 $("#page").val("${page.pages}");
+		 }
+		 $("#myform").submit();
 	 }
 </script>
 </html>

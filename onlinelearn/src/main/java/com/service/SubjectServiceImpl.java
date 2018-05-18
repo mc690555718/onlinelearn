@@ -20,8 +20,8 @@ public class SubjectServiceImpl implements SubjectService{
 
 	@Override
 	public SubjectBean getByIdSM(int id) {
-		SubjectBean listAllsm=subjectMapper.getByIdSM(id);
-		return listAllsm;
+		SubjectBean subjectBean=subjectMapper.getByIdSM(id);
+		return subjectBean;
 	}
 
 	@Override

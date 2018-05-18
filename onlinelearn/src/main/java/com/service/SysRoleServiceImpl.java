@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bean.SysRole;
 import com.mapper.SysRoleMapper;
+import com.util.CharTool;
 
 @Service
 public class SysRoleServiceImpl implements SysRoleService{
@@ -60,6 +61,14 @@ public class SysRoleServiceImpl implements SysRoleService{
 	@Override
 	public SysRole getfirstRole() {
 		return mapper.getfirstRole();
+	}
+
+	@Override
+	public SysRole getByName(String role_name) {
+		if (role_name != null && role_name.trim().length() != 0) {
+			return mapper.getByName(CharTool.setCharEncoding(role_name));
+		}
+		return null;
 	}
 
 }

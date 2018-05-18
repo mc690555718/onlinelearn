@@ -28,6 +28,9 @@
 	    function toMyInfo(){
 	    	$("#iframe_body").attr("src","/admin/sysuser/toeditsysuser/${user.user_id}");
 	    }
+	    function reload(){
+		    document.location.reload();
+	    }
 	</script>
 </head>
 <body>
@@ -37,7 +40,7 @@
 		<div class="layui-main">
 		    <!-- logo区域 -->
 			<div class="admin-logo-box">
-				<a class="logo" href="http://www.kuxuebao.net" title="logo">后台管理系统</a>
+				<a class="logo" href="javascript:reload();" title="logo">后台管理系统</a>
 				<div class="larry-side-menu">
 					<i class="fa fa-bars" aria-hidden="true"></i>
 				</div>
@@ -116,94 +119,7 @@
 			</li>
 			 </c:if> 
 			</c:forEach>
-				
-				<li class="layui-nav-item">
-					<a href="javascript:;">
-					   <i class="iconfont icon-shengchengbaogao" ></i>
-					   <span>网站维护</span>
-					   <em class="layui-nav-more"></em>
-					</a>
-					   <dl class="layui-nav-child">
-                           <dd>
-                           	   <a href="javascript:;">
-					              <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-					              <span>网站主题</span>
-					           </a>
-                           </dd>
-                           <dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-database" data-icon='icon-database'></i>
-					    		   <span>数据库管理</span>
-					    		</a>
-					    	</dd>
-					   	    <dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-shengchengbaogao" data-icon='icon-shengchengbaogao'></i>
-					    		   <span>生成页面</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="">
-					    		   <i class="iconfont icon-qingchuhuancun" data-icon='icon-qingchuhuancun'></i>
-					    		   <span>更新缓存</span>
-					    		</a>
-					    	</dd>
-					    	
-					   </dl>
-				</li>
-				
-			<!-- 系统设置 -->
-			<li class="layui-nav-item">
-					<a href="javascript:;">
-					   <i class="iconfont icon-xitong" ></i>
-					   <span>系统设置</span>
-					   <em class="layui-nav-more"></em>
-					</a>
-					    <dl class="layui-nav-child">
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-zhandianpeizhi" data-icon='icon-zhandianpeizhi'></i>
-					    		   <span>基本参数设置</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-zhandianguanli1" data-icon='icon-zhandianguanli1'></i>
-					    		   <span>多站点管理</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-anquanshezhi" data-icon='icon-anquanshezhi'></i>
-					    		   <span>安全设置</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-sms" data-icon='icon-sms'></i>
-					    		   <span>短信接口设置</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    		   <i class="iconfont icon-iconfuzhi01" data-icon='icon-iconfuzhi01'></i>
-					    		   <span>系统日志管理</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    			<i class='iconfont icon-SQLServershujuku' data-icon='icon-SQLServershujuku'></i>
-					    			<span>SQL命令行工具</span>
-					    		</a>
-					    	</dd>
-					    	<dd>
-					    		<a href="javascript:;">
-					    			<i class='iconfont icon-xinxicaiji' data-icon='icon-xinxicaiji'></i>
-					    			<span>防采集管理</span>
-					    		</a>
-					    	</dd>
-					    </dl>
-				</li>
+
 				<!-- 友链设置 -->
 				<li class="layui-nav-item">
 					<a href="javascript:;">
@@ -249,7 +165,7 @@
 		<div class="layui-mian">  
 		    <p class="p-admin">
 		    	<span>2017 &copy;</span>
-		    	 广州普金计算机科技股份有限公司,版权所有
+		    	襄阳三阳信息科技有限公司  && 版权所有
 		    </p>
 		</div>
 	</div>

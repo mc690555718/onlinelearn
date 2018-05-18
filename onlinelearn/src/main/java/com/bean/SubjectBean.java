@@ -40,6 +40,11 @@ public class SubjectBean {
 	public void setSort(int sort) {
 		this.sort = sort;
 	}
+	@Override
+	public String toString() {
+		return "SubjectBean [subject_id=" + subject_id + ", subject_name=" + subject_name + ", create_time="
+				+ create_time + ", parent_id=" + parent_id + ", sort=" + sort + "]";
+	}
 	
 	
 	

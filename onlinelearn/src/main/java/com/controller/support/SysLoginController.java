@@ -38,6 +38,7 @@ public class SysLoginController {
 			    subject.login(token);
 			    subject.hasRole("");
 			}catch(Exception e){
+				mv.addObject("loginState",1);
 				mv.setViewName("/back/login/login");
 				return mv;
 			}

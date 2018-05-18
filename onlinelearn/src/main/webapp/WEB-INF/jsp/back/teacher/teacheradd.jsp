@@ -45,16 +45,16 @@
 
  function save() {
 	 
-	 var name = $("#name").val();
+	    var name = $("#name").val();
 		var education = $("#education").val();
 		var sort = $("#sort").val();
 		var career = $("#career").val();
 		if(name!=""&&education!=""&&sort!=""&&career!=""){
-			document.forms[0].action="/teacher/tosave";
-			document.forms[0].subject();
-		}else{
+			document.forms[0].action="/admin/teacher/tosave";
+			document.forms[0].submit(); 
+		 }else{
 			alert("添加的数据不能为空")
-		}
+		} 
 			
 		}
 	     
@@ -133,7 +133,7 @@
 			 	<div class="layui-form-item">
 					<label class="layui-form-label">讲师名称</label>
 					<div class="layui-input-block">  
-					  	<input type="text" name="name" id="name" class="layui-input"   maxlength="5" placeholder="文章标题不得超过5个字"
+					  	<input type="text" name="name" id="name" class="layui-input"   maxlength="5" placeholder="讲师名称不得超过5个字"
 					  	onblur="fun(this,1)">
 					  	<span id="d1"></span>
 					</div>
@@ -142,7 +142,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师资历</label>
 					<div class="layui-input-block">  
-					  	<input type="text" id="education" name="education"   class="layui-input"  maxlength="50" placeholder="文章标题不得超过50个字"
+					  	<input type="text" id="education" name="education"   class="layui-input"  maxlength="50" placeholder="讲师资历不得超过50个字"
 					  	onblur="fun(this,2)">
 					  	<span id="d2"></span>
 					</div>
@@ -153,7 +153,7 @@
 					  <div class="layui-input-block">  
 					  <input id="citySel" type="text" readonly class="layui-input"/>
 		&nbsp;<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>
-		<input type="hidden" name="subjectids" value="${a.subject_id.subject_id}">
+		<input type="hidden" name="subjectids" id="subjectids" value="${a.subject_id.subject_id}">
 					  
 					</div>  
 				</div>
@@ -180,7 +180,7 @@
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师简介</label>
 					<div class="layui-input-block">  
-					  	<textarea class="form-control" name="career" rows="3" maxlength="500" onblur="fun(this,3)">500字以内</textarea>
+					  	<textarea class="form-control" name="career" rows="3" maxlength="500" onblur="fun(this,3)"></textarea>
 					  	<span id="d3"></span>
 					</div>
 					
@@ -202,7 +202,7 @@
 				
 				<div class="layui-form-item change-submit">
 					<div class="layui-input-block">
-						<input type="submit" class="layui-btn" id="tj" value="立即提交" />
+						<input class="layui-btn layui-btn-primary" id="btn" onclick="save()" value="提交" />
 						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 					</div>
 				</div>
@@ -255,7 +255,7 @@
 			if(ids.length>0) ids=ids.substring(0,ids.length-1);
 			var cityObj = $("#citySel");
 			cityObj.attr("value", v);
-			$("input[name=subjectId]").val(ids);
+			$("#subjectids").val(ids);
 		}
 		function showMenu() {
 			var cityObj = $("#citySel");

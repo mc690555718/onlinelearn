@@ -137,7 +137,7 @@
 						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<th>序号</th>
 									<th>邮件</th>
 									<th>类型</th>
 									<th>点赞</th>
@@ -162,7 +162,7 @@
 										<td>${p.reply_count}</td>
 										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
-										<td><a class="layui-btn layui-btn-mini" href="#" onclick="cly()"><i
+										<td><a class="layui-btn layui-btn-mini" href="/admin/cy/comment/all/{comment_id}" ><i
 												class="iconfont icon-edit"></i> 回复评论</a> 
 												<shiro:hasPermission name="comment_del">
 												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
@@ -174,19 +174,31 @@
 									</tr> 
 								</c:forEach>
 						    <tr>
-						    <td align="center" colspan="9"><font face="微软雅黑" size="3px"
-							color="black">一共${page.pages}页</font> 
-							<font face="微软雅黑" size="3px"
-							color="black">每页${page.pageSize }条/</font>
-							<a class="layui-btn"
-							href="/admin/cy/listcomment?page=${page.firstPage}">首页</a>
-							<a class="layui-btn"
-							href="/admin/cy/listcomment?page=${page.prePage}">上一页</a>
-							<a class="layui-btn"
-							href="/admin/cy/listcomment?page=${page.nextPage}">下一页</a>
-							<a class="layui-btn"
-							href="/admin/cy/listcomment?page=${page.lastPage}">最后页</a>
-							</td>
+							
+								<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/admin/cy/listcomment?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/admin/cy/listcomment?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/admin/cy/listcomment?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/admin/cy/listcomment?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
 					        </tr>
 						</tbody>
 						</table>

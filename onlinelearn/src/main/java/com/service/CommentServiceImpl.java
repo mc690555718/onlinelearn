@@ -65,6 +65,16 @@ public class CommentServiceImpl implements CommentService {
 		// TODO Auto-generated method stub
 		CommentMapper.addNum(other_id);
 	}
+
+	@Override
+	public Comment selectId(int comment_id) {
+	Comment  list=CommentMapper.selectId(comment_id);
+		return list;
+	}
+
+
+
+
 	
 	
 }

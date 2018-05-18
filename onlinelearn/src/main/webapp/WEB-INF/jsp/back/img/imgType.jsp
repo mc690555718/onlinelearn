@@ -3,9 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
-<%-- <%     String path=request.getContextPath();  
-String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.getServerPort()+path+"/"; %>
-<base href="<%=basePath%>"> --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,12 +159,12 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 
 							<thead>
 								<tr>
-									<th width="33%" align="center">ID</th>
+									<th width="33%" align="center">序号</th>
 									<th width="34%" align="center">类型名称</th>
 									<th width="33%" align="center">操作</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody> 
 								<c:forEach items="${list}" var="p" varStatus="statu">
 									<tr>
 										<td>${p.typeId }</td>
@@ -186,20 +183,33 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 												</td>
 									</tr>
 								</c:forEach>
-									<tr>
-						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
-							color="black">一共${page.pages}页</font> 
-							<font face="微软雅黑" size="3px"
-							color="black">每页${page.pageSize }条/</font>
-							<a class="layui-btn"
-							href="/admin/img/listimgType?page=${page.firstPage}">首页</a>
-							<a class="layui-btn"
-							href="/admin/img/listimgType?page=${page.prePage}">上一页</a>
-							<a class="layui-btn"
-							href="/admin/img/listimgType?page=${page.nextPage}">下一页</a>
-							<a class="layui-btn"
-							href="/admin/img/listimgType?page=${page.lastPage}">最后页</a></td>
-					</tr>
+										<tr>
+									<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/admin/img/listimgType?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/admin/img/listimgType?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/admin/img/listimgType?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/admin/img/listimgType?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
+								</tr>
+					
 							</tbody>
 						</table>
 					</div>

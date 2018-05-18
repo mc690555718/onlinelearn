@@ -87,17 +87,12 @@ public class imgController {
 		    imgType imgType=new imgType();
 	        imgType.setTypeId(typeId);
 	        img.setImgType(imgType);
-	        //ͼƬ�ϴ�
-			//�������·��webapp����·��  
 			String path = request.getRealPath("/images/upload/image/20180408/");  
 			String pathRoot = "";
 			String imgpath = "";
 			if(!file.isEmpty()){  
-				//����uuid��Ϊ�ļ�����  
 				String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-				//����ļ����ͣ������ж��������ͼƬ����ֹ�ϴ���  
 				String contentType=file.getOriginalFilename(); 
-				//����ļ���׺����  
 				String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
 				pathRoot = path+"/"+uuid+"."+imageName;
 				File newfile=new File(pathRoot);
@@ -109,7 +104,6 @@ public class imgController {
 				}
 			}
 	    img.setImageUrl(imgpath);
-	    System.out.println(imgpath);
 	    img.setPreviewUrl(imgpath);
 		imgService.save(img);
 		return "redirect:/admin/hello/list";
@@ -188,9 +182,6 @@ public class imgController {
         imgType.setTypeId(typeId);
         img.setImgType(imgType);
 		String path = request.getRealPath("/images/upload/image/20180408/");  
-//		String pathRoot = "";
-//		String imgpath = "";
-//		String imgpath1 = "";
 		String filename=file.getOriginalFilename();
 		String hiddens=request.getParameter("hiddens");
 		File file2=new File(path, filename);
@@ -206,32 +197,6 @@ public class imgController {
 			img.setImageUrl("/images/upload/image/20180408/"+filename);
 			img.setPreviewUrl("/images/upload/image/20180408/"+filename);
 		}
-//		if(!file.isEmpty()){  
-//			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-//			String contentType=file.getOriginalFilename(); 
-//			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
-//			pathRoot = path+"/"+uuid+"."+imageName;
-//			File newfile=new File(pathRoot);
-//			imgpath = "/images/upload/image/20180408/"+uuid+"."+imageName;
-//			try {
-//				file.transferTo(newfile);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		if(!file1.isEmpty()){  
-//			String uuid = UUID.randomUUID().toString().replaceAll("-","");  
-//			String contentType=file1.getOriginalFilename(); 
-//			String imageName=contentType.substring(contentType.lastIndexOf(".")+1,contentType.length());  
-//			pathRoot = path+"/"+uuid+"."+imageName;
-//			File newfile=new File(pathRoot);
-//			imgpath1 = "/images/upload/image/20180408/"+uuid+"."+imageName;
-//			try {
-//				file1.transferTo(newfile);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
         imgService.update(img);
         System.out.println(img);
 		return "redirect:/admin/hello/list";

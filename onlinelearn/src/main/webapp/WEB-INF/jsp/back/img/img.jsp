@@ -27,12 +27,11 @@
 	charset="utf-8"></script>
 <link rel="stylesheet" type="text/css"
 	href="/common/bootstrap/css/bootstrap.css" />
-	
 
 
-	<style type="text/css">
-	
-		#in1{
+
+<style type="text/css">
+#in1 {
 	background-color: mediumaquamarine;
 	width: 100px;
 	height: 35px;
@@ -40,8 +39,8 @@
 	size: 10px;
 	color: white;
 }
-		#a1 {
-	
+
+#a1 {
 	width: 80px;
 	height: 30px;
 	font-family: "微软雅黑";
@@ -49,25 +48,24 @@
 	color: white;
 }
 
-#ca {  
-    width:150px;  
-    overflow:hidden;  
-    white-space:nowrap;  
-    text-overflow:ellipsis;  
-    -o-text-overflow:ellipsis;  
-    -icab-text-overflow: ellipsis;  
-    -khtml-text-overflow: ellipsis;  
-    -moz-text-overflow: ellipsis;  
-    -webkit-text-overflow: ellipsis;  
-}  
-
-#img1{
-width: 100px;
-height: 80px;
-
+#ca {
+	width: 150px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	-icab-text-overflow: ellipsis;
+	-khtml-text-overflow: ellipsis;
+	-moz-text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
 }
-	</style>
-	
+
+#img1 {
+	width: 100px;
+	height: 80px;
+}
+</style>
+
 <script type="text/javascript">
 
 /* 显示 */
@@ -98,6 +96,7 @@ height: 80px;
  			datetype:"html",
  			success:function(date){
  			$("[name='checkbox2']:checked").attr("checked",false);
+ 			alert("11111");
  			location.reload();//刷新页面
  			},
  			error:function(date) {
@@ -145,8 +144,8 @@ height: 80px;
 						<div class="layui-inline">
 							<div class="layui-input-inline">
 								<input value="${title}" name="title" placeholder="请输入关键字"
-									class="layui-input search_input" type="text"  maxlength="20">
-							</div>  
+									class="layui-input search_input" type="text" maxlength="20">
+							</div>
 
 							<label class="layui-inline">类型:</label>
 							<div class="layui-input-inline">
@@ -160,16 +159,18 @@ height: 80px;
 
 
 
-						 <button type="submit" id="in1" onclick="list()">查找评论</button>
-						 <button type="reset"  id="in1" onclick="cy()" >清空</button>
-                         <button type="button" id="in1" onclick="batchDeletes()">批量删除</button>
-                         	<shiro:hasPermission name="img_add">
-						 <button type="button"  id="in1"><a href="/admin/hello/listtype" id="a1">新建图片</a></button>
-						 		</shiro:hasPermission>
+							<button type="submit" id="in1" onclick="list()">查找评论</button>
+							<button type="reset" id="in1" onclick="cy()">清空</button>
+							<button type="button" id="in1" onclick="batchDeletes()">批量删除</button>
+							<shiro:hasPermission name="img_add">
+								<button type="button" id="in1">
+									<a href="/admin/hello/listtype" id="a1">新建图片</a>
+								</button>
+							</shiro:hasPermission>
 						</div>
 					</form>
 				</blockquote>
- 
+
 				<div
 					class="layui-tab-content larry-personal-body clearfix mylog-info-box">
 					<!-- 操作日志 -->
@@ -177,8 +178,9 @@ height: 80px;
 						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
 							<thead>
 								<tr>
-									<th><input type="checkbox" id="checkbox" name="checkbox" onclick="fun1()"></th>
-									<th>ID</th>
+									<th><input type="checkbox" id="checkbox" name="checkbox"
+										onclick="fun1()"></th>
+									<th>序号</th>
 									<th>标题</th>
 									<th>图片URL</th>
 									<th>链接URL</th>
@@ -191,44 +193,54 @@ height: 80px;
 
 								<c:forEach items="${list }" var="p" varStatus="stat">
 									<tr>
-										<td><input type="checkbox" id="subcheck" name="subcheck" value="${p.imageId}"></td>
+										<td><input type="checkbox" id="subcheck" name="subcheck"
+											value="${p.imageId}"></td>
 										<td>${stat.index+1}</td>
 										<td>${p.title }</td>
-										<td><img src="${p.previewUrl}" id="img1"/></td>
-<%-- 										<td><div id="ca" title="${p.imageUrl}">${p.imageUrl}</td>
- --%>										<td>${p.linkAddress}</td>
+										<td><img src="${p.previewUrl}" id="img1" /></td>
+										<td>${p.linkAddress}</td>
 										<td>${p.imgType.typeName}</td>
 										<td>${p.seriesNumber}</td>
-										<td>
-										<shiro:hasPermission name="img_update">
-										<a class="layui-btn layui-btn-mini"
-											href="/admin/hello/getById/${p.imageId}"><i
-												class="iconfont icon-edit"></i> 编辑</a>
-												</shiro:hasPermission> 
-												<shiro:hasPermission name="img_del">
-												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
-											href="/admin/hello/delete/${p.imageId}"><i
-												class="layui-icon"></i> 删除</a>
-												</shiro:hasPermission>
-												</td>
+										<td><shiro:hasPermission name="img_update">
+												<a class="layui-btn layui-btn-mini"
+													href="/admin/hello/getById/${p.imageId}"><i
+													class="iconfont icon-edit"></i> 编辑</a>
+											</shiro:hasPermission> <shiro:hasPermission name="img_del">
+												<a class="layui-btn layui-btn-danger layui-btn-mini"
+													data-id="1" href="/admin/hello/delete/${p.imageId}"><i
+													class="layui-icon"></i> 删除</a>
+											</shiro:hasPermission></td>
 									</tr>
 								</c:forEach>
-					<tr>
-						<td align="center" colspan="9"><font face="微软雅黑" size="3px"
-							color="black">一共${page.pages}页</font> 
-							<font face="微软雅黑" size="3px"
-							color="black">每页${page.pageSize }条/</font>
-							<a class="layui-btn"
-							href="/admin/hello/list?page=${page.firstPage}">首页</a>
-							<a class="layui-btn" 
-							href="/admin/hello/list?page=${page.prePage}">上一页</a>
-							<a class="layui-btn"
-							href="/admin/hello/list?page=${page.nextPage}">下一页</a>
-							<a class="layui-btn" 
-							href="/admin/hello/list?page=${page.lastPage}">最后页</a>
-						</td>
-					</tr>
-						</tbody>
+							
+										
+												<tr>
+									<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/admin/hello/list?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/admin/hello/list?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/admin/hello/list?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/admin/hello/list?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
+								</tr>
+							</tbody>
 						</table>
 
 					</div>

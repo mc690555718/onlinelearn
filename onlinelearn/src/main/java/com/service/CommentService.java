@@ -17,4 +17,5 @@ public List<Comment> listAll(Map map);
 	public List<Comment> childComment(Map map);
 	public  void addcomment(int comment_id);
 	public void addNum(int other_id);
+	public Comment selectId(int comment_id);
 }

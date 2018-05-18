@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.CommentMapper">
 	<resultMap type="Comment" id="CommentMap">
-		<!-- <id column="comment_id" property="comment_id" /> -->
+		 <id column="comment_id" property="comment_id" /> 
 		<result column="p_comment_id" property="p_comment_id" />
 		<result column="content" property="content" />
 		<result column="addtime" property="addtime" />
@@ -44,6 +44,16 @@
 	<delete id="detele" parameterType="int">
 		delete from edu_comment where comment_id=#{value}
 	</delete>
+  <select id="selectId" parameterType="int" resultType="Comment">
+SELECT * from edu_comment WHERE comment_id= (SELECT P_COMMENT_ID from edu_comment WHERE comment_id =#{comment_id})  
+ </select>
+
+  <select id="getById" parameterType="int" resultMap="CommentMap" >
+  select * from edu_comment c,edu_user u where comment_id=#{comment_id} and c.user.id=u.user.id
+  </select>
+
+
+
 
 
 	<insert id="save" parameterType="Comment">

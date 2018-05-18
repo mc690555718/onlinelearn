@@ -72,7 +72,7 @@ public class CommentController {
 			map.put("email",email);
 		}
  	      if (start!=null&&start.trim().length()!=0) {
-	       request.setAttribute("start",start); 
+	       request.setAttribute("start",start);  
 			map.putIfAbsent("start", start);
 			
 		}if (end!=null&&end.trim().length()!=0) {
@@ -96,5 +96,19 @@ public String to(){
 		commentService.detele(comment_id);
 		return "redirect:/admin/cy/listcomment";
 	}
+	
+	
+	
+	
+	   @RequestMapping("/comment/all/{comment_id}")
+	    public ModelAndView All(@PathVariable("comment_id")int comment_id) {
+	    	ModelAndView mv = new ModelAndView();
+	    	Comment list = commentService.getById(comment_id);
+	        Comment comment = commentService.selectId(comment_id);
+	    	mv.setViewName("/back/comment/commentaa");
+	    	mv.addObject("list",list);
+	    	mv.addObject("comment",comment);
+			return mv;
+		}
 	
 }

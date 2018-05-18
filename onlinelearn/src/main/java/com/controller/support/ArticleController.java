@@ -55,13 +55,23 @@ public class ArticleController {
 		String qname = request.getParameter("qname");
 		String create_time = request.getParameter("create_time");
 		String publish_time = request.getParameter("publish_time");
-		map.put("qname",qname);
+		if (qname!=null) {
+			request.setAttribute("qname", qname);
+		}
+		if (create_time!=null) {
+			request.setAttribute("create_time", create_time);
+		}
+		if (publish_time!=null) {
+			request.setAttribute("publish_time", publish_time);
+		}
+		// 判断时间是否在区间里
 		if (create_time!=null&&create_time.length()>0) {
 			map.put("create_time", create_time);
 		}
 		if (publish_time!=null&&publish_time.length()>0) {
 			map.put("publish_time", publish_time);
 		}
+		map.put("qname",qname);
 		return map;
 	}
 

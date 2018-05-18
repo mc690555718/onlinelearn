@@ -34,6 +34,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 			<artifactId>mail</artifactId>
 			<version>1.4.5</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.alipay.sdk</groupId>
+		    <artifactId>alipay-sdk-java</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
 	<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>

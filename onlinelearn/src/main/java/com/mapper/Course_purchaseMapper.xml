@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  <mapper namespace="com.mapper.Course_purchaseMapper">
+  	
+  	<select id="queryStatus" parameterType="com.bean.Course_purchase" resultType="boolean">
+  	 select count(id) from Course_purchase where userId=#{userId} and courseId=#{courseId}  
+  	</select>
+  	
+  	<insert id="addCourse_purchase" parameterType="com.bean.Course_purchase">
+  	insert into Course_purchase(userId,courseId) values(#{userId},#{courseId}) 
+  	</insert>
+  </mapper>

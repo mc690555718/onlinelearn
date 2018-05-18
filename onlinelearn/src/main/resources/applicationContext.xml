@@ -110,6 +110,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				<!-- 有时候shrio会拦截静态资源访问 -->
+				/Alipay/**=anon
 				/upload/**=anon
 				/js/**=anon
 				/css/**=anon

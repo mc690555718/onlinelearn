@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bean.CourseCommentUser;
+import com.bean.Course_purchase;
 import com.bean.EduCourse;
 import com.bean.EduCourseKpoint;
 import com.bean.EduCourseNote;
@@ -24,6 +26,7 @@ import com.bean.Edu_User;
 import com.service.ConurseNoseService;
 import com.service.CourseCommentService;
 import com.service.CourseStudyhistoryService;
+import com.service.Course_purchaseService;
 import com.service.EduNoseUserService;
 import com.service.KpointNoseService;
 import com.service.SubjectNoseService;
@@ -49,6 +52,8 @@ public class CouseNoseController {
 	private EduNoseUserService eduNoseUserService;
 	@Autowired
 	private CourseCommentService courseCommentService;
+	@Autowired
+	private Course_purchaseService course_purchaseService;
 	@RequestMapping("/toCourseslist")
 	public String toCourseslist(Model model,EduCourse course){
 		model.addAttribute("courseList",conurseNoseService.listbyCourse(course));
@@ -110,6 +115,20 @@ public class CouseNoseController {
 		return "web/course/comment";
 	}
 	@RequestMapping("/tovedioplay")
+	public String cheak(Model model,Course_purchase purchase,HttpSession session,HttpServletResponse response){
+		Edu_User edu_User=(Edu_User)session.getAttribute("login_success");
+		purchase.setUserId(edu_User.getUser_id());
+		Boolean status = course_purchaseService.queryStatus(purchase);
+		if(status==false){
+			Cookie cookpurchase = new Cookie("cookpurchase",JsonUtils.objectToJson(purchase));
+			response.addCookie(cookpurchase);
+			return "redirect:/front/tocourseinfor?courseid="+purchase.getCourseId()+"&course_status=0/0";
+		}else{
+			return "redirect:/front/tovedioplay2?courseid="+purchase.getCourseId();
+		}
+	}
+	
+	@RequestMapping("/tovedioplay2")
 	public String tovedioplay(Model model,int courseid){
 		model.addAttribute("interfixCourse",conurseNoseService.byIdcourse(courseid));
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));

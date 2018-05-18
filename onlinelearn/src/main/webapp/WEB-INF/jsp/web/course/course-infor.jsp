@@ -75,7 +75,14 @@
 							</span>
 						</section>
 						<section class="c-attr-mt"><!--  -->
-									<a href="javascript:void(0)" title="立即观看" onclick="if(isLogin()){ window.location.href='/front/tovedioplay?courseid=${course.course_id }'} else{lrFun();} " class="comm-btn c-btn-3">立即观看</a>
+									<a href="javascript:void(0)" title="立即观看" onclick="if(!isLogin()){lrFun(); } 
+									else if(${course.current_price }=='0')
+									{window.location.href='/front/tovedioplay2?courseid=${course.course_id }'} 
+									else{
+									window.location.href='/front/tovedioplay?courseId=${course.course_id }'
+									}
+									" 
+									class="comm-btn c-btn-3">立即观看</a>
 							<span class="ml10"><tt class="c-yellow f-fM">*咨询 ${websitemap.web.phone}</tt></span>
 						</section>
 						<section class="c-attr-mt of ml10">
@@ -320,6 +327,19 @@
 	<%-- <script type="text/javascript" src="${ctx}/static/common/jquery-1.11.1.min.js"></script> --%>
 	<script type="text/javascript" src="/static/inxweb/front/courseInfo.js"></script>
 	<script type="text/javascript" src="/static/inxweb/comment/comment.js"></script>
+	
+	<script type="text/javascript">
+	<%String course_status = request.getParameter("course_status"); %>
+	 $(function(){  
+		if('0/0'=='${param.course_status}'){
+			dialog('提示信息', "请购买课程！", 0);
+			 var int=self.setInterval(function(){  // 这个方法是说在延迟两秒后执行大括号里的方法
+			     window.location.href="/front/Alipay/toindex?courseprice=${course.current_price }&courseId=${course.course_id }"
+			  // 这个方法是刷新当前页面
+			      },2000)
+		}
+     });  
+	</script>
 	<script>
 		//评论课程id
 		var otherId = '${course.course_id}';

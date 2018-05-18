@@ -267,7 +267,7 @@
 
 	<script type="text/javascript" src="/static/common/webutils.js"></script>
 	<script type="text/javascript" src="/static/inxweb/js/common.js" ></script>
-	<script src="/static/inxweb/comment/comment1.js" type="text/javascript"></script> <!--评论js -->
+	<script src="/static/inxweb/comment/comment.js" type="text/javascript"></script> <!--评论js -->
 	<script type="text/javascript" src="/kindeditor/kindeditor-all.js"></script>
 	<script type="text/javascript" src="/static/inxweb/play/playVideo.js"></script>
 	<script type="text/javascript">

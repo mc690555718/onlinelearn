@@ -319,7 +319,7 @@
 	</div>
 	<%-- <script type="text/javascript" src="${ctx}/static/common/jquery-1.11.1.min.js"></script> --%>
 	<script type="text/javascript" src="/static/inxweb/front/courseInfo.js"></script>
-	<script type="text/javascript" src="/static/inxweb/comment/comment1.js"></script>
+	<script type="text/javascript" src="/static/inxweb/comment/comment.js"></script>
 	<script>
 		//评论课程id
 		var otherId = '${course.course_id}';

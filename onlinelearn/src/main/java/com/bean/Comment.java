@@ -7,7 +7,6 @@ public class Comment {
 
 	private int comment_id;   //ID
 	private Edu_User user;      //�û�id
-	private int user_id;
 	private int p_comment_id;  //��������id(Ϊ0����һ������,��Ϊ0���ǻظ�)
 	private String content;  //��������
 	private Date addtime;   //����ʱ��
@@ -15,13 +14,7 @@ public class Comment {
 	private int praise_count;  //��������
 	private int  reply_count;   //�ظ�����
 	private int type;         //1���� 2�γ�
-	public int getUser_id() {
-		return user_id;
-	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
 	private String strat;
 	private String end;
 	public String getStrat() {

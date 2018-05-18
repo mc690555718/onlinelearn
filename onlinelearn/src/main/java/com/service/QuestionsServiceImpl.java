@@ -78,4 +78,9 @@ public class QuestionsServiceImpl implements QuestionsService{
 		QuestionsMapper.updateReply_count(id);
 	}
 
+	@Override
+	public List<Questions> listById(int id) {
+		return QuestionsMapper.listById(id);
+	}
+
 }

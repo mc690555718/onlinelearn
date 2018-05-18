@@ -23,4 +23,5 @@ public interface Questions_commentService {
 	public void deleteSubreview(int id);
 	public List<Questions_comment> getId(Questions_comment comment);
 	public int getQuestions_Id(int id);
+	public List<Questions_comment> getByCid(int cid);
 }

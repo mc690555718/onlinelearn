@@ -99,4 +99,7 @@
 	<select id="getQuestions_Id" resultType="int" parameterType="int">
 	   select QUESTION_ID from edu_questions_comment where id=#{value}
 	</select>
+	<select id="getByCid" parameterType="int" resultMap="Questions_commentMap"> 
+	   select * from edu_questions_comment where CUS_ID=#{value} 
+	</select>
 </mapper>

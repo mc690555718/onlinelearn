@@ -19,4 +19,5 @@ public interface QuestionsService {
 	public void addReply_count(int id);
 	public void deleteById(int id);
 	public void updateReply_count(int id);
+	public List<Questions> listById(int id);
 }

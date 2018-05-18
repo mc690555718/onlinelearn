@@ -89,4 +89,9 @@ public class Questions_commentServiceImpl implements Questions_commentService{
 	public int getQuestions_Id(int id) {
 		return Questions_commentMapper.getQuestions_Id(id);
 	}
+
+	@Override
+	public List<Questions_comment> getByCid(int cid) {
+		return Questions_commentMapper.getByCid(cid);
+	}
 }

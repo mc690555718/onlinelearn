@@ -1,5 +1,7 @@
 package com.controller.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,9 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Edu_User;
+import com.bean.Questions;
+import com.bean.Questions_comment;
 import com.service.Edu_UserService;
+import com.service.QuestionsService;
+import com.service.Questions_commentService;
 import com.util.Encryption;
 import com.util.Result;
 
@@ -20,7 +27,10 @@ public class UserCenterController {
 
 	@Autowired
 	private Edu_UserService service;
-
+	@Autowired
+	private QuestionsService questionsService;
+    @Autowired
+    private Questions_commentService questions_commentService;
 
 
 	@RequestMapping("/index")
@@ -46,13 +56,25 @@ public class UserCenterController {
 	}
 
 	@RequestMapping("/myquestions/list")
-	public String myquestions(){
-		return "web/ucenter/questions-mylist";
+	public ModelAndView myquestions(HttpSession session){
+		ModelAndView mv = new ModelAndView();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		int id = user.getUser_id();
+		List<Questions> questions = questionsService.listById(id);
+		mv.addObject("questions", questions);
+		mv.setViewName("web/ucenter/questions-mylist");
+		return mv;
 
 	}
 	@RequestMapping("/myrepquestions/list")
-	public String myrepquestions(){
-		return "web/ucenter/questions-myreplist";
+	public ModelAndView myrepquestions(HttpSession session){
+		ModelAndView mv = new ModelAndView();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		int cid = user.getUser_id();
+		List<Questions_comment> comments = questions_commentService.getByCid(cid);
+		mv.addObject("comments", comments);
+		mv.setViewName("/web/ucenter/questions-myreplist");
+		return mv;
 
 	}
 

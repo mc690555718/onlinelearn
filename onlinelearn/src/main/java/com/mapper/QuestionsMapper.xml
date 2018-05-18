@@ -96,4 +96,7 @@
 		edu_questions
 		set reply_count=reply_count-1 where ID=#{id}
 	</update>
+	<select id="listById" resultMap="QuestionsMap" parameterType="int">
+	    select * from edu_questions where CUS_ID=#{value}
+	</select>
 </mapper>

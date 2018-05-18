@@ -193,6 +193,7 @@
 				$("#context").val("");
 				teas.length=0;
 				tean.length=0;
+				$("#logo").val("");
 				$("#subject_id").empty();
 				$("#subject_id").append("<option value='-1'>--请选择--</option>");
 			}
@@ -322,7 +323,7 @@
 						<div class="layui-input-block">
 							<script type="text/plain" id="myEditor"
 								style="width: 650px; height: 240px;">
-                                <p>请输入课程详情</p>
+                                <p></p>
                             </script>
 							<textarea id="context" name="context" ></textarea>
 						</div>
@@ -345,11 +346,13 @@
 function bulr_courseName(){
 	var courseName = $("#course_name").val();
 	if(courseName == null || courseName.trim().length == 0){
+		layer.msg('请输入课程名称', {icon: 5});
 		layer.tips('请输入课程名称','#course_name');
 		return false;
 	}else{
 		var checkCname =  /^[\u4E00-\u9FA5A-Za-z0-9]{3,20}$/;
 		if(!checkCname.test(courseName)){
+			layer.msg('请输入合法的课程名称', {icon: 5});
 			layer.tips('请输入长度为3~20的字符','#course_name');
 			return false;
 		}else{
@@ -362,11 +365,13 @@ function bulr_courseName(){
 function bulr_LessNum(){
 	var lessNum = $("#lession_num").val();
 	if(lessNum == null || lessNum.trim().length == 0){
+		layer.msg('请输入总课时', {icon: 5});
 		layer.tips('请输入总课时','#lessNum');
 		return false;
 	}else{
 		var checkNum = /^[1-9]\d*$/;
 		if(!checkNum.test(lessNum)){
+			layer.msg('请输入合法的总课时数', {icon: 5});
 			layer.tips('请输入正确的课程数,并保证它们是正整数','#lessNum');
 			return false;
 		}else{
@@ -379,11 +384,13 @@ function bulr_LessNum(){
 function bulr_sourcePrice(){
 	var souPri = $("#source_price").val();
 	if(souPri == null || souPri.trim().length == 0){
+		layer.msg('请输入原价金额', {icon: 5});
 		layer.tips('请输入原价金额','#sourse_price');
 		return false;
 	}else{
 		var res = /^[0-9]+(.[0-9]{1,2})?$/;
 		if(!res.test(souPri)){
+			layer.msg('原价输入不合法,请检查输入', {icon: 5});
 			layer.tips('请输入合法的金额,可留小数点后两位','#sourse_price');
 			return false;
 		}else{
@@ -396,11 +403,13 @@ function bulr_sourcePrice(){
 function bulr_currentPrice(){
 	var curPri = $("#current_price").val();
 	if(curPri == null || curPri.trim().length == 0){
+		layer.msg('请输入售价金额', {icon: 5});
 		layer.tips('请输入售价金额','#sourse_price');
 		return false;
 	}else{
 		var res = /^[0-9]+(.[0-9]{1,2})?$/;
 		if(!res.test(curPri)){
+			layer.msg('售价输入不合法,请检查输入', {icon: 5});
 			layer.tips('请输入合法的金额,可留小数点后两位','#current_price');
 			return false;
 		}else{
@@ -467,7 +476,7 @@ function checkTeacher(){
 }
 
 function checkForm(){
-	if(bulr_courseName() && bulr_LessNum() && bulr_LessNum() && bulr_sourcePrice() && bulr_currentPrice(),
+	if(bulr_courseName() && bulr_LessNum() && bulr_LessNum() && bulr_sourcePrice() && bulr_currentPrice() &&
 			bulr_endTime() && checkSub() && checkTeacher()){
 	    return true;
 	}
@@ -495,28 +504,6 @@ $(function() {
 			renderForm();
 		}, "json");
 		
-	
-// 		    var res = /^[0-9]+(.[0-9]{1,2})?$/;/*/^1(3|4|5|7|8)\d{9}$/*/
-
-// 				$("#course_name").val("");
-// 				$("#parent_id").val("-1");
-// 				$("#is_avaliable").val("-1");
-// 				$("#lession_num").val("");
-// 				$("#source_price").val("");
-// 				$("#current_price").val("");
-// 				$("#loseType").val("1");
-// 				$("#tea1").remove("li");
-// 				$("#lose_time").val("");
-// 				$("#end_time").val("");
-// 				$("#title").val("");
-// 				$("#logo").val("");
-// 				$("#context").val("");
-// 				teas.length=0;
-// 				tean.length=0;
-// 				$("#subject_id").empty();
-// 				$("#subject_id").append("<option value='-1'>--请选择--</option>");
-
-		
 		
 		//验证提交
 		$("#btn_submit").click(function() {
@@ -530,9 +517,6 @@ $(function() {
 	 		}
 	 		$("#teacher_id").val(teach);
 			
-	 		var img = $("#pic").attr("src");
-	 		var imgPath = img.substring(12); 
-	 		$("#logo").val(imgPath);
 	 		if (checkForm()){
 				var um = UM.getEditor("myEditor");
 				var p = um.getContentTxt();
@@ -551,7 +535,8 @@ $(function() {
 		    ,elem: '#logo1' //指定原始元素，默认直接查找class="layui-upload-file"
 		    ,method: 'post' //上传接口的http类型
 		    ,success: function(res){
-		    	$('#pic').attr('src', '../../../../'+res); 
+		    	$('#pic').attr('src',res); 
+		 		$("#logo").val(res);
 		    }
 		  });
 		});

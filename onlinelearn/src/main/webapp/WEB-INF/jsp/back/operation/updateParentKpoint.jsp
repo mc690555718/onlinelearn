@@ -40,8 +40,7 @@ form {
 		<div class="layui-form-item">
 			<label class="layui-form-label">节点名称</label>
 			<div class="layui-input-inline">
-				<input type="text" name="name" id="name" value="${kpoint.name}" required
-					lay-verify="required" autocomplete="off" class="layui-input">
+				<input type="text" name="name" id="name" value="${kpoint.name}" autocomplete="off" class="layui-input">
 			</div>
 		</div>
 
@@ -50,8 +49,7 @@ form {
 		<div class="layui-form-item">
 			<label class="layui-form-label">热度</label>
 			<div class="layui-input-inline">
-				<input type="text" name="sort" id="sort" value="${kpoint.sort}" required
-					lay-verify="required" autocomplete="off" class="layui-input">
+				<input type="number" name="sort" id="sort" value="${kpoint.sort}" autocomplete="off" class="layui-input">
 			</div>
 		</div>
 
@@ -83,14 +81,38 @@ form {
 	//异步提交按钮,添加
 	function updateKpoint(){
 		
-		 $.ajax({
-             url:"/admin/cou/updateKpoint",
-             data:$('#kpointForm').serialize(),
-             dataType:"json",
-             success:function(data){
-            	 parent.location.reload();
-             }
-         });
+		 var sort = $("#sort").val();
+		   var name = $("#name").val();
+		   
+		   if(name == null || name.trim().length == 0){
+			   layer.tips('请输入章节名', '#name');
+		   }else{
+			   var rule_name = /^[\u4E00-\u9FA5A-Za-z0-9]{2,10}$/;
+			   if(!rule_name.test(name)){
+				   layer.tips('请输入2-10长度的章节名称(不包括标点符号)', '#name');
+			   }else{
+				   if(sort == null || sort.trim().length == 0){
+					   layer.tips('请输入热度', '#sort');
+				   }else{
+					   var rule_sort = /^\d+$/;
+					   if(!rule_sort.test(sort)){
+						   layer.tips('热度值必须是正整数', '#sort');
+					   }else{
+						   
+						   $.ajax({
+					             url:"/admin/cou/updateKpoint",
+					             data:$('#kpointForm').serialize(),
+					             dataType:"json",
+					             success:function(data){
+					            	 parent.location.reload();
+					             }
+					         });
+						   
+					   }
+				   }
+			   }
+		   }
+		
 	}
 
 	</script>

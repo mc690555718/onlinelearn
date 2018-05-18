@@ -102,6 +102,7 @@ public String to(){
 	
 	   @RequestMapping("/comment/all/{comment_id}")
 	    public ModelAndView All(@PathVariable("comment_id")int comment_id) {
+		   System.out.println("comment:"+comment_id);
 	    	ModelAndView mv = new ModelAndView();
 	    	Comment list = commentService.getById(comment_id);
 	        Comment comment = commentService.selectId(comment_id);

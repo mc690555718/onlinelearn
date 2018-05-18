@@ -162,7 +162,7 @@
 										<td>${p.reply_count}</td>
 										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
-										<td><a class="layui-btn layui-btn-mini" href="/admin/cy/comment/all/{comment_id}" ><i
+										<td><a class="layui-btn layui-btn-mini" href="/admin/cy/comment/all/${p.comment_id}" ><i
 												class="iconfont icon-edit"></i> 回复评论</a> 
 												<shiro:hasPermission name="comment_del">
 												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"

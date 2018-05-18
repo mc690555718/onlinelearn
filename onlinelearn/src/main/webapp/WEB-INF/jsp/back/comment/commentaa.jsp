@@ -48,10 +48,10 @@ $("#te").text("123");
 					<label class="layui-form-label">类型:</label>
 					<div class="layui-input-block">
 						<c:if test="${list.type==1 }">
-						<input type="text" disabled="true" name="type" id="types"  class="layui-input " value="文章"  autocomplete="off" disabled="disabled" style="width:250px;">
+						<input type="text" disabled="true" name="type" id="type"  class="layui-input " value="文章"  autocomplete="off" disabled="disabled" style="width:250px;">
 						</c:if>
 						<c:if test="${list.type==2 }">
-						<input type="text" disabled="true" name="type" id="types"  class="layui-input " value="课程"  autocomplete="off" disabled="disabled" style="width:250px;">
+						<input type="text" disabled="true" name="type" id="type"  class="layui-input " value="课程"  autocomplete="off" disabled="disabled" style="width:250px;">
 					</c:if>
 					</div>
 				</div>

@@ -45,11 +45,11 @@
 		delete from edu_comment where comment_id=#{value}
 	</delete>
   <select id="selectId" parameterType="int" resultType="Comment">
-SELECT * from edu_comment WHERE comment_id= (SELECT P_COMMENT_ID from edu_comment WHERE comment_id =#{comment_id})  
- </select>
+  select * from edu_comment c,edu_user u where comment_id=#{comment_id} and c.USER_ID=u.USER_ID
+   </select>
 
   <select id="getById" parameterType="int" resultMap="CommentMap" >
-  select * from edu_comment c,edu_user u where comment_id=#{comment_id} and c.user.id=u.user.id
+  select * from edu_comment c,edu_user u where comment_id=#{comment_id} and c.user_id=u.user_id
   </select>
 
 

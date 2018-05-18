@@ -75,7 +75,7 @@
 					t.style.color = "red";
 					$("#btn").attr({ disabled: "disabled" });
 				} else if(reg.test(v)){
-					t.innerText = "标题不能为纯数字";
+					t.innerText = "摘要不能为纯数字";
 					t.style.color = "red";
 				} else{
 					t.innerText = "";

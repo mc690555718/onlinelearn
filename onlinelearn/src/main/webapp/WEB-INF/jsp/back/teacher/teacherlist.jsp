@@ -100,7 +100,7 @@ function list(){
 								</colgroup>
 								<thead>
 									<tr>
-										<th style="text-align: left;">id</th>
+										<th style="text-align: left;">编号</th>
 										<th>教师名称</th>
 										<th>教师头衔</th>
 										<th>教师资历</th>

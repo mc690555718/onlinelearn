@@ -45,7 +45,6 @@ public class TeacherController {
 	@Autowired
 	private SubjectService subjectService;
 
-	private Object subjectids;
 
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(required=true,defaultValue="1")Integer 
@@ -135,6 +134,11 @@ public class TeacherController {
 	//添加
 	@RequestMapping("/tosave")
 	public String save(@PathVariable("file")MultipartFile file,HttpServletRequest request,TeacherBean tb) {
+		String subjectId=request.getParameter("subjectids");
+		SubjectBean subjectBean=new SubjectBean();
+		subjectBean.setSubject_id(Integer.valueOf(subjectId));
+		tb.setSubject_id(subjectBean);
+		
 		//图片上传
 		//获得物理路径webapp所在路径
 		String filename=file.getOriginalFilename();
@@ -152,12 +156,12 @@ public class TeacherController {
 				e.printStackTrace();
 			}
 		}
+		
 		tb.setPic_path("/images/upload/teacher/20150915/"+filename);
-	    tb.setCreate_time(new Date());
+		tb.setCreate_time(new Date());
 		teacherService.save(tb);
 		return "redirect:/admin/teacher/list";
 	}
-
 
 
 	@RequestMapping("/upinit/{id}")
@@ -193,9 +197,10 @@ public class TeacherController {
 
 
 	@RequestMapping("/update")
-	public String update(@RequestParam("file") MultipartFile file,HttpServletRequest request,TeacherBean teacherBean,int id,int is_stars) {
+	public String update(@RequestParam("file") MultipartFile file,HttpServletRequest request,TeacherBean teacherBean,int id,int is_stars,int subject) {
 		teacherBean.setId(id);
 		teacherBean.setIs_star(is_stars);
+		String subject_id =request.getParameter("subject");
 
 		//图片上传
 		//获得物理路径webapp所在路径
@@ -213,6 +218,8 @@ public class TeacherController {
 			}
 			teacherBean.setPic_path("/images/upload/teacher/20150915/"+filename);
 		}
+		SubjectBean subjectBean=subjectService.getByIdSM(subject);
+        teacherBean.setSubject_id(subjectBean);
 		teacherService.update(teacherBean);
 		return "redirect:/admin/teacher/list";
 	}

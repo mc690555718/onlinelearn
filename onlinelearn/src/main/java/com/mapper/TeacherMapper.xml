@@ -55,6 +55,6 @@
   select * from edu_teacher where id=#{value}
   </select>
   <select id="listTea" resultMap="TeacherBeanMap" parameterType="int">
-  	select * from edu_teacher where id in (select teacher_id from edu_course_teacher where subject_id=#{value})
+  	select * from edu_teacher where subject_id=#{value}
   </select>
  </mapper>

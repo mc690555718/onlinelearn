@@ -37,7 +37,7 @@
 								</dt>
 								<dd class="pr">
 									<label class=""><input type="text"
-										name="questions.title" placeholder="问题标题不少于16个字"
+										name="questions.title" placeholder="问题标题不少于6个字"
 										onkeyup="checkTitleLength(this)" value=""></label>
 									<aside class="q-c-jy"></aside>
 								</dd>

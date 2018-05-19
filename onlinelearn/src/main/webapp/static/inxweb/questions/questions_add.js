@@ -68,9 +68,9 @@ function addQuestions(){
 		$("input[name='questions.title']").parent().next().html('<img width="16" height="16" alt="错误" src="/static/inxweb/img/c-icon.png">');
 		dialog('提示信息',"问答标题不能为空",1);
 		return;
-	}else if(title.length<16){
+	}else if(title.length<6){
 		$("input[name='questions.title']").parent().next().html('<img width="16" height="16" alt="错误" src="/static/inxweb/img/c-icon.png">'); 
-		dialog('提示信息',"问答标题长度不能小于16个字",1);
+		dialog('提示信息',"问答标题长度不能小于6个字",1);
 		return;
 	}else{
 		$("input[name='questions.title']").parent().next().html('<img width="16" height="16" alt="正确" src="/static/inxweb/img/d-icon.png">');
@@ -129,7 +129,7 @@ function addQuestions(){
 /* 检查问题标题长度 */
 function checkTitleLength(obj){
 	var title=$(obj).val().trim();
-	if(title.length<16){
+	if(title.length<6){
 		$(obj).parent().next().html('<img width="16" height="16" alt="错误" src="/static/inxweb/img/c-icon.png">');
 	}else{
 		$(obj).parent().next().html('<img width="16" height="16" alt="正确" src="/static/inxweb/img/d-icon.png">');

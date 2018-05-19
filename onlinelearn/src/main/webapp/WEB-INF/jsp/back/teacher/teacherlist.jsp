@@ -130,23 +130,45 @@ function list(){
 											</th>
 											<th>
 											<shiro:hasPermission name="teacher_delete">
-											<a href="/admin/teacher/delete/${p.id}" class="btn btn-default">删除</a> 
+			
+										<a href="/admin/teacher/delete/${p.id}" class="layui-btn layui-btn-normal">删除</a>
 											</shiro:hasPermission>
 											<shiro:hasPermission name="teacher_update">
-												<a href="/admin/teacher/updateinit/${p.id }" class="btn btn-default">修改</a></th>
+	
+												 <a href="/admin/teacher/updateinit/${p.id }" class="layui-btn layui-btn-normal">修改</a></th>
+										  </th>
 										    </shiro:hasPermission>
 										</tr>
 				
 									</c:forEach>
-										<tr>
-						<td align="center" colspan="9">
-						<font face="微软雅黑" size="4px" color="blue">一共${page.pages}页</font> 
-							<a class="layui-btn"
-							href="/admin/teacher/list/${p.id}?page=${page.prePage}">上一页</a>
-							<a class="layui-btn"
-							href="/admin/teacher/list/${p.id}?page=${page.nextPage}">下一页</a>
-							</td>
-					</tr>
+					
+				                 	<tr>
+									<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<font face="微软雅黑" size="3px" color="black">当前第${page.pageNum }页</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/admin/teacher/list?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/admin/teacher/list?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/admin/teacher/list?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/admin/teacher/list?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
+								</tr>
 								</tbody>
 							</table>
 						</div>

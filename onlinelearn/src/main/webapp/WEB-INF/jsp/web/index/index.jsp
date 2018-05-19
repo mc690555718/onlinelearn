@@ -158,15 +158,15 @@
 				<div>
 					<article class="i-teacher-list">
 						<ul class="of">
- 							<c:forEach items="${teacherList}" var="teacher" varStatus="index"> 
+ 							<c:forEach items="${list}" var="teacher" varStatus="index"> 
  								<li> 
 									<section class="i-teach-wrap">
 										<div class="i-teach-pic"> 
 											<a href="${ctx}/front/teacher/${teacher.id}" title="${teacher.name}"> 
- 												<c:if test="${not empty teacher.picPath&&teacher.picPath!=''}"> 
-													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage%>${teacher.picPath}"> 
+ 												<c:if test="${not empty teacher.pic_path&&teacher.pic_path!=''}"> 
+													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-tea-img.gif" xsrc="<%=staticImage%>${teacher.pic_path}"> 
  												</c:if> 
- 												<c:if test="${empty teacher.picPath||teacher.picPath==''}"> 
+ 												<c:if test="${empty teacher.pic_path||teacher.pic_path==''}"> 
  													<img alt="${teacher.name}" src="${ctx}/static/inxweb/img/default-img.gif" xsrc="${ctx}/static/inxweb/img/default-img.gif"> 
  												</c:if> 
 											</a> 
@@ -178,7 +178,7 @@
 											<span class="fsize14 c-999">${teacher.education }</span>
 										</div> 
  										<div class="mt15 i-q-txt"> 
- 											<p class="c-999 f-fA">${teacher.career }</p> 
+ 											<p class="c-999 f-fA">${teacher.career}</p> 
  										</div> 
  									</section>
 								</li> 
@@ -186,6 +186,41 @@
 						</ul>
 						<div class="clear"></div>
 					</article>
+					
+				
+					
+					
+					           <tr>
+									<td align="center" colspan="9"><font face="微软雅黑"
+										size="3px" color="black">一共${page.pages}页</font> <font
+										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
+										<font face="微软雅黑" size="3px" color="black">当前第${page.pageNum }页</font>
+										<c:if test="${page.isFirstPage==true }">
+											<a class="layui-btn">首页</a>
+										</c:if> <c:if test="${page.isFirstPage==false }">
+											<a class="layui-btn"
+												href="/front/list?page=${page.firstPage}">首页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==true }">
+											<a class="layui-btn"
+												href="/front/list?page=${page.prePage}">上一页</a>
+										</c:if> <c:if test="${page.hasPreviousPage==false }">
+											<a class="layui-btn">上一页</a>
+										</c:if> <c:if test="${page.hasNextPage==true }">
+											<a class="layui-btn"
+												href="/front/list?page=${page.nextPage }">下一页</a>
+										</c:if> <c:if test="${page.hasNextPage==false }">
+											<a class="layui-btn">下一页</a>
+										</c:if> <c:if test="${page.isLastPage==false }">
+											<a class="layui-btn"
+												href="/front/list?page=${page.lastPage }">最后一页</a>
+										</c:if> <c:if test="${page.isLastPage==true }">
+											<a class="layui-btn">最后一页</a>
+										</c:if></td>
+								</tr>
+					
+					
+					
+					
 					<section class="tac pt20">
 						<a href="${ctx}/front/teacherlist" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
 					</section>

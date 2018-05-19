@@ -39,7 +39,7 @@ h3{margin:10px 0;}
 </head>
 <body>
 <section class="layui-larry-box">
-<form method="post" action="/statistics/stuLogin">
+<form method="post" action="/admin/statisticsPage/login">
 	<div class="larry-personal">
 	    <div class="layui-tab">
             <blockquote class="layui-elem-quote news_search">

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,12 +35,11 @@
 form {
 	height: 500px;
 }
-
 </style>
 </head>
 <body>
-
 <script type="text/javascript">
+
 var num = 0;
 var t1 = null;
 //一个上传动画定时器
@@ -58,21 +57,10 @@ function uploading(){
 	$("#upload_tittle").text(title);
 } 
 
-	$(function() {
-		
-		layui.use('form', function(){
-			var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
-		});
-		
-		layui.use('layer', function(){ //独立版的layer无需执行这一句
-			  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-		});
-		
-		//检测是否存在视频路径
-		var video_path = $("#video_url").val();
-		if(video_path != null && video_path.trim() != ""){
-			$("#upload_tittle").text("已存在视频文件");
-		}
+
+$(function(){
+	layui.use('form', function(){
+		var form = layui.form; //只有执行了这一步，部分表单元素才会修饰成功 
 		
 		//教师列表下拉框赋值
 		layui.use('form', function() {
@@ -84,18 +72,29 @@ function uploading(){
 									"<option value='"+msg[i].id+"' >"
 											+ msg[i].name + "</option>");
 						}
-						var teacher = ${kpoint.teacher_id};
-						$("#teacher_id").val(teacher);
-						form.render();
-					}, "json");
+				var teacher = ${kpoint.teacher_id};
+				$("#teacher_id").val(teacher);
+				form.render();
+			}, "json");
 		});
+	}); 
+	
+	layui.use('layer', function(){ //独立版的layer无需执行这一句
+		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+	});
+	
+	//检测是否存在视频路径
+	var video_path = $("#video_url").val();
+	if(video_path != null && video_path.trim() != ""){
+		$("#upload_tittle").text("已存在视频文件");
+	}
+	
+	//加载上传组件
+	layui.use('upload', function() {
 		
-			//加载上传组件
-		layui.use('upload', function() {
-			
-			var upload = layui.upload; //得到 upload 对象
-			  upload.render({
-				    elem: '#vedio_btn'//上传资源
+		var upload = layui.upload; //得到 upload 对象
+		  upload.render({
+			  elem: '#vedio_btn'//上传资源
 				    ,url: '/admin/cou/uploadVideo'
 				    ,auto: false//自动上传  取消
 				    ,accept: 'file' //普通文件
@@ -103,62 +102,47 @@ function uploading(){
 				    ,method:'post'
 				    ,size:'524288000'//kb
 				    ,bindAction: '#start_upload'//激活上传
-				    ,before : function(input) {
-				    	t1 = window.setInterval(uploading,200); 
-					}
-				    ,done: function(res){
-				    	window.clearInterval(t1);
-				    	$("#upload_tittle").css({"color":"green"});
-				    	$("#upload_tittle").text("上传成功");
-				    	$("#video_url").val(res.video_url);
-				    }
-				    ,error : function(){
-				    	window.clearInterval(t1);
-				    	$("#upload_tittle").css({"color":"red"});
-				    	$("#upload_tittle").text("上传失败");
-				    }
-			 });
-		});
-});
-
-	//重置按钮点击
-	function cleanText() {
-		$("#name").val("");
-		$("#sort").val("");
-		$("#play_time").val("");
-		$("#play_count").val("");
-		$("#is_free").val("");
-		$("#teacher_id").val("");
-	}
+			    ,before : function(input) {
+			    	t1 = window.setInterval(uploading,200); 
+				}
+			    ,done: function(res){
+			    	window.clearInterval(t1);
+			    	$("#upload_tittle").css({"color":"green"});
+			    	$("#upload_tittle").text("上传成功");
+			    	$("#video_url").val(res.video_url);
+			    }
+			    ,error : function(){
+			    	window.clearInterval(t1);
+			    	$("#upload_tittle").css({"color":"red"});
+			    	$("#upload_tittle").text("上传失败");
+			    }
+		 });
+	});
 	
-	//异步提交按钮,修改节点
-	function updateKpoint() {
-		
-		var freecheck = $("#free").is(":checked");
-		if (freecheck) {
-			$("#is_free").val(2);
-		} else {
-			$("#is_free").val(1);
-		}
+});
+	
 
-		$.ajax({
-			url : "/admin/cou/updateKpoint",
-			data : $('#kpointForm').serialize(),
-			dataType : "json",
-			success : function(data) {
-				parent.location.reload();
-			}
-		});
-	}
+//重置按钮点击
+function cleanText(){
+	    $("#name").val("");
+	    $("#sort").val("");
+	    $("#play_time").val("");
+	    $("#play_count").val("");
+	    $("#is_free").val("");
+	    $("#teacher_id").val("");
+}
+
+
 </script>
-
 	<form id="kpointForm" class="layui-form" action="" method="post">
-
+		<input type="hidden" id="kpoint_id" name="kpoint_id"
+			value="${kpoint.kpoint_id}" /> 
 		<input type="hidden" id="course_id" name="course_id"
-			value="${kpoint.course_id}" /> <input type="hidden" id="kpoint_id"
-			name="kpoint_id" value="${kpoint.kpoint_id}" />
+			value="${kpoint.course_id}" /> 
+		<input type="hidden" id="parent_id"
+			name="parent_id" value="${kpoint.parent_id}" />
 
-		<!-- 节点名称 -->
+				<!-- 节点名称 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">节点名称</label>
 			<div class="layui-input-inline">
@@ -201,7 +185,7 @@ function uploading(){
 			<label class="layui-form-label">播放时间</label>
 			<div class="layui-input-block">
 				<input type="text" name="play_time" id="play_time" 
-				autocomplete="off" class="layui-input" value="${kpoint.play_time }">
+				autocomplete="off" class="layui-input" value="${kpoint.play_time}">
 			</div>
 		</div>
 
@@ -313,7 +297,7 @@ function uploading(){
 	     }
 		
 		 $.ajax({
-   	      url:"/admin/cou/addKpoint",
+   	      url:"/admin/cou/updateKpoint",
     	     data:$('#kpointForm').serialize(),
         	 dataType:"json",
         	 success:function(data){
@@ -324,7 +308,6 @@ function uploading(){
 });
     	
     });
-
 	</script>
 </body>
 </html>

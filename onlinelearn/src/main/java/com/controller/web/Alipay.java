@@ -1,5 +1,7 @@
 package com.controller.web;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,9 +23,19 @@ public class Alipay {
 	private Course_purchaseService course_purchaseService;
 	
 	@RequestMapping("/Alipay/toindex")
-	public String toindex(Double courseprice,Model model){
+	public String toindex(Double courseprice,Model model,String coursename){
 		if(courseprice!=null){
 			model.addAttribute("courseprice",courseprice);
+		}
+		if(!"".equals(coursename)&&coursename!=null){
+			try {
+				coursename = new String(coursename .getBytes("iso8859-1"),"utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			} 
+			model.addAttribute("coursename",coursename);
+			
+			System.out.println(coursename);
 		}
 		return "Alipay/index";
 	}

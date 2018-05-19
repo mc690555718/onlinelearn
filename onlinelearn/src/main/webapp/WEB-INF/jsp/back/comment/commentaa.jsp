@@ -119,9 +119,9 @@ $("#te").text("123");
 										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
 										<td>
-												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
+												<a class="layui-btn layui-btn-danger" data-id="1"
 											href="/admin/cy/delete/${p.comment_id}"> <i
-												class="layui-icon"></i> 删除
+												class="layui-icon"></i> 
 										</a>
 										</td>
 									</tr> 

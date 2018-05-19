@@ -56,18 +56,25 @@ public class CouseNoseController {
 	private Course_purchaseService course_purchaseService;
 	@RequestMapping("/toCourseslist")
 	public String toCourseslist(Model model,EduCourse course){
+		//查询全部课程,此参数为模糊查询所用
 		model.addAttribute("courseList",conurseNoseService.listbyCourse(course));
+		//查询全部教师
 		model.addAttribute("teacherList",teacherNoseService.listbyTeacher());
+		//查询全部课程
 		model.addAttribute("subjectList",subjectNoseService.listbySubject());
 		return "web/course/courses-list";
 	}
 	@RequestMapping("/tocourseinfor")
 	public String tocourseinfor(Model model,int courseid){
+		//查询对应的课程详情,传入参数为课程Id
 		model.addAttribute("course",conurseNoseService.byIdcourse(courseid));
+		//查询对应的教师，传入参数为课程Id
 		model.addAttribute("teacherList",teacherNoseService.bysubjectTeacher(conurseNoseService.byIdcourse(courseid).getSubject_id()));
+		//查出对应的课程节点,传入参数为课程Id
 		model.addAttribute("parentKpointList",kpointNoseService.listbyKpoint(courseid));
 		return "web/course/course-infor";
 	}
+	//此方法现在无用
 	@RequestMapping("/comment/webcomment2")
 	public String comment2(Model model,int otherId){
 		Map m=new HashMap<>();
@@ -91,6 +98,7 @@ public class CouseNoseController {
 		System.out.println("进入了重新请求方法");
 		return "web/course/comment";
 	}
+	//课程子评论显示，现在用的是康骁的，无用
 	@RequestMapping("/article/webcomment1")
 	public String comment(Model model,int otherId){
 		Map m=new HashMap<>();
@@ -114,6 +122,7 @@ public class CouseNoseController {
 		System.out.println(listallCourseComment.size());
 		return "web/course/comment";
 	}
+	//用于检测是否对付费课程付费
 	@RequestMapping("/tovedioplay")
 	public String cheak(Model model,Course_purchase purchase,HttpSession session,HttpServletResponse response){
 		Edu_User edu_User=(Edu_User)session.getAttribute("login_success");
@@ -127,7 +136,7 @@ public class CouseNoseController {
 			return "redirect:/front/tovedioplay2?courseid="+purchase.getCourseId();
 		}
 	}
-	
+	//课程播放
 	@RequestMapping("/tovedioplay2")
 	public String tovedioplay(Model model,int courseid){
 		model.addAttribute("interfixCourse",conurseNoseService.byIdcourse(courseid));
@@ -175,6 +184,7 @@ public class CouseNoseController {
 		}
 		return "web/course/videocode";
 	}
+	//课程笔记初始添加
 	@RequestMapping("/courseNote/ajax/addnote")
 	@ResponseBody
 	public Result addnode(EduCourseNote courseNote,HttpSession session){
@@ -196,6 +206,7 @@ public class CouseNoseController {
 		result.setMessage("success");
 		return result;
 	}
+	//课程笔记修改保存
 	@RequestMapping("/courseNote/ajax/querynote")
 	@ResponseBody
 	public String querynode(EduCourseNote courseNote,HttpSession session){

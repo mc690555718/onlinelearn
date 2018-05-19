@@ -59,7 +59,7 @@
 				</c:if> <c:if test="${c.is_best==1 }">
 					是
 				</c:if></td>
-				<td><button class="layui-btn layui-btn-sm layui-btn-normal"
+				<td><button class="layui-btn layui-btn-danger"
 						onclick="del(${c.id },${c.questions.id })">
 						<i class="layui-icon"></i>
 					</button>

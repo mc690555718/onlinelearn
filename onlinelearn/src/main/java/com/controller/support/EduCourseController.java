@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -167,13 +168,15 @@ public class EduCourseController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="/addCourse",method=RequestMethod.POST)
-	public ModelAndView addCourse(ModelAndView mv,EduCourse course,String parent_id,
+	public ModelAndView addCourse(ModelAndView mv, EduCourse course,String parent_id,
 			String subject_id,String teacher_id,String endTime){
-				System.out.println(course);
-				System.out.println("parent_id :"+parent_id);
-				System.out.println("subject_id :"+subject_id);
-				System.out.println("teacher_id :"+teacher_id);
-				System.out.println("endTime :"+endTime);
+
+//		System.out.println(course);
+//		System.out.println("parent_id :"+parent_id);
+//		System.out.println("subject_id :"+subject_id);
+//		System.out.println("teacher_id :"+teacher_id);
+//		System.out.println("endTime :"+endTime);        
+      
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		//解析时间转换date写入课程
 		if (endTime != null && endTime.trim().length()!=0) {
@@ -205,7 +208,7 @@ public class EduCourseController {
 			e.printStackTrace();
 		}
 		
-		cs.add(course,teacher_id);
+//		cs.add(course,teacher_id);
 		mv.setViewName("redirect:/admin/cou/list");
 		return mv;
 	}
@@ -279,13 +282,13 @@ public class EduCourseController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="/updateCourse",method=RequestMethod.POST)
-	public ModelAndView updateCourse(ModelAndView mv,EduCourse course,String parent_id,
+	public ModelAndView updateCourse(ModelAndView mv, EduCourse course,String parent_id,
 			String subject_id,String teacher_id,String endTime){
-        System.out.println(course);
-        System.out.println("parent_id = "+parent_id);
-        System.out.println("subject_id = "+subject_id);
-        System.out.println("teacher_id = "+teacher_id);
-        System.out.println("endTime = "+endTime);
+//        System.out.println(course);
+//        System.out.println("parent_id = "+parent_id);
+//        System.out.println("subject_id = "+subject_id);
+//        System.out.println("teacher_id = "+teacher_id);
+//        System.out.println("endTime = "+endTime);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		//解析时间转换date写入课程
 		if (endTime != null && endTime.trim().length()!=0) {
@@ -317,11 +320,13 @@ public class EduCourseController {
 			e.printStackTrace();
 		}
 		
-		System.out.println(course);
-		cs.update(course,teacher_id);
+//		cs.update(course,teacher_id);
 		mv.setViewName("redirect:/admin/cou/list");
 		return mv;
 	}
+	
+	
+	
 	
 	/**
 	 * 根据id查询到 该课程的数据 跳转到       课程节点页面
@@ -376,7 +381,7 @@ public class EduCourseController {
 	public ModelAndView addKpointParent(ModelAndView mv,String name,String sort,String course_id){
 		EduCourseKpoint kpoint = new EduCourseKpoint();
 		if (name != null && name.trim().length() != 0) {
-			kpoint.setName(CharTool.setCharEncoding(name));
+			kpoint.setName(name);
 		}
 		if (sort != null && sort.trim().length() != 0) {
 			kpoint.setSort(Integer.valueOf(sort));
@@ -421,7 +426,13 @@ public class EduCourseController {
 	@ResponseBody
 	public int addKpoint(ModelAndView mv,EduCourseKpoint kpoint){
 		if (kpoint.getName() != null) {//修改编码格式
-			kpoint.setName(CharTool.setCharEncoding(kpoint.getName()));
+			kpoint.setName(kpoint.getName());
+		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			kpoint.setAdd_time(format.parse(format.format(new Date())));
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 		cs.addKpoint(kpoint);
 		return 0;

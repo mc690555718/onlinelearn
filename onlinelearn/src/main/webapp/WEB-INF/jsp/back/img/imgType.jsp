@@ -171,14 +171,14 @@
 										<td>${p.typeName}</td>
 										<td>
 										<shiro:hasPermission name="imgType_upd">
-										<a class="layui-btn layui-btn-mini"
+										<a 	class="layui-btn layui-btn-normal"
 											onclick="up('${p.typeName}','${p.typeId }')"><i
 												class="iconfont icon-edit"></i> 编辑</a> 
 												</shiro:hasPermission> 
 												<shiro:hasPermission name="imgType_del">
-												<a class="layui-btn layui-btn-danger layui-btn-mini" data-id="1"
+												<a class="layui-btn layui-btn-danger" data-id="1"
 											href="/admin/img/delete/${p.typeId}" ><i
-												class="layui-icon"></i> 删除</a>
+												class="layui-icon"></i> </a>
 											</shiro:hasPermission> 
 												</td>
 									</tr>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,6 +40,13 @@ td{
 }
 </style>
 <script type="text/javascript">
+
+    $(function(){
+    	layui.use('layer', function(){ //独立版的layer无需执行这一句
+  		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+  	    });
+    });
+
 	var setting = {
 		edit : {
 			enable : true
@@ -87,8 +95,20 @@ td{
 
 	//点击删除时触发，用来提示用户是否确定删除
 	function beforeRemove(treeId, treeNode) {
-		return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
-		$("#iframe_right").attr("src","");
+		
+		//若有权限,则取出权限隐藏域
+		var checkPermission = $("#deletePermission").val();
+		
+		if(checkPermission == "kpoint_del"){//是否有删除节点权限
+			var result = confirm("确认删除 节点 -- " + treeNode.name + " 吗？")
+			if(result){
+				$("#iframe_right").attr("src","");
+			}
+	    	return result;
+		}else{
+			layer.msg('权限不足,无法删除', {icon: 4});
+			return false;
+		}
 	}
 	
 	//编辑结束时触发，用来验证输入的数据是否符合要求
@@ -112,8 +132,8 @@ td{
 		if (tree.pId != null) {
 			pid = tree.pId;
 		}
-		$.post("/admin/cou/removeKpoint/" + treeNode.id + "/" + pid, function(
-				data) {
+		$.post("/admin/cou/removeKpoint/" + treeNode.id + "/" + pid, 
+				function(data) {
 			loadTree();
 		}, "json");
 	}
@@ -147,14 +167,14 @@ td{
 		var html = "     <div class='layui-form-item'>                                                            "
 			+ "     <label class='layui-form-label'>章节</label>                                                   "
 			+ "     <div class='layui-input-block'>                                                               "
-			+ "     <input type='text' name='name' id='name' required  lay-verify='required'                      "          
+			+ "     <input type='text' name='name' id='name'placeholder='请输入章节名称'                              "          
             + "          autocomplete='off' class='layui-input'>                                                  "
 			+ "     </div>                                                                                        "
 			+ "     </div>                                                                                        "  
 			+ "     <div class='layui-form-item'>                                                                 "
 			+ "     <label class='layui-form-label'>热度</label>                                                   "
 			+ "     <div class='layui-input-block'>                                                               "
-			+ "     <input type='text' name='sort' id='sort' required  lay-verify='required'                      "          
+			+ "     <input type='number' name='sort' id='sort'                                                    "          
             + "         placeholder='请输入热度数值' autocomplete='off' class='layui-input'>                          "
 			+ "     </div>                                                                                        "
 			+ "     </div>                                                                                        ";
@@ -172,12 +192,34 @@ td{
 		   btn : '确定',
 		   content : html,
 		   yes : function() {
-			   var subject_name = $("#subject_name").val();
+			   
 			   var sort = $("#sort").val();
 			   var name = $("#name").val();
-			   document.forms[0].action = "/admin/cou/addKpointParent?"
-					+ "name="+name+"&sort="+sort;
-			   document.forms[0].submit();
+			   
+			   if(name == null || name.trim().length == 0){
+				   layer.tips('请输入章节名', '#name');
+			   }else{
+				   var rule_name = /^[\u4E00-\u9FA5A-Za-z0-9]{2,10}$/;
+				   if(!rule_name.test(name)){
+					   layer.tips('请输入2-10长度的章节名称(不包括标点符号)', '#name');
+				   }else{
+					   if(sort == null || sort.trim().length == 0){
+						   layer.tips('请输入热度', '#sort');
+					   }else{
+						   var rule_sort = /^\d+$/;
+						   if(!rule_sort.test(sort)){
+							   layer.tips('热度值必须是正整数', '#sort');
+						   }else{
+							   
+							   document.forms[0].action = "/admin/cou/addKpointParent?"
+									+ "name="+name+"&sort="+sort;
+							   document.forms[0].submit();
+							   
+						   }
+					   }
+				   }
+			   }
+			   
 		   }
 	    });
     });	
@@ -217,30 +259,22 @@ td{
 				</tr>
 				<tr>
 					<td>
+					    <shiro:hasPermission name="kpoint_add">
 						<a href="javascript:;" class="layui-btn layui-btn-xs" onclick="addParentNode()">添加章节</a>
 						<a href="javascript:;" class="layui-btn layui-btn-xs" onclick="addKpointNode()">添加节点</a>
+						</shiro:hasPermission>
 					</td>
 				</tr>
 			</table>
 
+            <shiro:hasPermission name="kpoint_del">
+                <input type="hidden" id="deletePermission" name="deletePermission" value="kpoint_del">
+            </shiro:hasPermission>
 
 		</div>
 	</section>
 	<script type="text/javascript">
-		// 	layui.use('upload', function(){
-
-		// 		  layui.upload({
-		// 		    url: '/admin/cou/uploadImg'
-		// 		    ,elem: '#logo1' //指定原始元素，默认直接查找class="layui-upload-file"
-		// 		    ,method: 'post' //上传接口的http类型
-		// 		    ,success: function(res){
-		// 		    	$('#pic').attr('src', '../../../../'+res); 
-		// 		    }
-		// 		  });
-		// 		});
-
-		// 		//实例化编辑器
-		// 		var um = UM.getEditor("myEditor");
+		
 	</script>
 </body>
 </html>

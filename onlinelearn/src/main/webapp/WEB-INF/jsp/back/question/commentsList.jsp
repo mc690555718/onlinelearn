@@ -96,7 +96,7 @@
 				<td>${c.questions.praise_count }</td>
 				<td><fmt:formatDate value="${c.questions.add_time }"
 						type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-				<td><button class="layui-btn layui-btn-sm layui-btn-normal"
+				<td><button class="layui-btn layui-btn-danger"
 						onclick="del(${c.id })">
 						<i class="layui-icon"></i>
 					</button>

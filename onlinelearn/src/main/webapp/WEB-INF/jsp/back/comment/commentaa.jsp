@@ -28,6 +28,18 @@ select{width:250px;}
 	font-family: "微软雅黑";
 	size: 10px;
 }
+
+#ca {  
+    width:150px;  
+    overflow:hidden;  
+    white-space:nowrap;  
+    text-overflow:ellipsis;  
+    -o-text-overflow:ellipsis;  
+    -icab-text-overflow: ellipsis;  
+    -khtml-text-overflow: ellipsis;  
+    -moz-text-overflow: ellipsis;  
+    -webkit-text-overflow: ellipsis;  
+} 
 </style>
 
 <script type="text/javascript">
@@ -42,8 +54,9 @@ $("#te").text("123");
 		<div class="larry-personal-body clearfix">
 		
 			<form class="layui-form col-lg-5" action="" method="post">
+					<%--
 			<input type="text"  name="comment_id" value="${list.comment_id}" hidden="hidden"/>
-			
+	 
 				<div class="layui-form-item">
 					<label class="layui-form-label">类型:</label>
 					<div class="layui-input-block">
@@ -56,24 +69,77 @@ $("#te").text("123");
 					</div>
 				</div>
 				
-				<div class="layui-form-item">
+				 <div class="layui-form-item">
 					<label class="layui-form-label">评论内容:</label>
 					<div class="layui-input-block">
 					<textarea rows="60" cols="50"  readonly="readonly">${list.content}</textarea>
 					</div>
-				</div>
+				</div> 
 				
 				<div class="layui-form-item">
 					<label class="layui-form-label">父级评论内容:</label>
 					<div class="layui-input-block">
 					<textarea rows="60" cols="50" readonly="readonly">${coment.content}</textarea>
 					</div>
-				</div>
+				</div> --%>
 				
-				<div class="layui-form-item">
+			
+		
+		
+		
+		
+					<div class="layui-tab-item layui-field-box layui-show">
+						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
+						
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>邮件</th>
+									<th>类型</th>
+									<th>点赞</th>
+									<th>回复</th>
+									<th>创建时间</th>
+									<th>回复内容</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<c:forEach items="${list}" var="p" varStatus="stat">
+									<tr>
+										<td>${stat.index+1}</td>
+										<td>${p.user.email }</td>
+										<td><c:if test="${p.type==2}">
+			                                                                                                     课程
+			                           	</c:if> <c:if test="${p.type==1}">
+				                                                                                        文章
+				                        </c:if></td>
+										<td>${p.praise_count}</td>
+										<td>${p.reply_count}</td>
+										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
+										<td><div id="ca" title="${p.content}">${p.content}</div>
+										<td>
+												<a class="layui-btn layui-btn-danger" data-id="1"
+											href="/admin/cy/delete/${p.comment_id}"> <i
+												class="layui-icon"></i> 
+										</a>
+										</td>
+									</tr> 
+								</c:forEach>
+						
+						</table>
+					</div>
+		
+		
+		
+		
+		
+			<div class="layui-form-item">
 					<div class="layui-input-block">
 				    <button type="button"  class="btn btn-default" ><a href="/admin/cy/listcomment" id="a1">返回</a></button>
 					</div>
+		
+	
 		
 				
 			</form>

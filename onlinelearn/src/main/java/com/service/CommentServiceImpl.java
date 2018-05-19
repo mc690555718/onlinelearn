@@ -67,10 +67,12 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment selectId(int comment_id) {
-	Comment  list=CommentMapper.selectId(comment_id);
-		return list;
+	public List<Comment> selectId(int comment_id) {
+		List<Comment> lists=CommentMapper.selectId(comment_id);
+		return lists;
 	}
+
+
 
 
 

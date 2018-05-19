@@ -99,11 +99,11 @@
 				<td>${q.praise_count }</td>
 				<td><fmt:formatDate value="${q.add_time }" type="date"
 						pattern="yyyy-MM-dd hh:mm:ss" /></td>
-				<td><button class="layui-btn layui-btn-sm layui-btn-normal"
+				<td><button class="layui-btn layui-btn-danger"
 						onclick="del(${q.id })">
 						<i class="layui-icon"></i>
 					</button>
-					<button class="layui-btn layui-btn-xs" onclick="getById(${q.id })">查看回复</button></td>
+					<button class="layui-btn layui-btn-sm layui-btn-normal" onclick="getById(${q.id })">查看回复</button></td>
 			</tr>
 		</c:forEach>
 		<tr>

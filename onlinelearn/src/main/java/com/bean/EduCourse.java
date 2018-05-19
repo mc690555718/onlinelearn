@@ -115,16 +115,13 @@ public class EduCourse {
 	public double getSource_price() {
 		return source_price;
 	}
-	public void setSource_price(int source_price) {
+	public void setSource_price(double source_price) {
 		this.source_price = source_price;
 	}
 	public double getCurrent_price() {
 		return current_price;
 	}
 	public void setCurrent_price(double current_price) {
-		this.current_price = current_price;
-	}
-	public void setCurrent_price(int current_price) {
 		this.current_price = current_price;
 	}
 	public String getTitle() {

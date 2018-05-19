@@ -202,13 +202,13 @@
 										<td>${p.imgType.typeName}</td>
 										<td>${p.seriesNumber}</td>
 										<td><shiro:hasPermission name="img_update">
-												<a class="layui-btn layui-btn-mini"
+												<a 	class="layui-btn layui-btn-normal"
 													href="/admin/hello/getById/${p.imageId}"><i
 													class="iconfont icon-edit"></i> 编辑</a>
 											</shiro:hasPermission> <shiro:hasPermission name="img_del">
-												<a class="layui-btn layui-btn-danger layui-btn-mini"
+												<a class="layui-btn layui-btn-danger"
 													data-id="1" href="/admin/hello/delete/${p.imageId}"><i
-													class="layui-icon"></i> 删除</a>
+													class="layui-icon"></i> </a>
 											</shiro:hasPermission></td>
 									</tr>
 								</c:forEach>

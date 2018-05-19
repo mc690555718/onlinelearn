@@ -113,11 +113,12 @@
 										</shiro:hasPermission>
 										<shiro:hasPermission name="article_del">
 										<a href="/admin/article/delete?article_id=${a.article_id }"
-											class="btn btn-default ">删除</a>
+											class="layui-btn layui-btn-danger">
+											<i class="layui-icon"></i></a>
 										</shiro:hasPermission>
 											<shiro:hasPermission name="article_update">
 											<a href="/admin/article/updateValue?article_id=${a.article_id }"
-											class="btn btn-default">修改</a>
+											class="layui-btn layui-btn-normal">修改</a>
 											</shiro:hasPermission>
 											</td>
 									</tr>

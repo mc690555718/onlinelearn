@@ -44,8 +44,8 @@
 	<delete id="detele" parameterType="int">
 		delete from edu_comment where comment_id=#{value}
 	</delete>
-  <select id="selectId" parameterType="int" resultType="Comment">
-  select * from edu_comment c,edu_user u where comment_id=#{comment_id} and c.USER_ID=u.USER_ID
+  <select id="selectId" parameterType="int" resultType="Comment" resultMap="CommentMap" >
+SELECT * from edu_comment WHERE comment_id= (SELECT p_comment_id from edu_comment WHERE comment_id =#{comment_id})  
    </select>
 
   <select id="getById" parameterType="int" resultMap="CommentMap" >

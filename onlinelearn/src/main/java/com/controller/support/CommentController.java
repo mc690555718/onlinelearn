@@ -104,11 +104,11 @@ public String to(){
 	    public ModelAndView All(@PathVariable("comment_id")int comment_id) {
 		   System.out.println("comment:"+comment_id);
 	    	ModelAndView mv = new ModelAndView();
-	    	Comment list = commentService.getById(comment_id);
-	        Comment comment = commentService.selectId(comment_id);
+//	    	Comment list = commentService.getById(comment_id);
+	        List<Comment> list = commentService.selectId(comment_id);
 	    	mv.setViewName("/back/comment/commentaa");
+//	    	mv.addObject("list",list);
 	    	mv.addObject("list",list);
-	    	mv.addObject("comment",comment);
 			return mv;
 		}
 	

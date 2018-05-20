@@ -37,7 +37,7 @@
 						<div class="layui-inline">
 							<div class="layui-input-inline">
 								<input value="" placeholder="请输入关键字"
-									class="layui-input search_input" type="text" name="qname">
+									class="layui-input search_input" type="text" id="qname" name="qname" value="">
 							</div>
 							<a id="btn_search" class="layui-btn">查询</a>
 							<shiro:hasPermission name="user_create">
@@ -109,6 +109,9 @@
 								</tr>
 							</tbody>
 						</table>
+						<div class="larry-table-page clearfix">
+							<div id="page" class="page"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -120,6 +123,16 @@
 		$(function(){
 			layui.use('layer', function(){ //独立版的layer无需执行这一句
 				  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+			});
+			
+			layui.use('form', function(){
+				  var form = layui.form;
+				  
+				  //搜索框定值
+				  var query_text = "${qname}"; 
+				  $("#qname").val(query_text);
+				  
+				  form.render();
 			});
 			
 			//提交
@@ -184,6 +197,32 @@
 				});
 	        });
 		}
+		
+		layui.use(['jquery','layer','element','laypage'],function(){
+		      window.jQuery = window.$ = layui.jquery;
+		      window.layer = layui.layer;
+	          var element = layui.element(),
+	              laypage = layui.laypage;
+
+	            
+	          laypage({
+					cont: 'page',
+					pages: '${info.pages}' , //总页数
+					curr: '${info.pageNum}',
+					first: 1,
+					last: '${info.pages}',
+					groups: 5 ,    //连续显示分页数
+					jump: function(obj, first) {
+						//得到了当前页，用于向服务端请求对应数据
+						var curr = obj.curr;
+						if(!first) {
+							//layer.msg('第 '+ obj.curr +' 页');
+							document.forms[0].action="/admin/sysuser/userlist?currentPage="+curr;
+							document.forms[0].submit();
+						}
+					}
+				});
+	    });
 	</script>
 </body>
 </html>

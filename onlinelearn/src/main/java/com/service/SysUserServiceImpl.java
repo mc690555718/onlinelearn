@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.bean.SysFunction;
 import com.bean.SysUser;
 import com.mapper.SysUserMapper;
+import com.util.CharTool;
 import com.util.Encryption;
 
 @Service

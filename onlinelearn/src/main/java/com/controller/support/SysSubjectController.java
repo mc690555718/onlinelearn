@@ -1,14 +1,20 @@
 package com.controller.support;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bean.EduCourse;
 import com.bean.SysSubject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.SysSubjectService;
 import com.util.CharTool;
 
@@ -62,17 +68,27 @@ public class SysSubjectController {
 	
 	
 	@RequestMapping("/toSubjectList")
-	public ModelAndView toSubjectList(ModelAndView mv,String qname,String parent_id,String check){
+	public ModelAndView toSubjectList(ModelAndView mv,String qname,String parent_id,String check
+			,@RequestParam(required=true,defaultValue="1")Integer currentPage){
+		//设置每页显示10调数据
+		PageHelper.startPage(currentPage, 10);
 		Map< Object, Object> map = new HashMap<>();
 		if (qname != null && qname.trim().length() != 0) {
 			map.put("qname", qname);
+			mv.addObject("qname", qname);
 		}
 		if (parent_id != null && parent_id.trim().length() != 0) {
 			if (Integer.parseInt(parent_id) >= 0) {
 				map.put("parent_id", Integer.valueOf(parent_id));
+				mv.addObject("parentId", parent_id);
 			}
 		}
-		mv.addObject("subjects",ss.query(map));
+		List<SysSubject> subjects = ss.query(map);
+		//将数据加载为页面信息
+		PageInfo<SysSubject> info = new PageInfo<>(subjects);
+		//分页信息加入mv
+		mv.addObject("info", info);
+		mv.addObject("subjects",subjects);
 		mv.addObject("subs",ss.queryParent(null));
 		mv.setViewName("/back/subject/listSubject");
 		return mv;

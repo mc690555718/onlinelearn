@@ -31,7 +31,7 @@
 					<blockquote class="layui-elem-quote news_search">
 						<div class="layui-inline">
 							<div class="layui-input-inline">
-								<input value="" placeholder="请输入关键字"
+								<input value="" placeholder="请输入关键字" id="qname"
 									class="layui-input search_input" type="text" name="qname">
 							</div>
 							<div class="layui-input-inline">
@@ -100,6 +100,9 @@
 									</tr>
 								</tbody>
 							</table>
+							<div class="larry-table-page clearfix">
+							   <div id="page" class="page"></div>
+						    </div>
 						</div>
 					</div>
 				</div>
@@ -109,7 +112,16 @@
 		<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 		<script type="text/javascript">
 			$(function() {
-
+				
+				var qname = "${qname}";
+				$("#qname").val(qname);
+				var parentId = "${parentId}";
+				if(parentId != null && parentId.trim().length != 0){
+					$("#parent_id").val(parentId);
+				}
+				
+				
+                //查询按钮点击时间
 				$("#btn_search").click(function() {
 					document.forms[0].action = "/admin/subj/toSubjectList";
 					document.forms[0].submit();
@@ -254,6 +266,32 @@
 					$("#parentId option[value='"+subject_id+"']").remove();  
 				}, "json");
 			}
+			
+			layui.use(['jquery','layer','element','laypage'],function(){
+			      window.jQuery = window.$ = layui.jquery;
+			      window.layer = layui.layer;
+		          var element = layui.element(),
+		              laypage = layui.laypage;
+
+		            
+		          laypage({
+						cont: 'page',
+						pages: '${info.pages}' , //总页数
+						curr: '${info.pageNum}',
+						first: 1,
+						last: '${info.pages}',
+						groups: 5 ,    //连续显示分页数
+						jump: function(obj, first) {
+							//得到了当前页，用于向服务端请求对应数据
+							var curr = obj.curr;
+							if(!first) {
+								//layer.msg('第 '+ obj.curr +' 页');
+								document.forms[0].action="/admin/subj/toSubjectList?currentPage="+curr;
+								document.forms[0].submit();
+							}
+						}
+					});
+		    });
 			
 		</script>
 	</form>

@@ -174,6 +174,24 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 	</section>
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
 	<script type="text/javascript">
+	//高级检索定值
+    $(function(){
+
+        $("#qname").val("${qname}");
+        $("#add_time").val("${add_time}");
+        $("#end_time").val("${end_time}");
+        var subId = "${subject_id}";
+        var alive = "${is_avaliable}";
+        if(subId != null && subId.trim().length != 0){
+        	$("#subject_id").val(subId);
+        }
+        
+        if(alive != null && alive.trim().length != 0){
+        	$("#is_avaliable").val(alive);
+        }
+        
+    });
+	
 	layui.use(['jquery','layer','element','laypage'],function(){
 	      window.jQuery = window.$ = layui.jquery;
 	      window.layer = layui.layer;
@@ -197,18 +215,6 @@ String basePath=request.getScheme()+"://"+request.getServerName()+":" +request.g
 				}
 			});
 
-//           laypage({
-// 					cont: 'page2',
-// 					pages: 10 //总页数,
-// 					groups: 5 //连续显示分页数,
-// 					jump: function(obj, first) {
-// 						//得到了当前页，用于向服务端请求对应数据
-// 						var curr = obj.curr;
-// 						if(!first) {
-// 							//layer.msg('第 '+ obj.curr +' 页');
-// 						}
-// 					}
-// 				});
     });
 </script>
 </body>

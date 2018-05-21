@@ -7,7 +7,6 @@ function updateUserInfo(){
 	$("#updateForm input,#updateForm select").each(function(){
 		params+=$(this).serialize()+"&";
     });
-	alert(params);
 	$.ajax({
 		url:baselocation+'/uc/updateUser',
 		type:'post',
@@ -153,11 +152,48 @@ function uploadImg(btnid,fieldName){
 	});
 }
 
+
+
 /**
  * 修改用户图片
  * @param userId 用户ID
  */
 function updateImg(userId) {
+	  var formData = new FormData($("#form1")[0]);
+	  formData.append('file', $("#fileupload")[0].files[0]);  
+			$.ajax({
+				url : baselocation+"/uc/updateImg",
+				type: 'POST',
+				   data: formData,  
+			          async: false,  
+			          cache: false,  
+			          contentType: false,  
+			          processData: false,
+				success : function(result) {
+					if(result.success==true){
+						document.location='/uc/initUpdateUser/1';
+					}else{
+						if(result.massage=='1'){
+							dialog('提示信息','图片格式有误',1);
+						}
+						if(result.massage=='2'){
+							dialog('提示信息','请选择图片',1);
+						}
+					}
+				},
+				error : function(ex) {
+					dialog('提示信息','系统繁忙，请稍后再操作！',1);
+				}
+			});
+}
+
+
+
+/**
+ * 修改用户图片
+ * @param userId 用户ID
+ */
+/*function updateImg(userId) {
 	var path = $("#photoPath").val();
 	if (path==null || path=='') {
 		$("#save_message").html('<em class="icon16 u-a-cw">&nbsp;</em><q class="c-orange vam">请上传您要修改的图片</q>');
@@ -188,7 +224,7 @@ function updateImg(userId) {
 			});
 		}
 	);
-}
+}*/
 
 /**
  * 编辑图片

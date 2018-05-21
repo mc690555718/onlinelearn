@@ -35,7 +35,6 @@ public class LoginController {
 			return result;
 		}
 		pwd = Encryption.encryptionByMD5(email, pwd);
-		System.out.println(pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
 		if (edu_User==null) {

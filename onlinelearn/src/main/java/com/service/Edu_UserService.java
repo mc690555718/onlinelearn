@@ -14,5 +14,6 @@ public interface Edu_UserService {
 	 public Edu_User getPwd(String email);
 	 public void updatepwd(Edu_User edu_User);
 	 public void updateUser(Edu_User edu_User);
+	 public void updateImg(Edu_User edu_User);
 
 }

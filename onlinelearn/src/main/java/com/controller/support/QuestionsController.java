@@ -74,8 +74,8 @@ public class QuestionsController {
 		return map;
 	}
 
-	@RequestMapping("/delete/{id}")
-	public String delete(@PathVariable("id")int id) {
+	@RequestMapping("/delete/{id}/{page}")
+	public String delete(@PathVariable("id")int id,@PathVariable("page")int page) {
 		questionsService.delete(id);
 		Questions questions = new Questions();
 		questions.setId(id);
@@ -94,6 +94,6 @@ public class QuestionsController {
 			}
 		}
 		questions_commentService.deleteAll(comment);
-		return "redirect:/admin/questions/listAll";
+		return "redirect:/admin/questions/listAll?page="+page;
 	}
 }

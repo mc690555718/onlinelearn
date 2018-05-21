@@ -142,10 +142,10 @@ if("${type}"==null || "${type}"==''|| "${type}"==""){
 	$("#title").val("${title}");
 	$("#start").val("${start}");
 	$("#end").val("${end}");
-	function del(id){
-		location.href = "/admin/questions/delete/"+id;
-	}
 	var page = ${pageNum};
+	function del(id){
+		location.href = "/admin/questions/delete/"+id+"/"+page;
+	}
 	function getById(id){
 		location.href = "/admin/questions_comment/getById1?id="+id+"&pageNum="+page; 
 	}

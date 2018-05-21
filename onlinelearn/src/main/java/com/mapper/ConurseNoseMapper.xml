@@ -34,4 +34,19 @@ update edu_course_note set CONTENT=#{content} where user_id = #{userId}
   select * from edu_course_note where user_id = #{userId}
    and COURSE_ID=#{courseId} and KPOINT_ID = #{kpointId}
   </select>
+  
+  <select id="listCourses" parameterType="java.util.Map" resultType="com.bean.EduCourse">
+  select a.* from edu_course a left join sys_subject b on a.subject_id=b.subject_id
+  left join edu_teacher c on b.subject_id=c.subject_id where 0=0
+      <if test="current_price!=null ">
+           and a.current_price=#{current_price}
+      </if>
+  </select>
+  
+  <select id="getFavoriteCourse" parameterType="int" resultType="com.bean.EduCourse">
+      select * from edu_course where course_id in (
+          select course_id from edu_course_favorites where user_id = #{value}
+      )
+  </select>
+  
  </mapper>

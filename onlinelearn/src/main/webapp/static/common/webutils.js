@@ -195,7 +195,7 @@ function webImageUpload(btnId,param,callback){
  */
 function deleteFile(filePath){
 	$.ajax({
-		url:baselocation+'/image/deletefile',
+		url:baselocation+'/front/image/deletefile',
 		type:'post',
 		data:{'filePath':filePath},
 		dataType:'json',

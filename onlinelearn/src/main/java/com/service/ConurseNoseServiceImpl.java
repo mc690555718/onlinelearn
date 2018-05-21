@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,19 @@ public class ConurseNoseServiceImpl implements ConurseNoseService{
 
 	public EduCourseNote querynode(EduCourseNote courseNote) {
 		return conurseNoseMapper.querynode(courseNote);
+	}
+
+	@Override
+	public List<EduCourse> listCourses(Map<Object, Object> map) {
+		System.out.println(map.get("current_price"));
+		return conurseNoseMapper.listCourses(map);
+	}
+
+	@Override
+	public List<EduCourse> getFavoriteCourse(int user_id) {
+		if (user_id > 0) {
+			return conurseNoseMapper.getFavoriteCourse(user_id);
+		}
+		return null;
 	}
 }

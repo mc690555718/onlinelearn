@@ -29,7 +29,7 @@ var lodingHtml = '<div class="tac"><img width="100" height="108" alt="" src="/st
 //为你推荐    换一换
 function huanyihuan() {
 	$.ajax({
-		url : baselocation + "/index/ajax/huanyihuan",
+		url : baselocation + "/front/index/ajax/huanyihuan",
 		type : 'post',
 		dataType : 'text',
 		beforeSend:function(){
@@ -47,7 +47,7 @@ function huanyihuan() {
 //精品、最新、全部课程
 function bna(type,obj) {
 	$.ajax({
-		url : baselocation + "/index/ajax/bna",
+		url : baselocation + "/front/index/ajax/bna",
 		data : {
 			"order" : type
 		},
@@ -69,7 +69,7 @@ function bna(type,obj) {
 //学生动态
 function studentDynamic() {
 	$.ajax({
-		url :baselocation +  "/index/ajax/studentDynamic",
+		url :baselocation +  "/front/index/ajax/studentDynamic",
 		data : {
 		},
 		type : 'post',

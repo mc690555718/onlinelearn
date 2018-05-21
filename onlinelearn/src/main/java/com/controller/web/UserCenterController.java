@@ -1,7 +1,9 @@
 package com.controller.web;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bean.EduCourse;
 import com.bean.Edu_User;
 import com.bean.Questions;
 import com.bean.Questions_comment;
+import com.service.ConurseNoseService;
 import com.service.Edu_UserService;
 import com.service.QuestionsService;
 import com.service.Questions_commentService;
@@ -34,6 +38,8 @@ public class UserCenterController {
 	private QuestionsService questionsService;
     @Autowired
     private Questions_commentService questions_commentService;
+    @Autowired
+    private ConurseNoseService conurseNoseService;
 
 
 	@RequestMapping("/index")
@@ -173,6 +179,31 @@ public class UserCenterController {
             result.setSuccess(true);
 		}
 		return result;
+	}
+	
+	
+	@RequestMapping("/freeCourseList")
+	public ModelAndView freeCourseList(ModelAndView mv){
+		//课程当前价格为0,则为免费
+		int current_price = 0;
+		Map< Object, Object> map = new HashMap<>();
+		map.put("current_price", current_price);
+		mv.addObject("courseList", conurseNoseService.listCourses(map));
+		mv.setViewName("/web/ucenter/uc_freecourse");
+		return mv;
+	}
+	
+	
+	@RequestMapping("/myFavorites")
+	public ModelAndView myFavorites(ModelAndView mv,HttpSession session){
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		System.out.println(user.getUser_id());
+		List<EduCourse> courses = conurseNoseService.getFavoriteCourse(user.getUser_id());
+		System.out.println(courses);
+		mv.addObject("favoriteList", courses);
+		mv.addObject("user_id", user.getUser_id());
+		mv.setViewName("/web/ucenter/favourite_course_list");
+		return mv;
 	}
 
 }

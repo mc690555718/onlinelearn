@@ -110,7 +110,7 @@ function addComment() {
 function queryCommentReplyPage(pCommentId) {
 	//ajaxPage("/web/comment/ajax/commentreplypage", "&otherId=" + otherId + "&pCommentId=" + pCommentId , 1, dialog("评论列表",result,5));
 	$.ajax({
-		url : baselocation + '/web/comment/ajax/commentreplypage',
+		url : baselocation + '/front/web/comment/ajax/commentreplypage',
 		data : {
 			"otherId" : otherId,
 			"pCommentId" : pCommentId

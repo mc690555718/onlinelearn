@@ -12,7 +12,7 @@
 			<div>
 				<section class="c-infor-tabTitle c-tab-title">
 					<a href="javascript: void(0)" title="Wo的课程" style="cursor: default;">免费课程</a>
-					<a href="${ctx }/uc/freeCourseList" title="免费课程" class="current">免费</a>
+					<a href="javascript: void(0)" title="免费课程" class="current">免费</a>
 				</section>
 			</div>
 			<div class="mt40">
@@ -28,44 +28,40 @@
 					<div class="u-course-list">
 						<article class="comm-course-list">
 							<ul class="clearfix">
+							
 								<c:forEach items="${courseList}" var="course">
 									<li>
 										<div class="cc-l-wrap">
 											<section class="course-img">
 												<c:choose>
 													<c:when test="${not empty course.logo}">
-														<img src="<%=staticImage%>${course.logo}" class="img-responsive" alt="${course.courseName}" />
+														<img src="<%=staticImage%>${course.logo}" class="img-responsive" alt="${course.course_name}" />
 													</c:when>
 													<c:otherwise>
-														<img src="${ctx}/static/inxweb/img/default-img.gif" class="img-responsive" alt="${course.courseName}" />
+														<img src="${ctx}/static/inxweb/img/default-img.gif" class="img-responsive" alt="${course.course_name}" />
 													</c:otherwise>
 												</c:choose>
 												<div class="cc-mask">
-													<a href="${ctx}/uc/play/${course.courseId}" title="" class="comm-btn c-btn-1">继续学习</a>
+													<a href="${ctx}/front/tocourseinfor?courseid=${course.course_id}" title="" class="comm-btn c-btn-1">继续学习</a>
 												</div>
 											</section>
 											<h3 class="hLh30 txtOf mt10">
-												<a href="${ctx}/uc/play/${course.courseId}" title="${course.courseName}" class="course-title fsize18 c-333">${course.courseName}</a>
+												<a href="${ctx}/front/tocourseinfor?courseid=${course.course_id}" title="${course.course_name}" class="course-title fsize18 c-333">${course.course_name}</a>
 											</h3>
-											<section class="mt10 of">
-												<div class="time-bar-wrap">
-													<div class="lev-num-wrap" title="已学${course.studyPercent}%">
-														<aside class='lev-num-bar <c:if test="${course.studyPercent>=100}">bg-orange</c:if> <c:if test="${course.studyPercent<100}">bg-green</c:if>' style="width: ${course.studyPercent}%;"></aside>
-														<span class="lev-num"><big>${course.studyPercent}%</big>/<small>100%</small></span>
-													</div>
-												</div>
-											</section>
+<!-- 											<section class="mt10 of"> -->
+<!-- 												<div class="time-bar-wrap"> -->
+<%-- 													<div class="lev-num-wrap" title="已学${course.studyPercent}%"> --%>
+<%-- 														<aside class='lev-num-bar <c:if test="${course.studyPercent>=100}">bg-orange</c:if> <c:if test="${course.studyPercent<100}">bg-green</c:if>' style="width: ${course.studyPercent}%;"></aside> --%>
+<%-- 														<span class="lev-num"><big>${course.studyPercent}%</big>/<small>100%</small></span> --%>
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</section> -->
 										</div>
 									</li>
 								</c:forEach>
+								
 							</ul>
 						</article>
-						<!-- 公共分页 开始 -->
-						<jsp:include page="/WEB-INF/jsp/common/front_page.jsp" />
-						<!-- 公共分页 结束 -->
-						<form method="post" id="searchForm" action="${ctx}/uc/freeCourseList">
-							<input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" />
-						</form>
 					</div>
 				</c:if>
 			</div>

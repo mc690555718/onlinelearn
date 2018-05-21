@@ -61,10 +61,10 @@
 										<dt>
 											<section class="tar">
 												<p class="hLh30">
-													<b class="fsize14 f-fA c-red"><fmt:formatDate type="both" value="${favorite.addTime }" pattern="yyyy年" /></b>
+													<b class="fsize14 f-fA c-red"><fmt:formatDate type="both" value="${favorite.add_time }" pattern="yyyy年" /></b>
 												</p>
 												<p class="hLh20">
-													<span class="f-fA c-666"><fmt:formatDate type="both" value="${favorite.addTime }" pattern="MM月dd日 HH:mm" /></span>
+													<span class="f-fA c-666"><fmt:formatDate type="both" value="${favorite.add_time }" pattern="MM月dd日 HH:mm" /></span>
 												</p>
 												<p class="hLh20">
 													<span class="f-fA c-999">收藏</span>
@@ -78,7 +78,7 @@
 														<label class="hand"><input type="checkbox" style="vertical-align: -2px;" name="favouriteId" value="${favorite.favouriteId}"></label> <br>
 														<a href="${ctx}/uc/deleteFaveorite/${favorite.favouriteId}" title="" class="c-blue">取消收藏</a>
 													</div>
-													<a href="${ctx }/front/couinfo/${favorite.courseId }" title="">
+													<a href="${ctx }/front/couinfo/${favorite.course_id }" title="">
 														<c:choose>
 															<c:when test="${not empty favorite.logo }">
 																<img src="<%=staticImage %>${favorite.logo}" width="120" alt="">
@@ -90,7 +90,7 @@
 													</a>
 												</div>
 												<div class="hLh30 txtOf">
-													<a href="${ctx }/front/couinfo/${favorite.courseId }" class="c-666 fsize14">${favorite.courseName }</a>
+													<a href="${ctx }/front/couinfo/${favorite.course_id }" class="c-666 fsize14">${favorite.course_name }</a>
 												</div>
 											</section>
 										</dd>

@@ -72,7 +72,7 @@ function changeThemeColor(color){
 	$(".dialog-box-boy-in").find("div").removeClass("current");
 	$("#themeColor"+color).addClass("current");
 	$.ajax({
-		url :baselocation +  "/theme/ajax/update",
+		url :baselocation +  "/front/theme/ajax/update",
 		data : {
 			"color":color
 		},

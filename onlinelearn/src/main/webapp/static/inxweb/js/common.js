@@ -285,7 +285,7 @@ function queryUnReadNum(){
 	$.ajax({
 		type : "POST",
 		dataType : "json",
-		url:baselocation+"/uc/ajax/queryUnReadLetter",
+		url:baselocation+"/front/uc/ajax/queryUnReadLetter",
 		cache : true,
 		async : true,
 		success : function(result) {
@@ -596,7 +596,7 @@ function getCourseLearnedUser(courseId){
 	$.ajax({
 		type : "POST",
 		dataType : "json",
-		url:baselocation+"/couserStudyHistory/ajax/courseLearnedUser/"+courseId,
+		url:baselocation+"/front/couserStudyHistory/ajax/courseLearnedUser/"+courseId,
 		cache : true,
 		async : false,
 		success : function(result) {

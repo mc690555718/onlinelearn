@@ -65,9 +65,8 @@ public class Edu_Emailesend_HistoryController {
 		String email = request.getParameter("email");
 		String type = request.getParameter("type");
 		if (type!=null&&type.trim().length()!=0) {
-			int type2 = Integer.parseInt(type);
-			request.setAttribute("type",type2);
-			map.put("type",type2);
+			request.setAttribute("type",Integer.valueOf(type));
+			map.put("type",Integer.valueOf(type));
 		}
 		if (email!=null) {
 			request.setAttribute("email", email);

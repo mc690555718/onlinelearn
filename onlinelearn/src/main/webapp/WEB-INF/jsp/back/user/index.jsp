@@ -118,13 +118,13 @@ function xiugai(id) {
 			<form action="" method="post">
 				<div class="layui-inline">
 					<div class="layui-input-inline">
-						<input value="" placeholder="请输入关键字"
-							class="layui-input search_inupt " type="text" name="name">
+						<input value="${name }" placeholder="请输入关键字" 
+							class="layui-input search_inupt " type="text" name="name" >
 					</div>
 					<span>状态查询</span> <select class="layui-select" name="type">
-						<option value="-1">--请选择--</option>
-						<option value="1">正常</option>
-						<option value="2">冻结</option>
+						<option value="0" <c:if test="${type==0 }">selected</c:if>>--请选择--</option>
+						<option value="1" <c:if test="${type==1 }">selected</c:if>>正常</option>
+						<option value="2" <c:if test="${type==2 }">selected</c:if>>冻结</option>
 
 					</select>
 
@@ -132,14 +132,14 @@ function xiugai(id) {
 						<label class="layui-inline">开始时间:</label>
 						<div class="layui-input-inline">
 							<input class="Wdate layui-input" type="text"
-								onClick="WdatePicker()" name="start" />
+								onClick="WdatePicker()" name="start" value="${start }"/>
 						</div>
 					</div>
 					<div class="layui-input-inline">
 						<label class="layui-inline">结束时间:</label>
 						<div class="layui-input-inline">
-							<input class="Wdate layui-input" type="text" name="end"
-								onClick="WdatePicker()" />
+							<input class="Wdate layui-input" type="text" name="end" 
+								onClick="WdatePicker()" value="${end }"/ >
 						</div>
 					</div>
 					<a class="layui-btn" onclick="getList()">查询</a> <a
@@ -219,20 +219,20 @@ function xiugai(id) {
 											<a class="layui-btn">首页</a>
 										</c:if> <c:if test="${page.isFirstPage==false }">
 											<a class="layui-btn"
-												href="/admin/user/listUser/?page=${page.firstPage}">首页</a>
+												href="/admin/user/listUser/?page=${page.firstPage}&type=${type}">首页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==true }">
 											<a class="layui-btn"
-												href="/admin/user/listUser/?page=${page.prePage}">上一页</a>
+												href="/admin/user/listUser/?page=${page.prePage}&type=${type}">上一页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==false }">
 											<a class="layui-btn">上一页</a>
 										</c:if> <c:if test="${page.hasNextPage==true }">
 											<a class="layui-btn"
-												href="/admin/user/listUser/?page=${page.nextPage }">下一页</a>
+												href="/admin/user/listUser/?page=${page.nextPage }&type=${type}">下一页</a>
 										</c:if> <c:if test="${page.hasNextPage==false }">
 											<a class="layui-btn">下一页</a>
 										</c:if> <c:if test="${page.isLastPage==false }">
 											<a class="layui-btn"
-												href="/admin/user/listUser/?page=${page.lastPage }">最后一页</a>
+												href="/admin/user/listUser/?page=${page.lastPage }&type=${type}">最后一页</a>
 										</c:if> <c:if test="${page.isLastPage==true }">
 											<a class="layui-btn">最后一页</a>
 										</c:if></td>

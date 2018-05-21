@@ -1,4 +1,8 @@
 package com.controller.web;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,7 +25,7 @@ public class LoginController {
 	@RequestMapping(value="/front/login",produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Result frontLogin(HttpServletRequest request,
-			HttpServletResponse response,HttpSession session) {
+	HttpServletResponse response,HttpSession session) {
 		String email = request.getParameter("account");
 		String pwd = request.getParameter("password");
 		Result result = new Result();
@@ -31,6 +35,7 @@ public class LoginController {
 			return result;
 		}
 		pwd = Encryption.encryptionByMD5(email, pwd);
+		System.out.println(pwd);
 		String ipForget = request.getParameter("ipForget");
 		Edu_User edu_User = service.getPwd(email);
 		if (edu_User==null) {
@@ -43,7 +48,6 @@ public class LoginController {
 					result.setMessage("");
 					result.setSuccess(true);
 					session.setAttribute("login_success", edu_User);
-					Edu_User user=(Edu_User)session.getAttribute("login_success");
 					return result;
 				}
 			}else {
@@ -79,8 +83,14 @@ public class LoginController {
 			System.out.println(email);
 			user.setPassword( Encryption.encryptionByMD5(email,request.getParameter("user.password") ));
 			user.setMobile(request.getParameter("user.mobile"));
-			user.setUser_name("小星星");
+			user.setUser_name("logo");
 			user.setShow_name("goddess");
+			Date date=new Date();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String strdate = format.format(date);
+			user.setLast_system_time(Timestamp.valueOf(strdate));
+			user.setCreate_time(Timestamp.valueOf(strdate));
+			user.setLast_system_time(Timestamp.valueOf(strdate));
 			service.save(user);	
 			return new Result(true, null, null);
 		}else {

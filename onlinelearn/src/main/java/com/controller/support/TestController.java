@@ -114,19 +114,23 @@ public class TestController {
 
 public Map initMap(HttpServletRequest request,Map map){
 	String name=request.getParameter("name");
+	if (name!=null) {
+		request.setAttribute("name", name);
+	}
 	String type=request.getParameter("type");
-	String statr=request.getParameter("start");
+	String start=request.getParameter("start");
 	String end=request.getParameter("end");
-	if (statr!=null&&statr.length()>0) {
-		map.put("start", statr);
+	if (start!=null&&start.length()>0) {
+		request.setAttribute("start", start);
+		map.put("start", start);
 	}
 	if (end!=null&&end.length()>0) {
+		request.setAttribute("end", end);
 		map.put("end", end);
 	}
-
 	if (type==null) {
-		type="-1";
-	}
+		type="0";
+	}	request.setAttribute("type", type);
 	map.put("type", Integer.valueOf(type));
 	map.put("name", name);
 	return map;
@@ -242,7 +246,6 @@ public String parseExcel(@RequestParam("file")MultipartFile file,Edu_User user)t
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String strdate = format.format(date);
 		user.setLast_system_time(Timestamp.valueOf(strdate));
-		System.out.println(user);
 		edu_UserService.save(user);
 	}  
 	return "redirect:/admin/user/listUser";

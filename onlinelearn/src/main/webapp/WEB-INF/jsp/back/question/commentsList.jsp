@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -32,7 +31,6 @@ table {
 	width: 100px;
 	table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
 }
-
 td {
 	width: 100%;
 	word-break: keep-all; /* 不换行 */
@@ -130,17 +128,17 @@ td {
 	$("#name").val("${name}");
 	$("#start").val("${start}");
 	$("#end").val("${end}");
+	 var page = ${pageNum};
 	 function del(id){
-		 location.href = "/admin/questions_comment/delete/"+id;
+		 location.href = "/admin/questions_comment/delete/"+id+"/"+page;
 	} 
 	 function update(id,is_best){
 		 if(is_best==0){
-			 location.href = "/admin/questions_comment/update/"+id;
+			 location.href = "/admin/questions_comment/update/"+id+"/"+page;
 		 }else{
 			alert("已经采纳为最佳！"); 
 		 }	  
 	 }
-	 var page = ${pageNum};
 	 function onpage(){
 		 $("#page").val(page-1);
 		 if(page-1 < 1){

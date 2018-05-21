@@ -186,11 +186,8 @@
 						</ul>
 						<div class="clear"></div>
 					</article>
-					
-				
-					
-					
-					           <tr>
+
+					       <%--     <tr>
 									<td align="center" colspan="9"><font face="微软雅黑"
 										size="3px" color="black">一共${page.pages}页</font> <font
 										face="微软雅黑" size="3px" color="black">每页${page.pageSize }条/</font>
@@ -199,30 +196,26 @@
 											<a class="layui-btn">首页</a>
 										</c:if> <c:if test="${page.isFirstPage==false }">
 											<a class="layui-btn"
-												href="/front/list?page=${page.firstPage}">首页</a>
+												href="/front?page=${page.firstPage}">首页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==true }">
 											<a class="layui-btn"
-												href="/front/list?page=${page.prePage}">上一页</a>
+												href="/front?page=${page.prePage}">上一页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==false }">
-											<a class="layui-btn">上一页</a>
+												<a class="layui-btn">上一页</a>
 										</c:if> <c:if test="${page.hasNextPage==true }">
 											<a class="layui-btn"
-												href="/front/list?page=${page.nextPage }">下一页</a>
+												href="/front?page=${page.nextPage }">下一页</a>
 										</c:if> <c:if test="${page.hasNextPage==false }">
 											<a class="layui-btn">下一页</a>
 										</c:if> <c:if test="${page.isLastPage==false }">
 											<a class="layui-btn"
-												href="/front/list?page=${page.lastPage }">最后一页</a>
+												href="/front?page=${page.lastPage }">最后一页</a>
 										</c:if> <c:if test="${page.isLastPage==true }">
 											<a class="layui-btn">最后一页</a>
 										</c:if></td>
-								</tr>
-					
-					
-					
-					
+								</tr> --%>
 					<section class="tac pt20">
-						<a href="${ctx}/front/teacherlist" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
+						<a href="${ctx}/front/teacher/list" title="全部讲师" class="comm-btn c-btn-2">全部讲师</a>
 					</section>
 				</div>
 			</section>

@@ -12,13 +12,44 @@
 			<header class="comm-title all-teacher-title">
 				<h2 class="fl tac">
 					<span class="c-333">全部讲师</span>
-				</h2>
+				</h2>	
 				<section class="c-tab-title">
-					<a id="subjectAll" title="全部" href="${ctx}/front/teacher/list">全部</a>
-					<c:forEach var="subject" items="${list2}">
-						<a id="${subject.subject_id}" title="${subject.subject_name }" href="/front/teacher/getByIdSM/${subject.subject_id}" >${subject.subject_name }</a>
-					</c:forEach>
+				
+				<section class="c-s-dl">
+					
+						<dd class="c-s-dl-li">
+							<ul class="clearfix">
+								<li <c:if test="${teacher.subject_id==0}">class="current"</c:if>><a onclick="submitForm(1,0)" title="全部" href="${ctx}/front/teacher/list">全部</a></li>
+								<c:forEach items="${list2}" var="subject">
+									<li <c:if test="${queryCourse.subject_id==subject.subject_id or subjectParentId==subject.subject_id}">class="current"</c:if>><a onclick="submitForm(1,${subject.subject_id})" title="${subject.subject_name}" href="/front/teacher/getByIdSM/${subject.subject_id}">${subject.subject_name}</a></li>
+								</c:forEach>
+							</ul>
+							<aside class="c-s-more">
+								<a href="javascript: void(0)" title="" class="fsize14 c-master">[展开]</a> 
+							</aside>
+						</dd>
+					</dl>
+					<c:if test="${sonSubjectList!=null&&sonSubjectList.size()>0 }">
+                      	<dl>
+							<dt>
+								<span class="c-999 fsize14"></span>
+							</dt>
+							<dd class="c-s-dl-li">
+							
+								<ul class="clearfix">
+									<c:forEach items="${list2}" var="subject">
+										<li <c:if test="${queryCourse.subject_id==subject.subject_id}">class="current"</c:if>><a onclick="submitForm(1,${subject.subject_id})" title="${subject.subject_name}" href="javascript:void(0)">${subject.subject_name}</a></li>
+									</c:forEach>
+								</ul>
+								<aside class="c-s-more">
+									<a href="javascript: void(0)" title="" class="fsize14 c-master">[展开]</a>
+								</aside>
+							</dd>
+						</dl>
+                    </c:if>
+
 				</section>
+				
 			</header>
 			<section class="c-sort-box unBr">
 				<div>
@@ -32,6 +63,7 @@
 					<!-- /无数据提示 结束-->
 					<article class="i-teacher-list">
 						<ul class="of">
+					
 							<c:if test="${not empty list }">
 								<c:forEach var="teacher" items="${list }">
 									<li>
@@ -46,6 +78,7 @@
 															<img xSrc="${ctx }/static/inxweb/img/default-tea-img.gif" src="${ctx }/static/inxweb/img/default-tea-img.gif" alt="">
 														</c:otherwise>
 													</c:choose>
+													
 												</a>
 											</div>			
 											<div class="mt10 hLh30 txtOf tac">

@@ -35,12 +35,7 @@
 }
 </style>
 
-
 <script type="text/javascript">
-function update() {
-	document.forms[0].action = "/admin/teacher/update";
-	document.forms[0].submit();
-}
 
 function list() {
 	document.forms[0].acion="admin/teacher/getByIdSM";
@@ -61,13 +56,13 @@ var setting = {
 		}
 	};
 
-    var zNodes=${list};
+     var zNodes=${list};
 	function beforeClick(treeId, treeNode) {
-		var check = (treeNode && !treeNode.isParent);
-		if (!check) alert("只能选择专业课程...");
+		 var check = (treeNode && !treeNode.isParent);
+		 if (!check) alert("只能选择专业课程..."); 
 		return check;
 	}
-	
+	 
 	function onClick(e, treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 		nodes = zTree.getSelectedNodes(),
@@ -89,7 +84,6 @@ var setting = {
 		var cityObj = $("#citySel");
 		var cityOffset = $("#citySel").offset();
 		$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
-
 		$("body").bind("mousedown", onBodyDown);
 	}
 	function hideMenu() {
@@ -106,29 +100,110 @@ var setting = {
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 	});
 </script>
+
+<script type="text/javascript">
+function update() {
+	    var name = $("#name").val();
+		var education = $("#education").val();
+		var sort = $("#sort").val();
+		var career = $("#career").val();
+		 if(name!=""&&education!=""&&sort!=""&&career!=""){
+			 document.forms[0].action = "/admin/teacher/update";
+			 document.forms[0].submit();
+		 } 
+		else{
+			alert("修改的数据不能为空");
+		}  
+}
+</script>
+
+<script type="text/javascript">
+		function fun(a, b) {
+			var v = a.value;
+			var t;
+			if(b == 1) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d1");
+				if(v.trim().length == 0) {
+					t.innerText = "教师名称不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				}else if(reg.test(v)){
+					t.innerText = "教师名称不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+
+			} else if(b == 2) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d2");
+				if(v.trim().length == 0) {
+					t.innerText = "讲师资历不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				} else if(reg.test(v)){
+					t.innerText = "讲师资历不能为纯数字";
+					t.style.color = "red";
+				} else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+			} else if(b == 3) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d3");
+				if(v.trim().length == 0) {
+					t.innerText = "讲师简介不能为空!";
+					t.style.color = "red";
+					$("#btn").attr({ disabled: "disabled" });
+				}else if(reg.test(v)){
+					t.innerText = "讲师不能为纯数字";
+					t.style.color = "red";
+				}  else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+		}
+			else if(b == 4) {
+				var reg =/^[0-9]*$/;
+				t = document.getElementById("d4");
+				if(!reg.test(v)){
+					t.innerText = "排序值为数字";
+					t.style.color = "red";
+				}  else{
+					t.innerText = "";
+					$("#btn").removeAttr("disabled");
+				}
+		}
+		}
+</script>
+
 </head>
 <body>
 	<section class="layui-larry-box">
 	<div class="larry-personal">
-		<header class="larry-personal-tit"> <span>添加讲师</span> </header>
+		<header class="larry-personal-tit"> <span>修改讲师</span> </header>
 		<!-- /header -->
 		<div class="larry-personal-body clearfix changepwd">
 			<form class="layui-form col-lg-4" method="post"
-				action="/admin/teacher/tosave" enctype="multipart/form-data">
+				 enctype="multipart/form-data">
 				<input type="hidden" name="id" value="${a.id }"
 					class="layui-input layui-disabled">
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师名称</label>
 					<div class="layui-input-block">
 						<input type="text" name="name" value="${a.name }"
-							class="layui-input">
+							class="layui-input" maxlength="5" onblur="fun(this,1)" placeholder="讲师名称不得超过5个字">
+							<span id="d1"></span>
 					</div>
 				</div>
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师资历</label>
 					<div class="layui-input-block">
 						<input type="text" name="education" value="${a.education }"
-							class="layui-input">
+							class="layui-input"  maxlength="50" onblur="fun(this,2)" placeholder="讲师资历不得超过50个字">
+							<span id="d2"></span>
 					</div>
 				</div>
 
@@ -136,36 +211,40 @@ var setting = {
 					<label class="layui-form-label">讲师专业</label>
 					<div class="layui-input-block">
 						<input id="citySel" name="citySel" value="${a.subject_id.subject_name}"
-							readonly class="layui-input" /> &nbsp;<a id="menuBtn" href="#"
+							readonly class="layui-input" onblur="fun(this,5)" /> &nbsp;<a id="menuBtn" href="#"
 							onclick="showMenu(); return false;">选择</a> <input type="hidden"
 							name="subject" id="subject" value="${a.subject_id.subject_id}">
+							<span id="d5"></span>
 					</div>
 				</div>
+
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师等级</label>
 					<div class="layui-input-block">
-						<select name="is_stars" > 
+						<select name="is_stars" onblur="fun(this,6)"> 
 							<option value="2" <c:if test="${a.is_star==2}"> selected="selected" </c:if>>首席讲师</option>
 							<option value="1" <c:if test="${a.is_star==1}"> selected="selected" </c:if>>高级讲师</option>
 						</select>
+						<span id="d6"></span>
 					</div>
 				</div>
 				
 				
-
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师排序</label>
 					<div class="layui-input-block">
 						<input type="text" name="sort" value="${a.sort}"
-							class="layui-input">
+							class="layui-input" onblur="fun(this,4)">
+							<span id="d4"></span>
 					</div>
 				</div>
 
 				<div class="layui-form-item">
 					<label class="layui-form-label">讲师简介</label>
 					<div class="layui-input-block">
-						<textarea class="form-control" name="career" rows="3" id="career">${a.career }</textarea>
+						<textarea class="form-control" name="career" rows="3" id="career" maxlength="300" onblur="fun(this,3)" placeholder="讲师简介不得超过300个字">${a.career }</textarea>
+					<span id="d3"></span>
 					</div>
 				</div>
 
@@ -186,7 +265,7 @@ var setting = {
 
 				<div class="layui-form-item change-submit">
 					<div class="layui-input-block">
-						<button class="layui-btn" onclick="update()">立即提交</button>
+						<button class="layui-btn" id="btn" onclick="update()">立即提交</button>
 						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 					</div>
 				</div>
@@ -228,11 +307,7 @@ $("#imgInp").change(function() {
 	readURL(this);
 });
 
-
-		
 	</script>
-
-
 
 </body>
 </html>

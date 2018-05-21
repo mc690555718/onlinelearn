@@ -29,9 +29,7 @@ public class WebFrontController {
 	
 	@RequestMapping("/front")
 	public ModelAndView websiteImagesList(@RequestParam(required=true,defaultValue="1")Integer page,HttpServletRequest request) {
-		PageHelper.startPage(page, 4);
-		
-
+		PageHelper.startPage(page,8);
 		Map map =new HashMap<>();
 		ModelAndView mv=new ModelAndView();
 		List<img> websiteImagesList=imgService.listAll(new HashMap<>());

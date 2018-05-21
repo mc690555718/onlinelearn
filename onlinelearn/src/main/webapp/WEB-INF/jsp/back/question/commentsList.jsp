@@ -27,6 +27,21 @@
 <script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
 </head>
+<style>
+table {
+	width: 100px;
+	table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+
+td {
+	width: 100%;
+	word-break: keep-all; /* 不换行 */
+	white-space: nowrap; /* 不换行 */
+	overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+	/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/
+}
+</style>
 <body>
 	<div class="layui-inline">
 		<form action="/admin/questions_comment/listAll" method="post"
@@ -62,48 +77,38 @@
 		</form>
 	</div>
 	<table class="layui-table">
-		<colgroup>
-			<col width="2%">
-			<col width="10%">
-			<col width="7%">
-			<col width="3%">
-			<col width="3%">
-			<col width="3%">
-			<col width="7%">
-			<col width="20%">
-		</colgroup>
 		<tr>
-			<td>回复ID</td>
+			<td>序号</td>
 			<td>问答标题</td>
 			<td>发表人</td>
 			<td>是否采纳</td>
-			<td>回复数</td>
+			<td>回复详情</td>
 			<td>点赞数</td>
-			<td>添加时间</td>
+			<td>回复时间</td>
 			<td>操作</td>
 		</tr>
-		<c:forEach items="${comments }" var="c">
+		<c:forEach items="${comments }" var="c" varStatus="stat">
 			<tr>
-				<td>${c.id }</td>
-				<td>${c.questions.title }</td>
-				<td>${c.edu_user.email }</td>
+				<td>${stat.index+1 }</td>
+				<td title="${c.questions.title }">${c.questions.title }</td>
+				<td title="${c.edu_user.email }">${c.edu_user.email }</td>
 				<td><c:if test="${c.is_best==0 }">
 					否
 				</c:if> <c:if test="${c.is_best==1 }">
 					是
 				</c:if></td>
-				<td>${c.questions.reply_count }</td>
-				<td>${c.questions.praise_count }</td>
-				<td><fmt:formatDate value="${c.questions.add_time }"
-						type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+				<td title="${c.content }">${c.content }</td>
+				<td title="${c.praise_count }">${c.praise_count }</td>
+				<td
+					title="<fmt:formatDate value="${c.add_time }" type="date"
+						pattern="yyyy-MM-dd hh:mm:ss" />"><fmt:formatDate
+						value="${c.add_time }" type="date" pattern="yyyy-MM-dd hh:mm:ss" /></td>
 				<td><button class="layui-btn layui-btn-danger"
 						onclick="del(${c.id })">
 						<i class="layui-icon"></i>
 					</button>
 					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="getById(${c.id })">查看评论详情</button>
-					<button class="layui-btn layui-btn-sm layui-btn-normal"
-						onclick="update(${c.id },${c.is_best })">采纳为最佳</button></td>
+						onclick="update(${c.id },${c.is_best })">采纳最佳</button></td>
 			</tr>
 		</c:forEach>
 		<tr>
@@ -128,9 +133,6 @@
 	 function del(id){
 		 location.href = "/admin/questions_comment/delete/"+id;
 	} 
-	 function getById(id){
-		 location.href = "/admin/questions_comment/getById/"+id;
-	 }
 	 function update(id,is_best){
 		 if(is_best==0){
 			 location.href = "/admin/questions_comment/update/"+id;

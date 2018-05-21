@@ -33,27 +33,33 @@
  }
 </script>
 </head>
+<style>
+table{  
+    width:100px;  
+    table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */  
+}  
+td{  
+    width:100%;  
+    word-break:keep-all;/* 不换行 */  
+    white-space:nowrap;/* 不换行 */  
+    overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */  
+    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用*/  
+}
+</style>
 <body>
 	<table class="layui-table">
-		<colgroup>
-			<col width="2%">
-			<col width="10%">
-			<col width="30%">
-			<col width="2%">
-			<col width="30%">
-		</colgroup>
 		<tr>
-			<td>问答ID</td>
+			<td>序号</td>
 			<td>问答标题</td>
 			<td>回复内容</td>
 			<td>是否采纳</td>
 			<td>操作</td>
 		</tr>
-		<c:forEach items="${comments }" var="c">
+		<c:forEach items="${comments }" var="c" varStatus="stat">
 			<tr>
-				<td>${c.questions.id }</td>
-				<td>${c.questions.title }</td>
-				<td>${c.content }</td>
+				<td>${stat.index+1 }</td>
+				<td title="${c.questions.title }">${c.questions.title }</td>
+				<td title="${c.content }" id="content">${c.content }</td>
 				<td><c:if test="${c.is_best==0 }">
 					否
 				</c:if> <c:if test="${c.is_best==1 }">
@@ -79,17 +85,17 @@
 	</table>
 </body>
 <script type="text/javascript">
+     var pageNum = ${pageNum};
      function del(id,questionsId){
 	     location.href = "/admin/questions_comment/delete1/"+id+"/"+questionsId;
     }
 	 function update(id,is_best,questionsId){
 		 if(is_best==0){
-			 location.href = "/admin/questions_comment/update1/"+id+"/"+questionsId;
+			 location.href = "/admin/questions_comment/update1/"+id+"/"+questionsId+"/"+pageNum;
 		 }else{
 			alert("已经采纳为最佳！"); 
 		 }	  
 	 }
-	 var pageNum = ${pageNum};
 	 function back(){
 		 location.href = "/admin/questions/listAll?page="+pageNum;
 	 }

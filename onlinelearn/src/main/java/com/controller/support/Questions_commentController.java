@@ -105,10 +105,10 @@ public class Questions_commentController {
 		return "redirect:/admin/questions_comment/listAll";
 	}
 	
-	@RequestMapping("/update1/{id}/{questionsId}")
-	public String update1(@PathVariable("id")int id,@PathVariable("questionsId")int qid){
+	@RequestMapping("/update1/{id}/{questionsId}/{pageNum}")
+	public String update1(@PathVariable("id")int id,@PathVariable("questionsId")int qid,@PathVariable("pageNum")int pageNum){
 		questions_commentService.update(id);
-		return "redirect:/admin/questions_comment/getById2/"+qid;
+		return "redirect:/admin/questions_comment/getById1?id="+qid+"&pageNum="+pageNum;
 	}
 	@RequestMapping("/getById1")
 	public ModelAndView getById1(@RequestParam("id")int id,@RequestParam(required=true,defaultValue="1") Integer page,Model md,@RequestParam("pageNum")Integer pageNum){

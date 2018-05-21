@@ -334,7 +334,7 @@
 		if('0/0'=='${param.course_status}'){
 			dialog('提示信息', "请购买课程！", 0);
 			 var int=self.setInterval(function(){  // 这个方法是说在延迟两秒后执行大括号里的方法
-			     window.location.href="/front/Alipay/toindex?courseprice=${course.current_price }&courseId=${course.course_id }"
+			     window.location.href="/front/Alipay/toindex?courseprice=${course.current_price }&courseId=${course.course_id }&coursename=${course.course_name}"
 			  // 这个方法是刷新当前页面
 			      },2000)
 		}

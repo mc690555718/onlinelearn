@@ -1,14 +1,18 @@
 package com.controller.support;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.bean.SysRole;
 import com.bean.SysUser;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.service.SysRoleService;
 import com.service.SysUserService;
 import com.util.Encryption;
@@ -25,8 +29,19 @@ public class SysUserController {
 	private SysRoleService rs;
 
 	@RequestMapping("/userlist")
-	public ModelAndView query(ModelAndView mv,String qname){
+	public ModelAndView query(ModelAndView mv,String qname,@RequestParam(required=true,defaultValue="1")Integer currentPage){
+		
+		//设置每页显示10条数据
+		PageHelper.startPage(currentPage, 10);
+		
+		if(qname != null && qname.trim().length() != 0){
+			mv.addObject("qname", qname);
+		}
 		List<SysUser> users = us.query(qname);
+
+		//将数据加载为页面信息
+		PageInfo<SysUser> info = new PageInfo<>(users);
+		mv.addObject("info", info);
 		mv.addObject("users", users);
 		mv.setViewName("/back/admin/adminCtrl");
 		return mv;

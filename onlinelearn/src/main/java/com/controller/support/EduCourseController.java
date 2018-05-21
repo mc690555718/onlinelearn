@@ -54,15 +54,18 @@ public class EduCourseController {
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView listCourse(ModelAndView mv,String qname,String subject_id,
-			String add_time ,String end_time,String is_avaliable,@RequestParam(required=true,defaultValue="1")Integer currentPage){
+			String add_time ,String end_time,String is_avaliable
+			,@RequestParam(required=true,defaultValue="1")Integer currentPage){
 		//设置每页显示10调数据
 		PageHelper.startPage(currentPage, 10);
 		Map<Object, Object> map = new HashMap<>();
 		if (qname != null && qname.trim().length() != 0) {
 			map.put("qname", qname);
+			mv.addObject("qname", qname);
 		}
 		if (subject_id != null && Integer.valueOf(subject_id) > 0) {
 			map.put("subject_id",Integer.valueOf(subject_id));
+			mv.addObject("subject_id", subject_id);
 		}
 		if (add_time != null && add_time.trim().length() != 0) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -71,7 +74,9 @@ public class EduCourseController {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			mv.addObject("add_time", add_time);
 		}
+		
 		if (end_time != null && end_time.trim().length() != 0) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			try {
@@ -79,18 +84,21 @@ public class EduCourseController {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			mv.addObject("end_time", end_time);
 		}
+		
 		if (is_avaliable != null && Integer.valueOf(is_avaliable) > 0 ) {
 			map.put("is_avaliable", Integer.valueOf(is_avaliable));
+			mv.addObject("is_avaliable", is_avaliable);
 		}
 		List<EduCourse> eduCourses  = cs.query(map);
 		List<SysSubject> subjects = ss.query(null);
 		//将数据加载为页面信息
 		PageInfo<EduCourse> info = new PageInfo<>(eduCourses);
-		mv.addObject("subjects",subjects);
-		mv.addObject("eduCourses",eduCourses);
 		//分页信息加入mv
 		mv.addObject("info", info);
+		mv.addObject("subjects",subjects);
+		mv.addObject("eduCourses",eduCourses);
 		mv.setViewName("/back/operation/courseList");
 		return mv;
 	}

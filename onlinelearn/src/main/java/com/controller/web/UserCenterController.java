@@ -1,5 +1,6 @@
 package com.controller.web;
 
+import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bean.Edu_User;
@@ -125,6 +128,51 @@ public class UserCenterController {
 			return  new  Result(true, "update sessucess!", 0);
 		}
 	}
-
+	/**
+	 * @param file
+	 * @param request
+	 * @param session
+	 * 修改头像
+	 * @return
+	 */
+	@RequestMapping("/updateImg")
+	@ResponseBody
+	public Result updateImg(@RequestParam(value="file",required = false)MultipartFile file,HttpServletRequest request,HttpSession session){
+		Edu_User loginUser = (Edu_User) session.getAttribute("login_success");
+		Result result=new Result();
+		if(file != null) {
+            //上传文件路径
+            String path = request.getRealPath("/images/upload/customer/20150910/");
+            //上传文件名
+            String filename = file.getOriginalFilename();
+            if(filename==null||"".equals(filename)){
+            	result.setSuccess(false);
+            	result.setMessage("2");
+            }
+            String a[]=filename.split("\\.");
+            if(!a[1].equalsIgnoreCase("BMP")||!a[1].equalsIgnoreCase("JPEG")||!a[1].equalsIgnoreCase("PSD")||!a[1].equalsIgnoreCase("PCX")
+            		||!a[1].equalsIgnoreCase("PNG")||!a[1].equalsIgnoreCase("DXF")||!a[1].equalsIgnoreCase("CDR")
+            		||!a[1].equalsIgnoreCase("ICO")
+            		){
+            	result.setSuccess(false);
+            	result.setMessage("1");
+            }
+            File filepath = new File(path,filename);         
+            //判断路径是否存在，如果不存在就创建一个
+            if (!filepath.getParentFile().exists()) { 
+                filepath.getParentFile().mkdirs();
+            }
+            //将上传文件保存到一个目标文件当中
+            try {
+				file.transferTo(new File(path + File.separator + filename));
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+            loginUser.setPic_img("/images/upload/customer/20150910/"+filename);
+            service.updateImg(loginUser);
+            result.setSuccess(true);
+		}
+		return result;
+	}
 
 }

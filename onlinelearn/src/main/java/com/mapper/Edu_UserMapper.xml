@@ -64,5 +64,11 @@
 	<update id="updateUser" parameterType="Edu_User">
 	update edu_user set user_name=#{user_name},show_name=#{show_name},sex=#{sex},age=#{age} where user_id=#{user_id}
 	</update>
+	
+	<update id="updateImg" parameterType="Edu_User">
+	update  edu_user set pic_img=#{pic_img} where user_id=#{user_id}
+	
+	
+	</update>
 </mapper>
 

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>学生注册数统计</title>
+<title>视频观看数统计</title>
 	<meta name="renderer" content="webkit">	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">	
@@ -39,7 +39,7 @@ h3{margin:10px 0;}
 </head>
 <body>
 <section class="layui-larry-box">
-<form method="post" action="/statistics/vedioTime">
+<form method="post" action="/admin/statisticsPage/videoViewingNum">
 	<div class="larry-personal">
 	    <div class="layui-tab">
             <blockquote class="layui-elem-quote news_search">

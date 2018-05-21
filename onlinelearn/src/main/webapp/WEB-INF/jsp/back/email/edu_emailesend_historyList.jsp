@@ -41,15 +41,15 @@ text-align: center;
 					<div class="layui-inline">
 
 						<div class="layui-input-inline">
-							<input value="" placeholder="请输入关键字"
+							<input value="${email}" placeholder="请输入关键字"
 								class="layui-input search_input" type="text" name="email">
 						</div>
 						<div class="layui-input-inline">
 							<label class="sr-only" for="exampleInputEmail3">类型查找</label> <select
-								id="type" name="type" class="form-control">
-								<option value="">--请选择--</option>
-								<option value="1">普通</option>
-								<option value="2">定时</option>
+								id="type" name="type"  class="form-control">
+								<option value="-1" <c:if test="${type==-1}">selected</c:if>>--请选择--</option>
+								<option value="1" <c:if test="${type==1}">selected</c:if>>普通</option>
+								<option value="2" <c:if test="${type==2 }">selected</c:if>>定时</option>
 							</select>
 
 						</div>
@@ -109,20 +109,20 @@ text-align: center;
 											<a class="layui-btn">首页</a>
 										</c:if> <c:if test="${page.isFirstPage==false }">
 											<a class="layui-btn"
-												href="/admin/email/sendEmaillist?page=${page.firstPage}">首页</a>
+												href="/admin/email/sendEmaillist?page=${page.firstPage}&type=${type}">首页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==true }">
 											<a class="layui-btn"
-												href="/admin/email/sendEmaillist?page=${page.prePage}">上一页</a>
+												href="/admin/email/sendEmaillist?page=${page.prePage}&type=${type}">上一页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==false }">
 											<a class="layui-btn">上一页</a>
 										</c:if> <c:if test="${page.hasNextPage==true }">
 											<a class="layui-btn"
-												href="/admin/email/sendEmaillist?page=${page.nextPage }">下一页</a>
+												href="/admin/email/sendEmaillist?page=${page.nextPage }&type=${type}">下一页</a>
 										</c:if> <c:if test="${page.hasNextPage==false }">
 											<a class="layui-btn">下一页</a>
 										</c:if> <c:if test="${page.isLastPage==false }">
 											<a class="layui-btn"
-												href="/admin/email/sendEmaillist?page=${page.lastPage }">最后一页</a>
+												href="/admin/email/sendEmaillist?page=${page.lastPage}&type=${type}">最后一页</a>
 										</c:if> <c:if test="${page.isLastPage==true }">
 											<a class="layui-btn">最后一页</a>
 										</c:if></td>

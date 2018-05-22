@@ -162,8 +162,11 @@
 										<td>${p.reply_count}</td>
 										<td><fmt:formatDate value="${p.addtime}" type="date" pattern="yyyy-MM-dd" /></td>
 										<td><div id="ca" title="${p.content}">${p.content}</div>
-										<td><a 	class="layui-btn layui-btn-normal" href="/admin/cy/comment/all/${p.comment_id}" ><i
+										<td>
+											<shiro:hasPermission name="comment_huifu">
+										<a 	class="layui-btn layui-btn-normal" href="/admin/cy/comment/all/${p.comment_id}" ><i
 												class="iconfont icon-edit"></i> 回复评论</a> 
+													</shiro:hasPermission>
 												<shiro:hasPermission name="comment_del">
 												<a class="layui-btn layui-btn-danger" data-id="1"
 											href="/admin/cy/delete/${p.comment_id}"> <i

@@ -62,7 +62,7 @@ function fun(a, b) {
 			$("#btn").removeAttr("disabled");
 		}
 
-	}
+	}}
 
 
 </script>

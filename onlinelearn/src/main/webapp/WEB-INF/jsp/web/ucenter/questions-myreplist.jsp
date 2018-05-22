@@ -72,7 +72,7 @@
 												</a>
 												<h3 class="hLh30 txtOf">
 													<em class="icon16 q-tw">&nbsp;</em> <a
-														href="/front/info/${question.id }" title=""
+														href="/front/info/${question.questions.id }" title=""
 														class="fsize16 c-333 vam">${question.questions.title }</a>
 												</h3>
 												<h3 class="hLh30 txtOf mt5">

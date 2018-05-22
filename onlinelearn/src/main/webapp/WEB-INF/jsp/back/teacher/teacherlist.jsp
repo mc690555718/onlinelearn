@@ -62,9 +62,9 @@ function list(){
 
 							<div class="layui-input-inline">
 								<select class="form-control" name="isstar" value="${is_star}">
-									<option value="-1">---请选择---</option>
-									<option value="2">首席讲师</option>
-									<option value="1">高级讲师</option>
+									<option value="0" <c:if test="${isstar==0}">selected</c:if>>---请选择---</option>
+									<option value="2" <c:if test="${isstar==2}">selected</c:if>>首席讲师</option>
+									<option value="1" <c:if test="${isstar==1}">selected</c:if>>高级讲师</option>
 								</select>
 							</div>
 							开始时间
@@ -93,10 +93,10 @@ function list(){
 									<col width="2%">
 									<col width="7%">
 									<col width="7%">
+									<col width="4%">
+									<col width="4%">
 									<col width="7%">
-									<col width="7%">
-									<col width="7%">
-									<col width="7%">
+									<col width="8%">
 								</colgroup>
 								<thead>
 									<tr>
@@ -113,7 +113,8 @@ function list(){
 
 									<c:forEach items="${list}" var="p" varStatus="stat">
 										<tr>
-											<th>${p.id}</th>
+										
+											<th>${stat.index+1}</th>
 											<th>${p.name}</th>
 											<th>
 											<c:if test="${p.is_star==2}">
@@ -130,9 +131,11 @@ function list(){
 											</th>
 											<th>
 											<shiro:hasPermission name="teacher_delete">
-			
-										<a href="/admin/teacher/delete/${p.id}" class="layui-btn layui-btn-normal">删除</a>
+									<a class="layui-btn layui-btn-danger"
+													data-id="1" href="/admin/teacher/delete/${p.id}"><i
+													class="layui-icon"></i> </a>
 											</shiro:hasPermission>
+											
 											<shiro:hasPermission name="teacher_update">
 	
 												 <a href="/admin/teacher/updateinit/${p.id }" class="layui-btn layui-btn-normal">修改</a></th>
@@ -151,20 +154,20 @@ function list(){
 											<a class="layui-btn">首页</a>
 										</c:if> <c:if test="${page.isFirstPage==false }">
 											<a class="layui-btn"
-												href="/admin/teacher/list?page=${page.firstPage}">首页</a>
+												href="/admin/teacher/list?page=${page.firstPage}&isstar=${isstar}">首页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==true }">
 											<a class="layui-btn"
-												href="/admin/teacher/list?page=${page.prePage}">上一页</a>
+												href="/admin/teacher/list?page=${page.prePage}&isstar=${isstar}">上一页</a>
 										</c:if> <c:if test="${page.hasPreviousPage==false }">
 											<a class="layui-btn">上一页</a>
 										</c:if> <c:if test="${page.hasNextPage==true }">
 											<a class="layui-btn"
-												href="/admin/teacher/list?page=${page.nextPage }">下一页</a>
+												href="/admin/teacher/list?page=${page.nextPage }&isstar=${isstar}">下一页</a>
 										</c:if> <c:if test="${page.hasNextPage==false }">
 											<a class="layui-btn">下一页</a>
 										</c:if> <c:if test="${page.isLastPage==false }">
 											<a class="layui-btn"
-												href="/admin/teacher/list?page=${page.lastPage }">最后一页</a>
+												href="/admin/teacher/list?page=${page.lastPage }&isstar=${isstar}">最后一页</a>
 										</c:if> <c:if test="${page.isLastPage==true }">
 											<a class="layui-btn">最后一页</a>
 										</c:if></td>

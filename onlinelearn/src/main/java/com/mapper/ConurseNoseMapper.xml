@@ -14,6 +14,7 @@
   <if test="Tid!=0 ">
    c.id=#{Tid}
   </if>
+  and IS_AVALIABLE=1
   </where>
   </select>
     <select id="byIdcourse" parameterType="int" resultType="com.bean.EduCourse">
@@ -47,6 +48,25 @@ update edu_course_note set CONTENT=#{content} where user_id = #{userId}
       select * from edu_course where course_id in (
           select course_id from edu_course_favorites where user_id = #{value}
       )
+      and IS_AVALIABLE=1
+  </select> 
+  <select id="isNull" parameterType="com.bean.EduCourseFavorites" resultType="boolean">
+  select count(id) from edu_course_favorites where course_id=#{courseId} and user_id=#{userId} 
   </select>
-  
+  <insert id="addLove" parameterType="com.bean.EduCourseFavorites" >
+  insert into edu_course_favorites(course_id,user_id,add_time) value(#{courseId},#{userId},'${addTime}')
+  </insert>
+  <select id="bytime" resultType="com.bean.EduCourse" >
+  select * from edu_course group by ADD_TIME desc limit 1,8
+  </select>
+   <select id="byprice" resultType="com.bean.EduCourse" >
+  select * from edu_course group by CURRENT_PRICE desc limit 1,8
+  </select>
+    <select id="byall" resultType="com.bean.EduCourse" >
+  select * from edu_course   where IS_AVALIABLE=1 limit 1,8
+  </select>
+  <delete id="deleteFaveoriteById" parameterType="java.util.Map">
+      delete from edu_course_favorites where user_id = #{user_id}
+      and course_id = #{course_id}
+  </delete>
  </mapper>

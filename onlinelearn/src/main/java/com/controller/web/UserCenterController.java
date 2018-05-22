@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -181,7 +182,7 @@ public class UserCenterController {
 		return result;
 	}
 	
-	
+	//个人中心免费课程
 	@RequestMapping("/freeCourseList")
 	public ModelAndView freeCourseList(ModelAndView mv){
 		//课程当前价格为0,则为免费
@@ -193,17 +194,35 @@ public class UserCenterController {
 		return mv;
 	}
 	
-	
+	//个人中心收藏课程
 	@RequestMapping("/myFavorites")
 	public ModelAndView myFavorites(ModelAndView mv,HttpSession session){
 		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
-		System.out.println(user.getUser_id());
 		List<EduCourse> courses = conurseNoseService.getFavoriteCourse(user.getUser_id());
-		System.out.println(courses);
 		mv.addObject("favoriteList", courses);
 		mv.addObject("user_id", user.getUser_id());
 		mv.setViewName("/web/ucenter/favourite_course_list");
 		return mv;
 	}
+	
+	//个人中心取消收藏课程
+	@RequestMapping("/deleteFaveoriteById/{course_id}")
+	public ModelAndView deleteFaveoriteById(ModelAndView mv,HttpSession session,@PathVariable("course_id")int course_id){
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		conurseNoseService.deleteFaveoriteById(user.getUser_id(),course_id);
+		mv.setViewName("redirect:/uc/myFavorites");
+		return mv;
+	}
+	
+	//个人中心取消收藏课程
+	@RequestMapping("/deleteFaveorite/{courseIdStr}")
+	public ModelAndView deleteFaveorite(ModelAndView mv,HttpSession session,@PathVariable("courseIdStr")String courseIdStr){
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		conurseNoseService.deleteFaveorite(user.getUser_id(),courseIdStr);
+		mv.setViewName("redirect:/uc/myFavorites");
+		return mv;
+	}
+	
+	
 
 }

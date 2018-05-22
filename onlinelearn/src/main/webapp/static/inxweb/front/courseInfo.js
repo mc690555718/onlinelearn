@@ -127,15 +127,15 @@ function buy(courseId){
 function favorites(courseId,obj){
 	if(isLogin()){
 		$.ajax({
-			url:baselocation+'/front/createfavorites/'+courseId,
+			url:baselocation+'/front/createfavorites?courseId='+courseId,
 			type:'post',
 			dataType:'json',
 			success:function(result){
 				if(result.success==false){
-					dialog('提示',result.message,1);
+					dialog('提示',"您已经收藏过！",1);
 				}else{
 					$(obj).html("已收藏").attr("title","已收藏").parent().addClass("sc-end");
-					dialog('提示',result.message,0);
+					dialog('提示',"收藏成功！",0);
 				}
 			}
 		});

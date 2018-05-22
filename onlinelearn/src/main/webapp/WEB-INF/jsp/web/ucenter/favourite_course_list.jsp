@@ -22,13 +22,13 @@ s<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 			dialog("删除提示", "请选择要删除的收藏课程！", 1); 
 			return;
 		}
-		var favouriteIdStr = "";
+		var courseIdStr = "";
 		$('input[name="courseId"]:checked').each(function() {
-			favouriteIdStr = favouriteIdStr + $(this).val() + ",";
+			courseIdStr = courseIdStr + $(this).val() + ",";
 		});
-		favouriteIdStr = favouriteIdStr.substring(0, favouriteIdStr.length - 1);
+		courseIdStr = courseIdStr.substring(0, courseIdStr.length - 1);
 		dialog("删除提示", "确认要删除选择的收藏课程？", 2, "${ctx}/uc/deleteFaveorite/"
-				+ favouriteIdStr);
+				+ courseIdStr);
 	}
 </script>
 </head>
@@ -77,7 +77,7 @@ s<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 												<div class="of cancel-colle">
 													<div class="fr tac">
 														<label class="hand"><input type="checkbox" style="vertical-align: -2px;" name="courseId" value="${favorite.course_id }"></label> <br>
-														<a href="${ctx}/uc/deleteFaveorite/${favorite.course_id }" title="" class="c-blue">取消收藏</a>
+														<a href="${ctx}/uc/deleteFaveoriteById/${favorite.course_id }" title="" class="c-blue">取消收藏</a>
 													</div>
 													<a href="${ctx }/front/couinfo/${favorite.course_id }" title="">
 														<c:choose>

@@ -23,7 +23,6 @@
 						</dt>
 						<dd class="c-s-dl-li">
 							<ul class="clearfix">
-								<li <c:if test="${queryCourse.subject_id==0}">class="current"</c:if>><a onclick="submitForm(1,0)" title="全部" href="javascript:void(0)">全部</a></li>
 								<c:forEach items="${subjectList}" var="subject">
 									<li <c:if test="${queryCourse.subject_id==subject.subject_id or subjectParentId==subject.subject_id}">class="current"</c:if>><a onclick="submitForm(1,${subject.subject_id})" title="${subject.subject_name}" href="/front/toCourseslist?Sid=${subject.subject_id}">${subject.subject_name}</a></li>
 								</c:forEach>
@@ -57,7 +56,6 @@
 						</dt>
 						<dd class="c-s-dl-li">
 							<ul class="clearfix">
-								<li <c:if test="${queryCourse.teacherId==0}">class="current"</c:if>><a onclick="submitForm(2,0)" title="全部" href="javascript:void(0)">全部</a></li>
 								<c:forEach items="${teacherList}" var="teacher">
 									<li <c:if test="${teacher.id==queryCourse.teacherId}">class="current"</c:if>><a title="${teacher.name}" onclick="submitForm(2,${teacher.id})" href="/front/toCourseslist?Tid=${teacher.id}">${teacher.name}</a></li>
 								</c:forEach>
@@ -73,13 +71,6 @@
 					<section class="fr">
 						<span class="c-ccc"> <tt class="c-master f-fM">${page.currentPage}</tt>/<tt class="c-666 f-fM">${page.totalPageSize}</tt>
 						</span>
-					</section>
-					<section class="fl">
-						<ol class="js-tap clearfix">
-							<li <c:if test="${queryCourse.order=='FOLLOW'}">class="current bg-orange"</c:if>><a title="关注度" onclick="submitForm(3,'FOLLOW')" href="javascript:void(0)">关注度</a></li>
-							<li <c:if test="${queryCourse.order=='NEW'}">class="current bg-orange"</c:if>><a title="最新" onclick="submitForm(3,'NEW')" href="javascript:void(0)">最新</a></li>
-							<li <c:if test="${queryCourse.order=='ASCENDING'||queryCourse.order=='DESCENDING'}">class="current bg-orange"</c:if>><a title="价格" onclick="submitForm(4,'<c:if test="${not empty queryCourse.order}">${queryCourse.order }</c:if><c:if test="${empty queryCourse.order}">ONE</c:if>')" href="javascript:void(0)">价格<span><c:if test="${queryCourse.order=='ASCENDING' }">↑</c:if><c:if test="${queryCourse.order=='DESCENDING' }">↓</c:if></span></a></li>
-						</ol>
 					</section>
 				</div>
 				<div class="mt40">

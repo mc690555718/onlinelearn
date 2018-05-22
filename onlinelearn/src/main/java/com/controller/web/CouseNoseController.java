@@ -1,25 +1,25 @@
 package com.controller.web;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.bean.CourseCommentUser;
 import com.bean.Course_purchase;
 import com.bean.EduCourse;
+import com.bean.EduCourseFavorites;
 import com.bean.EduCourseKpoint;
 import com.bean.EduCourseNote;
 import com.bean.Edu_User;
@@ -217,4 +217,53 @@ public class CouseNoseController {
 		result.setEntity(courseNote);
 		return JsonUtils.objectToJson(result);
 	}
+	@RequestMapping("/createfavorites")
+	@ResponseBody
+	public Result addlove(EduCourseFavorites courseFavorites,HttpSession session){
+		Result result=new Result();
+		Edu_User  user=	(Edu_User) session.getAttribute("login_success");
+		courseFavorites.setUserId(user.getUser_id());
+		boolean is = conurseNoseService.isNull(courseFavorites);
+		if(is==true){
+			result.setSuccess(false);
+			return result;
+		}else{
+			SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String SendTime=df.format(new Date());
+			courseFavorites.setAddTime(SendTime);
+			conurseNoseService.addLove(courseFavorites);
+			result.setSuccess(true);
+			return result;
+		}
+		
+	}
+	@RequestMapping("/index/ajax/bna")
+	public String bna(@RequestParam("order") String type,Model model){
+		if("FOLLOW".equals(type)){//精品
+			//查询全部课程,此参数为模糊查询所用
+			model.addAttribute("courseList",conurseNoseService.byprice());
+			//查询全部教师
+			model.addAttribute("teacherList",teacherNoseService.listbyTeacher());
+			//查询全部课程
+			model.addAttribute("subjectList",subjectNoseService.listbySubject());
+			return "web/course/courses-list";
+		}else if("NEW".equals(type)){//最新
+			//查询全部课程,此参数为模糊查询所用
+			model.addAttribute("courseList",conurseNoseService.bytime());
+			//查询全部教师
+			model.addAttribute("teacherList",teacherNoseService.listbyTeacher());
+			//查询全部课程
+			model.addAttribute("subjectList",subjectNoseService.listbySubject());
+			return "web/course/courses-list";
+		}else{//全部
+			//查询全部课程,此参数为模糊查询所用
+			model.addAttribute("courseList",conurseNoseService.byall());
+			//查询全部教师
+			model.addAttribute("teacherList",teacherNoseService.listbyTeacher());
+			//查询全部课程
+			model.addAttribute("subjectList",subjectNoseService.listbySubject());
+			return "web/course/courses-list";
+		}
+	}
+		
 }

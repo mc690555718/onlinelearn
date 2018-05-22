@@ -9,7 +9,7 @@
 </script>
 </head> 
 <body>
-	<div class="i-slide">
+	<div class="i-slide" style="height: 480px">
 		<section>
 			<!-- 如果需要导航按钮 -->
 			<a class="arrow-left s-arrow" href="javascript:void(0)"></a>
@@ -32,24 +32,24 @@
 	</div>
 	<!-- /index slide -->
 	<div id="aCoursesList">
-		<!-- /为你推荐 开始 -->
-		<div class="bg-fa of">
-			<section class="container">
-				<header class="comm-title">
-					<span class="fr mt5"><a href="javascript:void(0)" title="换一换" class="c-master" onclick="huanyihuan()">换一换</a></span>
-					<h2 class="fl tac">
-						<span class="c-333">为你推荐</span>
-					</h2>
-				</header>
-				<article class="comm-course-list">
-					<ul class="of" id="weinituijian">
+<!-- 		<!-- /为你推荐 开始 --> -->
+<!-- 		<div class="bg-fa of"> -->
+<!-- 			<section class="container"> -->
+<!-- 				<header class="comm-title"> -->
+<!-- 					<span class="fr mt5"><a href="javascript:void(0)" title="换一换" class="c-master" onclick="huanyihuan()">换一换</a></span> -->
+<!-- 					<h2 class="fl tac"> -->
+<!-- 						<span class="c-333">为你推荐</span> -->
+<!-- 					</h2> -->
+<!-- 				</header> -->
+<!-- 				<article class="comm-course-list"> -->
+<!-- 					<ul class="of" id="weinituijian"> -->
 						
-					</ul>
-					<div class="clear"></div>
-				</article>
-			</section>
-		</div>
-		<!-- /为你推荐 结束 -->
+<!-- 					</ul> -->
+<!-- 					<div class="clear"></div> -->
+<!-- 				</article> -->
+<!-- 			</section> -->
+<!-- 		</div> -->
+<!-- 		<!-- /为你推荐 结束 -->
 		<!-- /网校课程 开始 -->
 		<div>
 			<section class="container">
@@ -72,81 +72,81 @@
 						<div class="clear"></div>
 					</article>
 					<section class="tac pt20">
-						<a href="${ctx }/front/showcoulist" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
+						<a href="${ctx }/front/toCourseslist" title="全部课程" class="comm-btn c-btn-2">全部课程</a>
 					</section>
 				</div>
 			</section>
 		</div>
 		<!-- /网校课程 结束 -->
-		<!-- /课程互动 开始-->
-		<div class="bg-fa of mt30">
-			<section class="container">
-				<article class="fl col-7">
-					<div class="mr50">
-						<header class="comm-title">
-							<h2 class="fl tac">
-								<span class="c-333">课程互动</span>
-							</h2>
-						</header>
-						<div class="i-question-list">
-							<ul id="iQuestion">
-								<c:forEach items="${commentList}" var="comment" varStatus="status">
-									<li>
-										<section class="i-q-l-wrap">
-											<div class="u-face">
-												<c:if test="${empty comment.picImg }">
-													<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif" xsrc="${ctx }/static/inxweb/img/avatar-boy.gif">
-												</c:if>
-												<c:if test="${not empty comment.picImg }">
-													<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif" xsrc="${ctx }${comment.picImg }">
-												</c:if>
-											</div>
-											<section class="hLh20 of">
-												<span class="fr"><tt class="c-ccc f-fG"><fmt:formatDate value="${comment.addTime }" pattern="yyyy/MM/dd HH:mm" /></tt></span> 
-												<span class="fsize16 c-666">
-												 	<c:if test="${empty comment.userName }">
-														${comment.email}
-													</c:if>
-													<c:if test="${not empty comment.userName }">
-														${comment.userName}
-													</c:if>
-												</span> 
-											    <span class="fsize14 c-999 ml5 f-fA">评论课程：</span>
-											</section>
-											<section class="hLh20 of mt10">
-												<a class="c-master fsize14" href="${ctx}/front/couinfo/${comment.courseId}">《${comment.courseName}》</a>
-											</section>
-											<section class="i-q-txt">
-												<p>
-													<span class="c-999 f-fA txtOf"> ${comment.content} </span>
-												</p>
-											</section>
-										</section>
-									</li>
-								</c:forEach>
-							</ul>
-						</div>
-					</div>
-				</article>
-				<aside class="fl col-3">
-					<header class="comm-title">
-						<!-- <span class="fr"><a class="c-master" title="" href="">换一换</a></span> -->
-						<h2 class="fl tac">
-							<span class="c-333">学生动态</span>
-						</h2>
-					</header>
-					<div class="stud-act-list">
-						<section>
-							<ul id="s-action" class="studentDynamicHtml">
+<!-- 		<!-- /课程互动 开始--> 
+<!-- 		<div class="bg-fa of mt30"> -->
+<!-- 			<section class="container"> -->
+<!-- 				<article class="fl col-7"> -->
+<!-- 					<div class="mr50"> -->
+<!-- 						<header class="comm-title"> -->
+<!-- 							<h2 class="fl tac"> -->
+<!-- 								<span class="c-333">课程互动</span> -->
+<!-- 							</h2> -->
+<!-- 						</header> -->
+<!-- 						<div class="i-question-list"> -->
+<!-- 							<ul id="iQuestion"> -->
+<%-- 								<c:forEach items="${commentList}" var="comment" varStatus="status"> --%>
+<!-- 									<li> -->
+<!-- 										<section class="i-q-l-wrap"> -->
+<!-- 											<div class="u-face"> -->
+<%-- 												<c:if test="${empty comment.picImg }"> --%>
+<%-- 													<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif" xsrc="${ctx }/static/inxweb/img/avatar-boy.gif"> --%>
+<%-- 												</c:if> --%>
+<%-- 												<c:if test="${not empty comment.picImg }"> --%>
+<%-- 													<img width="50" height="50" class="picImg" src="${ctx }/static/inxweb/img/avatar-boy.gif" xsrc="${ctx }${comment.picImg }"> --%>
+<%-- 												</c:if> --%>
+<!-- 											</div> -->
+<!-- 											<section class="hLh20 of"> -->
+<%-- 												<span class="fr"><tt class="c-ccc f-fG"><fmt:formatDate value="${comment.addTime }" pattern="yyyy/MM/dd HH:mm" /></tt></span>  --%>
+<!-- 												<span class="fsize16 c-666"> -->
+<%-- 												 	<c:if test="${empty comment.userName }"> --%>
+<%-- 														${comment.email} --%>
+<%-- 													</c:if> --%>
+<%-- 													<c:if test="${not empty comment.userName }"> --%>
+<%-- 														${comment.userName} --%>
+<%-- 													</c:if> --%>
+<!-- 												</span>  -->
+<!-- 											    <span class="fsize14 c-999 ml5 f-fA">评论课程：</span> -->
+<!-- 											</section> -->
+<!-- 											<section class="hLh20 of mt10"> -->
+<%-- 												<a class="c-master fsize14" href="${ctx}/front/couinfo/${comment.courseId}">《${comment.courseName}》</a> --%>
+<!-- 											</section> -->
+<!-- 											<section class="i-q-txt"> -->
+<!-- 												<p> -->
+<%-- 													<span class="c-999 f-fA txtOf"> ${comment.content} </span> --%>
+<!-- 												</p> -->
+<!-- 											</section> -->
+<!-- 										</section> -->
+<!-- 									</li> -->
+<%-- 								</c:forEach> --%>
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</article> -->
+<!-- 				<aside class="fl col-3"> -->
+<!-- 					<header class="comm-title"> -->
+<!-- 						<span class="fr"><a class="c-master" title="" href="">换一换</a></span> -->
+<!-- 						<h2 class="fl tac"> -->
+<!-- 							<span class="c-333">学生动态</span> -->
+<!-- 						</h2> -->
+<!-- 					</header> -->
+<!-- 					<div class="stud-act-list"> -->
+<!-- 						<section> -->
+<!-- 							<ul id="s-action" class="studentDynamicHtml"> -->
 
-							</ul>
-						</section>
-					</div>
-				</aside>
-				<div class="clear"></div>
-			</section>
-		</div>
-		<!-- /课程互动 结束-->
+<!-- 							</ul> -->
+<!-- 						</section> -->
+<!-- 					</div> -->
+<!-- 				</aside> -->
+<!-- 				<div class="clear"></div> -->
+<!-- 			</section> -->
+<!-- 		</div> -->
+<!-- 		<!-- /课程互动 结束--> 
 		<!-- /网校名师 开始 -->
 		<div>
 			<section class="container">

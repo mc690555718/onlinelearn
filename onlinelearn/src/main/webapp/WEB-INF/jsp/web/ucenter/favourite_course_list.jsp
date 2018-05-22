@@ -4,25 +4,26 @@
 <html>
 <head>
 <title>我的收藏</title>
+s<script type="text/javascript" src="/js/jquery-3.0.0.js"></script>
 <script type="text/javascript">
 	/**
 	 * 全选或反选 
 	 */
 	function selectAll(em) {
-		$("input[name='favouriteId']").attr('checked', $(em).prop('checked'));
+		$("input[name='courseId']").attr('checked', $(em).prop('checked'));
 	}
 
 	/**
 	 * 批量删除收藏
 	 */
 	function batchDelFav() {
-		var arr = $("input[name='favouriteId']:checked");
+		var arr = $("input[name='courseId']:checked");
 		if (arr == null || arr.length == 0) {
 			dialog("删除提示", "请选择要删除的收藏课程！", 1); 
 			return;
 		}
 		var favouriteIdStr = "";
-		$('input[name="favouriteId"]:checked').each(function() {
+		$('input[name="courseId"]:checked').each(function() {
 			favouriteIdStr = favouriteIdStr + $(this).val() + ",";
 		});
 		favouriteIdStr = favouriteIdStr.substring(0, favouriteIdStr.length - 1);
@@ -75,8 +76,8 @@
 											<section class="mt10">
 												<div class="of cancel-colle">
 													<div class="fr tac">
-														<label class="hand"><input type="checkbox" style="vertical-align: -2px;" name="favouriteId" value="${favorite.favouriteId}"></label> <br>
-														<a href="${ctx}/uc/deleteFaveorite/${favorite.favouriteId}" title="" class="c-blue">取消收藏</a>
+														<label class="hand"><input type="checkbox" style="vertical-align: -2px;" name="courseId" value="${favorite.course_id }"></label> <br>
+														<a href="${ctx}/uc/deleteFaveorite/${favorite.course_id }" title="" class="c-blue">取消收藏</a>
 													</div>
 													<a href="${ctx }/front/couinfo/${favorite.course_id }" title="">
 														<c:choose>
@@ -99,12 +100,12 @@
 							</form>
 						</div>
 					</c:if>
-					<!-- 公共分页 开始 -->
-					<jsp:include page="/WEB-INF/jsp/common/front_page.jsp" />
-					<!-- 公共分页 结束 -->
-					<form action="${ctx}/uc/myFavorites" method="post" id="searchForm">
-						<input type="hidden" name="page.currentPage" value="1" id="pageCurrentPage" />
-					</form>
+<!-- 					公共分页 开始 -->
+<%-- 					<jsp:include page="/WEB-INF/jsp/common/front_page.jsp" /> --%>
+<!-- 					公共分页 结束 -->
+<%-- 					<form action="${ctx}/uc/myFavorites" method="post" id="searchForm"> --%>
+<!-- 						<input type="hidden" name="page.currentPage" value="1" id="pageCurrentPage" /> -->
+<!-- 					</form> -->
 				</div>
 			</section>
 			<!-- /Wo的消息 -->

@@ -33,7 +33,7 @@
 <link rel="stylesheet" type="text/css" href="/css/bootstrap-table.css" />
 <script src="/js/bootstrap-table.js" type="text/javascript"
 	charset="utf-8"></script>
-<script src="/js/bootstrap-table-zh-CN.min.js" type="text/javascript"
+<script src="/js/bootstrap-table-zh-CN.js" type="text/javascript"
 	charset="utf-8"></script>
 
 <script type="text/javascript">
@@ -146,7 +146,7 @@
 								<shiro:hasPermission name="imgType_add">
 								<button type="button" class="layui-btn search_btn"
 									onclick="jump()">添加类型</button>
-										</shiro:hasPermission>
+								</shiro:hasPermission>
 							</div>
 						</div>
 
@@ -167,10 +167,10 @@
 							<tbody> 
 								<c:forEach items="${list}" var="p" varStatus="statu">
 									<tr>
-										<td>${statu.index+1}</td>
+										<td>${p.typeId }</td>
 										<td>${p.typeName}</td>
 										<td>
-										<shiro:hasPermission name="imgType_upd">
+										<shiro:hasPermission name="imgType_update">
 										<a 	class="layui-btn layui-btn-normal"
 											onclick="up('${p.typeName}','${p.typeId }')"><i
 												class="iconfont icon-edit"></i> 编辑</a> 
@@ -214,41 +214,6 @@
 						</table>
 					</div>
 
-
-
-					<div class="layui-tab-item layui-field-box">
-						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
-							<thead>
-								<tr>
-									<th><input type="checkbox" id="selected-all"></th>
-									<th>ID</th>
-									<th>管理员账号</th>
-									<th>状态</th>
-									<th>最后登录时间</th>
-									<th>上次登录IP</th>
-									<th>登录IP</th>
-									<th>IP所在位置</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><input type="checkbox"></td>
-									<td>110</td>
-									<td>admin</td>
-									<td>后台登录成功</td>
-									<td>2016-12-19 14:26:03</td>
-									<td>127.0.0.1</td>
-									<td>127.0.0.1</td>
-									<td>Unknown</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="larry-table-page clearfix">
-							<a href="javascript:;" class="layui-btn layui-btn-small"><i
-								class="iconfont icon-shanchu1"></i>删除</a>
-							<div id="page2" class="page"></div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -256,41 +221,7 @@
 
 	<script type="text/javascript" src="/common/layui/layui.js"></script>
 	<script type="text/javascript">
-		layui.use([ 'jquery', 'layer', 'element', 'laypage' ], function() {
-			window.jQuery = window.$ = layui.jquery;
-			window.layer = layui.layer;
-			var element = layui.element(), laypage = layui.laypage;
 
-			laypage({
-				cont : 'page',
-				pages : 10 //总页数
-				,
-				groups : 5 //连续显示分页数
-				,
-				jump : function(obj, first) {
-					//得到了当前页，用于向服务端请求对应数据
-					var curr = obj.curr;
-					if (!first) {
-						//layer.msg('第 '+ obj.curr +' 页');
-					}
-				}
-			});
-
-			laypage({
-				cont : 'page2',
-				pages : 10 //总页数
-				,
-				groups : 5 //连续显示分页数
-				,
-				jump : function(obj, first) {
-					//得到了当前页，用于向服务端请求对应数据
-					var curr = obj.curr;
-					if (!first) {
-						//layer.msg('第 '+ obj.curr +' 页');
-					}
-				}
-			});
-		});
 	</script>
 </body>
 </html>

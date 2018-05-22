@@ -20,7 +20,11 @@
 	<script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
 </head>
 <style type="text/css">
-select{width:250px;}
+   	#ta1 {
+	width:1320px;
+	font-family: "微软雅黑";
+	size: 10px;
+}
 
    	#a1 {
 	width: 80px;
@@ -28,7 +32,7 @@ select{width:250px;}
 	font-family: "微软雅黑";
 	size: 10px;
 }
- 
+
 #ca {  
     width:150px;  
     overflow:hidden;  
@@ -54,42 +58,9 @@ $("#te").text("123");
 		<div class="larry-personal-body clearfix">
 		
 			<form class="layui-form col-lg-5" action="" method="post">
-					<%--
-			<input type="text"  name="comment_id" value="${list.comment_id}" hidden="hidden"/>
-	 
-				<div class="layui-form-item">
-					<label class="layui-form-label">类型:</label>
-					<div class="layui-input-block">
-						<c:if test="${list.type==1 }">
-						<input type="text" disabled="true" name="type" id="type"  class="layui-input " value="文章"  autocomplete="off" disabled="disabled" style="width:250px;">
-						</c:if>
-						<c:if test="${list.type==2 }">
-						<input type="text" disabled="true" name="type" id="type"  class="layui-input " value="课程"  autocomplete="off" disabled="disabled" style="width:250px;">
-					</c:if>
-					</div>
-				</div>
-				
-				 <div class="layui-form-item">
-					<label class="layui-form-label">评论内容:</label>
-					<div class="layui-input-block">
-					<textarea rows="60" cols="50"  readonly="readonly">${list.content}</textarea>
-					</div>
-				</div> 
-				
-				<div class="layui-form-item">
-					<label class="layui-form-label">父级评论内容:</label>
-					<div class="layui-input-block">
-					<textarea rows="60" cols="50" readonly="readonly">${coment.content}</textarea>
-					</div>
-				</div> --%>
-				
-			
-		
-		
-		
-		
 					<div class="layui-tab-item layui-field-box layui-show">
-						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
+						<table class="layui-table table-hover" lay-even="" lay-skin="nob"  id="ta1">
+						
 							<thead>
 								<tr>
 									<th>序号</th>
@@ -133,7 +104,7 @@ $("#te").text("123");
 		
 		
 		
-			<div class="layui-form-item">
+	
 					<div class="layui-input-block">
 				    <button type="button"  class="btn btn-default" ><a href="/admin/cy/listcomment" id="a1">返回</a></button>
 					</div>

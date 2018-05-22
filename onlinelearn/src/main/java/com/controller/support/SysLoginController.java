@@ -1,5 +1,6 @@
 package com.controller.support;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +38,12 @@ public class SysLoginController {
 			try{
 			    subject.login(token);
 			    subject.hasRole("");
-			}catch(Exception e){
+			}catch(UnknownAccountException ue){
 				mv.addObject("loginState",1);
+				mv.setViewName("/back/login/login");
+				return mv;
+			}catch (Exception e) {
+				mv.addObject("loginState",2);
 				mv.setViewName("/back/login/login");
 				return mv;
 			}

@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>LarryCMS后台登录</title>
+<title>三阳科技在线学习管理系统后台登录</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -58,6 +58,10 @@ $(function(){
 	
 	if($("#loginState").val() == 1){
 		layer.msg('账号或密码不匹配', {icon: 5});
+	}
+	
+	if($("#loginState").val() == 2){
+		layer.msg('该账户已被锁定...', {icon: 5});
 	}
 	
 	$(".layui-canvs").jParticle({

@@ -41,15 +41,12 @@ public class AdminRealm extends AuthorizingRealm{
 		
 		UsernamePasswordToken uptoken = (UsernamePasswordToken) token;
 		String username = uptoken.getUsername();
-		if("unknow".equals(username)){
-			throw new UnknownAccountException("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		SysUser user  = us.getByName(username);
+		if(user == null){
+			throw new UnknownAccountException("ÓÃ»§Ãû»òÃÜÂë´íÎó");
 		}
-		if("monster".equals(username)){
-			throw new LockedAccountException("ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
-		}
-		SysUser user = us.getByName(username);	
-		if (user == null) {
-			return null;
+		if(user.getStatus() == 1){
+			throw new LockedAccountException("¸ÃÕË»§ÒÑ±»Ëø¶¨");
 		}
 		ByteSource salt=ByteSource.Util.bytes(username);
 		SimpleAuthenticationInfo info=new SimpleAuthenticationInfo(username,user.getLogin_pwd(),salt,getName());

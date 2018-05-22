@@ -116,6 +116,7 @@
 		var html =  "     <div class='layui-form-item'>                                                           "
 			+ "     <label class='layui-form-label'>选择教师</label>                                                 "
 			+ "     <div class='layui-input-block' id='checkDiv'>                                                 "
+			+ "     <table><tbody id='teacherTable'></tbody></table>                                              "
 			+ "     </div>                                                                                        "
 			+ "     </div>                                                                                        ";
 			
@@ -128,7 +129,7 @@
 				btnAlign : 'c', //按钮居中
 				shade : 0, //不显示遮罩
 				maxmin : true, //开启最大化最小化按钮
-				area : [ '420px', 'auto' ],
+				area : [ '450px', '270px' ],
 				btn : '确定',
 				content : html,
 				yes : function() {
@@ -149,7 +150,15 @@
     //加载checkbox
 	$.post("/admin/cou/getTeachers",function(data){
 		for (var i = 0; i < data.length; i++) {
-		    $("#checkDiv").append("<input name='teacher_ids' title='"+data[i].name+"' type='checkbox' value='"+data[i].id+"'/><span>"+data[i].name+"</span>");
+			//列数
+			var row = 5;
+			if(i%row== 0 || i==0){
+				$("#teacherTable").append("<tr>");
+			}
+		    $("#teacherTable").append("<td><input name='teacher_ids' title='"+data[i].name+"' type='checkbox' value='"+data[i].id+"'/><span>"+data[i].name+"</span></td>");
+			if(i%row == 0 || i== data.length){
+				$("#teacherTable").append("</tr>");
+			}
 		}
 		//检查数组存在项在checkbox中处于选中状态
 		if (teas.length>0){
@@ -183,27 +192,27 @@
 		}
 	}
 	
-			//清空输入框
-			function cleanText(){
-				$("#course_name").val("");
-				$("#parent_id").val("-1");
-				$("#is_avaliable").val("-1");
-				$("#lession_num").val("");
-				$("#source_price").val("");
-				$("#current_price").val("");
-				$("#loseType").val("1");
-				$("#tea1").remove("li");
-				$("#lose_time").val("");
-				$("#end_time").val("");
-				$("#title").val("");
-				$("#logo").val("");
-				$("#context").val("");
-				teas.length=0;
-				tean.length=0;
-				$("#pic").attr("src","");
-				$("#subject_id").empty();
-				$("#subject_id").append("<option value='-1'>--请选择--</option>");
-			}
+// 			//清空输入框
+// 			function cleanText(){
+// 				$("#course_name").val("");
+// 				$("#parent_id").val("-1");
+// 				$("#is_avaliable").val("-1");
+// 				$("#lession_num").val("");
+// 				$("#source_price").val("");
+// 				$("#current_price").val("");
+// 				$("#loseType").val("1");
+// 				$("#tea1").remove("li");
+// 				$("#lose_time").val("");
+// 				$("#end_time").val("");
+// 				$("#title").val("");
+// 				$("#logo").val("");
+// 				$("#context").val("");
+// 				teas.length=0;
+// 				tean.length=0;
+// 				$("#pic").attr("src","");
+// 				$("#subject_id").empty();
+// 				$("#subject_id").append("<option value='-1'>--请选择--</option>");
+// 			}
 
 			
 
@@ -356,8 +365,8 @@
 					<div class="layui-form-item">
 						<div class="layui-input-block">
 							<button class="layui-btn" id="btn_submit" type="button">立即提交</button>
-							<button type="reset" onclick="cleanText()"
-								class="layui-btn layui-btn-primary">重置</button>
+<!-- 							<button type="reset" onclick="cleanText()" -->
+<!-- 								class="layui-btn layui-btn-primary">重置</button> -->
 						</div>
 					</div>
 				</form>

@@ -528,7 +528,7 @@ public class EduCourseController {
 		if (file != null) {
 			String filename=file.getOriginalFilename();
 			//upload文件夹的路径
-			String path=request.getRealPath("/images/upload/video/");
+			String path=request.getRealPath("/upload/video/");
 			File newfile=new File(path,filename);
 			try{
 				//将客户端上传的文件复制到服务器中
@@ -536,7 +536,7 @@ public class EduCourseController {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			String videoPath = "/images/upload/video/"+filename;
+			String videoPath = "/upload/video/"+filename;
 			EduCourseKpoint point = new EduCourseKpoint();
 			point.setVideo_url(videoPath);
 			String json = JsonUtils.objectToJson(point);

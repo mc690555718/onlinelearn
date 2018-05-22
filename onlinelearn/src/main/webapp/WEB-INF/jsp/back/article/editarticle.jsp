@@ -139,9 +139,9 @@
 					<label class="layui-form-label">图片</label>
 					<div class="layui-input-block">
 						<img alt="" src="${article.image_url }" id="blah"
-							name="image_urls" style="height: 200px; width: 200px" /> <input
-							type="hidden" name="hiddens" value="${article.image_url }">
-						<input type="file" name="file" id="file">
+							name="image_urls" style="height: 200px; width: 200px" />
+							<input type="file" name="file" id="file">
+							 <input type="hidden" name="hiddens" value="${article.image_url }">
 					</div>
 				</div>
 
@@ -175,33 +175,33 @@
 	</div>
 	</section>
 	<script type="text/javascript">
-	layui.use(['form','upload'],function(){
-        var form = layui.form();
-        layui.upload({ 
-            url: '' ,//上传接口 
-            success: function(res){
-             //上传成功后的回调 
-             console.log(res) 
-           } 
-        });
+// 	layui.use(['form','upload'],function(){
+//         var form = layui.form();
+//         layui.upload({ 
+//             url: '' ,//上传接口 
+//             success: function(res){
+//              //上传成功后的回调 
+//              console.log(res) 
+//            } 
+//         });
 
-	});
+// 	});
 		
 		
-	//  图片显示
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$('#blah').attr('src', e.target.result);
-				}
-				reader.readAsDataURL(input.files[0]);
+//  图片显示
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#blah').attr('src', e.target.result);
 			}
+			reader.readAsDataURL(input.files[0]);
 		}
+	}
 
-		$("#file").change(function() {
-			readURL(this);
-		});
+	$("#file").change(function() {
+		readURL(this);
+	});
 	</script>
 
 </body>

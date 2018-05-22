@@ -28,7 +28,7 @@ select{width:250px;}
 	font-family: "微软雅黑";
 	size: 10px;
 }
-
+ 
 #ca {  
     width:150px;  
     overflow:hidden;  
@@ -90,7 +90,6 @@ $("#te").text("123");
 		
 					<div class="layui-tab-item layui-field-box layui-show">
 						<table class="layui-table table-hover" lay-even="" lay-skin="nob">
-						
 							<thead>
 								<tr>
 									<th>序号</th>

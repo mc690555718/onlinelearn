@@ -161,7 +161,9 @@
 
 							<button type="submit" id="in1" onclick="list()">查找评论</button>
 							<button type="reset" id="in1" onclick="cy()">清空</button>
+								<shiro:hasPermission name="img_delete">
 							<button type="button" id="in1" onclick="batchDeletes()">批量删除</button>
+							</shiro:hasPermission>
 							<shiro:hasPermission name="img_add">
 								<button type="button" id="in1">
 									<a href="/admin/hello/listtype" id="a1">新建图片</a>
@@ -191,7 +193,7 @@
 							</thead>
 							<tbody>
 
-								<c:forEach items="${list }" var="p" varStatus="stat">
+								<c:forEach items="${list}" var="p" varStatus="stat">
 									<tr>
 										<td><input type="checkbox" id="subcheck" name="subcheck"
 											value="${p.imageId}"></td>

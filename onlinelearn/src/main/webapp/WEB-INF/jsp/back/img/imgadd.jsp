@@ -238,7 +238,7 @@ document.getElementById('file').onchange = function() {
 	var imgFile = this.files[0];
 	var fr = new FileReader();
 	fr.onload = function() {
-		document.getElementById('imageUrl').src = fr.result;
+		document.getElementById('imageUrl').src = fr.result;  
 	};
 	fr.readAsDataURL(imgFile);
 }

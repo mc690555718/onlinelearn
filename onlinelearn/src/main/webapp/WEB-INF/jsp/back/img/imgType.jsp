@@ -167,7 +167,7 @@
 							<tbody> 
 								<c:forEach items="${list}" var="p" varStatus="statu">
 									<tr>
-										<td>${p.typeId }</td>
+										<td>${statu.index+1}</td>
 										<td>${p.typeName}</td>
 										<td>
 										<shiro:hasPermission name="imgType_upd">
